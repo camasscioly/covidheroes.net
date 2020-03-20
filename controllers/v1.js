@@ -7,12 +7,12 @@ keyv.on('error', (err) => {
 
 const router = Router();
 
-router.get('/set/us', async (req, res) => {
-  await keyv.set('us', req.query);
-  res.json(req.query);
+router.post('/us', async (req, res) => {
+  await keyv.set('us', req.body);
+  res.json(req.body);
 });
 
-router.get('/get/us', async (req, res) => {
+router.get('/us', async (req, res) => {
   res.json(await keyv.get('us') || {});
 });
 

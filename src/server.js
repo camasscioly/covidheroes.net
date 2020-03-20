@@ -10,7 +10,9 @@ const rootRoutes = require('./../controllers/index.js');
 
 const app = express();
 const keyv = new Keyv(process.env.DB_URL);
-keyv.on('error', handleConnectionError);
+keyv.on('error', (err) => {
+  console.error(err);
+});
 
 app.enable('trust proxy', true);
 

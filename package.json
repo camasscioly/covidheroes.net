@@ -2,9 +2,9 @@
   "name": "covid-tracker",
   "version": "0.0.1",
   "description": "10h Startup Idea",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -39,6 +39,8 @@
     "mongoose": "^5.9.5",
     "morgan": "^1.10.0",
     "node-cmd": "^3.0.0",
+    "node-fetch": "^2.6.0",
+    "prettier": "^1.19.1",
     "winston": "^3.2.1"
   }
 }

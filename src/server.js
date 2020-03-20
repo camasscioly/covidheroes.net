@@ -25,6 +25,7 @@ app.use(require('helmet')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
 app.use(require('morgan')('combined'));
+app.use(express.static('public'));
 
 app.use(
   '/v1',

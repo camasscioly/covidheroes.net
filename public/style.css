@@ -1,3 +1,96 @@
 #navbar {
   background: #222C45 !important;
 }
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar:hover {
+  width: 6px;
+  height: 3px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #a6a6a6;
+}
+::-webkit-scrollbar-track {
+  background: #4b5a68;
+  border: 1px none #ffffff;
+}
+::-webkit-scrollbar-track:hover {
+  background: #4b5a68;
+}
+::-webkit-scrollbar-track:active {
+  background: #4b5a68;
+}
+
+body {
+  background: #161E2D !important;
+  color: #BCC2CE !important;
+}
+
+h2 {
+  color: #fff !important;
+}
+
+.navbar {
+  /*padding-left: 9%;
+  padding-right: 9%;*/
+  padding: 1.5%;
+  margin-bottom: 2%;
+  background: #222C45 !important;
+}
+
+.active {
+  background: #222C45 !important;
+  outline: black !important;
+  border: black !important;
+  font-weight: bold;
+}
+
+.list-group, p {
+  max-width: 100% !important;
+}
+
+li {
+  /*padding: 9px !important;
+  height: 35px !important;*/
+  background: #121822 !important;
+}
+
+.btn-secondary, .badge-secondary {
+  background: #222C45 !important;
+  margin-left: 5px;
+  border-color: #F65E5E !important;
+  color: #F65E5E !important;
+}
+
+.btn-danger, .badge-danger {
+  background: #F65E5E !important;
+  margin-left: 5px;
+  border: 0;
+}
+
+.badge-danger {
+  background: #F65E5E;
+}
+
+code {
+  padding: 2px;
+  background: #F8F9FA;
+}
+
+a {
+  color: #F35353 !important;
+}

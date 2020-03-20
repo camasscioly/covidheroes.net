@@ -1,14 +1,16 @@
 require('dotenv').config();
 
 const express = require('express');
+const Keyv = require('keyv');
+ 
 const { join } = require('path');
-
-const connect = require('./connection.js');
 
 const v1Routes = require('./../controllers/v1.js');
 const rootRoutes = require('./../controllers/index.js');
 
 const app = express();
+const keyv = new Keyv(process.env.DB_URL);
+keyv.on('error', handleConnectionError);
 
 app.enable('trust proxy', true);
 
@@ -35,11 +37,6 @@ app.use(
     },
   })
 );
-
-const db = connect(process.env.DB_URL, {
-  useNewUrlParser: true, 
-  useUnifiedTopology: true, 
-});
 
 app.use('/v1', v1Routes);
 app.use(rootRoutes);

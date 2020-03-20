@@ -10,7 +10,11 @@ const rootRoutes = require('./../controllers/index.js');
 
 const app = express();
 
-app.set('trust proxy', 1);
+app.enable('trust proxy', true);
+
+app.disable('view cache');
+app.set('view engine', 'ejs'); 
+app.set('views', path.join(__dirname, './../views'));
 
 app.use(require('express-boom')());
 app.use(require('cors')());

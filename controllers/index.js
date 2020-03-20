@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { join } = require('path');
 const cmd = require('node-cmd');
 const crypto = require('crypto');
+const renderFile = require('./../middleware/renderFile.js');
 
 const router = Router();
 
@@ -27,6 +28,10 @@ router.post('/git', verifySignature, (req, res) => {
       return res.status(200).send(data);
     });
   }
+});
+
+router.get('/', (req, res) => {
+  renderFile(req, res, 'index');
 });
 
 router.use((req, { boom }) => {

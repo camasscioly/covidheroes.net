@@ -3,6 +3,7 @@ const { join } = require('path');
 const cmd = require('node-cmd');
 const crypto = require('crypto');
 const renderFile = require('./../middleware/renderFile.js');
+const fetch = require('node-fetch');
 
 const router = Router();
 
@@ -30,8 +31,8 @@ router.post('/git', verifySignature, (req, res) => {
   }
 });
 
-router.get('/', (req, res) => {
-  renderFile(req, res, 'index');
+router.get('/', async (req, res) => {
+  renderFile(req, res, 'index'/*, await fetch('') || {}*/);
 });
 
 router.use((req, { boom }) => {

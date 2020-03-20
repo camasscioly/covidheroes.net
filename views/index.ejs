@@ -1,9 +1,16 @@
 <%- include('blocks/header') %>
   <div class="container"></div>
   <div class="container mt-2">
-    <h2>Introduction</h2>
-    <p>
-      Things
-    </p>
-  </div><br>
+    <table class="table" id="dataTable">
+      <thead>
+        <tr id="head">
+          <th scope="col"><i class="fas fa-chess-knight"></i> Key</th>
+          <th scope="col"><i class="fas fa-table"></i> Value</th>
+        </tr>
+      </thead>
+      <tbody id="table"></tbody>
+      <br />
+    </table>
+  </div>
+</div><br>
 <%- include('blocks/footer') %>

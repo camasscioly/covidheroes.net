@@ -8,6 +8,17 @@ keyv.on('error', (err) => {
 
 const router = Router();
 
+router.post('/global', auth, async (req, res) => {
+  delete req.query.token;
+  await keyv.set('global', req.body);
+  console.log(req.body);
+  res.json(req.body);
+});
+
+router.get('/global', async (req, res) => {
+  res.json(await keyv.get('global') || {});
+});
+
 router.post('/us', auth, async (req, res) => {
   delete req.query.token;
   await keyv.set('us', req.body);
@@ -17,6 +28,28 @@ router.post('/us', auth, async (req, res) => {
 
 router.get('/us', async (req, res) => {
   res.json(await keyv.get('us') || {});
+});
+
+router.post('/us/timeline', auth, async (req, res) => {
+  delete req.query.token;
+  await keyv.set('ustimeline', req.body);
+  console.log(req.body);
+  res.json(req.body);
+});
+
+router.get('/us/timeline', async (req, res) => {
+  res.json(await keyv.get('ustimeline') || {});
+});
+
+router.post('/global/timeline', auth, async (req, res) => {
+  delete req.query.token;
+  await keyv.set('globaltimeline', req.body);
+  console.log(req.body);
+  res.json(req.body);
+});
+
+router.get('/global/timeline', async (req, res) => {
+  res.json(await keyv.get('globaltimeline') || {});
 });
 
 module.exports = router;

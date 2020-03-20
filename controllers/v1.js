@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const auth = require('./../middleware/auth.js');
 const Keyv = require('keyv');
 const keyv = new Keyv(process.env.DB_URL);
 keyv.on('error', (err) => {
@@ -7,7 +8,7 @@ keyv.on('error', (err) => {
 
 const router = Router();
 
-router.post('/us', async (req, res) => {
+router.post('/us', auth, async (req, res) => {
   await keyv.set('us', req.body);
   res.json(req.body);
 });

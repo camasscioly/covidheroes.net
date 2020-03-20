@@ -14,7 +14,7 @@ app.enable('trust proxy', true);
 
 app.disable('view cache');
 app.set('view engine', 'ejs'); 
-app.set('views', path.join(__dirname, './../views'));
+app.set('views', join(__dirname, './../views'));
 
 app.use(require('express-boom')());
 app.use(require('cors')());

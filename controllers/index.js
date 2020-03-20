@@ -7,7 +7,7 @@ const router = Router();
 
 const verifySignature = ({ body, headers }, res, next) => {
   const payload = JSON.stringify(body);
-  const hmac = crypto.createHmac('sha1', process.env.GITHUB_SECRET);
+  const hmac = crypto.createHmac('sha1', process.env.SECRET);
   const digest = `sha1=${hmac.update(payload).digest('hex')}`;
   const checksum = headers['x-hub-signature'];
 

@@ -10,8 +10,8 @@ const router = Router();
 
 router.post('/us', auth, async (req, res) => {
   delete req.query.token;
-  await keyv.set('us', req.query);
-  res.json(req.query);
+  await keyv.set('us', req.body);
+  res.json(req.body);
 });
 
 router.get('/us', async (req, res) => {

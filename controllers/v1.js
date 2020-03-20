@@ -9,8 +9,9 @@ keyv.on('error', (err) => {
 const router = Router();
 
 router.post('/us', auth, async (req, res) => {
-  await keyv.set('us', req.body);
-  res.json(req.body);
+  delete req.query.token;
+  await keyv.set('us', req.query);
+  res.json(req.query);
 });
 
 router.get('/us', async (req, res) => {

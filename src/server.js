@@ -5,7 +5,7 @@ const Keyv = require('keyv');
  
 const { join } = require('path');
 
-const v1Routes = require('./../controllers/v1.js');
+const v2Routes = require('./../controllers/v2.js');
 const rootRoutes = require('./../controllers/index.js');
 
 const app = express();
@@ -26,7 +26,7 @@ app.use(require('morgan')('combined'));
 app.use(express.static('public'));
 
 app.use(
-  '/v1',
+  '/v2',
   require('express-rate-limit')({
     windowMs: 10000,
     max: 50,
@@ -37,7 +37,7 @@ app.use(
   })
 );
 
-app.use('/v1', v1Routes);
+app.use('/v2', v2Routes);
 app.use(rootRoutes);
 
 app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));

@@ -1,4 +1,4 @@
-const base = `${window.location.href}v1/`;
+const base = `${window.location.href}v2/`;
 const ctx = document.getElementById('chart');
 const ctx1 = document.getElementById('chart1');
 const url = window.location.href.toString();
@@ -36,17 +36,7 @@ async function init() {
     labels: [],
     datasets: [
       {
-        label: 'New Cases',
-        data: [],
-        backgroundColor: 'rgba(252, 153, 89, 0.05)',
-        borderColor: '#FC9959',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'New Deaths',
+        label: 'Total Cases',
         data: [],
         backgroundColor: 'rgba(252, 153, 89, 0.05)',
         borderColor: '#DD45D3',
@@ -56,117 +46,9 @@ async function init() {
         fontFamily: 'IBM Plex Sans',
       },
       {
-        label: 'Total Cases',
+        label: 'Total Deaths',
         data: [],
         backgroundColor: 'rgba(148, 60, 255, 0.05)',
-        borderColor: '#943CFF',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total Deaths',
-        data: [],
-        backgroundColor: 'rgba(106, 17, 234, 0.05)',
-        borderColor: '#6A11EA',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total Recovered',
-        data: [],
-        backgroundColor: 'rgba(0, 0, 0, 0.05)',
-        borderColor: '#000',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-    ],
-  };
-  let data1 = {
-    labels: [
-      'Global',
-      'US'
-    ],
-    datasets: [
-      {
-        label: 'Total Active Cases',
-        data: [],
-        backgroundColor: 'rgba(252, 153, 89, 1)',
-        borderColor: '#FC9959',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total Cases',
-        data: [],
-        backgroundColor: '#DD45D3',
-        borderColor: '#DD45D3',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total Deaths',
-        data: [],
-        backgroundColor: 'rgba(148, 60, 255, 1)',
-        borderColor: '#943CFF',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total New Cases Today',
-        data: [],
-        backgroundColor: 'rgba(106, 17, 234, 1)',
-        borderColor: '#6A11EA',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total New Deaths Today',
-        data: [],
-        backgroundColor: 'rgba(0, 0, 0, 1)',
-        borderColor: '#000',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total Recovered',
-        data: [],
-        backgroundColor: 'rgba(252, 153, 89, 1)',
-        borderColor: '#FC9959',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total Serious Cases',
-        data: [],
-        backgroundColor: '#DD45D3',
-        borderColor: '#DD45D3',
-        fill: true,
-        lineTension: 0,
-        radius: 1,
-        fontFamily: 'IBM Plex Sans',
-      },
-      {
-        label: 'Total Unresolved',
-        data: [],
-        backgroundColor: 'rgba(148, 60, 255, 1)',
         borderColor: '#943CFF',
         fill: true,
         lineTension: 0,
@@ -202,18 +84,13 @@ async function init() {
     options: options,
   });
 
-  let chart1 = new Chart(ctx1, {
-    type: 'bar',
-    data: data1,
-    options: options,
-  });
-
   let counter = 0;
-  const usRes = await query('us');
-  const globalRes = await query('global');
-  const usTimelineRes = await query('us/timeline');
-  const usTimelinePredictionsRes = await query('us/timeline/predictions');
-  for (const prop in globalRes) {
+  // const usRes = await query('us');
+  // const globalRes = await query('global');
+  const globalTimelineCases = await query('global/timeline/cases');
+  const globalTimelineDeath = await query('global/timeline/death');
+  // const usTimelinePredictionsRes = await query('us/timeline/predictions');
+  /*for (const prop in globalRes) {
     addEntry(prop, globalRes[prop][0], '#globalTable');
     if (counter < 8) addData(chart1, prop, globalRes[prop][0], counter++, false);
   }
@@ -221,28 +98,12 @@ async function init() {
   for (const prop in usRes) {
     addEntry(prop, usRes[prop][0], '#usTable');
     if (counter < 8) addData(chart1, prop, usRes[prop][0], counter++, false);
+  }*/
+  for (let i = 0; i < globalTimelineDeath.death.length; i++) {
+    addData(chart, globalTimelineCases.cases[i][0], globalTimelineCases.cases[i][1], 0, true);
+    addData(chart, globalTimelineDeath.death[i][0], globalTimelineDeath.death[i][1], 1, false);
   }
-  for (const prop in usTimelineRes) {
-    if (new Date().toLocaleDateString('en-US') === prop) return;
-    const {
-      new_daily_cases,
-      new_daily_deaths,
-      total_cases,
-      total_deaths,
-      total_recoveries,
-    } = usTimelineRes[prop];
-    addData(chart, prop, new_daily_cases, 0, true);
-    addData(chart, prop, new_daily_deaths, 1, false);
-    addData(chart, prop, total_cases, 2, false);
-    addData(chart, prop, total_deaths, 3, false);
-    addData(chart, prop, total_recoveries, 4, false);
-    addEntry(
-      prop,
-      `New Cases: ${new_daily_cases}, New Deaths: ${new_daily_deaths}, Total Cases: ${total_cases}, Total Deaths: ${total_deaths}, Total Recoveries: ${total_recoveries}`,
-      '#dateTable'
-    );
-  }
-  for (const prop in usTimelinePredictionsRes) {
+  /*for (const prop in usTimelinePredictionsRes) {
     if (new Date().toLocaleDateString('en-US') === prop) return;
     const {
       new_daily_cases,
@@ -261,7 +122,7 @@ async function init() {
       `New Cases: ${new_daily_cases}, New Deaths: ${new_daily_deaths}, Total Cases: ${total_cases}, Total Deaths: ${total_deaths}, Total Recoveries: ${total_recoveries}`,
       '#dateTable'
     );
-  }
+  }*/
 }
 
 init();

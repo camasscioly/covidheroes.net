@@ -89,6 +89,8 @@ async function init() {
   // const globalRes = await query('global');
   const globalTimelineCases = await query('global/timeline/cases');
   const globalTimelineDeath = await query('global/timeline/death');
+  const globalTimelineCasesPredictions = await query('global/timeline/cases/predictions');
+  const globalTimelineDeathPredictions = await query('global/timeline/death/predictions');
   // const usTimelinePredictionsRes = await query('us/timeline/predictions');
   /*for (const prop in globalRes) {
     addEntry(prop, globalRes[prop][0], '#globalTable');
@@ -102,6 +104,11 @@ async function init() {
   for (let i = 0; i < globalTimelineDeath.death.length; i++) {
     addData(chart, globalTimelineCases.cases[i][0], globalTimelineCases.cases[i][1], 0, true);
     addData(chart, globalTimelineDeath.death[i][0], globalTimelineDeath.death[i][1], 1, false);
+  }
+
+  for (let i = 0; i < globalTimelineDeathPredictions.death.length; i++) {
+    addData(chart, globalTimelineCasesPredictions.cases[i][0], globalTimelineCasesPredictions.cases[i][1], 0, true);
+    addData(chart, globalTimelineDeathPredictions.death[i][0], globalTimelineDeathPredictions.death[i][1], 1, false);
   }
   /*for (const prop in usTimelinePredictionsRes) {
     if (new Date().toLocaleDateString('en-US') === prop) return;

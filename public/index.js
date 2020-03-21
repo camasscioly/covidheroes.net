@@ -213,6 +213,7 @@ async function init() {
   const usRes = await query('us');
   const globalRes = await query('global');
   const usTimelineRes = await query('us/timeline');
+  const usTimelineRes = await query('us/predictions');
   for (const prop in globalRes) {
     addEntry(prop, globalRes[prop][0], '#globalTable');
     if (counter < 8) addData(chart1, prop, globalRes[prop][0], counter++, false);

@@ -52,4 +52,15 @@ router.get('/global/timeline', async (req, res) => {
   res.json(await keyv.get('globaltimeline') || {});
 });
 
+router.post('/us/timeline/predictions', auth, async (req, res) => {
+  delete req.query.token;
+  await keyv.set('ustimelinepredictions', req.body);
+  console.log(req.body);
+  res.json(req.body);
+});
+
+router.get('/us/timeline/predictions', async (req, res) => {
+  res.json(await keyv.get('ustimelinepredictions') || {});
+});
+
 module.exports = router;

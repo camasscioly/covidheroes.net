@@ -1,3 +1,3 @@
-# COVID Web
+# The Data Platform for COVID-19
 
-Todo: write readme
+Understand COVID growth rates between different countries.

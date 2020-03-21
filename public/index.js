@@ -219,7 +219,7 @@ async function init() {
   }
   counter = 0;
   for (const prop in usRes) {
-    addEntry(prop, usRes[prop][counter], '#usTable');
+    addEntry(prop, usRes[prop][0], '#usTable');
     if (counter < 8) addData(chart1, prop, usRes[prop][0], counter++, false);
   }
   for (const prop in usTimelineRes) {

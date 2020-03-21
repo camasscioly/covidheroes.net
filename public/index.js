@@ -101,14 +101,15 @@ async function init() {
     addEntry(prop, usRes[prop][0], '#usTable');
     if (counter < 8) addData(chart1, prop, usRes[prop][0], counter++, false);
   }*/
-  for (let i = 0; i < globalTimelineDeath.death.length; i++) {
+  let i;
+  for (i = 0; i < globalTimelineDeath.death.length; i++) {
     addData(chart, globalTimelineCases.cases[i][0], globalTimelineCases.cases[i][1], 0, true);
     addData(chart, globalTimelineDeath.death[i][0], globalTimelineDeath.death[i][1], 1, false);
   }
 
-  for (let i = 0; i < globalTimelineDeathPredictions.death.length; i++) {
-    addData(chart, globalTimelineCasesPredictions.cases[i][0], globalTimelineCasesPredictions.cases[i][1], 0, true);
-    addData(chart, globalTimelineDeathPredictions.death[i][0], globalTimelineDeathPredictions.death[i][1], 1, false);
+  for (let j = i; j < globalTimelineDeathPredictions.death.length; j++) {
+    addData(chart, j, globalTimelineCasesPredictions.cases[j], 0, true);
+    addData(chart, j, globalTimelineDeathPredictions.death[j], 1, false);
   }
   /*for (const prop in usTimelinePredictionsRes) {
     if (new Date().toLocaleDateString('en-US') === prop) return;

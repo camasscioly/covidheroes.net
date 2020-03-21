@@ -1,7 +1,13 @@
 <%- include('blocks/header') %>
   <div class="container"></div>
   <div class="container mt-2">
+    <h1>The Data Platform for COVID-19</h1>
+    <p>Understand COVID growth rates between different countries.</p>
+    <hr>
+    <h3>US Timeline Progression</h3>
     <canvas id="chart"></canvas>
+    <canvas id="chart1"></canvas>
+    <hr>
     <h3>Global Statistics</h3>
     <table class="table" id="globalTable">
       <thead>
@@ -13,6 +19,7 @@
       <tbody id="table"></tbody>
       <br />
     </table>
+    <hr>
     <h3>US Statistics</h3>
     <table class="table" id="usTable">
       <thead>
@@ -24,6 +31,7 @@
       <tbody id="table"></tbody>
       <br />
     </table>
+    <hr>
     <h3>US Timeline</h3>
     <table class="table" id="dateTable">
       <thead>

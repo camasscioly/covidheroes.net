@@ -17,6 +17,10 @@ body {
   /* font-weight: bold !important; */
 }
 
+.panel-default {
+  background: #DD45D3;
+}
+
 .btn:focus,
 input:focus {
   outline: none !important;

@@ -1,9 +1,8 @@
-/*if ('serviceWorker' in navigator)
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));*/
-
-const base = 'http://localhost:3000/v1/';
-let ctx = document.getElementById('chart');
-let ctx1 = document.getElementById('chart1');
+const base = `${window.location.href}v1/`;
+const ctx = document.getElementById('chart');
+const ctx1 = document.getElementById('chart1');
+const url = window.location.href.toString();
+if (url.endsWith('#/') || url.endsWith('#')) location = url.replace('#', '');
 
 async function query(endpoint) {
   const res = await fetch(`${base}${endpoint}`);
@@ -213,7 +212,7 @@ async function init() {
   const usRes = await query('us');
   const globalRes = await query('global');
   const usTimelineRes = await query('us/timeline');
-  const usTimelineRes = await query('us/predictions');
+  const usTimelinePredictionsRes = await query('us/timeline/predictions');
   for (const prop in globalRes) {
     addEntry(prop, globalRes[prop][0], '#globalTable');
     if (counter < 8) addData(chart1, prop, globalRes[prop][0], counter++, false);
@@ -239,6 +238,26 @@ async function init() {
     addData(chart, prop, total_recoveries, 4, false);
     addEntry(
       prop,
+      `New Cases: ${new_daily_cases}, New Deaths: ${new_daily_deaths}, Total Cases: ${total_cases}, Total Deaths: ${total_deaths}, Total Recoveries: ${total_recoveries}`,
+      '#dateTable'
+    );
+  }
+  for (const prop in usTimelinePredictionsRes) {
+    if (new Date().toLocaleDateString('en-US') === prop) return;
+    const {
+      new_daily_cases,
+      new_daily_deaths,
+      total_cases,
+      total_deaths,
+      total_recoveries,
+    } = usTimelineRes[prop];
+    addData(chart, `P: ${prop}`, new_daily_cases, 0, true);
+    addData(chart, `P: ${prop}`, new_daily_deaths, 1, false);
+    addData(chart, `P: ${prop}`, total_cases, 2, false);
+    addData(chart, `P: ${prop}`, total_deaths, 3, false);
+    addData(chart, `P: ${prop}`, total_recoveries, 4, false);
+    addEntry(
+      `Prediction: ${prop}`,
       `New Cases: ${new_daily_cases}, New Deaths: ${new_daily_deaths}, Total Cases: ${total_cases}, Total Deaths: ${total_deaths}, Total Recoveries: ${total_recoveries}`,
       '#dateTable'
     );

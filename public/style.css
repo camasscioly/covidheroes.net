@@ -28,10 +28,14 @@ input:focus {
 
 .btn-danger,
 .btn-secondary {
-  border-color: #fff !important;
-  background: #fff !important;
-  outline: #fff !important;
-  color: #000 !important;
+  border-color: #F5F4F9 !important;
+  background: #F5F4F9 !important;
+  outline: #F5F4F9 !important;
+  border-radius: 1000px !important;
+  padding: 1px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  color: #666666 !important;
 }
 
 .btn-outline-primary {
@@ -103,6 +107,16 @@ tr, #pins {
   background: #fff !important;
 }
 
+td, th {
+  border: none !important;
+}
+
 body {
   padding: 2%;
+  background: rgba(0, 0, 0, 0)
+}
+
+#navbar {
+  background: #fff !important;
+  border-bottom: 0px solid #DEE2E6 !important;
 }

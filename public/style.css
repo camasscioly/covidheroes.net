@@ -36,14 +36,15 @@ input:focus {
 }
 
 canvas{
-  width: 90vw !important;
-  height: 60vh !important;
+  padding: 0 5%;
+  width: 90% !important;
+  height: 60% !important;
   overflow: hidden;
 }
-@media screen and (device-width: 750px){
+/* @media screen and (device-width: 750px){
   canvas{
     width: 90vw !important;
-    height: 30vh !important;
+    height: calc(750/1334 * 100%) !important;
     overflow: hidden;
   }
 }
@@ -95,7 +96,7 @@ canvas{
     height: 30vh !important;
     overflow: hidden;
   }
-}
+} */
 
 .the-project{
   display: flex;

@@ -1,4 +1,4 @@
-if (localStorage.getItem('member')) {
+if (localStorage.getItem('name')) {
   const name = localStorage.getItem('name');
   const email = localStorage.getItem('email');
   const phone = localStorage.getItem('phone');

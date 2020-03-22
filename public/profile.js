@@ -1,4 +1,4 @@
-if (localStorage.getItem('member')) {
+if (localStorage.getItem('name')) {
   const base = `${window.location.origin}/v1/`;
   const urlParams = new URLSearchParams(window.location.search);
   const name = urlParams.get('name');

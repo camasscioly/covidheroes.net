@@ -1,5 +1,5 @@
 const base = `${window.location.origin}/v1/`;
-if (localStorage.getItem('member')) {
+if (localStorage.getItem('name')) {
   let offerList;
   function killOffer(id) {
     postData(`${base}offer/remove`, {

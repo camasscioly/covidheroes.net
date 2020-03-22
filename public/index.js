@@ -137,23 +137,23 @@ async function init() {
     addData(chart, globalTimelineDeath.death[i][0], globalTimelineDeath.death[i][1], 1, false);
     addData(chart, globalTimelineCases.cases[i][0], (globalTimelineDeath.death.length - 1 === i) ? globalTimelineCases.cases[i][1] : undefined, 2, false);
     addData(chart, globalTimelineDeath.death[i][0], (globalTimelineDeath.death.length - 1 === i) ? globalTimelineDeath.death[i][1] : undefined, 3, false);
-    addEntry(
-      globalTimelineDeath.death[i][0],
-      globalTimelineCases.cases[i][1],
-      globalTimelineDeath.death[i][1],
-      '#dateTable'
-    );
+    // addEntry(
+    //   globalTimelineDeath.death[i][0],
+    //   globalTimelineCases.cases[i][1],
+    //   globalTimelineDeath.death[i][1],
+    //   '#dateTable'
+    // );
   }
 
   for (let j = i; j < globalTimelineDeathPredictions.death.length + i; j++) {
     addData(chart, `P${j}`, globalTimelineCasesPredictions.cases[j - i], 2, true);
     addData(chart, `P${j}`, globalTimelineDeathPredictions.death[j - i], 3, false);
-    addEntry(
-      `<i class="fas fa-exclamation-triangle"></i> Prediction: ${j}`,
-      globalTimelineCasesPredictions.cases[j - i],
-      globalTimelineDeathPredictions.death[j - i],
-      '#dateTable'
-    );
+    // addEntry(
+    //   `<i class="fas fa-exclamation-triangle"></i> Prediction: ${j}`,
+    //   globalTimelineCasesPredictions.cases[j - i],
+    //   globalTimelineDeathPredictions.death[j - i],
+    //   '#dateTable'
+    // );
   }
   /*for (const prop in usTimelinePredictionsRes) {
     if (new Date().toLocaleDateString('en-US') === prop) return;

@@ -1,24 +1,38 @@
 <%- include('blocks/header') %>
   <div class="container"></div>
   <div class="container mt-2">
-    <h1>The Data Platform for COVID-19</h1>
-    <p>Powerful SaaS using scikit machine learning to calculate prediction regression data</p>
+    <h1>The Sharing Platform for Medical Resources</h1>
+    <p>A platform for exhange of needed materials using requests and fulfillments.</p>
     <hr>
-    <h3>Global Timeline Progression</h3>
-    <canvas id="chart"></canvas>
+    <h3>The Goals</h3>
+    <p>
+      By connecting users in similar locations, we believe we can limit the damage done by the spread of coronavirus
+      through the exchange of needed medical goods.
+    </p>
     <hr>
-    <h3>Global Timeline Table Data</h3>
-    <table class="table" id="dateTable">
-      <thead>
-        <tr id="head">
-          <th scope="col"><i class="fas fa-sun"></i> Day</th>
-          <th scope="col"><i class="fas fa-exclamation"></i> Cases</th>
-          <th scope="col"><i class="fas fa-skull-crossbones"></i> Deaths</th>
-        </tr>
-      </thead>
-      <tbody id="table"></tbody>
-      <br />
-    </table>
+
+
+    <div class="the-project">
+        <div><i class="fas fa-tachometer-fast fa-3x"></i><br>Fast</div>
+        <div><i class="fas fa-map-marker-alt fa-3x"></i><br>Location Based</div>
+        <div><i class="fal fa-draw-circle fa-3x"></i><br>Multipurpose</div>
+  </div>
+    
+    <hr>
+
+    <h3>Why?</h3>
+    <h5>Global Timeline Progression</h5>
+    <div class="chart-container" style="position: relative; height: 50vh; width:50vw; float: left; overflow: auto">
+      <canvas id="chart"></canvas>
+    </div>
+
+    <br><br>
+    <p class ="chart-desc">
+      A time line of data, as well as predicted expansion of the coronavirus is shown in the left image. 
+      Unprecendented rates of increase give the need for a faster, more-effective way of getting needed medical supplies.
+      <br><br>
+    <button class="btn btn-danger" onclick="window.open('https://www.cdc.gov/coronavirus/2019-ncov/index.html', '_blank')">More info</button>
+  </p>
   </div>
 </div><br>
 <%- include('blocks/footer') %>

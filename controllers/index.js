@@ -45,6 +45,22 @@ router.get('/exchange', async (req, res) => {
   renderFile(req, res, 'exchange');
 });
 
+router.get('/me', async (req, res) => {
+  renderFile(req, res, 'user');
+});
+
+router.get('/offers', async (req, res) => {
+  renderFile(req, res, 'offers');
+});
+
+router.get('/requests', async (req, res) => {
+  renderFile(req, res, 'requests');
+});
+
+router.get('/profile', async (req, res) => {
+  renderFile(req, res, 'profile');
+});
+
 router.use((req, { boom }) => {
   boom.notFound();
 });

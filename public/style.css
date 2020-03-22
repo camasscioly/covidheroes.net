@@ -33,6 +33,7 @@ input:focus {
 
 canvas{
   float: left;
+  overflow: hidden;
 }
 
 .the-project{

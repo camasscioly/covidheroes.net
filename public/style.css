@@ -21,6 +21,10 @@ body {
   background: #DD45D3;
 }
 
+.maps{
+  float: left;
+}
+
 .btn:focus,
 input:focus {
   outline: none !important;
@@ -32,7 +36,8 @@ input:focus {
 }
 
 canvas{
-  float: left;
+  width: 90%;
+  overflow: hidden;
 }
 
 .the-project{
@@ -43,6 +48,7 @@ canvas{
 }
 
 .chart-desc{
+  font-size: larger;
   margin-left:5px;
   display: flex;
   flex-direction: column;
@@ -141,6 +147,11 @@ tr, #pins {
   background: #fff !important;
 }
 
+.nonbutton{
+  background: none;
+  border: none;
+}
+
 td, th {
   border: none !important;
 }
@@ -152,4 +163,11 @@ body {
 #navbar {
   background: #fff !important;
   border-bottom: 0px solid #DEE2E6 !important;
+}
+
+footer {
+  position:relative;
+  bottom:0;
+  width:100%;
+  height:30px;   /* Height of the footer */
 }

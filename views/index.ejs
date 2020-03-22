@@ -15,14 +15,14 @@
     <div class="the-project">
         <div><i class="fas fa-tachometer-fast fa-3x"></i><br>Fast</div>
         <div><i class="fas fa-map-marker-alt fa-3x"></i><br>Location Based</div>
-        <div><i class="fal fa-draw-circle fa-3x"></i><br>Multipurpose</div>
+        <div><i class="fal fa-draw-circle fa-3x" style="color:rgb(147, 76, 158)"></i><br>Multipurpose</div>
   </div>
     
     <hr>
 
     <h3>Why?</h3>
     <h5>Global Timeline Progression</h5>
-    <div class="chart-container" style="position: relative; height: 50vh; width:50vw; float: left; overflow: auto">
+    <div class="chart-container">
       <canvas id="chart"></canvas>
     </div>
 
@@ -32,7 +32,16 @@
       Unprecendented rates of increase give the need for a faster, more-effective way of getting needed medical supplies.
       <br><br>
     <button class="btn btn-danger" onclick="window.open('https://www.cdc.gov/coronavirus/2019-ncov/index.html', '_blank')">More info</button>
+  </p><br>
+  <hr>
+  <br>
+  <div class="maps">
+  <p>
+    <h3>Your location</h3>
   </p>
+  <!--  -->
+  </div>
+
   </div>
 </div><br>
 <%- include('blocks/footer') %>

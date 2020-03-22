@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const auth = require('./../middleware/auth.js');
+const makeID = require('./../middleware/makeID.js');
 const Keyv = require('keyv');
 const keyv = new Keyv(process.env.DB_URL);
 keyv.on('error', (err) => {
@@ -8,59 +9,30 @@ keyv.on('error', (err) => {
 
 const router = Router();
 
-router.post('/global', auth, async (req, res) => {
-  delete req.query.token;
-  await keyv.set('global', req.body);
-  console.log(req.body);
-  res.json(req.body);
+router.post('/signup', async (req, res) => {
+  const { name, email, phone, location, password } = req.body;
+  const userList = (await keyv.get('user-list')) || [];
+  try {
+    const out = userList.find((block) => block[0] === name);
+    if (out) res.status(500).send('Already Registered');
+    else throw new Error('Throw back to default');
+  } catch (err) {
+    const id = makeID(10);
+    userList.push([ name, id ]);
+    keyv.set('user-list', userList);
+    await keyv.set(id, { name, email, phone, location, password });
+    res.status(200).send('Registered!');
+  }
 });
 
-router.get('/global', async (req, res) => {
-  res.json(await keyv.get('global') || {});
-});
-
-router.post('/us', auth, async (req, res) => {
-  delete req.query.token;
-  await keyv.set('us', req.body);
-  console.log(req.body);
-  res.json(req.body);
-});
-
-router.get('/us', async (req, res) => {
-  res.json(await keyv.get('us') || {});
-});
-
-router.post('/us/timeline', auth, async (req, res) => {
-  delete req.query.token;
-  await keyv.set('ustimeline', req.body);
-  console.log(req.body);
-  res.json(req.body);
-});
-
-router.get('/us/timeline', async (req, res) => {
-  res.json(await keyv.get('ustimeline') || {});
-});
-
-router.post('/global/timeline', auth, async (req, res) => {
-  delete req.query.token;
-  await keyv.set('globaltimeline', req.body);
-  console.log(req.body);
-  res.json(req.body);
-});
-
-router.get('/global/timeline', async (req, res) => {
-  res.json(await keyv.get('globaltimeline') || {});
-});
-
-router.post('/us/timeline/predictions', auth, async (req, res) => {
-  delete req.query.token;
-  await keyv.set('ustimelinepredictions', req.body);
-  console.log(req.body);
-  res.json(req.body);
-});
-
-router.get('/us/timeline/predictions', async (req, res) => {
-  res.json(await keyv.get('ustimelinepredictions') || {});
+router.post('/login', async (req, res) => {
+  const { name, password } = req.body;
+  const userList = (await keyv.get('user-list')) || null;
+  if (!userList) return res.status(500).send('Invalid Login');
+  const out = userList.find((block) => block[0] === name);
+  if (!out) return res.status(500).send('Invalid Login');
+  const user = await keyv.get(out[1]);
+  res.json(user);
 });
 
 module.exports = router;

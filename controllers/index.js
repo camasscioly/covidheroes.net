@@ -41,6 +41,10 @@ router.get('/signup', async (req, res) => {
   renderFile(req, res, 'signup');
 });
 
+router.get('/exchange', async (req, res) => {
+  renderFile(req, res, 'exchange');
+});
+
 router.use((req, { boom }) => {
   boom.notFound();
 });

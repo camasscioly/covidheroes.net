@@ -63,6 +63,14 @@ router.post('/offer', async (req, res) => {
   res.json(offerList);
 });
 
+router.post('/offer/remove', async (req, res) => {
+  const offerList = (await keyv.get('offer-list')) || [];
+  let toRemove = offerList.find(block => block.id === req.body.id);
+  offerList.splice(offerList.indexOf(toRemove), 1);
+  await keyv.set('offer-list', offerList);
+  res.json(offerList);
+});
+
 router.get('/offer', async (req, res) => {
   const offerList = (await keyv.get('offer-list')) || [];
   res.json({ offerList });

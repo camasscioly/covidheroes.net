@@ -33,6 +33,14 @@ router.get('/', async (req, res) => {
   renderFile(req, res, 'index');
 });
 
+router.get('/login', async (req, res) => {
+  renderFile(req, res, 'login');
+});
+
+router.get('/signup', async (req, res) => {
+  renderFile(req, res, 'signup');
+});
+
 router.use((req, { boom }) => {
   boom.notFound();
 });

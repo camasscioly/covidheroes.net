@@ -1,0 +1,47 @@
+<%- include('blocks/header') %>
+    <div class="container"></div>
+    <div class="container mt-2">
+      <h1>Create a Offer</h1>
+      <form id="offers">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" placeholder="Enter Title" required>
+        </div>
+        <div class="form-group">
+          <label for="tags">Tags</label>
+          <input type="text" class="form-control" id="tags" placeholder="Like, This, Please" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Offer</button>
+      </form>
+      <hr>
+      <h1>Offers</h1>
+      <table class="table" id="dateTable">
+        <thead>
+          <tr id="head">
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Date</th>
+            <th scope="col">Tags</th>
+            <th scope="col">ID</th>
+          </tr>
+        </thead>
+        <tbody id="table">
+          
+        </tbody>
+        <br />
+      </table>
+    </div>
+  </div><br>
+  <footer class="text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p>&copy; 2019-present CoronaExchange. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="./offers.js" defer></script>
+  </body>
+</html>
+

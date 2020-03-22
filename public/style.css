@@ -42,8 +42,11 @@ canvas{
   margin-bottom: 0;
 }
 
-.moreinfo:hover{
-  
+.chart-desc{
+  margin-left:5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .btn-danger,

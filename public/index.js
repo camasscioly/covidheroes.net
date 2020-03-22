@@ -10,10 +10,11 @@ async function query(endpoint) {
   return body;
 }
 
-function addEntry(key, val, id) {
+function addEntry(day, cases, deaths, id) {
   document.querySelector(id).innerHTML += `<tr>
-    <th scope="row">${key}</th>
-    <td>${val}</td>
+    <th scope="row">${day}</th>
+    <td>${cases}</td>
+    <td>${deaths}</td>
   </tr>`;
 }
 
@@ -38,21 +39,41 @@ async function init() {
       {
         label: 'Total Cases',
         data: [],
-        backgroundColor: 'rgba(252, 153, 89, 0.05)',
-        borderColor: '#DD45D3',
-        fill: true,
+        backgroundColor: '#FD9D52',
+        borderColor: '#FD9D52',
+        fill: false,
         lineTension: 0,
-        radius: 1,
+        radius: 3.5,
         fontFamily: 'IBM Plex Sans',
       },
       {
         label: 'Total Deaths',
         data: [],
-        backgroundColor: 'rgba(148, 60, 255, 0.05)',
-        borderColor: '#943CFF',
-        fill: true,
+        backgroundColor: '#DD45D3',
+        borderColor: '#DD45D3',
+        fill: false,
         lineTension: 0,
-        radius: 1,
+        radius: 3.5,
+        fontFamily: 'IBM Plex Sans',
+      },
+      {
+        label: 'Predicted Total Cases',
+        data: [],
+        backgroundColor: '#943CFF',
+        borderColor: '#943CFF',
+        fill: false,
+        lineTension: 0,
+        radius: 3.5,
+        fontFamily: 'IBM Plex Sans',
+      },
+      {
+        label: 'Predicted Total Deaths',
+        data: [],
+        backgroundColor: '#000',
+        borderColor: '#000',
+        fill: false,
+        lineTension: 0,
+        radius: 3.5,
         fontFamily: 'IBM Plex Sans',
       },
     ],
@@ -76,6 +97,15 @@ async function init() {
       },
       fontFamily: 'IBM Plex Sans',
     },
+    scales: {
+      xAxes: [{
+        display: true,
+      }],
+      yAxes: [{
+        display: true,
+        //type: 'logarithmic',
+      }]
+    }
   };
 
   let chart = new Chart(ctx, {
@@ -105,11 +135,25 @@ async function init() {
   for (i = 0; i < globalTimelineDeath.death.length; i++) {
     addData(chart, globalTimelineCases.cases[i][0], globalTimelineCases.cases[i][1], 0, true);
     addData(chart, globalTimelineDeath.death[i][0], globalTimelineDeath.death[i][1], 1, false);
+    addData(chart, globalTimelineCases.cases[i][0], (globalTimelineDeath.death.length - 1 === i) ? globalTimelineCases.cases[i][1] : undefined, 2, false);
+    addData(chart, globalTimelineDeath.death[i][0], (globalTimelineDeath.death.length - 1 === i) ? globalTimelineDeath.death[i][1] : undefined, 3, false);
+    addEntry(
+      globalTimelineDeath.death[i][0],
+      globalTimelineCases.cases[i][1],
+      globalTimelineDeath.death[i][1],
+      '#dateTable'
+    );
   }
 
-  for (let j = i; j < globalTimelineDeathPredictions.death.length; j++) {
-    addData(chart, j, globalTimelineCasesPredictions.cases[j], 0, true);
-    addData(chart, j, globalTimelineDeathPredictions.death[j], 1, false);
+  for (let j = i; j < globalTimelineDeathPredictions.death.length + i; j++) {
+    addData(chart, `P${j}`, globalTimelineCasesPredictions.cases[j - i], 2, true);
+    addData(chart, `P${j}`, globalTimelineDeathPredictions.death[j - i], 3, false);
+    addEntry(
+      `<i class="fas fa-exclamation-triangle"></i> Prediction: ${j}`,
+      globalTimelineCasesPredictions.cases[j - i],
+      globalTimelineDeathPredictions.death[j - i],
+      '#dateTable'
+    );
   }
   /*for (const prop in usTimelinePredictionsRes) {
     if (new Date().toLocaleDateString('en-US') === prop) return;

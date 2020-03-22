@@ -37,6 +37,7 @@ input:focus {
 
 canvas{
   width: 90%;
+  height: 45vh;
   overflow: hidden;
 }
 

@@ -79,7 +79,7 @@ async function init() {
     ],
   };
   let options = {
-    responsive: true,
+    // responsive: true,
     title: {
       display: true,
       position: 'top',

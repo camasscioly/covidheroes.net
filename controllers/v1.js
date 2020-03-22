@@ -18,11 +18,23 @@ router.post('/signup', async (req, res) => {
     else throw new Error('Throw back to default');
   } catch (err) {
     const id = makeID(10);
-    userList.push([ name, id ]);
+    userList.push([name, id]);
     keyv.set('user-list', userList);
     await keyv.set(id, { name, email, phone, location, password });
     res.status(200).send('Registered!');
   }
+});
+
+router.get('/userdata', async (req, res) => {
+  const { name } = req.query;
+  const userList = (await keyv.get('user-list')) || null;
+  if (!userList) return res.status(500).send('Invalid Login');
+  const out = userList.find((block) => block[0] === name);
+  if (!out) return res.status(500).send('Invalid Login');
+  let user = await keyv.get(out[1]);
+  user.id = out[1];
+  user.password = undefined;
+  res.json(user);
 });
 
 router.post('/login', async (req, res) => {
@@ -31,8 +43,29 @@ router.post('/login', async (req, res) => {
   if (!userList) return res.status(500).send('Invalid Login');
   const out = userList.find((block) => block[0] === name);
   if (!out) return res.status(500).send('Invalid Login');
-  const user = await keyv.get(out[1]);
+  let user = await keyv.get(out[1]);
+  if (user.password !== password) return res.status(500).send('Invalid Login');
+  user.id = out[1];
   res.json(user);
+});
+
+router.post('/offer', async (req, res) => {
+  const offerList = (await keyv.get('offer-list')) || [];
+  offerList.push({
+    title: req.body.title,
+    description: req.body.description || null,
+    date: req.body.date,
+    tags: req.body.tags,
+    author: req.body.author,
+    id: makeID(15)
+  });
+  await keyv.set('offer-list', offerList);
+  res.json(offerList);
+});
+
+router.get('/offer', async (req, res) => {
+  const offerList = (await keyv.get('offer-list')) || [];
+  res.json({ offerList });
 });
 
 module.exports = router;

@@ -22,13 +22,15 @@ async function postData(url = '', data = {}) {
 document.querySelector('#login').onsubmit = () => {
   postData(`${base}login`, { name: document.querySelector('#name').value, password: document.querySelector('#password').value })
     .then((data) => {
-      const { name, email, phone, location, password } = data;
+      const { name, email, phone, location, password, id } = data;
       localStorage.setItem('name', name);
       localStorage.setItem('email', email);
       localStorage.setItem('phone', phone);
       localStorage.setItem('location', location);
       localStorage.setItem('password', password);
-      window.location = window.location.origin;
+      localStorage.setItem('id', id);
+      localStorage.setItem('member', true);
+      window.location = `${window.location.origin}/me`;
     });
   return false;
 }

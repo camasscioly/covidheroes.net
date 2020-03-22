@@ -103,7 +103,7 @@ async function init() {
       }],
       yAxes: [{
         display: true,
-        //type: 'logarithmic',
+        // type: 'logarithmic',
       }]
     }
   };
@@ -114,23 +114,11 @@ async function init() {
     options: options,
   });
 
-  let counter = 0;
-  // const usRes = await query('us');
-  // const globalRes = await query('global');
   const globalTimelineCases = await query('global/timeline/cases');
   const globalTimelineDeath = await query('global/timeline/death');
   const globalTimelineCasesPredictions = await query('global/timeline/cases/predictions');
   const globalTimelineDeathPredictions = await query('global/timeline/death/predictions');
-  // const usTimelinePredictionsRes = await query('us/timeline/predictions');
-  /*for (const prop in globalRes) {
-    addEntry(prop, globalRes[prop][0], '#globalTable');
-    if (counter < 8) addData(chart1, prop, globalRes[prop][0], counter++, false);
-  }
-  counter = 0;
-  for (const prop in usRes) {
-    addEntry(prop, usRes[prop][0], '#usTable');
-    if (counter < 8) addData(chart1, prop, usRes[prop][0], counter++, false);
-  }*/
+
   let i;
   for (i = 0; i < globalTimelineDeath.death.length; i++) {
     addData(chart, globalTimelineCases.cases[i][0], globalTimelineCases.cases[i][1], 0, true);
@@ -155,26 +143,6 @@ async function init() {
     //   '#dateTable'
     // );
   }
-  /*for (const prop in usTimelinePredictionsRes) {
-    if (new Date().toLocaleDateString('en-US') === prop) return;
-    const {
-      new_daily_cases,
-      new_daily_deaths,
-      total_cases,
-      total_deaths,
-      total_recoveries,
-    } = usTimelineRes[prop];
-    addData(chart, `P: ${prop}`, new_daily_cases, 0, true);
-    addData(chart, `P: ${prop}`, new_daily_deaths, 1, false);
-    addData(chart, `P: ${prop}`, total_cases, 2, false);
-    addData(chart, `P: ${prop}`, total_deaths, 3, false);
-    addData(chart, `P: ${prop}`, total_recoveries, 4, false);
-    addEntry(
-      `Prediction: ${prop}`,
-      `New Cases: ${new_daily_cases}, New Deaths: ${new_daily_deaths}, Total Cases: ${total_cases}, Total Deaths: ${total_deaths}, Total Recoveries: ${total_recoveries}`,
-      '#dateTable'
-    );
-  }*/
 }
 
 init();

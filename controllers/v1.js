@@ -21,7 +21,7 @@ router.post('/signup', async (req, res) => {
     const id = makeID(10);
     userList.push([name, id]);
     keyv.set('user-list', userList);
-    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.genSalt(10, async (err, salt) => {
       bcrypt.hash(password, salt, (err, hash) => {
         await keyv.set(id, { name, email, phone, location, hash });
         res.status(200).send('Registered!');

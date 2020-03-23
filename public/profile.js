@@ -8,9 +8,9 @@ window.onload = () => {
       .then((body) => {
         const { email, phone, location, id } = body;
         document.querySelector('#name').value = name;
-        document.querySelector('#email').value = email;
+        /*document.querySelector('#email').value = email;
         document.querySelector('#phone').value = phone;
-        document.querySelector('#location').value = location;
+        document.querySelector('#location').value = location;*/
         document.querySelector('#id').value = id;
         document.querySelector('#contact').onclick = () => {
           window.open(`mailto:${email}?subject=${document.getElementById('subject').value}!&body=${document.getElementById('message').value}`);

@@ -1,4 +1,5 @@
 let killOffer;
+const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
@@ -8,7 +9,7 @@ window.onload = () => {
       postData(`${base}offer/remove`, {
         id,
       }).then((data) => {});
-    }
+    };
 
     async function postData(url = '', data = {}) {
       // Default options are marked with *
@@ -25,19 +26,23 @@ window.onload = () => {
         referrerPolicy: 'no-referrer', // no-referrer, *client
         body: JSON.stringify(data), // body data type must match "Content-Type" header
       });
-      return await response.text(); // parses JSON response into native JavaScript objects
+      try {
+        return await response.json(); // parses JSON response into native JavaScript objects
+      } catch (err) {
+        alert('Invalid Offer');
+      }
     }
 
     function addEntry(title, author, date, tags, id, dom) {
       const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('name') === '${author}') { document.getElementById('${id}').remove(); killOffer('${id}') }">Close</button>`;
       const fulfill = ` <button class="btn btn-danger" onclick="if (localStorage.getItem('name') !== '${author}') { window.location = '${window.location.origin}/profile?name=${author}' }">Fullfill</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row">${title}</th>
+        <th scope="row"><p>${title}</p></th>
         <td><a href="${window.location.origin}/profile?name=${author}">${author}</a></td>
-        <td>${date}</td>
-        <td>${tags}</td>
+        <td><p>${date}</p></td>
+        <td><p>${tags}</p></td>
         <td>${id}</td>
-        <td>${(localStorage.getItem('name') === author) ? close : fulfill}</td>
+        <td>${localStorage.getItem('name') === author ? close : fulfill}</td>
       </tr>`;
     }
 
@@ -46,17 +51,24 @@ window.onload = () => {
       .then((body) => {
         body.offerList.reverse().forEach((offer) => {
           const { title, author, date, tags, id } = offer;
-          addEntry(title, author, date, tags, id, '#table');
+          addEntry(
+            esc(DOMPurify.sanitize(title)),
+            esc(DOMPurify.sanitize(author)),
+            esc(DOMPurify.sanitize(date)),
+            esc(DOMPurify.sanitize(tags)),
+            esc(DOMPurify.sanitize(id)),
+            '#table'
+          );
         });
         offerList = body.offerList.reverse();
       });
 
     document.querySelector('#offers').onsubmit = () => {
       postData(`${base}offer`, {
-        title: document.querySelector('#title').value,
-        author: localStorage.getItem('name'),
+        title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
+        author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
         date: new Date().toLocaleDateString('en-US'),
-        tags: document.querySelector('#title').value,
+        tags: esc(DOMPurify.sanitize(document.querySelector('#tags').value)),
       }).then((data) => {
         location.reload();
       });
@@ -66,3 +78,50 @@ window.onload = () => {
     window.location = `${window.location.origin}/login`;
   }
 };
+
+function esc(string) {
+  const str = `${string}`;
+  const match = matchHtmlRegExp.exec(str);
+
+  if (!match) {
+    return str
+  }
+
+  let escape;
+  let html = '';
+  let index = 0;
+  let lastIndex = 0;
+
+  for (index = match.index; index < str.length; index++) {
+    switch (str.charCodeAt(index)) {
+      case 34: // "
+        escape = '&quot;'
+        break
+      case 38: // &
+        escape = '&amp;'
+        break
+      case 39: // '
+        escape = '&#39;'
+        break
+      case 60: // <
+        escape = '&lt;'
+        break
+      case 62: // >
+        escape = '&gt;'
+        break
+      default:
+        continue
+    }
+
+    if (lastIndex !== index) {
+      html += str.substring(lastIndex, index)
+    }
+
+    lastIndex = index + 1
+    html += escape
+  }
+
+  return lastIndex !== index
+    ? html + str.substring(lastIndex, index)
+    : html
+}

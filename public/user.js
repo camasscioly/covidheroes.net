@@ -6,11 +6,11 @@ window.onload = () => {
     const location = localStorage.getItem('location');
     const id = localStorage.getItem('id');
 
-    document.querySelector('#name').value = name;
-    document.querySelector('#email').value = email;
-    document.querySelector('#phone').value = phone;
-    document.querySelector('#location').value = location;
-    document.querySelector('#id').value = id;
+    document.querySelector('#name').value = DOMPurify.sanitize(name);
+    document.querySelector('#email').value = DOMPurify.sanitize(email);
+    document.querySelector('#phone').value = DOMPurify.sanitize(phone);
+    document.querySelector('#location').value = DOMPurify.sanitize(location);
+    document.querySelector('#id').value = DOMPurify.sanitize(id);
   } else {
     window.location = `${window.location.origin}/login`;
   }

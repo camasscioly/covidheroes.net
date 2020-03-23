@@ -113,7 +113,7 @@ window.onload = () => {
       },
     };
 
-    let chart = new Chart(ctx, {
+    /*let chart = new Chart(ctx, {
       type: 'line',
       data: data,
       options: options,
@@ -160,7 +160,7 @@ window.onload = () => {
       //   '#dateTable'
       // );
     }
-  }
+  }*/
 
-  init();
+  //init();
 };

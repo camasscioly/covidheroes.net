@@ -1,3 +1,5 @@
+const base = `${window.location.origin}/v1/`;
+
 if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'
@@ -8,6 +10,12 @@ if (!localStorage.getItem('name')) {
     '#account'
   ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload();">Log out</button>
   <button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'">Account</button>`;
+  fetch(`${base}users`)
+    .then((res) => res.json())
+    .then((body) => {
+      if (!body.users.includes([localStorage.getItem('name'), localStorage.getItem('id')])) {
+        localStorage.clear();
+        location.reload();
+      }
+    });
 }
-console.log('Header Loaded');
-

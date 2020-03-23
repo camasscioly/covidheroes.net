@@ -14,7 +14,9 @@
       // this.page.url = window.location.origin;  // Replace PAGE_URL with your page's canonical URL variable
       // this.page.identifier = ID; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
       // };
-
+      if (!localStorage.getItem('name')) {
+        window.location = `${window.location.origin}/login`;
+      }
       (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
       s.src = 'https://corona-4.disqus.com/embed.js';
@@ -23,51 +25,7 @@
       })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-       
-
-    <!-- <div class="pad" style="padding-top: 10%; padding-bottom: 10%; background: #F5F4F9;">
-      <h2 style="font-weight: bold;">Platform Guidelines</h2>
-      <p style="font-size: 120%;">
-        WIP
-      </p>
-      <a href="/about">Learn more <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="pad" style="padding-top: 10%; padding-bottom: 10%;">
-      <h2 style="font-weight: bold;">Our Story</h2>
-      <p style="font-size: 120%;">
-        We provide a communication service that bridges requesters and fullfillers. This is mainly towards the dwindling amounts of supplies during the COVID-19 crisis.
-      </p>
-      <a href="/requests">Requesting Service <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="pad" style="padding-top: 10%; padding-bottom: 10%; background: #F5F4F9;">
-      <h2 style="font-weight: bold;">Mission Statement</h2>
-      <p style="font-size: 120%;">
-        We provide a communication service that bridges requesters and fullfillers. This is mainly towards the dwindling amounts of supplies during the COVID-19 crisis.
-      </p>
-      <a href="/requests">Requesting Service <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div style="padding-top: 10%; padding-bottom: 10%; font-weight: bold; text-align: center">
-      <h1>Join the Fight Today!</h1>
-      <button class="btn btn-primary" onclick="if (localStorage.getItem('name')) return; window.location=window.location.origin + '/signup'">CREATE A FREE ACCOUNT</button>
-      <button class="btn btn-primary" style="background: #fff !important; color: #000 !important" onclick="if (localStorage.getItem('name')) return; window.location=window.location.origin + '/login'">LOGIN</button>
-    </div> -->
-
-    <!-- <h3>Why?</h3>
-    <h5>Global Timeline Progression</h5>
-    <div class="chart-container">
-      <canvas id="chart"></canvas>
-    </div>
-
-    <br><br>
-    <p class="chart-desc">
-      A time line of data, as well as predicted expansion of the coronavirus is shown in the left image. 
-      Unprecendented rates of increase give the need for a faster, more-effective way of getting needed medical supplies.
-      <br><br>
-    <button class="btn btn-danger" onclick="window.open('https://www.cdc.gov/coronavirus/2019-ncov/index.html', '_blank')">More info</button>
-  </p> -->
+      
 </div>
 </div><br>
 <%- include('blocks/footer') %>

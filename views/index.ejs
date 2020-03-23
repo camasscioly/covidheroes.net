@@ -1,15 +1,17 @@
 <%- include('blocks/header') %>
+  <style>div { padding-left: 5%; padding-right: 5%;}</style>
   <div class="container mt-2">
     <div style="padding-top: 10%; padding-bottom: 10%;">
       <h1 style="font-weight: bold;">Solving COVID-19, One Step at a Time</h1>
       <p style="font-size: 150%;">The platform for exhanging needed materials using requests and fulfillments.</p>
-      <button class="btn btn-primary" onclick="if (!localStorage.getItem('name')) return; window.location=window.location.origin + '/signup'">CREATE A FREE ACCOUNT</button>
+      <button class="btn btn-primary" onclick="if (localStorage.getItem('name')) return; window.location=window.location.origin + '/signup'">CREATE A FREE ACCOUNT</button>
+      <button class="btn btn-primary" style="background: #fff !important; color: #000 !important" onclick="if (localStorage.getItem('name')) return; window.location=window.location.origin + '/login'">LOGIN</button>
     </div>
   
-    <div class="the-project" style="padding-top: 10%; padding-bottom: 10%; background: rgb(252,154,87); background: linear-gradient(45deg, rgba(252,154,87,1) 0%, rgba(213,68,216,1) 49%, rgba(154,61,251,1) 100%); font-size: 120%; color: #fff;">
-      <div><i class="fas fa-tachometer-fast fa-3x"></i><br>Fast</div>
+    <div class="the-project" style="padding-top: 10%; padding-bottom: 10%; background: #F5F4F9; font-size: 120%; color: #000; font-weight: bold;">
+      <div><i class="fas fa-tachometer-fast fa-3x"></i><br>Performant</div>
       <div><i class="fas fa-map-marker-alt fa-3x"></i><br>Location Based</div>
-      <div><i class="fas fa-draw-circle fa-3x"></i><br>Multipurpose</div>
+      <div><i class="fas fa-draw-circle fa-3x"></i><br>Simple Design</div>
     </div>
     
     <div style="padding-top: 10%; padding-bottom: 10%;">
@@ -18,6 +20,21 @@
         By connecting users in similar locations, we believe we can limit the damage done by the spread of coronavirus
         through the exchange of needed medical goods.
       </p>
+      <a href="/about">Learn more <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div style="padding-top: 10%; padding-bottom: 10%; background: #F5F4F9;">
+      <h2 style="font-weight: bold;">How it Works</h2>
+      <p style="font-size: 120%;">
+        We provide a communication service that bridges requesters and fullfillers. This is mainly towards the dwindling amounts of supplies during the COVID-19 crisis.
+      </p>
+      <a href="/requests">Requesting Service <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div style="padding-top: 10%; padding-bottom: 10%; font-weight: bold; text-align: center">
+      <h1>Join the Fight Today!</h1>
+      <button class="btn btn-primary" onclick="if (localStorage.getItem('name')) return; window.location=window.location.origin + '/signup'">CREATE A FREE ACCOUNT</button>
+      <button class="btn btn-primary" style="background: #fff !important; color: #000 !important" onclick="if (localStorage.getItem('name')) return; window.location=window.location.origin + '/login'">LOGIN</button>
     </div>
 
     <!-- <h3>Why?</h3>

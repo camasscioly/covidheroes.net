@@ -30,7 +30,7 @@ window.onload = () => {
 
     function addEntry(title, author, date, tags, id, dom) {
       const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('name') === '${author}') { document.getElementById('${id}').remove(); killOffer('${id}') }">Close</button>`;
-      const fulfill = ` <button class="btn btn-danger" onclick="if (localStorage.getItem('name') !== '${author}') { alert('WIP') }">Fullfill</button>`;
+      const fulfill = ` <button class="btn btn-danger" onclick="if (localStorage.getItem('name') !== '${author}') { window.location = '${window.location.origin}/profile?name=${author}' }">Fullfill</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row">${title}</th>
         <td><a href="${window.location.origin}/profile?name=${author}">${author}</a></td>

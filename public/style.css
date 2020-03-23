@@ -19,6 +19,7 @@ body {
 
 a {
   color: #d544d8 !important;
+  font-weight: bold;
 }
 
 .panel-default {
@@ -159,6 +160,9 @@ canvas{
 .btn-primary,
 .badge-primary {
   background: #000 !important;
+  outline: none;
+  border: none;
+  margin-right: 1%;
   font-weight: bold;
   padding: 1%;
   border-radius: 10px;
@@ -166,7 +170,7 @@ canvas{
 }
 
 .fas {
-  color: #fff !important;
+  color: #943CFF !important;
   margin-right: 2px;
 }
 

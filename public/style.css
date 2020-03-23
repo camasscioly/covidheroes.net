@@ -14,16 +14,16 @@ body {
 }
 
 .btn-primary:hover {
-  background: #000 !important;
+  background: rgb(59, 37, 185) !important;
 }
 
 a {
-  color: #943CFF !important;
+  color: #5436FF !important;
   font-weight: bold;
 }
 
 .panel-default {
-  background: #943CFF;
+  background: #5436FF;
 }
 
 .maps{
@@ -35,7 +35,7 @@ table {
 }
 
 input:focus, textarea:focus {
-  border-color: #943CFF !important;
+  border-color: #5436FF !important;
 }
 
 canvas{
@@ -140,27 +140,27 @@ canvas{
 }
 
 .btn-outline-primary {
-  border-color: #943CFF !important;
-  outline: #943CFF !important;
-  color: #943CFF !important;
+  border-color: #5436FF !important;
+  outline: #5436FF !important;
+  color: #5436FF !important;
 }
 
 .badge-outline-primary {
-  border: 1px solid #943CFF !important;
-  outline: #943CFF !important;
-  color: #943CFF !important;
+  border: 1px solid #5436FF !important;
+  outline: #5436FF !important;
+  color: #5436FF !important;
   background: transparent !important;
 }
 .btn-outline-primary:hover {
   background: rgba(67, 112, 255, 0.2) !important;
-  border-color: #943CFF !important;
-  outline: #943CFF !important;
+  border-color: #5436FF !important;
+  outline: #5436FF !important;
 }
 
 .btn-primary,
 .badge-primary {
-  background: #000 !important;
-  text-transform: uppercase;
+  background: #5436FF !important;
+  text-transform: capitalize;
   outline: none;
   border: none;
   margin-right: 1%;
@@ -168,12 +168,14 @@ canvas{
   padding: 12px;
   padding-right: 20px;
   padding-left: 20px;
-  border-radius: 10px;
+  border-radius: 10000px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
+::selection { background: #5436FF; }
+
 .fas {
-  color: #943CFF !important;
+  color: #5436FF !important;
   margin-right: 2px;
 }
 

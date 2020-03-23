@@ -29,6 +29,7 @@ window.onload = () => {
       location: esc(DOMPurify.sanitize(document.querySelector('#location').value)),
       password: esc(DOMPurify.sanitize(document.querySelector('#password').value)),
     }).then((data) => {
+      if (data === 'Already Registered') return alert('This username is already taken.');
       window.location = `${window.location.origin}/login`;
     });
     return false;

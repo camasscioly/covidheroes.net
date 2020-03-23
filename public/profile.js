@@ -3,11 +3,14 @@ window.onload = () => {
     const base = `${window.location.origin}/v1/`;
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    if (id === localStorage.getItem('id')) window.location = `${window.location.origin}/me`;
+    if (id === localStorage.getItem('id')) {
+      window.location = `${window.location.origin}/me`;
+      return;
+    }
     fetch(`${base}userdata?id=${id}`)
       .then((res) => res.json())
       .then((body) => {
-        const { email  } = body;
+        const { email, name } = body;
         document.querySelector('#name').value = name;
         /*document.querySelector('#email').value = email;
         document.querySelector('#phone').value = phone;

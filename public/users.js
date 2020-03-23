@@ -1,15 +1,9 @@
-let killOffer;
 const matchHtmlRegExp = /["'&<>]/;
+let count = 0;
 
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
   if (localStorage.getItem('name')) {
-    let offerList;
-    killOffer = (id) => {
-      postData(`${base}offer/remove`, {
-        id,
-      }).then((data) => {});
-    };
 
     async function postData(url = '', data = {}) {
       // Default options are marked with *
@@ -33,50 +27,26 @@ window.onload = () => {
       }
     }
 
-    async function addEntry(title, author, date, tags, id, dom, authorid) {
-      const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('id') === '${authorid}') { document.getElementById('${id}').remove(); killOffer('${id}') }">Close</button>`;
-      const fulfill = ` <button class="btn btn-danger" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'">Open</button>`;
+    async function addEntry(user, id, dom) {
       document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><p>${title}</p></th>
-        <td><a href="${window.location.origin}/profile?id=${authorid || undefined}">${author}</a></td>
-        <td><p>${date}</p></td>
-        <td><p>${tags}</p></td>
+        <th scope="row"><a href="${window.location.origin}/profile?id=${id}">${user}</a></th>
         <td>${id}</td>
-        <td>${localStorage.getItem('name') === author || localStorage.getItem('admin')  ? fulfill + close : fulfill}</td>
+        <td>${--count}</td>
       </tr>`;
     }
 
-    fetch(`${window.location.origin}/v1/offer`)
+    fetch(`${base}users`)
       .then((res) => res.json())
       .then((body) => {
-        body.offerList.reverse().forEach((offer) => {
-          const { title, author, date, tags, id, authorid } = offer;
+        count = body.users.length + 1;
+        body.users.reverse().forEach((user) => {
           addEntry(
-            esc(DOMPurify.sanitize(title)),
-            esc(DOMPurify.sanitize(author)),
-            esc(DOMPurify.sanitize(date)),
-            esc(DOMPurify.sanitize(tags)),
-            esc(DOMPurify.sanitize(id)),
+            esc(DOMPurify.sanitize(user[0])),
+            esc(DOMPurify.sanitize(user[1])),
             '#table',
-            esc(DOMPurify.sanitize(authorid)),
           );
         });
-        offerList = body.offerList.reverse();
       });
-
-    document.querySelector('#offers').onsubmit = () => {
-      postData(`${base}offer`, {
-        title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
-        author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
-        authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
-        email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
-        date: new Date().toLocaleDateString('en-US'),
-        tags: esc(DOMPurify.sanitize(document.querySelector('#tags').value)),
-      }).then((data) => {
-        location.reload();
-      });
-      return false;
-    };
   } else {
     window.location = `${window.location.origin}/login`;
   }

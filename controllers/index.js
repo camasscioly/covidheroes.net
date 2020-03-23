@@ -37,6 +37,10 @@ router.get('/about', async (req, res) => {
   renderFile(req, res, 'about');
 });
 
+router.get('/users', async (req, res) => {
+  renderFile(req, res, 'users');
+});
+
 router.get('/login', async (req, res) => {
   renderFile(req, res, 'login');
 });

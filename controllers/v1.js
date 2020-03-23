@@ -64,6 +64,7 @@ router.post('/offer', async (req, res) => {
     date: req.body.date,
     tags: req.body.tags,
     author: req.body.author,
+    authorid: req.body.authorid,
     email: req.body.email,
     id: makeID(15),
   });
@@ -82,6 +83,11 @@ router.post('/offer/remove', async (req, res) => {
 router.get('/offer', async (req, res) => {
   const offerList = (await keyv.get('offer-list')) || [];
   res.json({ offerList });
+});
+
+router.get('/users', async (req, res) => {
+  const users = (await keyv.get('user-list')) || [];
+  res.json({ users });
 });
 
 module.exports = router;

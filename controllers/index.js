@@ -53,6 +53,10 @@ router.get('/requests', async (req, res) => {
   renderFile(req, res, 'offers');
 });
 
+router.get('/requests/open', async (req, res) => {
+  renderFile(req, res, 'request');
+});
+
 router.get('/profile', async (req, res) => {
   renderFile(req, res, 'profile');
 });

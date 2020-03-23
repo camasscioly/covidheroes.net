@@ -3,6 +3,7 @@ window.onload = () => {
     const base = `${window.location.origin}/v1/`;
     const urlParams = new URLSearchParams(window.location.search);
     const name = urlParams.get('name');
+    if (name === localStorage.getItem('name')) window.location = `${window.location.origin}/me`;
     fetch(`${base}userdata?name=${name}`)
       .then((res) => res.json())
       .then((body) => {

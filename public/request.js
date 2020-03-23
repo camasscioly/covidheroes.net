@@ -1,4 +1,6 @@
 let killOffer;
+let emailTo;
+let ID;
 const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
@@ -26,55 +28,44 @@ window.onload = () => {
         referrerPolicy: 'no-referrer', // no-referrer, *client
         body: JSON.stringify(data), // body data type must match "Content-Type" header
       });
-      try {
-        return await response.json(); // parses JSON response into native JavaScript objects
-      } catch (err) {
-        alert('Invalid Offer');
-      }
-    }
-
-    function addEntry(title, author, date, tags, id, dom) {
-      const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('name') === '${author}') { document.getElementById('${id}').remove(); killOffer('${id}') }">Close</button>`;
-      const fulfill = ` <button class="btn btn-danger" onclick="if (localStorage.getItem('name') !== '${author}') { window.location = '${window.location.origin}/requests/open?id=${id}' }">Fullfill</button>`;
-      document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><p>${title}</p></th>
-        <td><a href="${window.location.origin}/profile?name=${author}">${author}</a></td>
-        <td><p>${date}</p></td>
-        <td><p>${tags}</p></td>
-        <td>${id}</td>
-        <td>${localStorage.getItem('name') === author ? close : fulfill}</td>
-      </tr>`;
+      return await response.text(); // parses JSON response into native JavaScript objects
     }
 
     fetch(`${window.location.origin}/v1/offer`)
       .then((res) => res.json())
       .then((body) => {
-        body.offerList.reverse().forEach((offer) => {
-          const { title, author, date, tags, id } = offer;
-          addEntry(
-            esc(DOMPurify.sanitize(title)),
-            esc(DOMPurify.sanitize(author)),
-            esc(DOMPurify.sanitize(date)),
-            esc(DOMPurify.sanitize(tags)),
-            esc(DOMPurify.sanitize(id)),
-            '#table'
-          );
-        });
+        const urlParams = new URLSearchParams(window.location.search);
+        const reqId = urlParams.get('id');
+        const offer = body.offerList.find(offer => offer.id === reqId);
+        document.querySelector('#reqid').innerText = `Request: #${esc(DOMPurify.sanitize(reqId))}`;
+        const { title, author, date, tags, email, id } = offer;
+        document.querySelector('#item').value = title;
+        document.querySelector('#author').value = author;
+        document.querySelector('#date').value = date;
+        document.querySelector('#quantity').value = tags;
+        emailTo = email;
+        ID = id;
         offerList = body.offerList.reverse();
       });
 
-    document.querySelector('#offers').onsubmit = () => {
-      postData(`${base}offer`, {
-        title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
-        author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
-        email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
-        date: new Date().toLocaleDateString('en-US'),
-        tags: esc(DOMPurify.sanitize(document.querySelector('#tags').value)),
+    document.querySelector('#req').onsubmit = () => {
+      if (localStorage.getItem(ID)) {
+        alert(`You've already fulfilled this request!`)
+        return false;
+      };
+      localStorage.setItem(ID, 'fullfilled');
+      postData(`${base}fire`, {
+        emailTo,
+        nameFrom: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
+        emailFrom: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
+        phoneFrom: esc(DOMPurify.sanitize(localStorage.getItem('phone'))),
       }).then((data) => {
         location.reload();
       });
+      document.querySelector('#fulfill').disabled = true;
       return false;
     };
+    if (localStorage.getItem(ID)) document.querySelector('#fulfill').disabled = true;
   } else {
     window.location = `${window.location.origin}/login`;
   }

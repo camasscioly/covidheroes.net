@@ -47,24 +47,6 @@ window.onload = () => {
         ID = id;
         offerList = body.offerList.reverse();
       });
-
-    document.querySelector('#req').onsubmit = () => {
-      if (localStorage.getItem(ID)) {
-        alert(`You've already fulfilled this request!`)
-        return false;
-      };
-      localStorage.setItem(ID, 'fullfilled');
-      postData(`${base}fire`, {
-        emailTo,
-        nameFrom: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
-        emailFrom: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
-        phoneFrom: esc(DOMPurify.sanitize(localStorage.getItem('phone'))),
-      }).then((data) => {
-        location.reload();
-      });
-      document.querySelector('#fulfill').disabled = true;
-      return false;
-    };
     if (localStorage.getItem(ID)) document.querySelector('#fulfill').disabled = true;
   } else {
     window.location = `${window.location.origin}/login`;

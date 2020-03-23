@@ -1,16 +1,8 @@
 const { Router } = require('express');
 const auth = require('./../middleware/auth.js');
 const makeID = require('./../middleware/makeID.js');
-const nodemailer = require('nodemailer');
 const Keyv = require('keyv');
 const keyv = new Keyv(process.env.DB_URL);
-let transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
-  },
-});
 keyv.on('error', (err) => {
   console.error(err);
 });
@@ -83,16 +75,6 @@ router.post('/offer/remove', async (req, res) => {
 router.get('/offer', async (req, res) => {
   const offerList = (await keyv.get('offer-list')) || [];
   res.json({ offerList });
-});
-
-router.post('/fire', async (req, res) => {
-  let mailOptions = {
-    from: process.env.EMAIL, 
-    to: req.body.emailTo, 
-    subject: `[CoronaExchange] Fulfillment Request from ${req.body.nameFrom}`,
-    text: `${req.body.nameFrom} would like to fulfill you email request. Contact ${req.body.emailFrom} / ${req.body.phoneFrom} to get your request fulfilled.`
-  };
-  transporter.sendMail(mailOptions, () => console.log('Sent'));
 });
 
 module.exports = router;

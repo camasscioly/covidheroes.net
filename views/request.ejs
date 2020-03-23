@@ -19,8 +19,24 @@
           <label for="quantity">Quantity</label>
           <input type="phone" class="form-control" id="quantity" readonly>
         </div>
-        <button class="btn btn-primary" id="fulfill" id="submit">Fulfill</button>
-      </form>
+      </form><br>
+      <div id="disqus_thread"></div>
+    <script>
+
+      // var disqus_config = function () {
+      // this.page.url = window.location.origin;  // Replace PAGE_URL with your page's canonical URL variable
+      // this.page.identifier = ID; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      // };
+
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://corona-4.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                
     </div>
   </div><br>
   <footer class="text-center">
@@ -32,6 +48,7 @@
       </div>
     </div>
   </footer>
+  <script id="dsq-count-scr" src="//corona-4.disqus.com/count.js" async></script>
   <script src="/request.js" defer></script>
 </body>
 </html>

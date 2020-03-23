@@ -18,12 +18,12 @@ body {
 }
 
 a {
-  color: #d544d8 !important;
+  color: #943CFF !important;
   font-weight: bold;
 }
 
 .panel-default {
-  background: #d544d8;
+  background: #943CFF;
 }
 
 .maps{
@@ -35,7 +35,7 @@ table {
 }
 
 input:focus, textarea:focus {
-  border-color: #d544d8 !important;
+  border-color: #943CFF !important;
 }
 
 canvas{
@@ -140,21 +140,21 @@ canvas{
 }
 
 .btn-outline-primary {
-  border-color: #d544d8 !important;
-  outline: #d544d8 !important;
-  color: #d544d8 !important;
+  border-color: #943CFF !important;
+  outline: #943CFF !important;
+  color: #943CFF !important;
 }
 
 .badge-outline-primary {
-  border: 1px solid #d544d8 !important;
-  outline: #d544d8 !important;
-  color: #d544d8 !important;
+  border: 1px solid #943CFF !important;
+  outline: #943CFF !important;
+  color: #943CFF !important;
   background: transparent !important;
 }
 .btn-outline-primary:hover {
   background: rgba(67, 112, 255, 0.2) !important;
-  border-color: #d544d8 !important;
-  outline: #d544d8 !important;
+  border-color: #943CFF !important;
+  outline: #943CFF !important;
 }
 
 .btn-primary,

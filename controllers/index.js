@@ -49,12 +49,8 @@ router.get('/me', async (req, res) => {
   renderFile(req, res, 'user');
 });
 
-router.get('/offers', async (req, res) => {
-  renderFile(req, res, 'offers');
-});
-
 router.get('/requests', async (req, res) => {
-  renderFile(req, res, 'requests');
+  renderFile(req, res, 'offers');
 });
 
 router.get('/profile', async (req, res) => {

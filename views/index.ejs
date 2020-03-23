@@ -1,26 +1,26 @@
 <%- include('blocks/header') %>
-  <div class="container"></div>
   <div class="container mt-2">
-    <h1>The Sharing Platform for Medical Resources</h1>
-    <p>A platform for exhange of needed materials using requests and fulfillments.</p>
-    <hr>
-    <h3>The Goals</h3>
-    <p>
-      By connecting users in similar locations, we believe we can limit the damage done by the spread of coronavirus
-      through the exchange of needed medical goods.
-    </p>
-    <hr>
-
-
-    <div class="the-project">
+    <div style="padding-top: 10%; padding-bottom: 10%;">
+      <h1 style="font-weight: bold;">Solving COVID-19, One Step at a Time</h1>
+      <p style="font-size: 150%;">The platform for exhanging needed materials using requests and fulfillments.</p>
+      <button class="btn btn-primary" onclick="if (!localStorage.getItem('name')) return; window.location=window.location.origin + '/signup'">CREATE A FREE ACCOUNT</button>
+    </div>
+  
+    <div class="the-project" style="padding-top: 10%; padding-bottom: 10%; background: rgb(252,154,87); background: linear-gradient(45deg, rgba(252,154,87,1) 0%, rgba(213,68,216,1) 49%, rgba(154,61,251,1) 100%); font-size: 120%; color: #fff;">
       <div><i class="fas fa-tachometer-fast fa-3x"></i><br>Fast</div>
       <div><i class="fas fa-map-marker-alt fa-3x"></i><br>Location Based</div>
-      <div><i class="fal fa-draw-circle fa-3x"></i><br>Multipurpose</div>
+      <div><i class="fas fa-draw-circle fa-3x"></i><br>Multipurpose</div>
     </div>
     
-    <hr>
+    <div style="padding-top: 10%; padding-bottom: 10%;">
+      <h2 style="font-weight: bold;">The Goal</h2>
+      <p style="font-size: 120%;">
+        By connecting users in similar locations, we believe we can limit the damage done by the spread of coronavirus
+        through the exchange of needed medical goods.
+      </p>
+    </div>
 
-    <h3>Why?</h3>
+    <!-- <h3>Why?</h3>
     <h5>Global Timeline Progression</h5>
     <div class="chart-container">
       <canvas id="chart"></canvas>
@@ -32,7 +32,7 @@
       Unprecendented rates of increase give the need for a faster, more-effective way of getting needed medical supplies.
       <br><br>
     <button class="btn btn-danger" onclick="window.open('https://www.cdc.gov/coronavirus/2019-ncov/index.html', '_blank')">More info</button>
-  </p>
+  </p> -->
 </div>
 </div><br>
 <%- include('blocks/footer') %>

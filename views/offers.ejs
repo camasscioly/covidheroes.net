@@ -1,27 +1,27 @@
 <%- include('blocks/header') %>
     <div class="container"></div>
     <div class="container mt-2">
-      <h1>Create a Offer</h1>
+      <h1>Create a Request</h1>
       <form id="offers">
         <div class="form-group">
-          <label for="title">Title</label>
-          <input type="text" class="form-control" id="title" placeholder="Enter Title" required>
+          <label for="title">Item</label>
+          <input type="text" class="form-control" id="title" placeholder="Enter Item Name" max-length="50" required>
         </div>
         <div class="form-group">
-          <label for="tags">Tags</label>
-          <input type="text" class="form-control" id="tags" placeholder="Like, This, Please" required>
+          <label for="tags">Quantity</label>
+          <input type="number" class="form-control" id="tags" placeholder="Enter Quantity of Item" required>
         </div>
-        <button type="submit" class="btn btn-primary">Offer</button>
+        <button type="submit" class="btn btn-primary">Request</button>
       </form>
       <hr>
-      <h1>Offers</h1>
+      <h1>Requests</h1>
       <table class="table" id="dateTable">
         <thead>
           <tr id="head">
-            <th scope="col">Title</th>
+            <th scope="col">Item</th>
             <th scope="col">Author</th>
             <th scope="col">Date</th>
-            <th scope="col">Tags</th>
+            <th scope="col">Quantity</th>
             <th scope="col">ID</th>
           </tr>
         </thead>

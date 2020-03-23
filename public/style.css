@@ -13,26 +13,28 @@ body {
   font-family: 'IBM Plex Sans', sans-serif !important;
 }
 
-.btn {
-  /* font-weight: bold !important; */
+.btn-primary:hover {
+  background: #000 !important;
+}
+
+a {
+  color: #d544d8 !important;
 }
 
 .panel-default {
-  background: #DD45D3;
+  background: #d544d8;
 }
 
 .maps{
   float: left;
 }
 
-.btn:focus,
-input:focus {
-  outline: none !important;
+table {
+  text-align: center;
 }
 
-input:focus {
-  border-color: #DD45D3 !important;
-  border-radius: 1000px;
+input:focus, textarea:focus {
+  border-color: #d544d8 !important;
 }
 
 canvas{
@@ -80,40 +82,34 @@ canvas{
 }
 
 .btn-outline-primary {
-  border-color: #943CFF !important;
-  outline: #943CFF !important;
-  color: #943CFF !important;
+  border-color: #d544d8 !important;
+  outline: #d544d8 !important;
+  color: #d544d8 !important;
 }
 
 .badge-outline-primary {
-  border: 1px solid #943CFF !important;
-  outline: #943CFF !important;
-  color: #943CFF !important;
+  border: 1px solid #d544d8 !important;
+  outline: #d544d8 !important;
+  color: #d544d8 !important;
   background: transparent !important;
 }
-
-.badge-primary {
-  border: 1px solid #943CFF !important;
-  outline: #943CFF !important;
-}
-
 .btn-outline-primary:hover {
   background: rgba(67, 112, 255, 0.2) !important;
-  border-color: #943CFF !important;
-  outline: #943CFF !important;
+  border-color: #d544d8 !important;
+  outline: #d544d8 !important;
 }
 
 .btn-primary,
 .badge-primary {
-  background: #943CFF !important;
-}
-
-.btn-primary:hover {
-  background: #5667fc !important;
+  background: #000 !important;
+  font-weight: bold;
+  padding: 1%;
+  border-radius: 10px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .fas {
-  color: #943CFF !important;
+  color: #fff !important;
   margin-right: 2px;
 }
 
@@ -157,18 +153,16 @@ td, th {
   border: none !important;
 }
 
-body {
-  padding: 2%;
-}
-
 #navbar {
   background: #fff !important;
   border-bottom: 0px solid #DEE2E6 !important;
 }
 
-footer {
-  position:relative;
-  bottom:0;
-  width:100%;
-  height:30px;   /* Height of the footer */
+html,
+body {
+  height: 100%;
+}
+
+#sticky-footer {
+  flex-shrink: none;
 }

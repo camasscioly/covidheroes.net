@@ -26,21 +26,22 @@
       rel="stylesheet"
       href="./style.css"
     />
-    <script src="./header.js" defer></script>
     <link rel="shortcut icon" href="https://cdn.glitch.com/5084dac8-b594-4bfd-979b-3c4aa82e57e2%2Fcrown.png?v=1584757717567" type="image/png">
 
-    <title>COVID-19 Tracker</title>
+    <title>Corona Exchange</title>
+
+    <script src="./header.js" defer></script>
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-light" id="navbar">
+    <nav class="navbar sticky-top navbar-light" style="margin-bottom: 2%; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); background: rgba(255, 255, 255, 0.9) !important" id="navbar">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <button class='nonbutton' onclick="window.location='https://covid.skywarder.cf'"><img src="" height="30" class="d-inline-block align-top" alt=""><i class="fas fa-crown"></i> <b>COVID-19</b> Exchange</button>
+          <button class='nonbutton' onclick="window.location='/'"><img src="" height="30" class="d-inline-block align-top" alt=""><i class="fas fa-crown" style="color: #943CFF !important"></i> <b>Corona</b> Exchange</button>
         </a>
         <div class="form-inline my-2 my-lg-0">
-          <button class="btn btn-danger" onclick="window.location=window.location.origin + '/offers'">Offers</button>
-          <button class="btn btn-danger" onclick="window.location=window.location.origin + '/about'">About</button>
-          <button class="btn btn-danger" onclick="window.open('https://github.com/10hstartup','_blank')" target="_blank">Github</button>
+          <button class="btn" onclick="window.location=window.location.origin + '/requests'">Requests</button>
+          <button class="btn" onclick="window.location=window.location.origin + '/about'">About</button>
+          <button class="btn" onclick="window.open('https://github.com/10hstartup','_blank')" target="_blank">Github</button>
         </div>
         <div class="form-inline my-2 my-lg-0" id="account">
           <!-- If not signed in -->

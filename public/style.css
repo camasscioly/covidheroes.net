@@ -160,6 +160,7 @@ canvas{
 .btn-primary,
 .badge-primary {
   background: #000 !important;
+  text-transform: uppercase;
   outline: none;
   border: none;
   margin-right: 1%;

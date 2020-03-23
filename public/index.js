@@ -1,3 +1,5 @@
+//if (localStorage.getItem('name')) window.location = `${window.location.origin}/requests`;
+
 // window.onload = () => {
 //   const base = `${window.location.href}v2/`;
 //   const ctx = document.getElementById('chart');

@@ -33,6 +33,10 @@ router.get('/', async (req, res) => {
   renderFile(req, res, 'index');
 });
 
+router.get('/about', async (req, res) => {
+  renderFile(req, res, 'about');
+});
+
 router.get('/login', async (req, res) => {
   renderFile(req, res, 'login');
 });

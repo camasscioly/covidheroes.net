@@ -38,7 +38,7 @@ window.onload = () => {
       const fulfill = ` <button class="btn btn-danger" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'">Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${title}</p></th>
-        <td><a href="${window.location.origin}/profile?name=${author}">${author}</a></td>
+        <td><a href="${window.location.origin}/profile?id=${id}">${author}</a></td>
         <td><p>${date}</p></td>
         <td><p>${tags}</p></td>
         <td>${id}</td>

@@ -31,10 +31,10 @@ router.post('/signup', async (req, res) => {
 });
 
 router.get('/userdata', async (req, res) => {
-  const { name } = req.query;
+  const { id } = req.query;
   const userList = (await keyv.get('user-list')) || null;
   if (!userList) return res.status(500).send('Invalid Login');
-  const out = userList.find((block) => block[0] === name);
+  const out = userList.find((block) => block[1] === id);
   if (!out) return res.status(500).send('Invalid Login');
   let user = await keyv.get(out[1]);
   user.id = out[1];

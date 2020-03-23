@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const bcrypt = require('bcrypt');
 const auth = require('./../middleware/auth.js');
 const makeID = require('./../middleware/makeID.js');
 const Keyv = require('keyv');
@@ -20,8 +21,12 @@ router.post('/signup', async (req, res) => {
     const id = makeID(10);
     userList.push([name, id]);
     keyv.set('user-list', userList);
-    await keyv.set(id, { name, email, phone, location, password });
-    res.status(200).send('Registered!');
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(password, salt, (err, hash) => {
+        await keyv.set(id, { name, email, phone, location, hash });
+        res.status(200).send('Registered!');
+      });
+    });
   }
 });
 
@@ -44,9 +49,11 @@ router.post('/login', async (req, res) => {
   const out = userList.find((block) => block[0] === name);
   if (!out) return res.status(500).send('Invalid Login');
   let user = await keyv.get(out[1]);
-  if (user.password !== password) return res.status(500).send('Invalid Login');
-  user.id = out[1];
-  res.json(user);
+  bcrypt.compare(password, user.password, (err, result) => {
+    if (!result) return res.status(500).send('Invalid Login');
+    user.id = out[1];
+    res.json(user);
+  });
 });
 
 router.post('/offer', async (req, res) => {

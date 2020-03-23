@@ -1,3 +1,3 @@
-# The Data Platform for COVID-19
+# Solving COVID-19, One Step at a Time
 
-Understand COVID growth rates between different countries.
+A platform that bridges requesters and fullfillers for medical supplies.

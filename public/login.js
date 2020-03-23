@@ -90,3 +90,7 @@ function esc(string) {
     ? html + str.substring(lastIndex, index)
     : html
 }
+
+function enable() {
+  document.querySelector('#submit').disabled = false;
+}

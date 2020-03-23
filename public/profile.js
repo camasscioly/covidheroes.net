@@ -21,3 +21,7 @@ window.onload = () => {
     window.location = `${window.location.origin}/login`;
   }
 };
+
+function enable() {
+  document.querySelector('#submit').disabled = false;
+}

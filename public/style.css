@@ -229,3 +229,7 @@ body {
 #sticky-footer {
   flex-shrink: none;
 }
+
+.btn:focus {
+  outline: none !important;
+}

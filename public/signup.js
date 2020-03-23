@@ -18,11 +18,7 @@ window.onload = () => {
       referrerPolicy: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(data), // body data type must match "Content-Type" header
     });
-    try {
-      return await response.json(); // parses JSON response into native JavaScript objects
-    } catch (err) {
-      alert('Invalid Signup')
-    }
+    return await response.text(); // parses JSON response into native JavaScript objects
   }
 
   document.querySelector('#signup').onsubmit = () => {

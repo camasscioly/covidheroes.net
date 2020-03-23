@@ -65,6 +65,16 @@ window.onload = () => {
       });
 
     document.querySelector('#offers').onsubmit = () => {
+      fetch(`${base}users`)
+        .then((res) => res.json())
+        .then((body) => {
+          if (!localStorage.getItem('name')) return;
+          if (!body.users.find(user => user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id'))) {
+            localStorage.clear();
+            location.reload();
+            return;
+          }
+        });
       postData(`${base}offer`, {
         title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
         author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),

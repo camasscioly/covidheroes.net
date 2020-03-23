@@ -33,8 +33,8 @@ router.get('/', async (req, res) => {
   renderFile(req, res, 'index');
 });
 
-router.get('/about', async (req, res) => {
-  renderFile(req, res, 'about');
+router.get('/discuss', async (req, res) => {
+  renderFile(req, res, 'discussion');
 });
 
 router.get('/users', async (req, res) => {

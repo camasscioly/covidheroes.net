@@ -109,7 +109,7 @@ window.onload = () => {
             display: true,
             // type: 'logarithmic',
           },
-        ],
+        ]
       },
     };
 

@@ -38,10 +38,67 @@ input:focus, textarea:focus {
 }
 
 canvas{
-  width: 90%;
-  height: 45vh;
+  padding: 0 5%;
+  width: 90% !important;
+  height: 60% !important;
   overflow: hidden;
 }
+/* @media screen and (device-width: 750px){
+  canvas{
+    width: 90vw !important;
+    height: calc(750/1334 * 100%) !important;
+    overflow: hidden;
+  }
+}
+@media screen and (device-width: 1242px){
+  canvas{
+    width: 90vw !important;
+    height: 30vh !important;
+    overflow: hidden;
+  }
+}
+@media screen and (device-width: 768px){
+  canvas{
+    width: 90vw !important;
+    height: 30vh !important;
+    overflow: hidden;
+  }
+}
+@media screen and (device-width: 1536px){
+  canvas{
+    width: 90vw !important;
+    height: 30vh !important;
+    overflow: hidden;
+  }
+}
+@media screen and (device-width: 480px){
+  canvas{
+    width: 90vw !important;
+    height: 30vh !important;
+    overflow: hidden;
+  }
+}
+@media screen and (device-width: 720px){
+  canvas{
+    width: 90vw !important;
+    height: 30vh !important;
+    overflow: hidden;
+  }
+}
+@media screen and (device-width: 540px){
+  canvas{
+    width: 90vw !important;
+    height: 30vh !important;
+    overflow: hidden;
+  }
+}
+@media screen and (device-width: 1024px){
+  canvas{
+    width: 90vw !important;
+    height: 30vh !important;
+    overflow: hidden;
+  }
+} */
 
 .the-project{
   display: flex;

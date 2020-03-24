@@ -27,11 +27,11 @@ window.onload = () => {
       }
     }
 
-    async function addEntry(user, id, dom) {
+    async function addEntry(user, id, rep, dom) {
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><a href="${window.location.origin}/profile?id=${id}">${user}</a></th>
         <td>${id}</td>
-        <td>${--count}</td>
+        <td>${rep}</td>
       </tr>`;
     }
 
@@ -39,12 +39,22 @@ window.onload = () => {
       .then((res) => res.json())
       .then((body) => {
         count = body.users.length + 1;
-        body.users.reverse().forEach((user) => {
-          addEntry(
-            esc(DOMPurify.sanitize(user[0])),
-            esc(DOMPurify.sanitize(user[1])),
-            '#table',
-          );
+        let users = body.users;
+        let totals = [];
+        users.forEach(async user => {
+          const { rep } = await fetch(`${base}userdata?id=${user[1]}`)
+            .then((res) => res.json())
+          totals.push([ user[0], user[1], String(rep.length) ]);
+          if (users.length === totals.length) {
+            totals.sort((a, b) => a[2] - b[2]).reverse().forEach((user) => {
+              addEntry(
+                esc(DOMPurify.sanitize(user[0])),
+                esc(DOMPurify.sanitize(user[1])),
+                esc(DOMPurify.sanitize(user[2])),
+                '#table',
+              );
+            });
+          }
         });
       });
   } else {

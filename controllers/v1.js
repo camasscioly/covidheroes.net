@@ -30,6 +30,32 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+
+router.post('/update', async (req, res) => {
+  try {
+    const { name, email, phone, location, password, id } = req.body;
+    const userList = (await keyv.get('user-list')) || [];
+    const out = userList.find((block) => block[1] === id);
+    userList.splice(userList.indexOf(out), 1);
+    userList.push([name, id]);
+    keyv.set('user-list', userList);
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(password, salt, async (err, hash) => {
+        let user = await keyv.get(id);
+        user.name = name;
+        user.email = email;
+        user.phone = phone;
+        user.location - location;
+        user.password = hash;
+        await keyv.set(id, user);
+        res.status(200).send('Updated!');
+      });
+    });
+  } catch {
+    res.status(500).send('Error!');
+  }
+});
+
 router.get('/userdata', async (req, res) => {
   const { id } = req.query;
   const userList = (await keyv.get('user-list')) || null;

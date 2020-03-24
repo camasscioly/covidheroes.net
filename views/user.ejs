@@ -1,10 +1,10 @@
 <%- include('blocks/header') %>
     <div class="container mt-2">
       <h1>Your Profile</h1>
-      <form onsubmit="return false;">
+      <form id="submit">
         <div class="form-group">
           <label for="name">Username</label>
-          <input type="text" class="form-control" id="name" disabled>
+          <input type="text" class="form-control" id="name">
         </div>
         <div class="form-group">
           <label for="id">ID</label>
@@ -16,16 +16,22 @@
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" disabled>
+          <input type="email" class="form-control" id="email">
         </div>
         <div class="form-group">
           <label for="phone">Phone</label>
-          <input type="phone" class="form-control" id="phone" disabled>
+          <input type="phone" class="form-control" id="phone">
         </div>
         <div class="form-group">
           <label for="location">Location</label>
-          <input type="location" class="form-control" id="location" placeholder="1234 NE 33nd Ave, Camas WA" disabled>
+          <input type="location" class="form-control" id="location">
         </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" class="form-control" id="password">
+        </div>
+        <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
+        <button type="submit" class="btn btn-primary" id="save" disabled><i class="fas fa-save" style="color: #fff !important"></i> Save Profile</button>
       </form>
     </div>
   </div><br>

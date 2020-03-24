@@ -1,3 +1,4 @@
+const matchHtmlRegExp = /["'&<>]/;
 const base = `${window.location.origin}/v1/`;
 
 window.onload = async () => {
@@ -7,11 +8,13 @@ window.onload = async () => {
     const phone = localStorage.getItem('phone');
     const location = localStorage.getItem('location');
     const id = localStorage.getItem('id');
+    const password = localStorage.getItem('password');
 
     document.querySelector('#name').value = DOMPurify.sanitize(name);
     document.querySelector('#email').value = DOMPurify.sanitize(email);
     document.querySelector('#phone').value = DOMPurify.sanitize(phone);
     document.querySelector('#location').value = DOMPurify.sanitize(location);
+    document.querySelector('#password').value = DOMPurify.sanitize(password);
     document.querySelector('#id').value = DOMPurify.sanitize(id);
     const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)
       .then((res) => res.json())
@@ -20,8 +23,98 @@ window.onload = async () => {
   } else {
     window.location = `${window.location.origin}/login`;
   }
+  document.querySelector('#submit').onsubmit = (event) => {
+    event.preventDefault();
+    async function postData(url = '', data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+      });
+      try {
+        return await response.text(); // parses JSON response into native JavaScript objects
+      } catch (err) {
+        alert('Oops, something went wrong.');
+      }
+    }
+    const base = `${window.location.origin}/v1/`;
+
+    postData(`${base}update`, {
+      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50),
+      email: esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50),
+      phone: esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50),
+      location: esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100),
+      password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
+      id: localStorage.getItem('id')
+    }).then((data) => {
+      if (data === 'Error!') return alert('Oops! Something went wrong.');
+      localStorage.setItem('name', esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50));
+      localStorage.setItem('email', esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50));
+      localStorage.setItem('phone', esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50));
+      localStorage.setItem('location', esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100));
+      localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50));
+      location.reload();
+      return false;
+    });
+  };
 };
 
 function enable() {
-  document.querySelector('#submit').disabled = false;
+  document.querySelector('#save').disabled = false;
+}
+
+function esc(string) {
+  const str = `${string}`;
+  const match = matchHtmlRegExp.exec(str);
+
+  if (!match) {
+    return str
+  }
+
+  let escape;
+  let html = '';
+  let index = 0;
+  let lastIndex = 0;
+
+  for (index = match.index; index < str.length; index++) {
+    switch (str.charCodeAt(index)) {
+      case 34: // "
+        escape = '&quot;'
+        break
+      case 38: // &
+        escape = '&amp;'
+        break
+      case 39: // '
+        escape = '&#39;'
+        break
+      case 60: // <
+        escape = '&lt;'
+        break
+      case 62: // >
+        escape = '&gt;'
+        break
+      default:
+        continue
+    }
+
+    if (lastIndex !== index) {
+      html += str.substring(lastIndex, index)
+    }
+
+    lastIndex = index + 1
+    html += escape
+  }
+
+  return lastIndex !== index
+    ? html + str.substring(lastIndex, index)
+    : html
 }

@@ -1,7 +1,7 @@
 {
-  "name": "covid-tracker",
+  "name": "covid-heroes",
   "version": "0.0.1",
-  "description": "10h Startup Idea",
+  "description": "A platform that bridges requesters and fullfillers for medical supplies.",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -18,7 +18,7 @@
     "data",
     "analytics"
   ],
-  "author": "Aiden Bai, Ashton Doane, Jinhai Yan",
+  "author": "COVID Heroes",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/10hstartup/web/issues"

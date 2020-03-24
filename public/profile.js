@@ -1,3 +1,6 @@
+let killOffer;
+const matchHtmlRegExp = /["'&<>]/;
+
 window.onload = () => {
   if (localStorage.getItem('name')) {
     async function postData(url = '', data = {}) {
@@ -22,6 +25,18 @@ window.onload = () => {
       }
     }
 
+    async function addEntry(title, author, date, tags, id, dom, authorid) {
+      const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
+      const fulfill = ` <button class="btn btn-danger" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
+      document.querySelector(dom).innerHTML += `<tr id="${id}">
+        <th scope="row"><p>${title}</p></th>
+        <td><p>${date}</p></td>
+        <td><p>${tags}</p></td>
+        <td>${id}</td>
+        <td>${localStorage.getItem('name') === author || localStorage.getItem('admin')  ? fulfill + close : fulfill}</td>
+      </tr>`;
+    }
+
     const base = `${window.location.origin}/v1/`;
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
@@ -38,15 +53,6 @@ window.onload = () => {
         /*document.querySelector('#email').value = email;
         document.querySelector('#phone').value = phone;
         document.querySelector('#location').value = location;*/
-        document.querySelector('#location').value = location;
-        document.querySelector('#contact').onclick = () => {
-          window.open(
-            `mailto:${email}?subject=${document.getElementById('subject').value}!&body=${
-              document.getElementById('message').value
-            }`
-          );
-          return false;
-        };
       })
       .catch((err) => {
         alert('Oops! Something went wrong...');
@@ -62,15 +68,79 @@ window.onload = () => {
         return false;
       });
     };
+    fetch(`${window.location.origin}/v1/offer`)
+      .then((res) => res.json())
+      .then((body) => {
+        body.offerList.reverse().forEach((offer) => {
+          const { title, author, date, tags, authorid } = offer;
+          //if (id !== offer.id) return;
+          addEntry(
+            esc(DOMPurify.sanitize(title)).substring(0, 30),
+            esc(DOMPurify.sanitize(author)),
+            esc(DOMPurify.sanitize(date)),
+            esc(DOMPurify.sanitize(tags)),
+            esc(DOMPurify.sanitize(id)),
+            '#table',
+            esc(DOMPurify.sanitize(authorid)),
+          );
+        });
+        offerList = body.offerList.reverse();
+      });
   } else {
     window.location = `${window.location.origin}/login`;
   }
 };
 
-function enable() {
-  document.querySelector('#contact').disabled = false;
-}
-
 function enable2() {
   document.querySelector('#give-rep').disabled = false;
+}
+function esc(string) {
+  const str = `${string}`;
+  const match = matchHtmlRegExp.exec(str);
+
+  if (!match) {
+    return str
+  }
+
+  let escape;
+  let html = '';
+  let index = 0;
+  let lastIndex = 0;
+
+  for (index = match.index; index < str.length; index++) {
+    switch (str.charCodeAt(index)) {
+      case 34: // "
+        escape = '&quot;'
+        break
+      case 38: // &
+        escape = '&amp;'
+        break
+      case 39: // '
+        escape = '&#39;'
+        break
+      case 60: // <
+        escape = '&lt;'
+        break
+      case 62: // >
+        escape = '&gt;'
+        break
+      default:
+        continue
+    }
+
+    if (lastIndex !== index) {
+      html += str.substring(lastIndex, index)
+    }
+
+    lastIndex = index + 1
+    html += escape
+  }
+
+  return lastIndex !== index
+    ? html + str.substring(lastIndex, index)
+    : html
+}
+
+function enable() {
+  document.querySelector('#submit').disabled = false;
 }

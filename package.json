@@ -34,6 +34,7 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-boom": "^3.0.0",
+    "express-minify": "^1.0.0",
     "express-rate-limit": "^5.1.1",
     "grumpy": "^0.2.4",
     "helmet": "^3.21.3",

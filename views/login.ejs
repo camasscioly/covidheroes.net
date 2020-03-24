@@ -27,15 +27,14 @@
             body: JSON.stringify(data), // body data type must match "Content-Type" header
           });
           try {
-            return await response.json(); // parses JSON response into native JavaScript objects
+            return await response.text(); // parses JSON response into native JavaScript objects
           } catch (err) {
-            alert('Invalid Login')
+            alert('Invalid Login');
           }
         }
 
         function onSignIn(googleUser) {
           const profile = googleUser.getBasicProfile();
-          
           postData(`${base}signup`, {
             name: `${profile.getName()} ${makeid(5)}`,
             email: profile.getEmail(),
@@ -44,7 +43,7 @@
             password: profile.getId(),
           }).then((data) => {
             if (data === 'Already Registered') return alert('This username is already taken.');
-            localStorage.setItem('name', profile.getName());
+            localStorage.setItem('name', `${profile.getName()} ${makeid(5)}`);
             localStorage.setItem('email', profile.getEmail());
             localStorage.setItem('phone', null);
             localStorage.setItem('location', null);

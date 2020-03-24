@@ -45,7 +45,7 @@
             password: profile.getId(),
           }).then((data) => {
             if (data === 'Already Registered') return alert('This username is already taken.');
-            postData(`${base}userdata`, {
+            postData(`${base}login`, {
               name: `${profile.getName()}-${suffix}`,
               password: profile.getId(),
             }).then((message) => {

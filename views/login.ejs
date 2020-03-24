@@ -45,13 +45,20 @@
             password: profile.getId(),
           }).then((data) => {
             if (data === 'Already Registered') return alert('This username is already taken.');
-            localStorage.setItem('name', `${profile.getName()}-${suffix}`);
-            localStorage.setItem('email', profile.getEmail());
-            localStorage.setItem('phone', 'Not Configured (Google Account)');
-            localStorage.setItem('location', 'Not Configured (Google Account)');
-            localStorage.setItem('password', profile.getId());
-            localStorage.setItem('id', data.id)
-            window.location = `${window.location.origin}/me`;
+            postData(`${base}login`, {
+              name: `${profile.getName()}-${suffix}`,
+              password: profile.getId(),
+            }).then((data) => {
+              const { name, email, phone, location, password, id } = data;
+              localStorage.setItem('name', `${profile.getName()}-${suffix}`);
+              localStorage.setItem('email', profile.getEmail());
+              localStorage.setItem('phone', phone);
+              localStorage.setItem('location', location);
+              localStorage.setItem('password', profile.getId());
+              localStorage.setItem('id', id)
+              localStorage.setItem('member', true);
+              window.location = `${window.location.origin}/me`;
+            });
           });
         }
       </script>

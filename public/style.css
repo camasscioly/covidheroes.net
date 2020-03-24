@@ -26,6 +26,10 @@ a {
   background: #5436ff;
 }
 
+code {
+  color: #5436ff !important;
+}
+
 .maps {
   float: left;
 }

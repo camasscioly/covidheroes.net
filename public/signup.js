@@ -23,11 +23,11 @@ window.onload = () => {
 
   document.querySelector('#signup').onsubmit = () => {
     postData(`${base}signup`, {
-      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)),
-      email: esc(DOMPurify.sanitize(document.querySelector('#email').value)),
-      phone: esc(DOMPurify.sanitize(document.querySelector('#phone').value)),
-      location: esc(DOMPurify.sanitize(document.querySelector('#location').value)),
-      password: esc(DOMPurify.sanitize(document.querySelector('#password').value)),
+      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50),
+      email: esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50),
+      phone: esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50),
+      location: esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100),
+      password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
     }).then((data) => {
       if (data === 'Already Registered') return alert('This username is already taken.');
       window.location = `${window.location.origin}/login`;

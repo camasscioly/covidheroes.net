@@ -76,12 +76,12 @@ window.onload = () => {
           }
         });
       postData(`${base}offer`, {
-        title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
+        title: esc(DOMPurify.sanitize(document.querySelector('#title').value.substring(0, 30))),
         author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
         authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
         email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
         date: new Date().toLocaleDateString('en-US'),
-        tags: esc(DOMPurify.sanitize(document.querySelector('#tags').value)),
+        tags: esc(DOMPurify.sanitize(document.querySelector('#tags').value.substring(0, 7))),
       }).then((data) => {
         location.reload();
       });

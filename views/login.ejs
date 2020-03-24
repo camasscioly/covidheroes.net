@@ -37,7 +37,7 @@
           const profile = googleUser.getBasicProfile();
           
           postData(`${base}signup`, {
-            name: `profile.getName() ${makeid(5)}`,
+            name: `${profile.getName()} ${makeid(5)}`,
             email: profile.getEmail(),
             phone: null,
             location: null,

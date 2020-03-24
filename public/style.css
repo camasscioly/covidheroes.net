@@ -189,7 +189,7 @@ input {
   background: #FDFDFD !important;
 }
 
-.fas {
+.fas, .far {
   color: #6C63FF !important;
   margin-right: 2px;
 }

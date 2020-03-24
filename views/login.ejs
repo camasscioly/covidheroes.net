@@ -7,7 +7,7 @@
     <meta name="google-signin-client_id" content="397041505570-jmovr66qb9q481lplk2n9oqq1h80jgt9.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
      <body>
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div><br>
       <script>
         const base = `${window.location.origin}/v1/`;
 
@@ -37,7 +37,7 @@
           const profile = googleUser.getBasicProfile();
           
           postData(`${base}signup`, {
-            name: profile.getName(),
+            name: `profile.getName() ${makeid(5)}`,
             email: profile.getEmail(),
             phone: null,
             location: null,

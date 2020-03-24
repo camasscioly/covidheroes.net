@@ -1,7 +1,7 @@
 if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'"><i class="far fa-fist-raised"></i> Sign up</button>
+  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'"><i class="far fa-fist-raised" style="color: #6C63FF !important"></i> Sign up</button>
 <button class="btn btn-danger" onclick="window.location=window.location.origin + '/login'"><i class="fas fa-sign-in-alt"></i> Log in</button> `;
 } else {
   const base = `${window.location.origin}/v1/`;

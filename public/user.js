@@ -1,3 +1,5 @@
+const base = `${window.location.origin}/v1/`;
+
 window.onload = () => {
   if (localStorage.getItem('name')) {
     const name = localStorage.getItem('name');
@@ -11,6 +13,10 @@ window.onload = () => {
     document.querySelector('#phone').value = DOMPurify.sanitize(phone);
     document.querySelector('#location').value = DOMPurify.sanitize(location);
     document.querySelector('#id').value = DOMPurify.sanitize(id);
+    const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)
+      .then((res) => res.json())
+    document.querySelector('#rep').value = DOMPurify.sanitize(rep);
+
   } else {
     window.location = `${window.location.origin}/login`;
   }

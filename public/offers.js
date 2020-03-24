@@ -79,6 +79,7 @@ window.onload = () => {
         title: esc(DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))),
         author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
         authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
+        description: esc(DOMPurify.sanitize(localStorage.getItem('location'))),
         email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
         date: new Date().toLocaleDateString('en-US'),
         tags: esc(DOMPurify.sanitize(parseInt(document.querySelector('#tags').value.substring(0, 7)) > 1000000 ? 1000000 : parseInt(document.querySelector('#tags').value.substring(0, 7)))),

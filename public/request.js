@@ -38,11 +38,12 @@ window.onload = () => {
         const reqId = urlParams.get('id');
         const offer = body.offerList.find(offer => offer.id === reqId);
         document.querySelector('#reqid').innerText = `Request: #${esc(DOMPurify.sanitize(reqId))}`;
-        const { title, author, date, tags, email, id } = offer;
+        const { title, author, date, tags, email, id, description } = offer;
         document.querySelector('#item').value = title;
         document.querySelector('#author').value = author;
         document.querySelector('#date').value = date;
         document.querySelector('#quantity').value = tags;
+        document.querySelector('#location').value = description;
         emailTo = email;
         ID = id;
         offerList = body.offerList.reverse();

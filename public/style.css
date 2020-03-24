@@ -128,7 +128,7 @@ canvas {
 .btn-danger,
 .btn-secondary {
   border-color: #f5f4f9 !important;
-  background: #f5f4f9 !important;
+  background: transparent !important;
   outline: #f5f4f9 !important;
   border-radius: 1000px !important;
   padding: 1px !important;
@@ -190,7 +190,7 @@ h1 {
 }
 
 input {
-  background: #FDFDFD !important;
+  /* background: #FDFDFD !important; */
 }
 
 .fas {

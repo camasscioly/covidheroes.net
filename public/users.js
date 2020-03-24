@@ -46,7 +46,7 @@ window.onload = () => {
             .then((res) => res.json())
           totals.push([ user[0], user[1], String(rep.length) ]);
           if (users.length === totals.length) {
-            totals.sort((a, b) => a[2] - b[2]).reverse().forEach((user) => {
+            totals.sort((a, b) => a[2] - b[2]).reverse().slice(0, 10).forEach((user) => {
               addEntry(
                 esc(DOMPurify.sanitize(user[0])),
                 esc(DOMPurify.sanitize(user[1])),

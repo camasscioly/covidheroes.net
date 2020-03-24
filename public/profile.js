@@ -53,6 +53,7 @@ window.onload = () => {
         location = window.location.origin;
       });
     document.querySelector('#give-rep').onclick = () => {
+      if (!confirm('Are you sure you want to rep this user? This is permanent.')) return;
       postData(`${base}userdata/rep`, {
         rep: localStorage.getItem('id'),
         id,

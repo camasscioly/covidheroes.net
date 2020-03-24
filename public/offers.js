@@ -34,8 +34,8 @@ window.onload = () => {
     }
 
     async function addEntry(title, author, date, tags, id, dom, authorid) {
-      const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('id') === '${authorid}') { document.getElementById('${id}').remove(); killOffer('${id}') }"><i class="fas fa-times"></i> Close</button>`;
-      const fulfill = ` <button class="btn btn-danger" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-check"></i> Open</button>`;
+      const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
+      const fulfill = ` <button class="btn btn-danger" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${title}</p></th>
         <td><a href="${window.location.origin}/profile?id=${authorid || undefined}">${author}</a></td>

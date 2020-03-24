@@ -52,7 +52,7 @@ window.onload = () => {
         body.offerList.reverse().forEach((offer) => {
           const { title, author, date, tags, id, authorid } = offer;
           addEntry(
-            esc(DOMPurify.sanitize(title)),
+            esc(DOMPurify.sanitize(title)).substring(0, 30),
             esc(DOMPurify.sanitize(author)),
             esc(DOMPurify.sanitize(date)),
             esc(DOMPurify.sanitize(tags)),
@@ -76,12 +76,12 @@ window.onload = () => {
           }
         });
       postData(`${base}offer`, {
-        title: esc(DOMPurify.sanitize(document.querySelector('#title').value.substring(0, 30))),
+        title: esc(DOMPurify.sanitize(document.querySelector('#title').value.substring(0, 30).replace(/[^a-z0-9]/gi, '') ? 'null' : document.querySelector('#title').value.substring(0, 30).replace(/[^a-z0-9]/gi, ''))),
         author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
         authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
         email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
         date: new Date().toLocaleDateString('en-US'),
-        tags: esc(DOMPurify.sanitize(document.querySelector('#tags').value.substring(0, 7))),
+        tags: esc(DOMPurify.sanitize(parseInt(document.querySelector('#tags').value.substring(0, 7)) > 1000000 ? 1000000 : parseInt(document.querySelector('#tags').value.substring(0, 7)))),
       }).then((data) => {
         location.reload();
       });

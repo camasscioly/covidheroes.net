@@ -49,16 +49,21 @@
               name: `${profile.getName()}-${suffix}`,
               password: profile.getId(),
             }).then((message) => {
-              const { name, email, phone, location, password, id } = message;
-              localStorage.setItem('name', `${profile.getName()}-${suffix}`);
-              localStorage.setItem('email', profile.getEmail());
-              localStorage.setItem('phone', phone);
-              localStorage.setItem('location', location);
-              localStorage.setItem('password', profile.getId());
-              localStorage.setItem('id', id);
-              localStorage.setItem('member', true);
-              localStorage.setItem('google', true);
-              window.location = `${window.location.origin}/me`;
+              fetch(`${base}users`)
+                .then((res) => res.json())
+                .then((body) => {
+                  const { name, email, phone, location, password, id } = message;
+                  const block = body.users.find(user => user[0] === name);
+                  localStorage.setItem('name', `${profile.getName()}-${suffix}`);
+                  localStorage.setItem('email', profile.getEmail());
+                  localStorage.setItem('phone', phone);
+                  localStorage.setItem('location', location);
+                  localStorage.setItem('password', profile.getId());
+                  localStorage.setItem('id', block[1]);
+                  localStorage.setItem('member', true);
+                  localStorage.setItem('google', true);
+                  window.location = `${window.location.origin}/me`;
+                });
             });
           });
         }

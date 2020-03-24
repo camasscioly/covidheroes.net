@@ -44,14 +44,14 @@
             location: null,
             password: profile.getId(),
           }).then((data) => {
-            alert('hello');
             if (data === 'Already Registered') return alert('This username is already taken.');
             localStorage.setItem('name', `${profile.getName()}-${suffix}`);
             localStorage.setItem('email', profile.getEmail());
             localStorage.setItem('phone', 'Not Configured (Google Account)');
             localStorage.setItem('location', 'Not Configured (Google Account)');
             localStorage.setItem('password', profile.getId());
-            //window.location = `${window.location.origin}/me`;
+            localStorage.setItem('id', data.id)
+            window.location = `${window.location.origin}/me`;
           });
         }
       </script>

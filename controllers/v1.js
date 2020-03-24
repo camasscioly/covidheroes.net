@@ -35,6 +35,11 @@ router.get('/userdata', async (req, res) => {
   const userList = (await keyv.get('user-list')) || null;
   if (!userList) return res.status(500).send('Invalid Login');
   const out = userList.find((block) => block[1] === id);
+  const long = userList.find((block) => block.length > 200);
+  if (long) {
+    userList.splice(userList.indexOf(long), 1);
+    await keyv.set('user-list', userList)
+  }
   if (!out) return res.status(500).send('Invalid Login');
   let user = await keyv.get(out[1]);
   user.id = out[1];

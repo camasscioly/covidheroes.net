@@ -2,18 +2,6 @@ const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
-
-  function makeid(length) {
-    let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  
-    for (let i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-  
-    return text;
-  };
-
   async function postData(url = '', data = {}) {
     // Default options are marked with *
     const response = await fetch(url, {
@@ -105,3 +93,14 @@ function esc(string) {
 function enable() {
   document.querySelector('#submit').disabled = false;
 }
+
+function makeid(length) {
+  let text = '';
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  return text;
+};

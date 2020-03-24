@@ -54,7 +54,7 @@
                 .then((body) => {
                   const { name, email, phone, location, password, id } = message;
                   const block = body.users.find(user => user[0] === name);
-                  alert(body.users)
+                  alert(block)
                   localStorage.setItem('name', `${profile.getName()}-${suffix}`);
                   localStorage.setItem('email', profile.getEmail());
                   localStorage.setItem('phone', phone);

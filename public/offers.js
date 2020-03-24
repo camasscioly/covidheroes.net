@@ -76,7 +76,7 @@ window.onload = () => {
           }
         });
       postData(`${base}offer`, {
-        title: esc(DOMPurify.sanitize(document.querySelector('#title').value.substring(0, 30).replace(/[^a-z0-9]/gi, '') ? 'null' : document.querySelector('#title').value.substring(0, 30).replace(/[^a-z0-9]/gi, ''))),
+        title: esc(DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))),
         author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
         authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
         email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),

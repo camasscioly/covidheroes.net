@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap'); */
 
 table {
   border: 1px solid #dee2e6 !important;
@@ -10,7 +10,11 @@ thead {
 }
 
 body {
-  font-family: 'IBM Plex Sans', sans-serif !important;
+  font-family: 'MetropolisRegular', sans-serif;
+}
+
+h1 {
+  font-family: 'Metropolis', sans-serif;
 }
 
 .btn-primary:hover {

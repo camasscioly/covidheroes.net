@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap');
 
 table {
-  border: 0px solid #dee2e6 !important;
+  border: 1px solid #dee2e6 !important;
   border-radius: 15px !important;
 }
 

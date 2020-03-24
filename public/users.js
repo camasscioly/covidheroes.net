@@ -50,7 +50,7 @@ window.onload = () => {
               addEntry(
                 esc(DOMPurify.sanitize(user[0])),
                 esc(DOMPurify.sanitize(user[1])),
-                esc(DOMPurify.sanitize(user[2])),
+                esc(DOMPurify.sanitize(`+${user[2]}`)),
                 '#table',
               );
             });

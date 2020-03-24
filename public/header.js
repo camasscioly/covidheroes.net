@@ -3,13 +3,13 @@ const base = `${window.location.origin}/v1/`;
 if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'">Sign up</button>
-<button class="btn btn-danger" onclick="window.location=window.location.origin + '/login'">Log in</button> `;
+  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'"><i class="far fa-fist-raised"></i> Sign up</button>
+<button class="btn btn-danger" onclick="window.location=window.location.origin + '/login'"><i class="fas fa-sign-in-alt"></i> Log in</button> `;
 } else {
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload();">Log out</button>
-  <button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'">Account</button>`;
+  ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload();"><i class="fas fa-sign-out-alt"></i> Log out</button>
+  <button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'"><i class="fas fa-user-circle"></i> Account</button>`;
   window.addEventListener('storage', () => {
     fetch(`${base}users`)
       .then((res) => res.json())

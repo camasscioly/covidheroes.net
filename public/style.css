@@ -139,13 +139,6 @@ canvas {
   color: #666666 !important;
 }
 
-.btn-danger:hover {
-  background: #e5e5e5;
-  -webkit-box-shadow: inset 0px 0px 5px #c9c6c6;
-  -moz-box-shadow: inset 0px 0px 5px #c9c6c6;
-  box-shadow: inset 0px 0px 5px #c9c6c6;
-  outline: none;
-}
 
 h1 {
   font-weight: bold;

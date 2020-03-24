@@ -34,19 +34,21 @@
         }
 
         function onSignIn(googleUser) {
+          if (localStorage.getItem('id')) return;
           const profile = googleUser.getBasicProfile();
+          let suffix = makeid(5);
           postData(`${base}signup`, {
-            name: `${profile.getName()} ${makeid(5)}`,
+            name: `${profile.getName()}-${suffix}`,
             email: profile.getEmail(),
             phone: null,
             location: null,
             password: profile.getId(),
           }).then((data) => {
             if (data === 'Already Registered') return alert('This username is already taken.');
-            localStorage.setItem('name', `${profile.getName()} ${makeid(5)}`);
+            localStorage.setItem('name', `${profile.getName()}-${suffix}`);
             localStorage.setItem('email', profile.getEmail());
-            localStorage.setItem('phone', null);
-            localStorage.setItem('location', null);
+            localStorage.setItem('phone', 'Not Configured (Google Account)');
+            localStorage.setItem('location', 'Not Configured (Google Account)');
             localStorage.setItem('password', profile.getId());
             window.location = `${window.location.origin}/me`;
           });

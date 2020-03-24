@@ -44,8 +44,8 @@ router.post('/update', async (req, res) => {
         let user = await keyv.get(id);
         user.name = name;
         user.email = email;
-        user.phone = phone || null;
-        user.location - location || null;
+        user.phone = phone || 'Not Configured';
+        user.location - location || 'Not Configured';
         user.password = hash;
         await keyv.set(id, user);
         res.status(200).send('Updated!');

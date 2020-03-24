@@ -29,15 +29,20 @@ window.onload = () => {
       name: document.querySelector('#name').value,
       password: document.querySelector('#password').value,
     }).then((data) => {
-      const { name, email, phone, location, password, id } = data;
-      localStorage.setItem('name', esc(DOMPurify.sanitize(name)));
-      localStorage.setItem('email', esc(DOMPurify.sanitize(email)));
-      localStorage.setItem('phone', esc(DOMPurify.sanitize(phone)));
-      localStorage.setItem('location', esc(DOMPurify.sanitize(location)));
-      localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)));
-      localStorage.setItem('id', esc(DOMPurify.sanitize(id)));
-      localStorage.setItem('member', true);
-      window.location = `${window.location.origin}/me`;
+      fetch(`${base}users`)
+        .then((res) => res.json())
+        .then((body) => {
+          const { name, email, phone, location, password, id } = data;
+          const block = body.users.find(user => user[0] === name);
+          localStorage.setItem('name', esc(DOMPurify.sanitize(name)));
+          localStorage.setItem('email', esc(DOMPurify.sanitize(email)));
+          localStorage.setItem('phone', esc(DOMPurify.sanitize(phone)));
+          localStorage.setItem('location', esc(DOMPurify.sanitize(location)));
+          localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)));
+          localStorage.setItem('id', block[1]);
+          localStorage.setItem('member', true);
+          window.location = `${window.location.origin}/me`;
+        });
     });
     return false;
   };

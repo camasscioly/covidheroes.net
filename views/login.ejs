@@ -45,7 +45,7 @@
             password: profile.getId(),
           }).then((data) => {
             if (data === 'Already Registered') return alert('This username is already taken.');
-            postData(`${base}login`, {
+            postData(`${base}userdata`, {
               name: `${profile.getName()}-${suffix}`,
               password: profile.getId(),
             }).then((message) => {
@@ -55,7 +55,7 @@
               localStorage.setItem('phone', phone);
               localStorage.setItem('location', location);
               localStorage.setItem('password', profile.getId());
-              localStorage.setItem('id', id)
+              localStorage.setItem('id', id);
               localStorage.setItem('member', true);
               localStorage.setItem('google', true);
               window.location = `${window.location.origin}/me`;

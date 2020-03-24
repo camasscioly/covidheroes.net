@@ -24,7 +24,6 @@ app.use(require('helmet')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
 app.use(require('morgan')('combined'));
-app.use(require('express-minify')({ js_match : /\.js$/, css_match : /\.css$/ }));
 app.use(express.static('public'));
 
 app.use(

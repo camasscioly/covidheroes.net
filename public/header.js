@@ -1,11 +1,10 @@
-const base = `${window.location.origin}/v1/`;
-
 if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'
   ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'"><i class="far fa-fist-raised"></i> Sign up</button>
 <button class="btn btn-danger" onclick="window.location=window.location.origin + '/login'"><i class="fas fa-sign-in-alt"></i> Log in</button> `;
 } else {
+  const base = `${window.location.origin}/v1/`;
   document.querySelector(
     '#account'
   ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload();"><i class="fas fa-sign-out-alt"></i> Log out</button>

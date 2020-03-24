@@ -48,8 +48,8 @@
             postData(`${base}login`, {
               name: `${profile.getName()}-${suffix}`,
               password: profile.getId(),
-            }).then((data) => {
-              const { name, email, phone, location, password, id } = data;
+            }).then((message) => {
+              const { name, email, phone, location, password, id } = message;
               localStorage.setItem('name', `${profile.getName()}-${suffix}`);
               localStorage.setItem('email', profile.getEmail());
               localStorage.setItem('phone', phone);

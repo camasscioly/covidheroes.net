@@ -14,7 +14,7 @@ if (!localStorage.getItem('name')) {
       .then((res) => res.json())
       .then((body) => {
         if (!localStorage.getItem('name')) return;
-        if (!body.users.find(user => user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id'))) {
+        if (!body.users.find(user => user[0] === localStorage.getItem('name') || user[1] === localStorage.getItem('id'))) {
           localStorage.clear();
           location.reload();
         }
@@ -24,7 +24,7 @@ if (!localStorage.getItem('name')) {
     .then((res) => res.json())
     .then((body) => {
       if (!localStorage.getItem('name')) return;
-      if (!body.users.find(user => user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id'))) {
+      if (!body.users.find(user => user[0] === localStorage.getItem('name') || user[1] === localStorage.getItem('id'))) {
         localStorage.clear();
         location.reload();
       }

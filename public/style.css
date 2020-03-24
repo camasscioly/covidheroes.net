@@ -177,6 +177,10 @@ canvas {
   color: #fff !important;
 }
 
+input {
+  background: #FDFDFD !important;
+}
+
 .fas {
   color: #5436ff !important;
   margin-right: 2px;
@@ -217,6 +221,7 @@ tr,
 .nonbutton {
   background: none;
   border: none;
+  outline: none !important;
 }
 
 td,
@@ -240,4 +245,5 @@ body {
 
 .btn:focus {
   outline: none !important;
+  box-shadow: none !important;
 }

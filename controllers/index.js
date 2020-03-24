@@ -37,7 +37,7 @@ router.get('/discuss', async (req, res) => {
   renderFile(req, res, 'discussion');
 });
 
-router.get('/users', async (req, res) => {
+router.get('/heroes', async (req, res) => {
   renderFile(req, res, 'users');
 });
 

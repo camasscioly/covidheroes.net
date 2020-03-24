@@ -23,7 +23,7 @@ router.post('/signup', async (req, res) => {
     keyv.set('user-list', userList);
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
-        await keyv.set(id, { name, email, phone, location, password: hash });
+        await keyv.set(id, { name, email, phone, location, password: hash, rep: [] });
         res.status(200).send('Registered!');
       });
     });
@@ -38,8 +38,23 @@ router.get('/userdata', async (req, res) => {
   if (!out) return res.status(500).send('Invalid Login');
   let user = await keyv.get(out[1]);
   user.id = out[1];
+  if (!user.rep) user.rep = [];
   user.password = undefined;
   res.json(user);
+});
+
+router.post('/userdata/rep', async (req, res) => {
+  const { id, rep } = req.body;
+  const userList = (await keyv.get('user-list')) || null;
+  if (!userList) return res.status(500).send('Invalid Login');
+  const out = userList.find((block) => block[1] === id);
+  if (!out) return res.status(500).send('Invalid Login');
+  let user = await keyv.get(out[1]);
+  user.id = out[1];
+  if (!user.rep) user.rep = [];
+  if (!user.rep.includes(rep)) user.rep.push(rep);
+  await keyv.set(out[1], user);
+  res.send(`Action completed`);
 });
 
 router.post('/login', async (req, res) => {

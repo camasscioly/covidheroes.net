@@ -30,7 +30,6 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-
 router.post('/update', async (req, res) => {
   try {
     const { name, email, phone, location, password, id } = req.body;
@@ -64,7 +63,7 @@ router.get('/userdata', async (req, res) => {
   const long = userList.find((block) => block[0].length > 200);
   if (long) {
     userList.splice(userList.indexOf(long), 1);
-    await keyv.set('user-list', userList)
+    await keyv.set('user-list', userList);
   }
   if (!out) return res.status(500).send('Invalid Login');
   let user = await keyv.get(out[1]);

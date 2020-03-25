@@ -2,6 +2,8 @@ const { Router } = require('express');
 const cmd = require('node-cmd');
 const crypto = require('crypto');
 const renderFile = require('./../middleware/renderFile.js');
+const toLogin = require('./../middleware/toLogin.js');
+const toProfile = require('./../middleware/toProfile.js');
 
 const router = Router();
 
@@ -37,35 +39,31 @@ router.get('/discuss', async (req, res) => {
   renderFile(req, res, 'discussion');
 });
 
-router.get('/heroes', async (req, res) => {
+router.get('/heroes', toLogin, async (req, res) => {
   renderFile(req, res, 'users');
 });
 
-router.get('/login', async (req, res) => {
+router.get('/login', toProfile, async (req, res) => {
   renderFile(req, res, 'login');
 });
 
-router.get('/signup', async (req, res) => {
+router.get('/signup', toProfile, async (req, res) => {
   renderFile(req, res, 'signup');
 });
 
-router.get('/exchange', async (req, res) => {
-  renderFile(req, res, 'exchange');
-});
-
-router.get('/me', async (req, res) => {
+router.get('/me', toLogin, async (req, res) => {
   renderFile(req, res, 'user');
 });
 
-router.get('/requests', async (req, res) => {
+router.get('/requests', toLogin, async (req, res) => {
   renderFile(req, res, 'offers');
 });
 
-router.get('/requests/open', async (req, res) => {
+router.get('/requests/open', toLogin, async (req, res) => {
   renderFile(req, res, 'request');
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', toLogin, async (req, res) => {
   renderFile(req, res, 'profile');
 });
 

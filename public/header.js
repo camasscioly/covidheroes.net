@@ -8,7 +8,7 @@ if (!localStorage.getItem('name')) {
   const base = `${window.location.origin}/v1/`;
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload();"><i class="fas fa-sign-out-alt"></i> Log out</button>
+  ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload(); document.cookie = '';"><i class="fas fa-sign-out-alt"></i> Log out</button>
   <button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'"><i class="fas fa-user-circle"></i> Account</button>`;
   window.addEventListener('storage', () => {
     fetch(`${base}users`)
@@ -21,7 +21,7 @@ if (!localStorage.getItem('name')) {
         }
       });
   }, false);
-  fetch(`${base}users`)
+  /*fetch(`${base}users`)
     .then((res) => res.json())
     .then((body) => {
       if (!localStorage.getItem('name')) return;
@@ -29,5 +29,5 @@ if (!localStorage.getItem('name')) {
         localStorage.clear();
         location.reload();
       }
-    });
+    });*/
 }

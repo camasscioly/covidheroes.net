@@ -33,7 +33,7 @@ window.onload = () => {
       }
     }
 
-    async function addEntry(title, author, date, tags, id, dom, authorid) {
+    async function addEntry(title, author, date, tags, description, dom, authorid, id) {
       const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
       const fulfill = ` <button class="btn btn-danger" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
@@ -41,7 +41,7 @@ window.onload = () => {
         <td><a href="${window.location.origin}/profile?id=${authorid || undefined}">${author}</a></td>
         <td><p>${date}</p></td>
         <td><p>${tags}</p></td>
-        <td>${id}</td>
+        <td>${description}</td>
         <td>${localStorage.getItem('name') === author || localStorage.getItem('admin')  ? fulfill + close : fulfill}</td>
       </tr>`;
     }
@@ -59,6 +59,7 @@ window.onload = () => {
             esc(DOMPurify.sanitize(description)),
             '#table',
             esc(DOMPurify.sanitize(authorid)),
+            esc(DOMPurify.sanitize(id)),
           );
         });
         offerList = body.offerList.reverse();

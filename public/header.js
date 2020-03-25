@@ -1,4 +1,4 @@
-if (window.location.origin.includes('covidheroes.net')) window.location = `https://covidheroes.net`;
+// if (window.location.origin.includes('covidheroes.net')) window.location = `https://covidheroes.net`;
 if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'

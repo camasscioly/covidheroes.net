@@ -73,7 +73,7 @@ window.onload = () => {
       .then((body) => {
         body.offerList.reverse().forEach((offer) => {
           const { title, author, date, tags, authorid } = offer;
-          //if (id !== offer.id) return;
+          if (id !== offer.id) return;
           addEntry(
             esc(DOMPurify.sanitize(title)).substring(0, 30),
             esc(DOMPurify.sanitize(author)),

@@ -26,7 +26,7 @@ window.onload = () => {
 
   document.querySelector('#login').onsubmit = () => {
     postData(`${base}login`, {
-      name: document.querySelector('#name').value,
+      name: document.querySelector('#name').value.toLowerCase(),
       password: document.querySelector('#password').value,
     }).then((data) => {
       const { name, email, phone, location, password, id } = data;

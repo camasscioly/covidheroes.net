@@ -48,8 +48,22 @@ window.onload = async () => {
     }
     const base = `${window.location.origin}/v1/`;
 
+    function validateEmail(email) {
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    if (esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, '') !== esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)) {
+      alert('Username must be alphanumeric, lowercase, and contain no spaces.');
+      return false;
+    }
+
+    if (!validateEmail(esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50))) {
+      alert('Invalid Email');
+      return false;
+    }
     postData(`${base}update`, {
-      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50),
+      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, ''),
       email: esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50),
       phone: esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50),
       location: esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100),
@@ -57,7 +71,7 @@ window.onload = async () => {
       id: localStorage.getItem('id')
     }).then((data) => {
       if (data === 'Error!') return alert('Oops! Something went wrong.');
-      localStorage.setItem('name', esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50));
+      localStorage.setItem('name', esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, ''));
       localStorage.setItem('email', esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50));
       localStorage.setItem('phone', esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50));
       localStorage.setItem('location', esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100));

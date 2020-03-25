@@ -22,6 +22,18 @@ window.onload = () => {
   }
 
   document.querySelector('#signup').onsubmit = () => {
+    function validateEmail(email) {
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+    if (esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, '') !== esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)) {
+      alert('Username must be alphanumeric, lowercase, and contain no spaces.');
+      return false;
+    }
+    if (!validateEmail(esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50))) {
+      alert('Invalid Email');
+      return false;
+    }
     postData(`${base}signup`, {
       name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, ''),
       email: esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50),
@@ -34,6 +46,7 @@ window.onload = () => {
       localStorage.setItem('email', esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50));
       localStorage.setItem('phone', 'Not Configured');
       localStorage.setItem('location', 'Not Configured');
+      localStorage.setItem('id', data)
       localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50));
       window.location = `${window.location.origin}/me`;
     });

@@ -24,7 +24,7 @@ router.post('/signup', async (req, res) => {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
         await keyv.set(id, { name, email, phone, location, password: hash, rep: [] });
-        res.status(200).send('Registered!');
+        res.status(200).send(id);
       });
     });
   }

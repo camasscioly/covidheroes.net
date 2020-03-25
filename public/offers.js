@@ -50,13 +50,13 @@ window.onload = () => {
       .then((res) => res.json())
       .then((body) => {
         body.offerList.reverse().forEach((offer) => {
-          const { title, author, date, tags, id, authorid } = offer;
+          const { title, author, date, tags, id, authorid, description } = offer;
           addEntry(
             esc(DOMPurify.sanitize(title)).substring(0, 30),
             esc(DOMPurify.sanitize(author)),
             esc(DOMPurify.sanitize(date)),
             esc(DOMPurify.sanitize(tags)),
-            esc(DOMPurify.sanitize(id)),
+            esc(DOMPurify.sanitize(description)),
             '#table',
             esc(DOMPurify.sanitize(authorid)),
           );

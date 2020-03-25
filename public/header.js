@@ -2,13 +2,13 @@ if (window.location.origin.includes('herokuapp')) window.location = `https://cov
 if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'"><i class="far fa-fist-raised" style="color: #6C63FF !important"></i> Sign up</button>
-<button class="btn btn-danger" onclick="window.location=window.location.origin + '/login'"><i class="fas fa-sign-in-alt"></i> Log in</button> `;
+  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'">Sign up</button>
+<button class="btn btn-danger" onclick="window.location=window.location.origin + '/login'">Log in</button> `;
 } else {
   const base = `${window.location.origin}/v1/`;
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload(); document.cookie = '';"><i class="fas fa-sign-out-alt"></i> Log out</button>
+  ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'"><i class="fas fa-sign-out-alt"></i> Log out</button>
   <button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'"><i class="fas fa-user-circle"></i> Account</button>`;
   window.addEventListener('storage', () => {
     fetch(`${base}users`)
@@ -21,6 +21,7 @@ if (!localStorage.getItem('name')) {
         }
       });
   }, false);
+  if (!localStorage.getItem('name')) document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   /*fetch(`${base}users`)
     .then((res) => res.json())
     .then((body) => {

@@ -47,7 +47,7 @@ window.onload = () => {
     fetch(`${base}userdata?id=${id}`)
       .then((res) => res.json())
       .then((body) => {
-        const { email, name, location, rep } = body;
+        const { email, name, location, rep, phone } = body;
         document.querySelector('#name').value = name;
         document.querySelector('#rep').value = rep.length;
         document.querySelector('#email').value = email;

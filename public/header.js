@@ -1,3 +1,14 @@
+Element.prototype.remove = function() {
+  this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+  for(var i = this.length - 1; i >= 0; i--) {
+      if(this[i] && this[i].parentElement) {
+          this[i].parentElement.removeChild(this[i]);
+      }
+  }
+}
+
 if (window.location.origin.includes('herokuapp')) window.location = `https://covidheroes.net`;
 if (!localStorage.getItem('name')) {
   document.querySelector(

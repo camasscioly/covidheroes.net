@@ -49,6 +49,11 @@ window.onload = () => {
     fetch(`${window.location.origin}/v1/offer`)
       .then((res) => res.json())
       .then((body) => {
+        document.getElementById('loading1').remove();
+        document.getElementById('loading2').remove();
+        document.getElementById('loading3').remove();
+        document.getElementById('loading4').remove();
+        document.getElementById('loading5').remove();
         body.offerList.reverse().forEach((offer) => {
           const { title, author, date, tags, id, authorid, description } = offer;
           addEntry(

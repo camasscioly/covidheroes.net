@@ -50,9 +50,9 @@ window.onload = () => {
         const { email, name, location, rep } = body;
         document.querySelector('#name').value = name;
         document.querySelector('#rep').value = rep.length;
-        /*document.querySelector('#email').value = email;
+        document.querySelector('#email').value = email;
         document.querySelector('#phone').value = phone;
-        document.querySelector('#location').value = location;*/
+        document.querySelector('#location').value = location;
       })
       .catch((err) => {
         alert('Oops! Something went wrong...');

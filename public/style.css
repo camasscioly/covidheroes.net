@@ -284,3 +284,9 @@ td {
 .btn-primary:hover {
   transform: translate(0px, -3px);
 }
+
+@media screen and (max-width: 960px) {
+  #lady {
+    display: none !important;
+  }
+}

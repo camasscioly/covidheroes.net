@@ -102,7 +102,9 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/offer', async (req, res) => {
-  const offerList = (await keyv.get('offer-list')) || [];
+  let offerList = (await keyv.get('offer-list')) || [];
+  let counter = (await keyv.get('offer-count')) || 0;
+  counter++;
   offerList.push({
     title: req.body.title,
     description: req.body.description || null,
@@ -114,6 +116,7 @@ router.post('/offer', async (req, res) => {
     id: makeID(15),
   });
   await keyv.set('offer-list', offerList);
+  await keyv.set('offer-count', counter);
   res.json(offerList);
 });
 
@@ -133,6 +136,11 @@ router.get('/offer', async (req, res) => {
 router.get('/users', async (req, res) => {
   const users = (await keyv.get('user-list')) || [];
   res.json({ users });
+});
+
+router.get('/counter', async (req, res) => {
+  const counter = (await keyv.get('offer-count')) || 0;
+  res.json({ counter });
 });
 
 module.exports = router;

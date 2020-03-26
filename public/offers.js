@@ -51,6 +51,12 @@ window.onload = () => {
       </tr>`;
     }
 
+    fetch(`${window.location.origin}/v1/counter`)
+      .then(res => res.json())
+      .then((body) => {
+        document.querySelector('#counter').innerHTML = `Over <b>${body.counter}</b> and counting requests!`;
+      });
+
     fetch(`${window.location.origin}/v1/offer`)
       .then((res) => res.json())
       .then((body) => {
@@ -90,20 +96,20 @@ window.onload = () => {
       if (
         esc(
           DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))
-        ) !== esc(DOMPurify.sanitize(document.querySelector('#title').value)) ||
+        ) !== esc(DOMPurify.sanitize(document.querySelector('#title').value.split(' ').join(''))) ||
         esc(
           DOMPurify.sanitize(document.querySelector('#location').value.replace(/[^a-z0-9]/gi, ''))
-        ) !== esc(DOMPurify.sanitize(document.querySelector('#location').value))
+        ) !== esc(DOMPurify.sanitize(document.querySelector('#location').value.split(' ').join('')))
       )
         return alert('Input must be alphanumeric.');
       postData(`${base}offer`, {
         title: esc(
-          DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))
+          DOMPurify.sanitize(document.querySelector('#title').value)
         ),
         author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
         authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
         description: esc(
-          DOMPurify.sanitize(document.querySelector('#location').value.replace(/[^a-z0-9]/gi, ''))
+          DOMPurify.sanitize(document.querySelector('#location').value)
         ),
         email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
         date: new Date().toLocaleDateString('en-US'),

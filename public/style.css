@@ -131,16 +131,17 @@ canvas {
 
 .btn-danger,
 .btn-secondary {
-  border-color: #f5f4f9 !important;
+  border-color: transparent !important;
   background: transparent !important;
-  outline: #f5f4f9 !important;
-  border-radius: 1000px !important;
+  /* outline: #f5f4f9 !important; */
+  border-radius: 5px !important;
   padding: 1px !important;
   padding-left: 15px !important;
   padding-right: 15px !important;
   margin-left: 5px;
   margin-right: 5px;
-  color: #666666 !important;
+  font-weight: bold;
+  color: #6C63FF !important;
 }
 
 
@@ -186,9 +187,9 @@ h1 {
   color: #fff !important;
 }
 
-input {
-  /* background: #FDFDFD !important; */
-}
+/* input {
+  background: #FDFDFD !important; 
+} */
 
 .fas {
   color: #6C63FF !important;

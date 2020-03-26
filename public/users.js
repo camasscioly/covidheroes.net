@@ -42,19 +42,23 @@ window.onload = () => {
         let users = body.users;
         let totals = [];
         users.forEach(async user => {
-          const { rep } = await fetch(`${base}userdata?id=${user[1]}`)
-            .then((res) => res.json())
-          totals.push([ user[0], user[1], String(rep.length) ]);
-          if (users.length === totals.length) {
-            document.getElementById('table').innerHTML = '';
-            totals.sort((a, b) => a[2] - b[2]).reverse().slice(0, 10).forEach((user) => {
-              addEntry(
-                esc(DOMPurify.sanitize(user[0])),
-                esc(DOMPurify.sanitize(user[1])),
-                esc(DOMPurify.sanitize(`+${user[2]}`)),
-                '#table',
-              );
-            });
+          try {
+            const { rep } = await fetch(`${base}userdata?id=${user[1]}`)
+              .then((res) => res.json())
+            totals.push([ user[0], user[1], String(rep.length) ]);
+            if (users.length === totals.length) {
+              document.getElementById('table').innerHTML = '';
+              totals.sort((a, b) => a[2] - b[2]).reverse().slice(0, 10).forEach((user) => {
+                addEntry(
+                  esc(DOMPurify.sanitize(user[0])),
+                  esc(DOMPurify.sanitize(user[1])),
+                  esc(DOMPurify.sanitize(`+${user[2]}`)),
+                  '#table',
+                );
+              });
+            }
+          } catch(err) {
+            return;
           }
         });
       });

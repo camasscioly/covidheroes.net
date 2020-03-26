@@ -46,11 +46,7 @@ window.onload = () => {
             .then((res) => res.json())
           totals.push([ user[0], user[1], String(rep.length) ]);
           if (users.length === totals.length) {
-            document.getElementById('loading1').remove();
-            document.getElementById('loading2').remove();
-            document.getElementById('loading3').remove();
-            document.getElementById('loading4').remove();
-            document.getElementById('loading5').remove();
+            document.getElementById('table').innerHTML = '';
             totals.sort((a, b) => a[2] - b[2]).reverse().slice(0, 10).forEach((user) => {
               addEntry(
                 esc(DOMPurify.sanitize(user[0])),

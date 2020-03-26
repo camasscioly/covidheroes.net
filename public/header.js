@@ -33,7 +33,7 @@ if (!localStorage.getItem('name')) {
       });
   }, false);
   if (!localStorage.getItem('name')) document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-  /*fetch(`${base}users`)
+  fetch(`${base}users`)
     .then((res) => res.json())
     .then((body) => {
       if (!localStorage.getItem('name')) return;
@@ -41,5 +41,5 @@ if (!localStorage.getItem('name')) {
         localStorage.clear();
         location.reload();
       }
-    });*/
+    });
 }

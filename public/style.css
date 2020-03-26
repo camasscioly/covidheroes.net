@@ -252,3 +252,8 @@ body {
   outline: none !important;
   box-shadow: none !important;
 }
+
+.dropdown-toggle {
+  border: none !important;
+  outline: none !important;
+}

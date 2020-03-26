@@ -291,3 +291,11 @@ td {
     display: none !important;
   }
 }
+
+a {     
+  display: inline-block;     
+  position: relative;    
+  z-index: 1;     
+  padding: 1em;     
+  margin: -1em; 
+}

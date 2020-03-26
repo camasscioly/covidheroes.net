@@ -28,6 +28,7 @@ if (!localStorage.getItem('name')) {
         if (!localStorage.getItem('name')) return;
         if (!body.users.find(user => user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id'))) {
           localStorage.clear();
+          document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
           location.reload();
         }
       });
@@ -39,6 +40,7 @@ if (!localStorage.getItem('name')) {
       if (!localStorage.getItem('name')) return;
       if (!body.users.find(user => user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id'))) {
         localStorage.clear();
+        document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         location.reload();
       }
     });

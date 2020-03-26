@@ -27,9 +27,10 @@ window.onload = () => {
       }
     }
 
-    async function addEntry(user, id, rep, dom) {
+    async function addEntry(user, id, rep, dom, staff) {
+      if (staff) user = `${user} <span class="badge badge-outline-primary">STAFF</span>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><a href="${window.location.origin}/profile?id=${id}">${user}</a></th>
+        <th scope="row"><a href="${window.location.origin}/profile?id=${id}" style="color: #6C63FF !important">${user}</a></th>
         <td>${id}</td>
         <td>${rep}</td>
       </tr>`;
@@ -43,9 +44,9 @@ window.onload = () => {
         let totals = [];
         users.forEach(async user => {
           try {
-            const { rep } = await fetch(`${base}userdata?id=${user[1]}`)
+            const { rep, staff } = await fetch(`${base}userdata?id=${user[1]}`)
               .then((res) => res.json())
-            totals.push([ user[0], user[1], String(rep.length) ]);
+            totals.push([ user[0], user[1], String(rep.length), staff || false ]);
             if (users.length === totals.length) {
               document.getElementById('table').innerHTML = '';
               totals.sort((a, b) => a[2] - b[2]).reverse().slice(0, 10).forEach((user) => {
@@ -54,6 +55,7 @@ window.onload = () => {
                   esc(DOMPurify.sanitize(user[1])),
                   esc(DOMPurify.sanitize(`+${user[2]}`)),
                   '#table',
+                  user[3]
                 );
               });
             }

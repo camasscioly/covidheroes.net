@@ -47,12 +47,15 @@ window.onload = () => {
     fetch(`${base}userdata?id=${id}`)
       .then((res) => res.json())
       .then((body) => {
-        const { email, name, location, rep, phone } = body;
+        let { email, name, location, rep, phone, staff } = body;
         document.querySelector('#name').value = name;
         document.querySelector('#rep').value = rep.length;
         document.querySelector('#email').value = email;
         document.querySelector('#phone').value = phone;
         document.querySelector('#location').value = location;
+        name = esc(DOMPurify.sanitize(name));
+        if (staff) name = `${name} <span class="badge badge-outline-primary">STAFF</span>`;
+        document.querySelector('#prof-head').innerHTML = name;
       })
       .catch((err) => {
         alert('Oops! Something went wrong...');

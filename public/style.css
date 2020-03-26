@@ -1,5 +1,9 @@
 /* @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap'); */
 
+a:hover {
+  text-decoration: none;
+}
+
 table {
   border: 1px solid #dee2e6 !important;
   border-radius: 15px !important;
@@ -173,7 +177,7 @@ h1 {
   padding: 12px;
   padding-right: 20px;
   padding-left: 20px;
-  border-radius: 10000px;
+  border-radius: 7px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -237,6 +241,7 @@ th {
 #navbar {
   background: #fff !important;
   border-bottom: 0px solid #dee2e6 !important;
+  box-shadow: 0 0 0.2rem rgba(0,0,0,.06) !important;
 }
 
 html,
@@ -261,4 +266,21 @@ body {
 td {
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+.btn-primary {
+  box-shadow: 0 0 3.2rem rgba(0,0,0,.06) !important;
+  transition: background-color .2s ease,transform .2s ease,-webkit-transform .2s ease;
+}
+
+.hover {
+  transition: background-color .2s ease,transform .2s ease,-webkit-transform .2s ease !important;
+}
+
+.hover:hover {
+  transform: translate(0px, -3px) !important;
+}
+
+.btn-primary:hover {
+  transform: translate(0px, -3px);
 }

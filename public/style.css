@@ -302,51 +302,32 @@ td {
 
 input {
   transition: all 0.2s ease;
-  background: rgba(3, 3, 3, 0.01) !important;
+  background: rgba(3, 3, 3, 0.03) !important;
   border: none !important;
   outline: none !important;
-  border-radius: 5px !important;
+  border-radius: 0.3em !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
   border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 0px  !important;
-  width: 50% !important;
+  border-bottom-right-radius: 0px !important;
 }
 
 input:focus {
-  background: rgba(3, 3, 3, 0.05) !important;
+  background: rgba(3, 3, 3, 0.1) !important;
   border-bottom: 2px solid #6C63FF !important;
 }
 
 input:read-only {
   transition: all 0.2s ease;
-  background: rgba(3, 3, 3, 0.05) !important;
+  background: rgba(3, 3, 3, 0.1) !important;
   border: none !important;
   outline: none !important;
-  border-radius: 5px !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 3px !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.09) !important;
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px  !important;
-  width: 50% !important;
 }
 
 input:read-only:focus {
-  background: rgba(3, 3, 3, 0.1) !important;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.15) !important;
-}
-
-input:disabled {
-  transition: all 0.2s ease;
-  background: rgba(3, 3, 3, 0.05) !important;
-  border: none !important;
-  outline: none !important;
-  border-radius: 5px !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-  border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 0px  !important;
-  width: 50% !important;
-}
-
-input:disabled:focus {
-  background: rgba(3, 3, 3, 0.1) !important;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.15) !important;
+  background: rgba(3, 3, 3, 0.15) !important;
+  border-bottom: 2px solid #6C63FF !important;
 }

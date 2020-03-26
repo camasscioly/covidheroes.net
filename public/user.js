@@ -62,8 +62,21 @@ window.onload = async () => {
       alert('Invalid Email');
       return false;
     }
+
+    if (!esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50).match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+      alert('Invalid Phone Number');
+      return false;
+    }
+
+    if (localStorage.getItem('password') !== esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)) {
+      let userPass = prompt('What is your current password?');
+      if (localStorage.getItem('password') !== userPass) {
+        alert('Incorrect password.');
+        return false;
+      }
+    }
     postData(`${base}update`, {
-      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, ''),
+      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, '').trim(),
       email: esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50),
       phone: esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50),
       location: esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100),

@@ -31,7 +31,7 @@ window.onload = () => {
       password: document.querySelector('#password').value,
     }).then((data) => {
       const { name, email, phone, location, password, id } = data;
-      localStorage.setItem('name', esc(DOMPurify.sanitize(name)));
+      localStorage.setItem('name', esc(DOMPurify.sanitize(name.trim())));
       localStorage.setItem('email', esc(DOMPurify.sanitize(email)));
       localStorage.setItem('phone', esc(DOMPurify.sanitize(phone)));
       localStorage.setItem('location', esc(DOMPurify.sanitize(location)));

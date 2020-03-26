@@ -43,7 +43,7 @@ window.onload = () => {
       password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
     }).then((data) => {
       if (data === 'Already Registered') return alert('This username is already taken.');
-      localStorage.setItem('name', esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, ''));
+      localStorage.setItem('name', esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, '').trim());
       localStorage.setItem('email', esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50));
       localStorage.setItem('phone', 'Not Configured');
       localStorage.setItem('location', 'Not Configured');

@@ -71,6 +71,10 @@ router.get('/profile', toLogin, async (req, res) => {
   renderFile(req, res, 'profile');
 });
 
+router.get('/terms', async (req, res) => {
+  renderFile(req, res, 'terms');
+});
+
 router.use((req, res) => {
   renderFile(req, res, '404');
 });

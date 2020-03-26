@@ -15,10 +15,10 @@ window.onload = async () => {
     document.querySelector('#phone').value = DOMPurify.sanitize(phone);
     document.querySelector('#location').value = DOMPurify.sanitize(location);
     document.querySelector('#password').value = DOMPurify.sanitize(password);
-    document.querySelector('#id').value = DOMPurify.sanitize(id);
-    const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)
-      .then((res) => res.json())
-    document.querySelector('#rep').value = DOMPurify.sanitize(rep.length);
+    // document.querySelector('#id').value = DOMPurify.sanitize(id);
+    // const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)
+    //   .then((res) => res.json())
+    // document.querySelector('#rep').value = DOMPurify.sanitize(rep.length);
 
   } else {
     window.location = `${window.location.origin}/login`;

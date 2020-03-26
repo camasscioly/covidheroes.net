@@ -13,14 +13,14 @@ if (window.location.origin.includes('herokuapp')) window.location = `https://cov
 if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'">Sign up</button>
-<button class="btn btn-danger" onclick="window.location=window.location.origin + '/login'">Log in</button> `;
+  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/signup'"><i class="fas fa-hand-spock"></i> Join</button>
+<button class="btn btn-danger" onclick="window.location=window.location.origin + '/login'"><i class="fas fa-sign-in-alt"></i> Log in</button> `;
 } else {
   const base = `${window.location.origin}/v1/`;
   document.querySelector(
     '#account'
   ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'"><i class="fas fa-sign-out-alt"></i> Log out</button>
-  <button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'"><i class="fas fa-user-circle"></i> Account</button>`;
+  <button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'"><i class="fas fa-user"></i> Account</button>`;
   window.addEventListener('storage', () => {
     fetch(`${base}users`)
       .then((res) => res.json())

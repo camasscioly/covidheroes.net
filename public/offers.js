@@ -42,7 +42,7 @@ window.onload = () => {
         undefined}">${author}</a></td>
         <td><p>${date}</p></td>
         <td><p>${tags}</p></td>
-        <td>${description.replace(/(.{17})..+/, '$1…')}</td>
+        <td><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description.split(' ').join('+')}">${description.replace(/(.{17})..+/, '$1…')}</a></td>
         <td>${
           localStorage.getItem('name') === author || localStorage.getItem('admin')
             ? fulfill + close

@@ -1,0 +1,35 @@
+<%- include('blocks/header') %>
+    <div class="container"></div>
+    <div class="container mt-2">
+      <h1><i class="fas fa-box-open"></i> Create a Request</h1>
+      <form id="offers">
+        <div class="form-group">
+          <label for="title">Item</label>
+          <input type="text" class="form-control" id="title" placeholder="Enter Item Name" maxlength="30" required>
+        </div>
+        <div class="form-group">
+          <label for="location">Dropoff Location</label>
+          <input type="text" class="form-control" id="location" placeholder="Enter Dropoff Location" maxlength="40" required>
+        </div>
+        <div class="form-group">
+          <label for="tags">Quantity</label>
+          <input maxlength="7" min="1" max="1000000" type="number" class="form-control" id="tags" placeholder="Enter Quantity of Item" maxlength="10" required>
+        </div>
+        <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
+        <button type="submit" class="btn btn-primary" id="submit" disabled><i class="fas fa-paper-plane" style="color: #fff !important"></i> Request</button>
+      </form>
+    </div>
+  </div><br>
+  <footer class="text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p>Copyright &copy; 2020 COVID Heroes. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="./offers.js" defer></script>
+  </body>
+</html>
+

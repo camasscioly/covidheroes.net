@@ -88,12 +88,12 @@ window.onload = () => {
           }
         });
       if (
-        !esc(
+        esc(
           DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))
-        ) ||
-        !esc(
+        ) !== esc(DOMPurify.sanitize(document.querySelector('#title').value)) ||
+        esc(
           DOMPurify.sanitize(document.querySelector('#location').value.replace(/[^a-z0-9]/gi, ''))
-        )
+        ) !== esc(DOMPurify.sanitize(document.querySelector('#location').value))
       )
         return alert('Input must be alphanumeric.');
       postData(`${base}offer`, {
@@ -115,7 +115,7 @@ window.onload = () => {
           )
         ),
       }).then((data) => {
-        location.reload();
+        window.location = `${window.location.origin}/requests`;
       });
       return false;
     };

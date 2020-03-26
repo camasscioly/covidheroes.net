@@ -55,6 +55,10 @@ router.get('/me', toLogin, async (req, res) => {
   renderFile(req, res, 'user');
 });
 
+router.get('/new', toLogin, async (req, res) => {
+  renderFile(req, res, 'new');
+});
+
 router.get('/requests', toLogin, async (req, res) => {
   renderFile(req, res, 'offers');
 });

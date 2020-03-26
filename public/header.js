@@ -19,8 +19,8 @@ if (!localStorage.getItem('name')) {
   const base = `${window.location.origin}/v1/`;
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="localStorage.clear(); location.reload(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'"><i class="fas fa-sign-out-alt"></i> Log out</button>
-  <button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'"><i class="fas fa-user"></i> Account</button>`;
+  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'"><i class="fas fa-user"></i> Account</button>
+  <button class="btn btn-danger" onclick="window.location=window.location.origin + '/new'"><i class="fas fa-plus"></i> New</button>`;
   window.addEventListener('storage', () => {
     fetch(`${base}users`)
       .then((res) => res.json())

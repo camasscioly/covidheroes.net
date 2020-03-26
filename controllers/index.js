@@ -71,8 +71,8 @@ router.get('/profile', toLogin, async (req, res) => {
   renderFile(req, res, 'profile');
 });
 
-router.use((req, { boom }) => {
-  boom.notFound();
+router.use((req, res) => {
+  renderFile(req, res, '404');
 });
 
 module.exports = router;

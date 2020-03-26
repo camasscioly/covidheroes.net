@@ -1,9 +1,8 @@
 <%- include('blocks/header') %>
     <div class="container mt-2">
       <h1>Your Profile</h1>
-      <p>
-        
-      <button class="btn btn-primary" onclick="localStorage.clear(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location = window.location.origin" id="logout"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Log out</button>
+      <p> 
+        <button class="btn btn-primary" onclick="localStorage.clear(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location = window.location.origin" id="logout"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Log out</button>
       </p>
       <form id="submit">
         <div class="form-group">
@@ -12,11 +11,11 @@
         </div>
         <div class="form-group">
           <label for="id">ID</label>
-          <input type="text" class="form-control" id="id" value="Loading..." disabled>
+          <input type="text" class="form-control" id="id" value="Loading..." readonly>
         </div>
         <div class="form-group">
           <label for="rep">Reputation</label>
-          <input type="text" class="form-control" id="rep" placeholder="0" value="Loading..." disabled>
+          <input type="text" class="form-control" id="rep" placeholder="0" value="Loading..." readonly>
         </div>
         <div class="form-group">
           <label for="email">Email</label>

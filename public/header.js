@@ -19,7 +19,7 @@ if (!localStorage.getItem('name')) {
   const base = `${window.location.origin}/v1/`;
   document.querySelector(
     '#account'
-  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/me'"><i class="fas fa-user"></i> Account</button>
+  ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/profile?id=' + localStorage.getItem('id')"><i class="fas fa-user"></i> Account</button>
   <button class="btn btn-danger" onclick="window.location=window.location.origin + '/new'"><i class="fas fa-plus"></i> New Request</button>`;
   window.addEventListener('storage', () => {
     fetch(`${base}users`)

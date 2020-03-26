@@ -26,14 +26,18 @@ window.onload = () => {
     }
 
     async function addEntry(title, author, date, tags, id, dom, authorid) {
-      const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
-      const fulfill = ` <button class="btn btn-danger" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
+      const close = `<button class="btn btn-danger hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
+      const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${title}</p></th>
         <td><p>${date}</p></td>
         <td><p>${tags}</p></td>
         <td>${id}</td>
-        <td>${localStorage.getItem('name') === author || localStorage.getItem('admin')  ? fulfill + close : fulfill}</td>
+        <td>${
+          localStorage.getItem('name') === author || localStorage.getItem('admin')
+            ? fulfill + close
+            : fulfill
+        }</td>
       </tr>`;
     }
 
@@ -41,8 +45,9 @@ window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     if (id === localStorage.getItem('id')) {
-      window.location = `${window.location.origin}/me`;
-      return;
+      document.querySelector(
+        '#change'
+      ).innerHTML = `<button class="btn btn-primary" id="config" onclick="window.location = (window.location.origin + '/me')"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Change Settings</button>`;
     }
     fetch(`${base}userdata?id=${id}`)
       .then((res) => res.json())
@@ -61,16 +66,19 @@ window.onload = () => {
         alert('Oops! Something went wrong...');
         location = window.location.origin;
       });
-    document.querySelector('#give-rep').onclick = () => {
-      if (!confirm('Are you sure you want to rep this user? This is permanent.')) return;
-      postData(`${base}userdata/rep`, {
-        rep: localStorage.getItem('id'),
-        id,
-      }).then((data) => {
-        location.reload();
-        return false;
-      });
-    };
+    if (document.querySelector('#give-rep')) {
+      document.querySelector('#give-rep').onclick = () => {
+        if (!confirm('Are you sure you want to rep this user? This is permanent.')) return;
+        postData(`${base}userdata/rep`, {
+          rep: localStorage.getItem('id'),
+          id,
+        }).then((data) => {
+          location.reload();
+          return false;
+        });
+      };
+    }
+
     fetch(`${window.location.origin}/v1/offer`)
       .then((res) => res.json())
       .then((body) => {
@@ -84,7 +92,7 @@ window.onload = () => {
             esc(DOMPurify.sanitize(tags)),
             esc(DOMPurify.sanitize(offer.id)),
             '#table',
-            esc(DOMPurify.sanitize(authorid)),
+            esc(DOMPurify.sanitize(authorid))
           );
         });
         offerList = body.offerList.reverse();
@@ -102,7 +110,7 @@ function esc(string) {
   const match = matchHtmlRegExp.exec(str);
 
   if (!match) {
-    return str
+    return str;
   }
 
   let escape;
@@ -113,35 +121,33 @@ function esc(string) {
   for (index = match.index; index < str.length; index++) {
     switch (str.charCodeAt(index)) {
       case 34: // "
-        escape = '&quot;'
-        break
+        escape = '&quot;';
+        break;
       case 38: // &
-        escape = '&amp;'
-        break
+        escape = '&amp;';
+        break;
       case 39: // '
-        escape = '&#39;'
-        break
+        escape = '&#39;';
+        break;
       case 60: // <
-        escape = '&lt;'
-        break
+        escape = '&lt;';
+        break;
       case 62: // >
-        escape = '&gt;'
-        break
+        escape = '&gt;';
+        break;
       default:
-        continue
+        continue;
     }
 
     if (lastIndex !== index) {
-      html += str.substring(lastIndex, index)
+      html += str.substring(lastIndex, index);
     }
 
-    lastIndex = index + 1
-    html += escape
+    lastIndex = index + 1;
+    html += escape;
   }
 
-  return lastIndex !== index
-    ? html + str.substring(lastIndex, index)
-    : html
+  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
 }
 
 function enable() {

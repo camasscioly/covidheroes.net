@@ -257,3 +257,8 @@ body {
   border: none !important;
   outline: none !important;
 }
+
+td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}

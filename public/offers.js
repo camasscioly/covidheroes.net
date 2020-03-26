@@ -37,12 +37,17 @@ window.onload = () => {
       const close = `<button class="btn btn-danger" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
       const fulfill = ` <button class="btn btn-danger" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><p>${title}</p></th>
-        <td><a href="${window.location.origin}/profile?id=${authorid || undefined}">${author}</a></td>
+        <th scope="row"><p>${title.replace(/(.{17})..+/, '$1…')}</p></th>
+        <td><a href="${window.location.origin}/profile?id=${authorid ||
+        undefined}">${author}</a></td>
         <td><p>${date}</p></td>
         <td><p>${tags}</p></td>
-        <td>${description}</td>
-        <td>${localStorage.getItem('name') === author || localStorage.getItem('admin')  ? fulfill + close : fulfill}</td>
+        <td>${description.replace(/(.{17})..+/, '$1…')}</td>
+        <td>${
+          localStorage.getItem('name') === author || localStorage.getItem('admin')
+            ? fulfill + close
+            : fulfill
+        }</td>
       </tr>`;
     }
 
@@ -60,7 +65,7 @@ window.onload = () => {
             esc(DOMPurify.sanitize(description)),
             '#table',
             esc(DOMPurify.sanitize(authorid)),
-            esc(DOMPurify.sanitize(id)),
+            esc(DOMPurify.sanitize(id))
           );
         });
         offerList = body.offerList.reverse();
@@ -71,20 +76,44 @@ window.onload = () => {
         .then((res) => res.json())
         .then((body) => {
           if (!localStorage.getItem('name')) return;
-          if (!body.users.find(user => user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id'))) {
+          if (
+            !body.users.find(
+              (user) =>
+                user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id')
+            )
+          ) {
             localStorage.clear();
             location.reload();
             return;
           }
         });
+      if (
+        !esc(
+          DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))
+        ) ||
+        !esc(
+          DOMPurify.sanitize(document.querySelector('#location').value.replace(/[^a-z0-9]/gi, ''))
+        )
+      )
+        return alert('Input must be alphanumeric.');
       postData(`${base}offer`, {
-        title: esc(DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))),
+        title: esc(
+          DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))
+        ),
         author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
         authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
-        description: esc(DOMPurify.sanitize(document.querySelector('#location').value)),
+        description: esc(
+          DOMPurify.sanitize(document.querySelector('#location').value.replace(/[^a-z0-9]/gi, ''))
+        ),
         email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
         date: new Date().toLocaleDateString('en-US'),
-        tags: esc(DOMPurify.sanitize(parseInt(document.querySelector('#tags').value.substring(0, 7)) > 1000000 ? 1000000 : parseInt(document.querySelector('#tags').value.substring(0, 7)))),
+        tags: esc(
+          DOMPurify.sanitize(
+            parseInt(document.querySelector('#tags').value.substring(0, 7)) > 1000000
+              ? 1000000
+              : parseInt(document.querySelector('#tags').value.substring(0, 7))
+          )
+        ),
       }).then((data) => {
         location.reload();
       });
@@ -100,7 +129,7 @@ function esc(string) {
   const match = matchHtmlRegExp.exec(str);
 
   if (!match) {
-    return str
+    return str;
   }
 
   let escape;
@@ -111,35 +140,33 @@ function esc(string) {
   for (index = match.index; index < str.length; index++) {
     switch (str.charCodeAt(index)) {
       case 34: // "
-        escape = '&quot;'
-        break
+        escape = '&quot;';
+        break;
       case 38: // &
-        escape = '&amp;'
-        break
+        escape = '&amp;';
+        break;
       case 39: // '
-        escape = '&#39;'
-        break
+        escape = '&#39;';
+        break;
       case 60: // <
-        escape = '&lt;'
-        break
+        escape = '&lt;';
+        break;
       case 62: // >
-        escape = '&gt;'
-        break
+        escape = '&gt;';
+        break;
       default:
-        continue
+        continue;
     }
 
     if (lastIndex !== index) {
-      html += str.substring(lastIndex, index)
+      html += str.substring(lastIndex, index);
     }
 
-    lastIndex = index + 1
-    html += escape
+    lastIndex = index + 1;
+    html += escape;
   }
 
-  return lastIndex !== index
-    ? html + str.substring(lastIndex, index)
-    : html
+  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
 }
 
 function enable() {

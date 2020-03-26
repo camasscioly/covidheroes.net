@@ -292,10 +292,10 @@ td {
   }
 }
 
-a {     
+.hitbox {     
   display: inline-block;     
   position: relative;    
   z-index: 1;     
-  padding: 1em;     
-  margin: -1em; 
+  padding: 1.2em;     
+  margin: -1.2em; 
 }

@@ -38,7 +38,7 @@ window.onload = () => {
       const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${title.replace(/(.{17})..+/, '$1…')}</p></th>
-        <td><a href="${window.location.origin}/profile?id=${authorid ||
+        <td><a href="${window.location.origin}/@${author ||
         undefined}">${author}</a></td>
         <td><p>${date}</p></td>
         <td><p>${tags}</p></td>

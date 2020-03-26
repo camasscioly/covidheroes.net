@@ -44,7 +44,7 @@ window.onload = () => {
         document.querySelector('#date').value = date;
         document.querySelector('#quantity').value = tags;
         document.querySelector('#location').value = description;
-        document.querySelector('#prof-link').value = `<a href="${window.location.origin}/profile?id=${localStorage.getItem('id')}">${window.location.origin}/profile?id=${localStorage.getItem('id')}</a>`;
+        document.querySelector('#prof-link').value = `<a href="${window.location.origin}/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem('name')}</a>`;
         emailTo = email;
         ID = id;
         offerList = body.offerList.reverse();

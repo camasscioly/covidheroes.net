@@ -1,9 +1,15 @@
 const { Router } = require('express');
+const url = require('url');
 const cmd = require('node-cmd');
 const crypto = require('crypto');
 const renderFile = require('./../middleware/renderFile.js');
 const toLogin = require('./../middleware/toLogin.js');
 const toProfile = require('./../middleware/toProfile.js');
+const Keyv = require('keyv');
+const keyv = new Keyv(process.env.DB_URL);
+keyv.on('error', (err) => {
+  console.error(err);
+});
 
 const router = Router();
 
@@ -73,6 +79,17 @@ router.get('/profile', toLogin, async (req, res) => {
 
 router.get('/terms', async (req, res) => {
   renderFile(req, res, 'terms');
+});
+
+router.get('/@:username', async (req, res) => {
+  const name = req.params.username;
+  const userList = (await keyv.get('user-list')) || [];
+  const id = userList.find((block) => block[0] === name)[1];
+  const origin = url.format({
+    protocol: req.protocol,
+    host: req.get('host')
+  });
+  res.redirect(`${origin}/profile?id=${id}`);
 });
 
 router.use((req, res) => {

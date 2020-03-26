@@ -28,9 +28,10 @@ window.onload = () => {
     }
 
     async function addEntry(user, id, rep, dom, staff) {
+      let origUser = user;
       if (staff) user = `${user} <span class="badge badge-outline-primary">STAFF</span>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><a href="${window.location.origin}/profile?id=${id}" style="color: #6C63FF !important">${user}</a></th>
+        <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
         <td>${id}</td>
         <td>${rep}</td>
       </tr>`;

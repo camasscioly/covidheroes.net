@@ -4,11 +4,11 @@
       <h1><i class="fas fa-list"></i> Requests</h1>
       <p style="font-size: 120%;">If you are in need of resources, <a href="/new">create a new request</a>.</p>
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="item-input" placeholder="Enter Item" maxlength="30" required>&nbsp;&nbsp;
-        <input type="text" class="form-control" id="author-input" placeholder="Enter Author" maxlength="30" required>&nbsp;&nbsp;
-        <input type="text" class="form-control" id="date-input" placeholder="Enter Date" maxlength="30" required>&nbsp;&nbsp;
-        <input type="text" class="form-control" id="quantity-input" placeholder="Enter Quantity" maxlength="30" required>&nbsp;&nbsp;
-        <input type="text" class="form-control" id="location-input" placeholder="Enter Location" maxlength="30" required>
+        <input type="text" class="form-control" id="item-input" placeholder="Item" maxlength="30" required>&nbsp;&nbsp;
+        <input type="text" class="form-control" id="author-input" placeholder="Author" maxlength="20" required>&nbsp;&nbsp;
+        <input type="text" class="form-control" id="date-input" placeholder="Date" maxlength="15" required>&nbsp;&nbsp;
+        <input type="text" class="form-control" id="quantity-input" placeholder="Quantity" maxlength="10" required>&nbsp;&nbsp;
+        <input type="text" class="form-control" id="location-input" placeholder="Location" maxlength="40" required>
       </div>  
       <button class="btn btn-primary" onclick="search()"><i class="fas fa-search" style="color: #fff !important"></i> Search</button>
       <button class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="window.location = `${location.origin}/requests`"><i class="fas fa-trash"></i> Reset</button><br>

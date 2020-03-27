@@ -38,11 +38,12 @@ window.onload = () => {
       const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${title.replace(/(.{17})..+/, '$1…')}</p></th>
-        <td><a href="${window.location.origin}/@${author ||
-        undefined}">${author}</a></td>
+        <td><a href="${window.location.origin}/@${author || undefined}">${author}</a></td>
         <td><p>${date}</p></td>
         <td><p>${tags}</p></td>
-        <td><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description.split(' ').join('+')}">${description.replace(/(.{17})..+/, '$1…')}</a></td>
+        <td><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description
+          .split(' ')
+          .join('+')}">${description.replace(/(.{17})..+/, '$1…')}</a></td>
         <td>${
           localStorage.getItem('name') === author || localStorage.getItem('admin')
             ? fulfill + close
@@ -51,82 +52,73 @@ window.onload = () => {
       </tr>`;
     }
 
-    fetch(`${window.location.origin}/v1/counter`)
-      .then(res => res.json())
-      .then((body) => {
-        document.querySelector('#counter').innerHTML = `Over <b>${body.counter}</b> and counting requests!`;
-      });
-
-    fetch(`${window.location.origin}/v1/offer`)
-      .then((res) => res.json())
-      .then((body) => {
-        document.getElementById('table').innerHTML = '';
-        body.offerList.reverse().forEach((offer) => {
-          const { title, author, date, tags, id, authorid, description } = offer;
-          addEntry(
-            esc(DOMPurify.sanitize(title)).substring(0, 30),
-            esc(DOMPurify.sanitize(author)),
-            esc(DOMPurify.sanitize(date)),
-            esc(DOMPurify.sanitize(tags)),
-            esc(DOMPurify.sanitize(description)),
-            '#table',
-            esc(DOMPurify.sanitize(authorid)),
-            esc(DOMPurify.sanitize(id))
-          );
-        });
-        offerList = body.offerList.reverse();
-      });
-
-    document.querySelector('#offers').onsubmit = () => {
-      fetch(`${base}users`)
+    if (window.location.href.includes('new')) {
+      fetch(`${window.location.origin}/v1/counter`)
         .then((res) => res.json())
         .then((body) => {
-          if (!localStorage.getItem('name')) return;
-          if (
-            !body.users.find(
-              (user) =>
-                user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id')
-            )
-          ) {
-            localStorage.clear();
-            location.reload();
-            return;
-          }
+          document.querySelector(
+            '#counter'
+          ).innerHTML = `Over <b>${body.counter}</b> and counting requests!`;
         });
-      if (
-        esc(
-          DOMPurify.sanitize(document.querySelector('#title').value.replace(/[^a-z0-9]/gi, ''))
-        ) !== esc(DOMPurify.sanitize(document.querySelector('#title').value.split(' ').join(''))) ||
-        esc(
-          DOMPurify.sanitize(document.querySelector('#location').value.replace(/[^a-z0-9]/gi, ''))
-        ) !== esc(DOMPurify.sanitize(document.querySelector('#location').value.split(' ').join('')))
-      )
-        return alert('Input must be alphanumeric.');
-      postData(`${base}offer`, {
-        title: esc(
-          DOMPurify.sanitize(document.querySelector('#title').value)
-        ),
-        author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
-        authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
-        description: esc(
-          DOMPurify.sanitize(document.querySelector('#location').value)
-        ),
-        email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
-        date: new Date().toLocaleDateString('en-US'),
-        tags: esc(
-          DOMPurify.sanitize(
-            parseInt(document.querySelector('#tags').value.substring(0, 7)) > 1000000
-              ? 1000000
-              : parseInt(document.querySelector('#tags').value.substring(0, 7))
-          )
-        ),
-      }).then((data) => {
-        window.location = `${window.location.origin}/requests`;
-      });
-      return false;
-    };
-  } else {
-    window.location = `${window.location.origin}/login`;
+    }
+    if (window.location.href.includes('requests')) {
+      fetch(`${window.location.origin}/v1/offer`)
+        .then((res) => res.json())
+        .then((body) => {
+          document.getElementById('table').innerHTML = '';
+          body.offerList.reverse().forEach((offer) => {
+            const { title, author, date, tags, id, authorid, description } = offer;
+            addEntry(
+              esc(DOMPurify.sanitize(title)).substring(0, 30),
+              esc(DOMPurify.sanitize(author)),
+              esc(DOMPurify.sanitize(date)),
+              esc(DOMPurify.sanitize(tags)),
+              esc(DOMPurify.sanitize(description)),
+              '#table',
+              esc(DOMPurify.sanitize(authorid)),
+              esc(DOMPurify.sanitize(id))
+            );
+          });
+          offerList = body.offerList.reverse();
+        });
+    }
+    if (window.location.href.includes('new')) {
+      document.querySelector('#offers').onsubmit = () => {
+        fetch(`${base}users`)
+          .then((res) => res.json())
+          .then((body) => {
+            if (!localStorage.getItem('name')) return;
+            if (
+              !body.users.find(
+                (user) =>
+                  user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id')
+              )
+            ) {
+              localStorage.clear();
+              location.reload();
+              return;
+            }
+          });
+        postData(`${base}offer`, {
+          title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
+          author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
+          authorid: esc(DOMPurify.sanitize(localStorage.getItem('id'))),
+          description: esc(DOMPurify.sanitize(document.querySelector('#location').value)),
+          email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
+          date: new Date().toLocaleDateString('en-US'),
+          tags: esc(
+            DOMPurify.sanitize(
+              parseInt(document.querySelector('#tags').value.substring(0, 7)) > 1000000
+                ? 1000000
+                : parseInt(document.querySelector('#tags').value.substring(0, 7))
+            )
+          ),
+        }).then((data) => {
+          window.location = `${window.location.origin}/requests`;
+        });
+        return false;
+      };
+    }
   }
 };
 

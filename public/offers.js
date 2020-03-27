@@ -65,9 +65,30 @@ window.onload = () => {
       fetch(`${window.location.origin}/v1/offer`)
         .then((res) => res.json())
         .then((body) => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const searchItem = urlParams.get('item');
+          const searchAuthor = urlParams.get('author');
+          const searchDate = urlParams.get('date');
+          const searchQuantity = urlParams.get('quantity');
+          const searchLocation = urlParams.get('location');
+
+          document.querySelector('#item-input').value = searchItem;
+          document.querySelector('#author-input').value = searchAuthor;
+          document.querySelector('#date-input').value = searchDate;
+          document.querySelector('#quantity-input').value = searchQuantity;
+          document.querySelector('#location-input').value = searchLocation;
+
           document.getElementById('table').innerHTML = '';
           body.offerList.reverse().forEach((offer) => {
             const { title, author, date, tags, id, authorid, description } = offer;
+            if (searchItem || searchAuthor || searchDate || searchLocation || searchQuantity) {
+              if (searchItem && stringSimilarity.compareTwoStrings(title, (searchItem || title).split('+').join(' ')) < 0.3) return;
+              if (searchAuthor && stringSimilarity.compareTwoStrings(author, (searchAuthor || author).split('+').join(' ')) < 0.3) return;
+              if (searchDate && stringSimilarity.compareTwoStrings(date, (searchDate || date).split('+').join(' ')) < 0.3) return;
+              if (searchQuantity && stringSimilarity.compareTwoStrings(tags, (searchQuantity || tags).split('+').join(' ')) < 0.3) return;
+              if (searchLocation && stringSimilarity.compareTwoStrings(description, (searchLocation || description).split('+').join(' ')) < 0.3) return;
+            }
+            
             addEntry(
               esc(DOMPurify.sanitize(title)).substring(0, 30),
               esc(DOMPurify.sanitize(author)),
@@ -170,3 +191,27 @@ function esc(string) {
 function enable() {
   document.querySelector('#submit').disabled = false;
 }
+
+function search() {
+  window.location = `${window.location.origin}/requests?item=${document.querySelector('#item-input').value || ''}&author=${document.querySelector('#author-input').value}&date=${document.querySelector('#date-input').value}&quantity=${document.querySelector('#quantity-input').value}&location=${document.querySelector('#location-input').value}`;
+}
+
+/*document.querySelector('#item-input').addEventListener('change', (e) => {
+  search();
+});
+
+document.querySelector('#author-input').addEventListener('change', (e) => {
+  search();
+});
+
+document.querySelector('#date-input').addEventListener('change', (e) => {
+  search();
+});
+
+document.querySelector('#quantity-input').addEventListener('change', (e) => {
+  search();
+});
+
+document.querySelector('#location-input').addEventListener('change', (e) => {
+  search();
+});*/

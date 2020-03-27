@@ -1,9 +1,6 @@
 <%- include('blocks/header') %>
     <div class="container mt-2">
       <h1>Your Profile</h1>
-      <p> 
-        <button class="btn btn-primary" onclick="localStorage.clear(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location = window.location.origin" id="logout"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Log out</button>
-      </p>
       <form id="submit">
         <div class="form-group">
           <label for="name">Username</label>
@@ -15,7 +12,7 @@
         </div>
         <div class="form-group">
           <label for="phone">Phone</label>
-          <input type="number" class="form-control" id="phone" maxlength="15" value="Loading...">
+          <input type="text" class="form-control" id="phone" maxlength="15" value="Loading...">
         </div>
         <div class="form-group">
           <label for="location">Location</label>

@@ -2,6 +2,9 @@
     <div class="container"></div>
     <div class="container mt-2">
       <h1 id="prof-head">Profile</h1>
+      <p> 
+        <button class="btn btn-primary" onclick="localStorage.clear(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location = window.location.origin" id="logout"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Log out</button>
+      </p>
       <form onsubmit="return false;">
         <div class="form-group">
           <label for="name">Username</label>

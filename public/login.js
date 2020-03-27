@@ -37,7 +37,7 @@ window.onload = () => {
       localStorage.setItem('location', esc(DOMPurify.sanitize(location)));
       localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)));
       localStorage.setItem('id', esc(DOMPurify.sanitize(id)));
-      if (staff) localStorage.setItem('admin', 'true');
+      if (staff) localStorage.setItem('admin', true);
       localStorage.setItem('member', true);
       document.cookie = 'member=true';
       window.location = `${window.location.origin}/me`;

@@ -44,4 +44,7 @@ if (!localStorage.getItem('name')) {
         location.reload();
       }
     });
+  window.onload = () => {
+    if (localStorage.getItem('admin')) enable(); 
+  }
 }

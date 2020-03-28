@@ -62,6 +62,7 @@ window.onload = () => {
         });
     }
     if (window.location.href.includes('requests')) {
+      let counter = 0;
       fetch(`${window.location.origin}/v1/offer`)
         .then((res) => res.json())
         .then((body) => {
@@ -78,7 +79,7 @@ window.onload = () => {
           document.querySelector('#quantity-input').value = searchQuantity;
           document.querySelector('#location-input').value = searchLocation;
 
-          document.getElementById('table').innerHTML = '';
+          document.querySelector('#table').innerHTML = '';
           body.offerList.reverse().forEach((offer) => {
             const { title, author, date, tags, id, authorid, description } = offer;
             if (searchItem || searchAuthor || searchDate || searchLocation || searchQuantity) {
@@ -89,6 +90,7 @@ window.onload = () => {
               if (searchLocation && stringSimilarity.compareTwoStrings(description, (searchLocation || description).split('+').join(' ')) < 0.3) return;
             }
             
+            if (counter >= 10) return;
             addEntry(
               esc(DOMPurify.sanitize(title)).substring(0, 30),
               esc(DOMPurify.sanitize(author)),
@@ -99,6 +101,7 @@ window.onload = () => {
               esc(DOMPurify.sanitize(authorid)),
               esc(DOMPurify.sanitize(id))
             );
+            ++counter;
           });
           offerList = body.offerList.reverse();
         });

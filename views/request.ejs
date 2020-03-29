@@ -53,6 +53,10 @@
       var disqus_config = function () {
         this.page.url = window.location.href; 
         this.page.identifier = (new URLSearchParams(window.location.search)).get('id');
+        this.callbacks.onNewComment = [function(comment) {
+          console.log(comment.id);
+          console.log(comment.text);
+        }];
       };
 
       (function() { // DON'T EDIT BELOW THIS LINE

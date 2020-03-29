@@ -40,7 +40,7 @@ window.onload = () => {
       if (staff) localStorage.setItem('admin', true);
       localStorage.setItem('member', true);
       document.cookie = 'member=true';
-      window.location = `${window.location.origin}/me`;
+      window.history.back();
     });
     return false;
   };

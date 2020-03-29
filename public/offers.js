@@ -33,21 +33,30 @@ window.onload = () => {
       }
     }
 
-    async function addEntry(title, author, date, tags, description, dom, authorid, id) {
+    async function addEntry(title, author, date, tags, description, dom, authorid, id, comments) {
       const close = `<button class="btn btn-danger hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
       const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${title.replace(/(.{17})..+/, '$1…')}</p></th>
         <td><a href="${window.location.origin}/@${author || undefined}">${author}</a></td>
-        <td><p>${date}</p></td>
-        <td><p>${tags}</p></td>
-        <td><a target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description
-          .split(' ')
-          .join('+')}">${description.replace(/(.{17})..+/, '$1…')}</a></td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
+              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments || 0}</span> More
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdown">
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Date</b>: ${date}</a>
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Quantity</b>: ${tags}</a>
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description
+                .split(' ')
+                .join('+')}"><b>Location</b>: ${description.replace(/(.{17})..+/, '$1…')}</a>
+            </div>
+          </div>
+        </td>
         <td>${
-          localStorage.getItem('name') === author || localStorage.getItem('admin')
+          (localStorage.getItem('name') === author || localStorage.getItem('admin')
             ? fulfill + close
-            : fulfill
+            : fulfill)
         }</td>
       </tr>`;
     }
@@ -81,7 +90,7 @@ window.onload = () => {
 
           document.querySelector('#table').innerHTML = '';
           body.offerList.reverse().forEach((offer) => {
-            const { title, author, date, tags, id, authorid, description } = offer;
+            const { title, author, date, tags, id, authorid, description, comments } = offer;
             if (searchItem || searchAuthor || searchDate || searchLocation || searchQuantity) {
               if (searchItem && stringSimilarity.compareTwoStrings(title, (searchItem || title).split('+').join(' ')) < 0.3) return;
               if (searchAuthor && stringSimilarity.compareTwoStrings(author, (searchAuthor || author).split('+').join(' ')) < 0.3) return;
@@ -89,7 +98,6 @@ window.onload = () => {
               if (searchQuantity && stringSimilarity.compareTwoStrings(tags, (searchQuantity || tags).split('+').join(' ')) < 0.3) return;
               if (searchLocation && stringSimilarity.compareTwoStrings(description, (searchLocation || description).split('+').join(' ')) < 0.3) return;
             }
-            
             if (counter >= 10) return;
             addEntry(
               esc(DOMPurify.sanitize(title)).substring(0, 30),
@@ -99,7 +107,8 @@ window.onload = () => {
               esc(DOMPurify.sanitize(description)),
               '#table',
               esc(DOMPurify.sanitize(authorid)),
-              esc(DOMPurify.sanitize(id))
+              esc(DOMPurify.sanitize(id)),
+              esc(DOMPurify.sanitize(comments || 0))
             );
             ++counter;
           });
@@ -130,6 +139,7 @@ window.onload = () => {
           description: esc(DOMPurify.sanitize(document.querySelector('#location').value)),
           email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
           date: new Date().toLocaleDateString('en-US'),
+          comments: 0,
           tags: esc(
             DOMPurify.sanitize(
               parseInt(document.querySelector('#tags').value.substring(0, 7)) > 1000000

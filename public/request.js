@@ -49,6 +49,7 @@ window.onload = () => {
         document.querySelector('#location').value = description;
         if (localStorage.getItem('name')) document.querySelector('#prof-link').value = `<a href="${window.location.origin}/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem('name')}</a>`;
         else document.querySelector('#prof-link').value = 'Login to get a profile link.';
+        document.querySelector('#prof-link-author').innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">${window.location.origin}/@${author}</a></b>`;
         emailTo = email;
         ID = id;
         offerList = body.offerList.reverse();

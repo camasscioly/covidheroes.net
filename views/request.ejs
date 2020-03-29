@@ -2,6 +2,7 @@
     <div class="container"></div>
     <div class="container mt-2">
       <h1 id="reqid"></h1>
+      <p id="prof-link-author"></p>
       <form id="req">
         <div class="form-group">
           <label for="item">Item</label>
@@ -56,6 +57,7 @@
         this.callbacks.onNewComment = [function(comment) {
           console.log(comment.id);
           console.log(comment.text);
+          fetch(`${window.location.origin}/v1/offer/increment?id=${ID}`)
         }];
       };
 

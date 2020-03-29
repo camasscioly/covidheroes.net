@@ -81,6 +81,10 @@ router.get('/terms', async (req, res) => {
   renderFile(req, res, 'terms');
 });
 
+router.get('/team', async (req, res) => {
+  renderFile(req, res, 'team');
+});
+
 router.get('/@:username', async (req, res) => {
   const name = req.params.username;
   const userList = (await keyv.get('user-list')) || [];

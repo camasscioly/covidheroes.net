@@ -113,10 +113,31 @@ router.post('/offer', async (req, res) => {
     author: req.body.author,
     authorid: req.body.authorid,
     email: req.body.email,
+    comments: 0,
     id: makeID(15),
   });
   await keyv.set('offer-list', offerList);
   await keyv.set('offer-count', counter);
+  res.json(offerList);
+});
+
+router.get('/offer/increment', async (req, res) => {
+  let offerList = (await keyv.get('offer-list')) || [];
+  let out = offerList.find(({ id }) => id === req.query.id);
+  offerList.splice(offerList.indexOf(out), 1);
+  console.log(offerList);
+  offerList.push({
+    title: out.title,
+    description: out.description || null,
+    date: out.date,
+    tags: out.tags,
+    author: out.author,
+    authorid: out.authorid,
+    email: out.email,
+    comments: out.comments + 1 || 0,
+    id: out.id,
+  });
+  await keyv.set('offer-list', offerList);
   res.json(offerList);
 });
 

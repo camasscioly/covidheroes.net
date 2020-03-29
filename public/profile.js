@@ -54,6 +54,9 @@ window.onload = () => {
       .then((res) => res.json())
       .then((body) => {
         let { email, name, location, rep, phone, staff } = body;
+        let temp = name;
+        if (phone.toLowerCase() === 'not configured') phone = '';
+        if (location.toLowerCase() === 'not configured') location = '';
         document.querySelector('#name').value = name;
         document.querySelector('#rep').value = rep.length;
         document.querySelector('#email').value = email;
@@ -62,6 +65,7 @@ window.onload = () => {
         name = esc(DOMPurify.sanitize(name));
         if (staff) name = `${name} <span class="badge badge-outline-primary">STAFF</span>`;
         document.querySelector('#prof-head').innerHTML = `@${name}`;
+        name = temp;
         document.querySelector('#prof-link').innerHTML = `<b>Profile: <a href="${window.location.origin}/@${name}">${window.location.origin}/@${name}</a></b>`;
       })
       .catch((err) => {

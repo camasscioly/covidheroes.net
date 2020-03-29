@@ -41,6 +41,9 @@ window.onload = () => {
         const { title, author, date, tags, email, id, description } = offer;
         document.querySelector('#item').value = title;
         document.querySelector('#author').value = author;
+        document.querySelector('#author').onclick = () => {
+          window.location = `${window.location.origin}/@${author}`
+        }
         document.querySelector('#date').value = date;
         document.querySelector('#quantity').value = tags;
         document.querySelector('#location').value = description;

@@ -61,7 +61,8 @@ window.onload = () => {
         document.querySelector('#location').value = location;
         name = esc(DOMPurify.sanitize(name));
         if (staff) name = `${name} <span class="badge badge-outline-primary">STAFF</span>`;
-        document.querySelector('#prof-head').innerHTML = name;
+        document.querySelector('#prof-head').innerHTML = `@${name}`;
+        document.querySelector('#prof-link').innerHTML = `<b>Profile: <a href="${window.location.origin}/@${name}">${window.location.origin}/@${name}</a></b>`;
       })
       .catch((err) => {
         alert('Oops! Something went wrong...');

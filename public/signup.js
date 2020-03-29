@@ -50,7 +50,7 @@ window.onload = () => {
       localStorage.setItem('id', data)
       localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50));
       document.cookie = 'member=true';
-      window.location = `${window.location.origin}/me`;
+      window.history.back();
     });
     return false;
   };

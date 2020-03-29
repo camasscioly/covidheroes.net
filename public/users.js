@@ -29,11 +29,12 @@ window.onload = () => {
 
     async function addEntry(user, id, rep, dom, staff) {
       let origUser = user;
+      if (localStorage.getItem('id') === id) user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
       if (staff) user = `${user} <span class="badge badge-outline-primary">STAFF</span>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
         <td>${id}</td>
-        <td>${rep}</td>
+        <td><b><i class="fas fa-sort-up"></i>${rep}</b></td>
       </tr>`;
     }
 
@@ -50,11 +51,15 @@ window.onload = () => {
             totals.push([ user[0], user[1], String(rep.length), staff || false ]);
             if (users.length === totals.length) {
               document.getElementById('table').innerHTML = '';
-              totals.sort((a, b) => a[2] - b[2]).reverse().slice(0, 10).forEach((user) => {
+              totals.sort((a, b) => {
+                return !a[0].localeCompare(b[0]);
+              }).sort((a, b) => {
+                return a[2] - b[2];
+              }).reverse().slice(0, 10).forEach((user) => {
                 addEntry(
                   esc(DOMPurify.sanitize(user[0])),
                   esc(DOMPurify.sanitize(user[1])),
-                  esc(DOMPurify.sanitize(`+${user[2]}`)),
+                  esc(DOMPurify.sanitize(user[2])),
                   '#table',
                   user[3]
                 );

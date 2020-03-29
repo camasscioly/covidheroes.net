@@ -65,11 +65,11 @@ router.get('/new', toLogin, async (req, res) => {
   renderFile(req, res, 'new');
 });
 
-router.get('/requests', toLogin, async (req, res) => {
+router.get('/requests', async (req, res) => {
   renderFile(req, res, 'offers');
 });
 
-router.get('/requests/open', toLogin, async (req, res) => {
+router.get('/requests/open', async (req, res) => {
   renderFile(req, res, 'request');
 });
 

@@ -5,7 +5,7 @@ const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
-  if (localStorage.getItem('name')) {
+  if (true) {
     let offerList;
     killOffer = (id) => {
       postData(`${base}offer/remove`, {
@@ -44,7 +44,8 @@ window.onload = () => {
         document.querySelector('#date').value = date;
         document.querySelector('#quantity').value = tags;
         document.querySelector('#location').value = description;
-        document.querySelector('#prof-link').value = `<a href="${window.location.origin}/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem('name')}</a>`;
+        if (localStorage.getItem('name')) document.querySelector('#prof-link').value = `<a href="${window.location.origin}/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem('name')}</a>`;
+        else document.querySelector('#prof-link').value = 'Login to get a profile link.';
         emailTo = email;
         ID = id;
         offerList = body.offerList.reverse();

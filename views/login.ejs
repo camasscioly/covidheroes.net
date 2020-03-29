@@ -2,72 +2,9 @@
     <div class="container"></div>
     <div class="container mt-2">
       <h1>Login</h1>
-      <p>Don't have an account? <a href="/signup">Join</a> here</p>
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="397041505570-jmovr66qb9q481lplk2n9oqq1h80jgt9.apps.googleusercontent.com">
+      <p>Don't have an account? <a href="/signup">Join</a> here.</p>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
      <body>
-      <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div><br> -->
-      <script>
-        // const base = `${window.location.origin}/v1/`;
-
-        // async function postData(url = '', data = {}) {
-        //   // Default options are marked with *
-        //   const response = await fetch(url, {
-        //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        //     mode: 'cors', // no-cors, *cors, same-origin
-        //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        //     credentials: 'same-origin', // include, *same-origin, omit
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //       // 'Content-Type': 'application/x-www-form-urlencoded',
-        //     },
-        //     redirect: 'follow', // manual, *follow, error
-        //     referrerPolicy: 'no-referrer', // no-referrer, *client
-        //     body: JSON.stringify(data), // body data type must match "Content-Type" header
-        //   });
-        //   try {
-        //     return await response.text(); // parses JSON response into native JavaScript objects
-        //   } catch (err) {
-        //     alert('Invalid Login');
-        //   }
-        // }
-
-        // function onSignIn(googleUser) {
-        //   if (localStorage.getItem('id')) return;
-        //   const profile = googleUser.getBasicProfile();
-        //   let suffix = makeid(5);
-        //   postData(`${base}signup`, {
-        //     name: `${profile.getName()}-${suffix}`,
-        //     email: profile.getEmail(),
-        //     phone: null,
-        //     location: null,
-        //     password: profile.getId(),
-        //   }).then((data) => {
-        //     if (data === 'Already Registered') return alert('This username is already taken.');
-        //     postData(`${base}login`, {
-        //       name: `${profile.getName()}-${suffix}`,
-        //       password: profile.getId(),
-        //     }).then((message) => {
-        //       fetch(`${base}users`)
-        //         .then((res) => res.json())
-        //         .then((body) => {
-        //           const { name, email, phone, location, password, id } = message;
-        //           const block = body.users.find(user => user[0] === `${profile.getName()}-${suffix}`);
-        //           localStorage.setItem('name', `${profile.getName()}-${suffix}`);
-        //           localStorage.setItem('email', profile.getEmail());
-        //           localStorage.setItem('phone', phone);
-        //           localStorage.setItem('location', location);
-        //           localStorage.setItem('password', profile.getId());
-        //           localStorage.setItem('id', block[1]);
-        //           localStorage.setItem('member', true);
-        //           localStorage.setItem('google', true);
-        //           window.location = `${window.location.origin}/me`;
-        //         });
-        //     });
-        //   });
-        // }
-      </script>
       <form id="login">
         <div class="form-group">
           <label for="name">Username</label>
@@ -78,7 +15,6 @@
           <label for="password">Password</label>
           <input type="password" class="form-control" id="password" maxlength="40" placeholder="Password" required>
         </div>
-        <!-- <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br> -->
         <button type="submit" class="btn btn-primary" id="submit"><i class="fas fa-sign-in-alt" style="color: #fff !important"></i> Login</button>
       </form>
     </div>

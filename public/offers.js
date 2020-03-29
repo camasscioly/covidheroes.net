@@ -3,7 +3,7 @@ const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
-  if (localStorage.getItem('name')) {
+  if (true) {
     let offerList;
     killOffer = (id) => {
       postData(`${base}offer/remove`, {

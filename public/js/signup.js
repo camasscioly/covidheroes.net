@@ -46,16 +46,26 @@ window.onload = () => {
       alert('Invalid Email');
       return false;
     }
+    if (
+      document.querySelector('#password').value !==
+      document.querySelector('#password-confirm').value
+    ) {
+      alert('Password does not match confirmation');
+      return false;
+    }
     postData(`${base}signup`, {
       name: esc(DOMPurify.sanitize(document.querySelector('#name').value))
         .substring(0, 50)
         .toLowerCase()
         .replace(/[^a-z0-9]/gi, '')
-        .replace(/\s/g, ''),
+        .replace(/\s/g, '')
+        .trim(),
       email: esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50),
       phone: 'Not Configured',
       location: 'Not Configured',
-      password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
+      password: esc(DOMPurify.sanitize(document.querySelector('#password').value))
+        .substring(0, 50)
+        .trim(),
     }).then((data) => {
       if (data === 'Already Registered') return alert('This username is already taken.');
       localStorage.setItem(

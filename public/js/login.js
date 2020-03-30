@@ -27,11 +27,11 @@ window.onload = () => {
 
   document.querySelector('#login').onsubmit = () => {
     postData(`${base}login`, {
-      name: document.querySelector('#name').value.toLowerCase(),
-      password: document.querySelector('#password').value,
+      name: document.querySelector('#name').value.toLowerCase().trim(),
+      password: document.querySelector('#password').value.trim(),
     }).then((data) => {
       const { name, email, phone, location, password, id, staff } = data;
-      localStorage.setItem('name', esc(DOMPurify.sanitize(name.trim())));
+      localStorage.setItem('name', esc(DOMPurify.sanitize(name)).trim());
       localStorage.setItem('email', esc(DOMPurify.sanitize(email)));
       localStorage.setItem('phone', esc(DOMPurify.sanitize(phone)));
       localStorage.setItem('location', esc(DOMPurify.sanitize(location)));

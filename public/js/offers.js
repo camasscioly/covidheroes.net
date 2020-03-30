@@ -69,10 +69,15 @@ window.onload = () => {
         .then((body) => {
           document.querySelector(
             '#counter'
-          ).innerHTML = `Over <b>${body.counter}</b> and counting requests!`;
+          ).innerHTML = `Over <a>${body.counter}</a> and counting requests!`;
         });
     }
     if (window.location.href.includes('requests')) {
+      fetch(`${base}users`)
+        .then((res) => res.json())
+        .then((body) => {
+          document.querySelector('#user-count').innerText = body.users.length;
+        });
       let counter = 0;
       fetch(`${window.location.origin}/v1/offer`)
         .then((res) => res.json())

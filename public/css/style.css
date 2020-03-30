@@ -354,3 +354,37 @@ input:read-only:focus {
   background: rgba(3, 3, 3, 0.15) !important;
   border-bottom: 2px solid #6c63ff !important;
 }
+
+.underline {
+  transition: 150ms;
+  border-bottom: 1px inset transparent;
+}
+
+.underline:hover {
+  border-color: #6c63ff;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.announcement .message {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 0 5px;
+}
+
+.announcement {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 5px 4px;
+  font-size: 14px;
+  line-height: 17px;
+  color: #fff;
+  text-decoration: none;
+}

@@ -31,11 +31,11 @@ router.post('/signup', async (req, res) => {
 
 router.post('/update', async (req, res) => {
   try {
-    const { name, email, phone, location, password, id } = req.body;
+    const { name, email, phone, location, password, id, original } = req.body;
     const userList = (await keyv.get('user-list')) || [];
     const out = userList.find((block) => block[1] === id);
     const checkIllegal = userList.find((block) => block[0] === name) || 0;
-    if (checkIllegal) return res.send('Already Registered');
+    if (name !== original) if (checkIllegal) return res.send('Already Registered');
     userList.splice(userList.indexOf(out), 1);
     userList.push([name, id]);
     keyv.set('user-list', userList);

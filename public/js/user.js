@@ -107,6 +107,7 @@ window.onload = async () => {
       ),
       password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
       id: localStorage.getItem('id'),
+      original: localStorage.getItem('name')
     }).then((data) => {
       if (data === 'Error!') return alert('Oops! Something went wrong.');
       if (data === 'Already Registered') return alert('Username already taken');

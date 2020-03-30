@@ -42,7 +42,7 @@ window.onload = () => {
         <td>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
-              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments || 0}</span> More
+              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments || 0}</span> Info
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdown">
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Date</b>: ${date}</a>

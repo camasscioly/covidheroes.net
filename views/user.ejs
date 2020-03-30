@@ -1,33 +1,34 @@
 <%- include('blocks/header') %>
-    <div class="container mt-2">
-      <h1>Your Profile</h1>
-      <form id="submit">
-        <div class="form-group">
-          <label for="name">Username</label>
-          <input type="text" class="form-control" id="name" maxlength="20" value="Loading...">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" maxlength="50" value="Loading...">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="text" class="form-control" id="phone" maxlength="15" value="Loading...">
-        </div>
-        <div class="form-group">
-          <label for="location">Location</label>
-          <input type="text" class="form-control" id="location" maxlength="30" value="Loading...">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="text" class="form-control" id="password" maxlength="20" value="Loading...">
-        </div>
-        <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
-        <button type="submit" class="btn btn-primary" id="save" disabled><i class="fas fa-save" style="color: #fff !important"></i> Save Profile</button>
-      </form>
+<div class="container mt-2">
+  <h1>Your Profile</h1>
+  <form id="submit">
+    <div class="form-group">
+      <label for="name">Username</label>
+      <input type="text" class="form-control" id="name" maxlength="20" value="Loading...">
     </div>
-  </div><br>
-  <%- include('blocks/footer') %>
-  <script src="./user.js" defer></script>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" maxlength="50" value="Loading...">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="text" class="form-control" id="phone" maxlength="15" value="Loading...">
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" class="form-control" id="location" maxlength="30" value="Loading...">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="text" class="form-control" id="password" maxlength="20" value="Loading...">
+    </div>
+    <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
+    <button type="submit" class="btn btn-primary" id="save" disabled><i class="fas fa-save" style="color: #fff !important"></i> Save Profile</button>
+  </form>
+</div>
+</div><br>
+<%- include('blocks/footer') %>
+<script src="./js/user.js" defer></script>
 </body>
+
 </html>

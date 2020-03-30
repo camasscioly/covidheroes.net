@@ -1,3 +1,5 @@
+const urlParams = new URLSearchParams(window.location.search);
+let range = urlParams.get('range') || 0;
 const matchHtmlRegExp = /["'&<>]/;
 let count = 0;
 
@@ -60,7 +62,7 @@ window.onload = () => {
                   return a[2] - b[2];
                 })
                 .reverse()
-                .slice(0, 10)
+                .slice(range, range + 10)
                 .forEach((user) => {
                   addEntry(
                     esc(DOMPurify.sanitize(user[0])),
@@ -72,6 +74,7 @@ window.onload = () => {
                 });
             }
           } catch (err) {
+            // return alert('Oops! Something went wrong.');
             return;
           }
         });

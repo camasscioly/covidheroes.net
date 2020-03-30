@@ -29,7 +29,7 @@ app.use(express.static('public'));
 app.use(
   '/v1',
   require('express-rate-limit')({
-    windowMs: 10000,
+    windowMs: 1000,
     max: 50,
     headers: true,
     handler: (_req, res) => {

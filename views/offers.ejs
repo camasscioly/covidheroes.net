@@ -5,11 +5,19 @@
       <p style="font-size: 120%;">If you are in need of resources, <a href="/new">create a new request</a>.</p>
       <form id="search" onsubmit="search(); return false;">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="item-input" placeholder="Item" maxlength="30">&nbsp;&nbsp;
-          <input type="text" class="form-control" id="author-input" placeholder="Author" maxlength="20">&nbsp;&nbsp;
-          <input type="text" class="form-control" id="date-input" placeholder="Date" maxlength="15">&nbsp;&nbsp;
-          <input type="text" class="form-control" id="quantity-input" placeholder="Quantity" maxlength="10">&nbsp;&nbsp;
-          <input type="text" class="form-control" id="location-input" placeholder="Location" maxlength="40">
+          <input type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">&nbsp;&nbsp;
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
+              Setting
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdown">
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'item'; document.querySelector('#search-input').placeholder = 'Search Item'">Item</a>
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'author'; document.querySelector('#search-input').placeholder = 'Search Author'">Author</a>
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'date'; document.querySelector('#search-input').placeholder = 'Search Date'">Date</a>
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'quantity'; document.querySelector('#search-input').placeholder = 'Search Quantity'">Quantity</a>
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'location'; document.querySelector('#search-input').placeholder = 'Search Location'">Location</a>
+            </div>
+          </div>
         </div>
         <button type="submit" class="btn btn-primary" onclick="search()"><i class="fas fa-search" style="color: #fff !important"></i> Search</button>
         <button type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="window.location = `${location.origin}/requests`"><i class="fas fa-trash"></i> Reset</button><br>

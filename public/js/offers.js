@@ -1,4 +1,5 @@
 let killOffer;
+let searchSetting = 'item';
 const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
@@ -38,7 +39,7 @@ window.onload = () => {
       const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${title.replace(/(.{17})..+/, '$1…')}</p></th>
-        <td><a href="${window.location.origin}/@${author || undefined}">${author}</a></td>
+        <td><a href="${window.location.origin}/profile?id=${authorid}">${author}</a></td>
         <td>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
@@ -82,12 +83,9 @@ window.onload = () => {
           const searchDate = urlParams.get('date');
           const searchQuantity = urlParams.get('quantity');
           const searchLocation = urlParams.get('location');
+          searchSetting = urlParams.get('setting');
 
-          document.querySelector('#item-input').value = searchItem;
-          document.querySelector('#author-input').value = searchAuthor;
-          document.querySelector('#date-input').value = searchDate;
-          document.querySelector('#quantity-input').value = searchQuantity;
-          document.querySelector('#location-input').value = searchLocation;
+          document.querySelector('#search-input').value = searchItem || searchAuthor || searchDate || searchQuantity || searchLocation;
 
           document.querySelector('#table').innerHTML = '';
           body.offerList.reverse().forEach((offer) => {
@@ -242,12 +240,8 @@ function enable() {
 }
 
 function search() {
-  window.location = `${window.location.origin}/requests?item=${document.querySelector('#item-input')
-    .value || ''}&author=${document.querySelector('#author-input').value}&date=${
-    document.querySelector('#date-input').value
-  }&quantity=${document.querySelector('#quantity-input').value}&location=${
-    document.querySelector('#location-input').value
-  }`;
+  window.location = `${window.location.origin}/requests?${searchSetting}=${document.querySelector('#search-input')
+    .value || ''}&setting=${searchSetting}`;
 }
 
 /*document.querySelector('#item-input').addEventListener('change', (e) => {

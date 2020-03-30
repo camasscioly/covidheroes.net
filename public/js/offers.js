@@ -47,7 +47,7 @@ window.onload = () => {
             <div class="dropdown-menu" aria-labelledby="dropdown">
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Date</b>: ${date}</a>
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Quantity</b>: ${tags}</a>
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description
+              <a style="background: #fff !important;" class="hover dropdown-item" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description
                 .split(' ')
                 .join('+')}"><b>Location</b>: ${description.replace(/(.{17})..+/, '$1…')}</a>
             </div>

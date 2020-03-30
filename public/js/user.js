@@ -84,6 +84,7 @@ window.onload = async () => {
       id: localStorage.getItem('id')
     }).then((data) => {
       if (data === 'Error!') return alert('Oops! Something went wrong.');
+      if (data === 'Already Registered') return alert('Username already taken');
       localStorage.setItem('name', esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, ''));
       localStorage.setItem('email', esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50));
       localStorage.setItem('phone', esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50));

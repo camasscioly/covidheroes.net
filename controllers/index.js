@@ -1,7 +1,5 @@
 const { Router } = require('express');
 const url = require('url');
-const cmd = require('node-cmd');
-const crypto = require('crypto');
 const renderFile = require('./../middleware/renderFile.js');
 const toLogin = require('./../middleware/toLogin.js');
 const toProfile = require('./../middleware/toProfile.js');

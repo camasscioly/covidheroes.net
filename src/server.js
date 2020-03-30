@@ -5,7 +5,6 @@ const Keyv = require('keyv');
  
 const { join } = require('path');
 
-const v2Routes = require('./../controllers/v2.js');
 const v1Routes = require('./../controllers/v1.js');
 const rootRoutes = require('./../controllers/index.js');
 
@@ -28,7 +27,7 @@ app.use(require('morgan')('combined'));
 app.use(express.static('public'));
 
 app.use(
-  '/v2',
+  '/v1',
   require('express-rate-limit')({
     windowMs: 10000,
     max: 50,
@@ -39,7 +38,6 @@ app.use(
   })
 );
 
-app.use('/v2', v2Routes);
 app.use('/v1', v1Routes);
 app.use(rootRoutes);
 

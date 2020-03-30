@@ -36,20 +36,27 @@ window.onload = () => {
       .then((body) => {
         const urlParams = new URLSearchParams(window.location.search);
         const reqId = urlParams.get('id');
-        const offer = body.offerList.find(offer => offer.id === reqId);
+        const offer = body.offerList.find((offer) => offer.id === reqId);
         document.querySelector('#reqid').innerText = `Request: #${esc(DOMPurify.sanitize(reqId))}`;
         const { title, author, date, tags, email, id, description } = offer;
         document.querySelector('#item').value = title;
         document.querySelector('#author').value = author;
         document.querySelector('#author').onclick = () => {
-          window.location = `${window.location.origin}/@${author}`
-        }
+          window.location = `${window.location.origin}/@${author}`;
+        };
         document.querySelector('#date').value = date;
         document.querySelector('#quantity').value = tags;
         document.querySelector('#location').value = description;
-        if (localStorage.getItem('name')) document.querySelector('#prof-link').value = `<a href="${window.location.origin}/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem('name')}</a>`;
+        if (localStorage.getItem('name'))
+          document.querySelector('#prof-link').value = `<a href="${
+            window.location.origin
+          }/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem(
+            'name'
+          )}</a>`;
         else document.querySelector('#prof-link').value = 'Login to get a profile link.';
-        document.querySelector('#prof-link-author').innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">${window.location.origin}/@${author}</a></b>`;
+        document.querySelector(
+          '#prof-link-author'
+        ).innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">${window.location.origin}/@${author}</a></b>`;
         emailTo = email;
         ID = id;
         offerList = body.offerList.reverse();
@@ -65,7 +72,7 @@ function esc(string) {
   const match = matchHtmlRegExp.exec(str);
 
   if (!match) {
-    return str
+    return str;
   }
 
   let escape;
@@ -76,35 +83,33 @@ function esc(string) {
   for (index = match.index; index < str.length; index++) {
     switch (str.charCodeAt(index)) {
       case 34: // "
-        escape = '&quot;'
-        break
+        escape = '&quot;';
+        break;
       case 38: // &
-        escape = '&amp;'
-        break
+        escape = '&amp;';
+        break;
       case 39: // '
-        escape = '&#39;'
-        break
+        escape = '&#39;';
+        break;
       case 60: // <
-        escape = '&lt;'
-        break
+        escape = '&lt;';
+        break;
       case 62: // >
-        escape = '&gt;'
-        break
+        escape = '&gt;';
+        break;
       default:
-        continue
+        continue;
     }
 
     if (lastIndex !== index) {
-      html += str.substring(lastIndex, index)
+      html += str.substring(lastIndex, index);
     }
 
-    lastIndex = index + 1
-    html += escape
+    lastIndex = index + 1;
+    html += escape;
   }
 
-  return lastIndex !== index
-    ? html + str.substring(lastIndex, index)
-    : html
+  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
 }
 
 function enable() {

@@ -21,7 +21,7 @@ window.onload = () => {
     try {
       return await response.json(); // parses JSON response into native JavaScript objects
     } catch (err) {
-      alert('Invalid Login')
+      alert('Invalid Login');
     }
   }
 
@@ -35,7 +35,10 @@ window.onload = () => {
       localStorage.setItem('email', esc(DOMPurify.sanitize(email)));
       localStorage.setItem('phone', esc(DOMPurify.sanitize(phone)));
       localStorage.setItem('location', esc(DOMPurify.sanitize(location)));
-      localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)));
+      localStorage.setItem(
+        'password',
+        esc(DOMPurify.sanitize(document.querySelector('#password').value))
+      );
       localStorage.setItem('id', esc(DOMPurify.sanitize(id)));
       if (staff) localStorage.setItem('admin', true);
       localStorage.setItem('member', true);
@@ -51,7 +54,7 @@ function esc(string) {
   const match = matchHtmlRegExp.exec(str);
 
   if (!match) {
-    return str
+    return str;
   }
 
   let escape;
@@ -62,35 +65,33 @@ function esc(string) {
   for (index = match.index; index < str.length; index++) {
     switch (str.charCodeAt(index)) {
       case 34: // "
-        escape = '&quot;'
-        break
+        escape = '&quot;';
+        break;
       case 38: // &
-        escape = '&amp;'
-        break
+        escape = '&amp;';
+        break;
       case 39: // '
-        escape = '&#39;'
-        break
+        escape = '&#39;';
+        break;
       case 60: // <
-        escape = '&lt;'
-        break
+        escape = '&lt;';
+        break;
       case 62: // >
-        escape = '&gt;'
-        break
+        escape = '&gt;';
+        break;
       default:
-        continue
+        continue;
     }
 
     if (lastIndex !== index) {
-      html += str.substring(lastIndex, index)
+      html += str.substring(lastIndex, index);
     }
 
-    lastIndex = index + 1
-    html += escape
+    lastIndex = index + 1;
+    html += escape;
   }
 
-  return lastIndex !== index
-    ? html + str.substring(lastIndex, index)
-    : html
+  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
 }
 
 function enable() {
@@ -106,4 +107,4 @@ function makeid(length) {
   }
 
   return text;
-};
+}

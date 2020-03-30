@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const bcrypt = require('bcrypt');
-const auth = require('./../middleware/auth.js');
 const makeID = require('./../middleware/makeID.js');
 const Keyv = require('keyv');
 const keyv = new Keyv(process.env.DB_URL);

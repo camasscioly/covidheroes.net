@@ -42,7 +42,8 @@ window.onload = () => {
         <td>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
-              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments || 0}</span> Info
+              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments ||
+                0}</span> Info
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdown">
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Date</b>: ${date}</a>
@@ -54,9 +55,9 @@ window.onload = () => {
           </div>
         </td>
         <td>${
-          (localStorage.getItem('name') === author || localStorage.getItem('admin')
+          localStorage.getItem('name') === author || localStorage.getItem('admin')
             ? fulfill + close
-            : fulfill)
+            : fulfill
         }</td>
       </tr>`;
     }
@@ -92,11 +93,46 @@ window.onload = () => {
           body.offerList.reverse().forEach((offer) => {
             const { title, author, date, tags, id, authorid, description, comments } = offer;
             if (searchItem || searchAuthor || searchDate || searchLocation || searchQuantity) {
-              if (searchItem && stringSimilarity.compareTwoStrings(title, (searchItem || title).split('+').join(' ')) < 0.3) return;
-              if (searchAuthor && stringSimilarity.compareTwoStrings(author, (searchAuthor || author).split('+').join(' ')) < 0.3) return;
-              if (searchDate && stringSimilarity.compareTwoStrings(date, (searchDate || date).split('+').join(' ')) < 0.3) return;
-              if (searchQuantity && stringSimilarity.compareTwoStrings(tags, (searchQuantity || tags).split('+').join(' ')) < 0.3) return;
-              if (searchLocation && stringSimilarity.compareTwoStrings(description, (searchLocation || description).split('+').join(' ')) < 0.3) return;
+              if (
+                searchItem &&
+                stringSimilarity.compareTwoStrings(
+                  title,
+                  (searchItem || title).split('+').join(' ')
+                ) < 0.3
+              )
+                return;
+              if (
+                searchAuthor &&
+                stringSimilarity.compareTwoStrings(
+                  author,
+                  (searchAuthor || author).split('+').join(' ')
+                ) < 0.3
+              )
+                return;
+              if (
+                searchDate &&
+                stringSimilarity.compareTwoStrings(
+                  date,
+                  (searchDate || date).split('+').join(' ')
+                ) < 0.3
+              )
+                return;
+              if (
+                searchQuantity &&
+                stringSimilarity.compareTwoStrings(
+                  tags,
+                  (searchQuantity || tags).split('+').join(' ')
+                ) < 0.3
+              )
+                return;
+              if (
+                searchLocation &&
+                stringSimilarity.compareTwoStrings(
+                  description,
+                  (searchLocation || description).split('+').join(' ')
+                ) < 0.3
+              )
+                return;
             }
             if (counter >= 10) return;
             addEntry(
@@ -206,7 +242,12 @@ function enable() {
 }
 
 function search() {
-  window.location = `${window.location.origin}/requests?item=${document.querySelector('#item-input').value || ''}&author=${document.querySelector('#author-input').value}&date=${document.querySelector('#date-input').value}&quantity=${document.querySelector('#quantity-input').value}&location=${document.querySelector('#location-input').value}`;
+  window.location = `${window.location.origin}/requests?item=${document.querySelector('#item-input')
+    .value || ''}&author=${document.querySelector('#author-input').value}&date=${
+    document.querySelector('#date-input').value
+  }&quantity=${document.querySelector('#quantity-input').value}&location=${
+    document.querySelector('#location-input').value
+  }`;
 }
 
 /*document.querySelector('#item-input').addEventListener('change', (e) => {

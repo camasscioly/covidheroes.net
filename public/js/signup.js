@@ -27,28 +27,57 @@ window.onload = () => {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
     }
-    if (esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, '') !== esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)) {
+    if (
+      esc(DOMPurify.sanitize(document.querySelector('#name').value))
+        .substring(0, 50)
+        .toLowerCase()
+        .replace(/[^a-z0-9]/gi, '')
+        .replace(/\s/g, '') !==
+      esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)
+    ) {
       alert('Username must be alphanumeric, lowercase, and contain no spaces.');
       return false;
     }
-    if (!validateEmail(esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50))) {
+    if (
+      !validateEmail(
+        esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
+      )
+    ) {
       alert('Invalid Email');
       return false;
     }
     postData(`${base}signup`, {
-      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, ''),
+      name: esc(DOMPurify.sanitize(document.querySelector('#name').value))
+        .substring(0, 50)
+        .toLowerCase()
+        .replace(/[^a-z0-9]/gi, '')
+        .replace(/\s/g, ''),
       email: esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50),
       phone: 'Not Configured',
       location: 'Not Configured',
       password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
     }).then((data) => {
       if (data === 'Already Registered') return alert('This username is already taken.');
-      localStorage.setItem('name', esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, '').trim());
-      localStorage.setItem('email', esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50));
+      localStorage.setItem(
+        'name',
+        esc(DOMPurify.sanitize(document.querySelector('#name').value))
+          .substring(0, 50)
+          .toLowerCase()
+          .replace(/[^a-z0-9]/gi, '')
+          .replace(/\s/g, '')
+          .trim()
+      );
+      localStorage.setItem(
+        'email',
+        esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
+      );
       localStorage.setItem('phone', 'Not Configured');
       localStorage.setItem('location', 'Not Configured');
-      localStorage.setItem('id', data)
-      localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50));
+      localStorage.setItem('id', data);
+      localStorage.setItem(
+        'password',
+        esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
+      );
       document.cookie = 'member=true';
       window.history.back();
     });
@@ -61,7 +90,7 @@ function esc(string) {
   const match = matchHtmlRegExp.exec(str);
 
   if (!match) {
-    return str
+    return str;
   }
 
   let escape;
@@ -72,35 +101,33 @@ function esc(string) {
   for (index = match.index; index < str.length; index++) {
     switch (str.charCodeAt(index)) {
       case 34: // "
-        escape = '&quot;'
-        break
+        escape = '&quot;';
+        break;
       case 38: // &
-        escape = '&amp;'
-        break
+        escape = '&amp;';
+        break;
       case 39: // '
-        escape = '&#39;'
-        break
+        escape = '&#39;';
+        break;
       case 60: // <
-        escape = '&lt;'
-        break
+        escape = '&lt;';
+        break;
       case 62: // >
-        escape = '&gt;'
-        break
+        escape = '&gt;';
+        break;
       default:
-        continue
+        continue;
     }
 
     if (lastIndex !== index) {
-      html += str.substring(lastIndex, index)
+      html += str.substring(lastIndex, index);
     }
 
-    lastIndex = index + 1
-    html += escape
+    lastIndex = index + 1;
+    html += escape;
   }
 
-  return lastIndex !== index
-    ? html + str.substring(lastIndex, index)
-    : html
+  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
 }
 
 function enable() {

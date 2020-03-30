@@ -4,7 +4,6 @@ let count = 0;
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
   if (localStorage.getItem('name')) {
-
     async function postData(url = '', data = {}) {
       // Default options are marked with *
       const response = await fetch(url, {
@@ -29,7 +28,8 @@ window.onload = () => {
 
     async function addEntry(user, id, rep, dom, staff) {
       let origUser = user;
-      if (localStorage.getItem('id') === id) user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
+      if (localStorage.getItem('id') === id)
+        user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
       if (staff) user = `${user} <span class="badge badge-outline-primary">STAFF</span>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
@@ -44,28 +44,34 @@ window.onload = () => {
         count = body.users.length + 1;
         let users = body.users;
         let totals = [];
-        users.forEach(async user => {
+        users.forEach(async (user) => {
           try {
-            const { rep, staff } = await fetch(`${base}userdata?id=${user[1]}`)
-              .then((res) => res.json())
-            totals.push([ user[0], user[1], String(rep.length), staff || false ]);
+            const { rep, staff } = await fetch(`${base}userdata?id=${user[1]}`).then((res) =>
+              res.json()
+            );
+            totals.push([user[0], user[1], String(rep.length), staff || false]);
             if (users.length === totals.length) {
               document.getElementById('table').innerHTML = '';
-              totals.sort((a, b) => {
-                return !a[0].localeCompare(b[0]);
-              }).sort((a, b) => {
-                return a[2] - b[2];
-              }).reverse().slice(0, 10).forEach((user) => {
-                addEntry(
-                  esc(DOMPurify.sanitize(user[0])),
-                  esc(DOMPurify.sanitize(user[1])),
-                  esc(DOMPurify.sanitize(user[2])),
-                  '#table',
-                  user[3]
-                );
-              });
+              totals
+                .sort((a, b) => {
+                  return !a[0].localeCompare(b[0]);
+                })
+                .sort((a, b) => {
+                  return a[2] - b[2];
+                })
+                .reverse()
+                .slice(0, 10)
+                .forEach((user) => {
+                  addEntry(
+                    esc(DOMPurify.sanitize(user[0])),
+                    esc(DOMPurify.sanitize(user[1])),
+                    esc(DOMPurify.sanitize(user[2])),
+                    '#table',
+                    user[3]
+                  );
+                });
             }
-          } catch(err) {
+          } catch (err) {
             return;
           }
         });
@@ -80,7 +86,7 @@ function esc(string) {
   const match = matchHtmlRegExp.exec(str);
 
   if (!match) {
-    return str
+    return str;
   }
 
   let escape;
@@ -91,35 +97,33 @@ function esc(string) {
   for (index = match.index; index < str.length; index++) {
     switch (str.charCodeAt(index)) {
       case 34: // "
-        escape = '&quot;'
-        break
+        escape = '&quot;';
+        break;
       case 38: // &
-        escape = '&amp;'
-        break
+        escape = '&amp;';
+        break;
       case 39: // '
-        escape = '&#39;'
-        break
+        escape = '&#39;';
+        break;
       case 60: // <
-        escape = '&lt;'
-        break
+        escape = '&lt;';
+        break;
       case 62: // >
-        escape = '&gt;'
-        break
+        escape = '&gt;';
+        break;
       default:
-        continue
+        continue;
     }
 
     if (lastIndex !== index) {
-      html += str.substring(lastIndex, index)
+      html += str.substring(lastIndex, index);
     }
 
-    lastIndex = index + 1
-    html += escape
+    lastIndex = index + 1;
+    html += escape;
   }
 
-  return lastIndex !== index
-    ? html + str.substring(lastIndex, index)
-    : html
+  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
 }
 
 function enable() {

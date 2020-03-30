@@ -19,7 +19,6 @@ window.onload = async () => {
     // const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)
     //   .then((res) => res.json())
     // document.querySelector('#rep').value = DOMPurify.sanitize(rep.length);
-
   } else {
     window.location = `${window.location.origin}/login`;
   }
@@ -53,22 +52,40 @@ window.onload = async () => {
       return re.test(String(email).toLowerCase());
     }
 
-    if (esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, '') !== esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)) {
+    if (
+      esc(DOMPurify.sanitize(document.querySelector('#name').value))
+        .substring(0, 50)
+        .toLowerCase()
+        .replace(/[^a-z0-9]/gi, '')
+        .replace(/\s/g, '') !==
+      esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)
+    ) {
       alert('Username must be alphanumeric, lowercase, and contain no spaces.');
       return false;
     }
 
-    if (!validateEmail(esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50))) {
+    if (
+      !validateEmail(
+        esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
+      )
+    ) {
       alert('Invalid Email');
       return false;
     }
 
-    if (!esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50).match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+    if (
+      !esc(DOMPurify.sanitize(document.querySelector('#phone').value))
+        .substring(0, 50)
+        .match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)
+    ) {
       alert('Invalid Phone Number');
       return false;
     }
 
-    if (localStorage.getItem('password') !== esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)) {
+    if (
+      localStorage.getItem('password') !==
+      esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
+    ) {
       let userPass = prompt('What is your current password?');
       if (localStorage.getItem('password') !== userPass) {
         alert('Incorrect password.');
@@ -76,20 +93,47 @@ window.onload = async () => {
       }
     }
     postData(`${base}update`, {
-      name: esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, '').trim(),
+      name: esc(DOMPurify.sanitize(document.querySelector('#name').value))
+        .substring(0, 50)
+        .toLowerCase()
+        .replace(/[^a-z0-9]/gi, '')
+        .replace(/\s/g, '')
+        .trim(),
       email: esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50),
       phone: esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50),
-      location: esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100),
+      location: esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(
+        0,
+        100
+      ),
       password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
-      id: localStorage.getItem('id')
+      id: localStorage.getItem('id'),
     }).then((data) => {
       if (data === 'Error!') return alert('Oops! Something went wrong.');
       if (data === 'Already Registered') return alert('Username already taken');
-      localStorage.setItem('name', esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50).toLowerCase().replace(/[^a-z0-9]/gi, '').replace(/\s/g, ''));
-      localStorage.setItem('email', esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50));
-      localStorage.setItem('phone', esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50));
-      localStorage.setItem('location', esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100));
-      localStorage.setItem('password', esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50));
+      localStorage.setItem(
+        'name',
+        esc(DOMPurify.sanitize(document.querySelector('#name').value))
+          .substring(0, 50)
+          .toLowerCase()
+          .replace(/[^a-z0-9]/gi, '')
+          .replace(/\s/g, '')
+      );
+      localStorage.setItem(
+        'email',
+        esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
+      );
+      localStorage.setItem(
+        'phone',
+        esc(DOMPurify.sanitize(document.querySelector('#phone').value)).substring(0, 50)
+      );
+      localStorage.setItem(
+        'location',
+        esc(DOMPurify.sanitize(document.querySelector('#location').value)).substring(0, 100)
+      );
+      localStorage.setItem(
+        'password',
+        esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
+      );
       location.reload();
       return false;
     });
@@ -105,7 +149,7 @@ function esc(string) {
   const match = matchHtmlRegExp.exec(str);
 
   if (!match) {
-    return str
+    return str;
   }
 
   let escape;
@@ -116,33 +160,31 @@ function esc(string) {
   for (index = match.index; index < str.length; index++) {
     switch (str.charCodeAt(index)) {
       case 34: // "
-        escape = '&quot;'
-        break
+        escape = '&quot;';
+        break;
       case 38: // &
-        escape = '&amp;'
-        break
+        escape = '&amp;';
+        break;
       case 39: // '
-        escape = '&#39;'
-        break
+        escape = '&#39;';
+        break;
       case 60: // <
-        escape = '&lt;'
-        break
+        escape = '&lt;';
+        break;
       case 62: // >
-        escape = '&gt;'
-        break
+        escape = '&gt;';
+        break;
       default:
-        continue
+        continue;
     }
 
     if (lastIndex !== index) {
-      html += str.substring(lastIndex, index)
+      html += str.substring(lastIndex, index);
     }
 
-    lastIndex = index + 1
-    html += escape
+    lastIndex = index + 1;
+    html += escape;
   }
 
-  return lastIndex !== index
-    ? html + str.substring(lastIndex, index)
-    : html
+  return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
 }

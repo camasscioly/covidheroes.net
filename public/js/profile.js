@@ -34,7 +34,8 @@ window.onload = () => {
         <td>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
-              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments || 0}</span> Info
+              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments ||
+                0}</span> Info
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdown">
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Date</b>: ${date}</a>
@@ -46,9 +47,9 @@ window.onload = () => {
           </div>
         </td>
         <td>${
-          (localStorage.getItem('name') === author || localStorage.getItem('admin')
+          localStorage.getItem('name') === author || localStorage.getItem('admin')
             ? fulfill + close
-            : fulfill)
+            : fulfill
         }</td>
       </tr>`;
     }
@@ -57,7 +58,9 @@ window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     if (id === localStorage.getItem('id')) {
-      document.querySelector('#logoff').innerHTML = `<button class="btn btn-primary" onclick="localStorage.clear(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location = window.location.origin" id="logout"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Log out</button>`;
+      document.querySelector(
+        '#logoff'
+      ).innerHTML = `<button class="btn btn-primary" onclick="localStorage.clear(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location = window.location.origin" id="logout"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Log out</button>`;
       document.querySelector(
         '#change'
       ).innerHTML = `<button class="btn btn-primary" id="config" onclick="window.location = (window.location.origin + '/me')"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Change Settings</button>`;
@@ -78,7 +81,9 @@ window.onload = () => {
         if (staff) name = `${name} <span class="badge badge-outline-primary">STAFF</span>`;
         document.querySelector('#prof-head').innerHTML = `@${name}`;
         name = temp;
-        document.querySelector('#prof-link').innerHTML = `<b>Profile: <a href="${window.location.origin}/@${name}">${window.location.origin}/@${name}</a></b>`;
+        document.querySelector(
+          '#prof-link'
+        ).innerHTML = `<b>Profile: <a href="${window.location.origin}/@${name}">${window.location.origin}/@${name}</a></b>`;
       })
       .catch((err) => {
         alert('Oops! Something went wrong...');
@@ -114,7 +119,7 @@ window.onload = () => {
             '#table',
             esc(DOMPurify.sanitize(authorid)),
             esc(DOMPurify.sanitize(comments || 0)),
-            esc(DOMPurify.sanitize(description)),
+            esc(DOMPurify.sanitize(description))
           );
         });
         offerList = body.offerList.reverse();

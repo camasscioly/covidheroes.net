@@ -14,54 +14,52 @@
         <button type="submit" class="btn btn-primary" onclick="search()"><i class="fas fa-search" style="color: #fff !important"></i> Search</button>
         <button type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="window.location = `${location.origin}/requests`"><i class="fas fa-trash"></i> Reset</button><br>
       </form>  
-      <table class="table" id="dateTable">
-        <thead>
-          <tr id="head">
-            <th scope="col">Item</th>
-            <th scope="col">Author</th>
-            <th scope="col">Information</th>
-            <th scope="col">Controls</th>
-          </tr>
-        </thead>
-        <tbody id="table">
-          <tr id="loading1" style="color: rgba(0, 0, 0, 0.3)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.3)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-          <tr id="loading2" style="color: rgba(0, 0, 0, 0.25)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.25)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-          <tr id="loading3" style="color: rgba(0, 0, 0, 0.2)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.2)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-          <tr id="loading4" style="color: rgba(0, 0, 0, 0.15)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.15)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-          <tr id="loading5" style="color: rgba(0, 0, 0, 0.1)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.1)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-        </tbody>
-        <br />
-      </table>
+      <div class="table-responsive">
+        <table class="table" id="dateTable">
+          <thead>
+            <tr id="head">
+              <th scope="col">Item</th>
+              <th scope="col">Author</th>
+              <th scope="col">Information</th>
+              <th scope="col">Controls</th>
+            </tr>
+          </thead>
+          <tbody id="table">
+            <tr id="loading1" style="color: rgba(0, 0, 0, 0.3)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.3)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+            <tr id="loading2" style="color: rgba(0, 0, 0, 0.25)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.25)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+            <tr id="loading3" style="color: rgba(0, 0, 0, 0.2)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.2)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+            <tr id="loading4" style="color: rgba(0, 0, 0, 0.15)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.15)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+            <tr id="loading5" style="color: rgba(0, 0, 0, 0.1)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.1)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+          </tbody>
+          <br />
+        </table>
+      </div>
+      
     </div>
   </div><br>
   <%- include('blocks/footer') %>

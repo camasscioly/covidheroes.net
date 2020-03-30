@@ -3,43 +3,46 @@
     <div class="container mt-2">
       <h1><i class="fas fa-users"></i> Heroes</h1>
       <p style="font-size: 120%;">Who's currently contributing the most?</p>
-      <table class="table" id="dateTable">
-        <thead>
-          <tr id="head">
-            <th scope="col">Name</th>
-            <th scope="col">ID</th>
-            <th scope="col">Reputation</th>
-          </tr>
-        </thead>
-        <tbody id="table">
-          <tr id="loading1" style="color: rgba(0, 0, 0, 0.3)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.3)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-          <tr id="loading2" style="color: rgba(0, 0, 0, 0.25)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.25)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-          <tr id="loading3" style="color: rgba(0, 0, 0, 0.2)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.2)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-          <tr id="loading4" style="color: rgba(0, 0, 0, 0.15)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.15)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-          <tr id="loading5" style="color: rgba(0, 0, 0, 0.1)">
-            <th scope="row" style="color: rgba(107, 99, 255, 0.1)">Loading...</a></th>
-            <td>Loading...</td>
-            <td>Loading...</td>
-          </tr>
-        </tbody>
-        <br />
-      </table>
+      <div class="table-responsive">
+        <table class="table" id="dateTable">
+          <thead>
+            <tr id="head">
+              <th scope="col">Name</th>
+              <th scope="col">ID</th>
+              <th scope="col">Reputation</th>
+            </tr>
+          </thead>
+          <tbody id="table">
+            <tr id="loading1" style="color: rgba(0, 0, 0, 0.3)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.3)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+            <tr id="loading2" style="color: rgba(0, 0, 0, 0.25)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.25)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+            <tr id="loading3" style="color: rgba(0, 0, 0, 0.2)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.2)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+            <tr id="loading4" style="color: rgba(0, 0, 0, 0.15)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.15)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+            <tr id="loading5" style="color: rgba(0, 0, 0, 0.1)">
+              <th scope="row" style="color: rgba(107, 99, 255, 0.1)">Loading...</a></th>
+              <td>Loading...</td>
+              <td>Loading...</td>
+            </tr>
+          </tbody>
+          <br />
+        </table>
+      </div>
+      
     </div>
   </div><br>
   <%- include('blocks/footer') %>

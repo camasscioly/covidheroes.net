@@ -28,6 +28,10 @@ thead {
   background: rgba(222, 226, 230, 0);
 }
 
+.table-responsive {
+  display: table;
+}
+
 body {
   font-family: 'MetropolisRegular', sans-serif;
 }

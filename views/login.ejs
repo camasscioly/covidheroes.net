@@ -1,25 +1,24 @@
 <%- include('blocks/header') %>
-    <div class="container"></div>
-    <div class="container mt-2">
-      <h1>Login</h1>
-      <p>Don't have an account? <a href="/signup">Join</a> here.</p>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-     <body>
-      <form id="login">
-        <div class="form-group">
-          <label for="name">Username</label>
-          <input type="text" class="form-control" id="name" maxlength="20" placeholder="Enter username" required>
-          <small id="userHelp" class="form-text text-muted">We'll never share your personal details with anyone else.</small>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" maxlength="40" placeholder="Password" required>
-        </div>
-        <button type="submit" class="btn btn-primary" id="submit"><i class="fas fa-sign-in-alt" style="color: #fff !important"></i> Login</button>
-      </form>
+<div class="container"></div>
+<div class="container mt-2">
+  <h1>Login</h1>
+  <p>Don't have an account? <a href="/signup">Join</a> here.</p>
+    <form id="login">
+      <div class="form-group">
+        <label for="name">Username</label>
+        <input type="text" class="form-control" id="name" maxlength="20" placeholder="Enter username" required>
+        <small id="userHelp" class="form-text text-muted">We'll never share your personal details with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" maxlength="40" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submit"><i class="fas fa-sign-in-alt" style="color: #fff !important"></i> Login</button>
+    </form>
     </div>
   </div><br>
   <%- include('blocks/footer') %>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="./js/login.js" defer></script>
 </body>
 </html>

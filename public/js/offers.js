@@ -1,4 +1,5 @@
 let addressOfOffers = [];
+let reqs = 0;
 let killOffer;
 let searchSetting = 'item';
 const matchHtmlRegExp = /["'&<>]/;
@@ -209,7 +210,19 @@ window.onload = () => {
         }
       }
 
+      fetch(`${window.location.origin}/v1/offer`)
+        .then((res) => res.json())
+        .then((body) => {
+          body.offerList.reverse().forEach((offer) => {
+            const { authorid } = offer;
+            if (authorid === localStorage.getItem('id')) {
+              ++reqs;
+            }
+          });
+        });
+
       document.querySelector('#offers').onsubmit = () => {
+        if (!localStorage.getItem('admin')) if (reqs > 5) return alert('You cannot have more than 5 concurrent requests.');
         fetch(`${base}users`)
           .then((res) => res.json())
           .then((body) => {

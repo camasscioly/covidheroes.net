@@ -34,7 +34,7 @@
               <div class="card-body">
                 <h4 class="card-title" style="font-weight:700">Dropoff Location</h4>
                 <div id="map"></div>
-                <small>Your distance from the dropoff location is <a id="distance">0km</a>, or around a <a id="time">0min</a> drive.</small>
+                <small id="stats">Your distance from the dropoff location is <a id="distance">0km</a>, or around a <a id="time">0min</a> drive.</small>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@
       function parse(predictions, status) {
         
         if (status != google.maps.places.PlacesServiceStatus.OK) {
-          alert(status);
+          console.log(status);
           return;
         }
         ++count;
@@ -103,6 +103,10 @@
         if (homeAddress && address) initMap();
       };
 
+      if (!localStorage.getItem('name')) {
+        document.querySelector('#stats').innerHTML = 'Login to See Map Calculations';
+        return document.querySelector('#map').innerHTML = 'Login to See Map Data';
+      }
       const service = new google.maps.places.AutocompleteService();
       service.getQueryPredictions({ input: document.querySelector('#location').value }, parse);
       service.getQueryPredictions({ input: localStorage.getItem('location') }, parse);
@@ -133,7 +137,7 @@
           ++coordCalcCount;
           if (coordCalcCount === 2) {
             const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
-            document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
+            document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 72.4205 * 60)}min`;
             document.querySelector('#distance').innerText = dist;
           }
         } else {

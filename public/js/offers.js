@@ -179,6 +179,7 @@ window.onload = () => {
           email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
           date: new Date().toLocaleDateString('en-US'),
           comments: 0,
+          csrf: document.querySelector('#csrf').value,
           tags: esc(
             DOMPurify.sanitize(
               parseInt(document.querySelector('#tags').value.substring(0, 7)) > 1000000

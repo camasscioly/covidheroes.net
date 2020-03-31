@@ -60,6 +60,7 @@ window.onload = () => {
         emailTo = email;
         ID = id;
         offerList = body.offerList.reverse();
+        initService();
       });
     if (localStorage.getItem(ID)) document.querySelector('#fulfill').disabled = true;
   } else {

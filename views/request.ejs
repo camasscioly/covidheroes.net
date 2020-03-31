@@ -5,7 +5,7 @@
       <p id="prof-link-author"></p>
       <div class="container">
         <div class="row">
-          <div class="col-6">
+          <div class="col-md-6">
             <form id="req">
               <div class="form-group">
                 <label for="item">Item</label>
@@ -29,10 +29,10 @@
               </div>
             </form>
           </div>
-        <div class="col-6">
+          <div class="col-md-6">
             <div id="map"></div>
-            <br><hr>
-        </div>
+            <br>
+          </div>
         </div>
     </div>
     </div>
@@ -62,35 +62,53 @@
         5. <b>Post</b> your comment.
       </p>
       <div id="disqus_thread"></div>
-  <script>
-    function initMap(){ 
-      let dropoff = document.querySelector('#location').value;
-      
-      var options = {zoom: 6, center:{lat: 42, lng: -71}}
-      var map = new google.maps.Map(document.getElementById('map'), options);
-      // var geocoder = new google.maps.Geocoder();
-      // document.getElementById('submit').addEventListener('click', function() {
-      //     geocodeAddress(geocoder, map);
-      //   });
+  <script defer>
+    let address;
+
+    function initService() {
+      function parse(predictions, status) {
+        if (status != google.maps.places.PlacesServiceStatus.OK) {
+          alert(status);
+          return;
+        }
+
+        address = predictions[0].description;
+        console.log(document.querySelector('#location').value);
+        initMap();
+      };
+
+      const service = new google.maps.places.AutocompleteService();
+      service.getQueryPredictions({ input: document.querySelector('#location').value }, parse);
+    }
+
+    function initMap() { 
+      let options = {
+        zoom: 15, 
+        center: {
+          lat: 0, 
+          lng: 0
+        }
       }
+      let map = new google.maps.Map(document.getElementById('map'), options);
+      let geocoder = new google.maps.Geocoder();
+      geocodeAddress(geocoder, map);
+    }
       
-      // function geocodeAddress(geocoder, resultsMap) {
-      //   var address = document.getElementById('address').value;
-      //   geocoder.geocode({'address': address}, function(results, status) {
-      //     if (status === 'OK') {
-      //       resultsMap.setCenter(results[0].geometry.location);
-      //       var marker = new google.maps.Marker({
-      //         map: resultsMap,
-      //         position: results[0].geometry.location
-      //       });
-      //     } else {
-      //       alert('Geocode was not successful for the following reason: ' + status);
-      //     }
-      //   });
-      // }
+    async function geocodeAddress(geocoder, resultsMap) {
+      geocoder.geocode({ address }, (results, status) => {
+        if (status === 'OK') {
+          resultsMap.setCenter(results[0].geometry.location);
+          let marker = new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location
+          });
+        } else {
+          alert(status);
+        }
+      });
+    }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&callback=initMap"
-  async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=geometry,places"></script>
     <script>
       var disqus_config = function () {
         this.page.url = window.location.href; 

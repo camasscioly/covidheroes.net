@@ -4,6 +4,7 @@
       <h1><i class="fas fa-box-open"></i> Create a Request</h1>
       <p style="font-size: 120%;" id="counter"><a>Loading...</a> and counting requests!</p>
       <form id="offers">
+        <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
         <div class="form-group">
           <label for="title">Item</label>
           <input type="text" class="form-control" id="title" placeholder="Enter Item Name" maxlength="30" required>

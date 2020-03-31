@@ -114,7 +114,7 @@
 
     async function initMap() { 
       let options = {
-        zoom: 15, 
+        zoom: 10, 
         center: {
           lat: 0, 
           lng: 0
@@ -136,13 +136,28 @@
               results[0].geometry.location.lat(), results[0].geometry.location.lng()
             ]);
             ++coordCalcCount;
-            resultsMap.setCenter(results[0].geometry.location);
-            if (coordCalcCount === 1) res(true);
-            let marker = new google.maps.Marker({
+            let opts = {
               map: resultsMap,
-              position: results[0].geometry.location
-            });
+              position: results[0].geometry.location,
+              icon: {
+                url: `${window.location.origin}/img/target_marker.svg`,
+                scaledSize: new google.maps.Size(70, 70)
+              }
+            }
+            if (coordCalcCount === 1) {
+              opts.icon = {
+                url: `${window.location.origin}/img/home_marker.svg`,
+                scaledSize: new google.maps.Size(60, 60)
+              }
+            }
+            // let marker = new google.maps.Marker(opts);
+            if (coordCalcCount === 1) return res(true);
+            resultsMap.setCenter(results[0].geometry.location);
             if (coordCalcCount === 2) {
+              let directionsService = new google.maps.DirectionsService;
+              let directionsDisplay = new google.maps.DirectionsRenderer;
+              directionsDisplay.setMap(resultsMap);
+              calculateAndDisplayRoute(directionsService, directionsDisplay);
               const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
               document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
               document.querySelector('#distance').innerText = dist;
@@ -153,8 +168,21 @@
             rej(false);
           }
         });
+      }); 
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      directionsService.route({
+        origin: homeAddress,
+        destination: address,
+        travelMode: 'DRIVING'
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+        } else {
+          console.log('Directions request failed due to ' + status);
+        }
       });
-      
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=geometry,places"></script>

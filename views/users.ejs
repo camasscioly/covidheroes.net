@@ -3,6 +3,7 @@
 <div class="container mt-2">
   <h1><i class="fas fa-users"></i> Heroes</h1>
   <p style="font-size: 120%;">Who's currently contributing the most?</p>
+  <hr>
   <button type="submit" class="btn btn-primary" onclick="location = `${location.origin}/heroes?range=${(parseInt(range) <= 0) ? 0 : (parseInt(range) - 10)}`;"><i class="fas fa-arrow-left" style="color: #fff !important"></i> Previous</button>
   <button type="submit" class="btn btn-primary" onclick="location = `${location.origin}/heroes?range=${(parseInt(range) >= ((Math.ceil((count - 1) / 10) * 10) - 10)) ? (Math.ceil((count - 1) / 10) * 10) - 10 : (parseInt(range) + 10)}`;">Next <i class="fas fa-arrow-right" style="color: #fff !important"></i></button>
   <div class="table-responsive">

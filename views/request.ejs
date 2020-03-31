@@ -1,29 +1,41 @@
 <%- include('blocks/header') %>
     <div class="container"></div>
     <div class="container mt-2">
-      <h1 id="reqid"></h1>
+      <div><h1 id="reqid"></h1>
       <p id="prof-link-author"></p>
-      <form id="req">
-        <div class="form-group">
-          <label for="item">Item</label>
-          <input type="text" class="form-control" id="item" value="Loading..." readonly>
+      <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <form id="req">
+            <div class="form-group">
+              <label for="item">Item</label>
+              <input type="text" class="form-control" id="item" value="Loading..." readonly>
+            </div>
+            <div class="form-group">
+              <label for="author">Author</label>
+              <input type="text" class="form-control" id="author" value="Loading..." readonly>
+            </div>
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="email" class="form-control" id="date" value="Loading..." readonly>
+            </div>
+            <div class="form-group">
+              <label for="location">Dropoff Address</label>
+              <input type="email" class="form-control" id="location" value="Loading..." readonly>
+            </div>
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="phone" class="form-control" id="quantity" value="Loading..." readonly>
+            </div>
+          </form>
+            </div>
+            <div class="col-6">
+                <div id="map"></div>
+                <br><hr>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="author">Author</label>
-          <input type="text" class="form-control" id="author" value="Loading..." readonly>
-        </div>
-        <div class="form-group">
-          <label for="date">Date</label>
-          <input type="email" class="form-control" id="date" value="Loading..." readonly>
-        </div>
-        <div class="form-group">
-          <label for="location">Dropoff Location</label>
-          <input type="email" class="form-control" id="location" value="Loading..." readonly>
-        </div>
-        <div class="form-group">
-          <label for="quantity">Quantity</label>
-          <input type="phone" class="form-control" id="quantity" value="Loading..." readonly>
-        </div>
+    </div>
+    </div>
       </form><br>
       <h1>
         Fulfillment Process
@@ -50,6 +62,35 @@
         5. <b>Post</b> your comment.
       </p>
       <div id="disqus_thread"></div>
+  <script>
+    function initMap(){ 
+      let dropoff = document.querySelector('#location').value;
+      
+      var options = {zoom: 6, center:{lat: 42, lng: -71}}
+      var map = new google.maps.Map(document.getElementById('map'), options);
+      // var geocoder = new google.maps.Geocoder();
+      // document.getElementById('submit').addEventListener('click', function() {
+      //     geocodeAddress(geocoder, map);
+      //   });
+      }
+      
+      // function geocodeAddress(geocoder, resultsMap) {
+      //   var address = document.getElementById('address').value;
+      //   geocoder.geocode({'address': address}, function(results, status) {
+      //     if (status === 'OK') {
+      //       resultsMap.setCenter(results[0].geometry.location);
+      //       var marker = new google.maps.Marker({
+      //         map: resultsMap,
+      //         position: results[0].geometry.location
+      //       });
+      //     } else {
+      //       alert('Geocode was not successful for the following reason: ' + status);
+      //     }
+      //   });
+      // }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&callback=initMap"
+  async defer></script>
     <script>
       var disqus_config = function () {
         this.page.url = window.location.href; 

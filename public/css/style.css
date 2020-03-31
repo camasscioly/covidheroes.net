@@ -429,3 +429,8 @@ a:hover {
   top: 11px;
   left: -6px;
 }
+
+#map{
+  height: 80%;
+  margin: 10px 0;
+}

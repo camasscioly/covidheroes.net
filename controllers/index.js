@@ -62,15 +62,18 @@ router.get('/team', async (req, res) => {
 });
 
 router.get('/@:username', async (req, res) => {
-  const name = req.params.username.toLowerCase();
-  const userList = (await keyv.get('user-list')) || [];
-  const id = userList.find((block) => block[0] === name)[1];
-  if (!id) return renderFile(req, res, '404');
-  const origin = url.format({
-    protocol: req.protocol,
-    host: req.get('host')
-  });
-  res.redirect(`${origin}/profile?id=${id}`);
+  try {
+    const name = req.params.username.toLowerCase();
+    const userList = (await keyv.get('user-list')) || [];
+    const id = userList.find((block) => block[0] === name)[1];
+    const origin = url.format({
+      protocol: req.protocol,
+      host: req.get('host')
+    });
+    res.redirect(`${origin}/profile?id=${id}`);
+  } catch(err) {
+    renderFile(req, res, '404');
+  }
 });
 
 router.use((req, res) => {

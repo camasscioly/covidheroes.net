@@ -30,7 +30,6 @@ window.onload = () => {
       });
       return await response.text(); // parses JSON response into native JavaScript objects
     }
-
     fetch(`${window.location.origin}/v1/offer`)
       .then((res) => res.json())
       .then((body) => {

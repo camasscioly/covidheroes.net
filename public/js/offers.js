@@ -1,3 +1,4 @@
+let addressOfOffers = [];
 let killOffer;
 let searchSetting = 'item';
 const matchHtmlRegExp = /["'&<>]/;
@@ -90,7 +91,8 @@ window.onload = () => {
           const searchLocation = urlParams.get('location');
           searchSetting = urlParams.get('setting');
 
-          document.querySelector('#search-input').value = searchItem || searchAuthor || searchDate || searchQuantity || searchLocation;
+          document.querySelector('#search-input').value =
+            searchItem || searchAuthor || searchDate || searchQuantity || searchLocation;
 
           document.querySelector('#table').innerHTML = '';
           body.offerList.reverse().forEach((offer) => {
@@ -149,12 +151,64 @@ window.onload = () => {
               esc(DOMPurify.sanitize(id)),
               esc(DOMPurify.sanitize(comments || 0))
             );
+            addressOfOffers.push(description);
             ++counter;
           });
           offerList = body.offerList.reverse();
         });
     }
     if (window.location.href.includes('new')) {
+      let placeSearch, autocomplete;
+
+      let componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name',
+      };
+
+      function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('location'), {
+          types: ['geocode'],
+        });
+        autocomplete.setFields(['address_component']);
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        let place = autocomplete.getPlace();
+
+        for (let component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+
+        for (let i = 0; i < place.address_components.length; i++) {
+          let addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            let val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+      }
+
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            let geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            let circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy,
+            });
+          });
+        }
+      }
+
       document.querySelector('#offers').onsubmit = () => {
         fetch(`${base}users`)
           .then((res) => res.json())
@@ -246,26 +300,7 @@ function enable() {
 }
 
 function search() {
-  window.location = `${window.location.origin}/requests?${searchSetting}=${document.querySelector('#search-input')
-    .value || ''}&setting=${searchSetting}`;
+  window.location = `${window.location.origin}/requests?${searchSetting}=${document.querySelector(
+    '#search-input'
+  ).value || ''}&setting=${searchSetting}`;
 }
-
-/*document.querySelector('#item-input').addEventListener('change', (e) => {
-  search();
-});
-
-document.querySelector('#author-input').addEventListener('change', (e) => {
-  search();
-});
-
-document.querySelector('#date-input').addEventListener('change', (e) => {
-  search();
-});
-
-document.querySelector('#quantity-input').addEventListener('change', (e) => {
-  search();
-});
-
-document.querySelector('#location-input').addEventListener('change', (e) => {
-  search();
-});*/

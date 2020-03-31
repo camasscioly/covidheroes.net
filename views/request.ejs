@@ -112,7 +112,7 @@
       service.getQueryPredictions({ input: localStorage.getItem('location') }, parse);
     }
 
-    function initMap() { 
+    async function initMap() { 
       let options = {
         zoom: 15, 
         center: {
@@ -123,50 +123,38 @@
       }
       let map = new google.maps.Map(document.getElementById('map'), options);
       let geocoder = new google.maps.Geocoder();
-      geocodeAddress(geocoder, map, homeAddress);
-      geocodeAddressMark(geocoder, map, address);
+      await geocodeAddressMark(geocoder, map, address);
+      await geocodeAddressMark(geocoder, map, homeAddress);
     }
 
     let coordCalcCount = 0;
-    async function geocodeAddress(geocoder, resultsMap, address) {
-      geocoder.geocode({ address }, (results, status) => {
-        if (status === 'OK') {
-          coordArray.push([ 
-            results[0].geometry.location.lat(), results[0].geometry.location.lng()
-          ]);
-          ++coordCalcCount;
-          if (coordCalcCount === 2) {
-            const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
-            document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 72.4205 * 60)}min`;
-            document.querySelector('#distance').innerText = dist;
-          }
-        } else {
-          alert(status);
-        }
-      });
-    }
-
     async function geocodeAddressMark(geocoder, resultsMap, address) {
-      geocoder.geocode({ address }, (results, status) => {
-        if (status === 'OK') {
-          coordArray.push([ 
-            results[0].geometry.location.lat(), results[0].geometry.location.lng()
-          ]);
-          ++coordCalcCount;
-          resultsMap.setCenter(results[0].geometry.location);
-          let marker = new google.maps.Marker({
-            map: resultsMap,
-            position: results[0].geometry.location
-          });
-          if (coordCalcCount === 2) {
-            const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
-            document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
-            document.querySelector('#distance').innerText = dist;
+      return new Promise((res, rej) => {
+        geocoder.geocode({ address }, (results, status) => {
+          if (status === 'OK') {
+            coordArray.push([ 
+              results[0].geometry.location.lat(), results[0].geometry.location.lng()
+            ]);
+            ++coordCalcCount;
+            resultsMap.setCenter(results[0].geometry.location);
+            if (coordCalcCount === 1) res(true);
+            let marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+            if (coordCalcCount === 2) {
+              const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
+              document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
+              document.querySelector('#distance').innerText = dist;
+            }
+            res(true);
+          } else {
+            alert(status);
+            rej(false);
           }
-        } else {
-          alert(status);
-        }
+        });
       });
+      
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=geometry,places"></script>

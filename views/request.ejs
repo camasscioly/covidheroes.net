@@ -119,34 +119,41 @@
       }
       let map = new google.maps.Map(document.getElementById('map'), options);
       let geocoder = new google.maps.Geocoder();
-      geocodeAddress(geocoder, map, homeAddress, false);
-      geocodeAddress(geocoder, map, address);
+      geocodeAddress(geocoder, map, homeAddress);
+      geocodeAddressMark(geocoder, map, address);
     }
 
     let coordCalcCount = 0;
-    async function geocodeAddress(geocoder, resultsMap, address, toggle = true) {
+    async function geocodeAddress(geocoder, resultsMap, address) {
       geocoder.geocode({ address }, (results, status) => {
         if (status === 'OK') {
           coordArray.push([ 
             results[0].geometry.location.lat(), results[0].geometry.location.lng()
           ]);
           ++coordCalcCount;
-          if (toggle) return;
+          if (coordCalcCount === 2) {
+            const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
+            document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
+            document.querySelector('#distance').innerText = dist;
+          }
+        } else {
+          alert(status);
+        }
+      });
+    }
+
+    async function geocodeAddressMark(geocoder, resultsMap, address) {
+      geocoder.geocode({ address }, (results, status) => {
+        if (status === 'OK') {
+          coordArray.push([ 
+            results[0].geometry.location.lat(), results[0].geometry.location.lng()
+          ]);
+          ++coordCalcCount;
           resultsMap.setCenter(results[0].geometry.location);
           let marker = new google.maps.Marker({
             map: resultsMap,
             position: results[0].geometry.location
           });
-          // let circle = new google.maps.Circle({
-          //   center: results[0].geometry.location,
-          //   map: resultsMap,
-          //   radius: 100, 
-          //   fillColor: '#6c63ff',
-          //   fillOpacity: 0.3,
-          //   strokeColor: '#6c63ff',
-          //   strokeWeight: 1  
-          // });
-          // circle.bindTo('center', marker, 'position');
           if (coordCalcCount === 2) {
             const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
             document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;

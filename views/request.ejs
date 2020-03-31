@@ -34,7 +34,7 @@
               <div class="card-body">
                 <h4 class="card-title" style="font-weight:700">Dropoff Location</h4>
                 <div id="map"></div>
-                <small>Note: Map data may not be 100% accurate.</small>
+                <small>Your distance from the dropoff location is <a id="distance">0km</a>, or around a <a id="time">0min</a> drive.</small>
               </div>
             </div>
           </div>
@@ -69,21 +69,43 @@
       <div id="disqus_thread"></div>
   <script defer>
     let address;
+    let homeAddress;
+    let coordArray = [];
+
+    function distance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // km (change this constant to get miles)
+      const dLat = ((lat2 - lat1) * Math.PI) / 180;
+      const dLon = ((lon2 - lon1) * Math.PI) / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((lat1 * Math.PI) / 180) *
+          Math.cos((lat2 * Math.PI) / 180) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const d = R * c;
+      if (d > 1) return `${Math.round(d)}km`;
+      else if (d <= 1) return `${Math.round(d * 1000)}m`;
+      return d;
+    }
 
     function initService() {
+      let count = 0;
       function parse(predictions, status) {
+        
         if (status != google.maps.places.PlacesServiceStatus.OK) {
           alert(status);
           return;
         }
-
-        address = predictions[0].description;
-        console.log(document.querySelector('#location').value);
-        initMap();
+        ++count;
+        if (count === 2) address = predictions[0].description;
+        else homeAddress = predictions[0].description;
+        if (homeAddress && address) initMap();
       };
 
       const service = new google.maps.places.AutocompleteService();
       service.getQueryPredictions({ input: document.querySelector('#location').value }, parse);
+      service.getQueryPredictions({ input: localStorage.getItem('location') }, parse);
     }
 
     function initMap() { 
@@ -92,21 +114,44 @@
         center: {
           lat: 0, 
           lng: 0
-        }
+        },
+        disableDefaultUI: true,
       }
       let map = new google.maps.Map(document.getElementById('map'), options);
       let geocoder = new google.maps.Geocoder();
-      geocodeAddress(geocoder, map);
+      geocodeAddress(geocoder, map, homeAddress, false);
+      geocodeAddress(geocoder, map, address);
     }
-      
-    async function geocodeAddress(geocoder, resultsMap) {
+
+    let coordCalcCount = 0;
+    async function geocodeAddress(geocoder, resultsMap, address, toggle = true) {
       geocoder.geocode({ address }, (results, status) => {
         if (status === 'OK') {
+          coordArray.push([ 
+            results[0].geometry.location.lat(), results[0].geometry.location.lng()
+          ]);
+          ++coordCalcCount;
+          if (toggle) return;
           resultsMap.setCenter(results[0].geometry.location);
           let marker = new google.maps.Marker({
             map: resultsMap,
             position: results[0].geometry.location
           });
+          // let circle = new google.maps.Circle({
+          //   center: results[0].geometry.location,
+          //   map: resultsMap,
+          //   radius: 100, 
+          //   fillColor: '#6c63ff',
+          //   fillOpacity: 0.3,
+          //   strokeColor: '#6c63ff',
+          //   strokeWeight: 1  
+          // });
+          // circle.bindTo('center', marker, 'position');
+          if (coordCalcCount === 2) {
+            const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
+            document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
+            document.querySelector('#distance').innerText = dist;
+          }
         } else {
           alert(status);
         }

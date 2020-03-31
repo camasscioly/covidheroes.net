@@ -65,6 +65,7 @@ router.get('/@:username', async (req, res) => {
   const name = req.params.username.toLowerCase();
   const userList = (await keyv.get('user-list')) || [];
   const id = userList.find((block) => block[0] === name)[1];
+  if (!id) return renderFile(req, res, '404');
   const origin = url.format({
     protocol: req.protocol,
     host: req.get('host')

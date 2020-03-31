@@ -9,9 +9,8 @@ keyv.on('error', (err) => {
 });
 
 const router = Router();
-const csrfProtection = csrf({ cookie: true });
 
-router.post('/signup', csrfProtection, async (req, res) => {
+router.post('/signup', async (req, res) => {
   const { name, email, phone, location, password } = req.body;
   const userList = (await keyv.get('user-list')) || [];
   try {
@@ -31,7 +30,7 @@ router.post('/signup', csrfProtection, async (req, res) => {
   }
 });
 
-router.post('/update', csrfProtection, async (req, res) => {
+router.post('/update', async (req, res) => {
   try {
     const { name, email, phone, location, password, id, original } = req.body;
     const userList = (await keyv.get('user-list')) || [];
@@ -104,7 +103,7 @@ router.post('/login', async (req, res) => {
   });
 });
 
-router.post('/offer', csrfProtection, async (req, res) => {
+router.post('/offer', async (req, res) => {
   let offerList = (await keyv.get('offer-list')) || [];
   let counter = (await keyv.get('offer-count')) || 0;
   counter++;

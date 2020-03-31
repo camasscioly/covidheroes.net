@@ -4,13 +4,14 @@
       <h1><i class="fas fa-box-open"></i> Create a Request</h1>
       <p style="font-size: 120%;" id="counter"><a>Loading...</a> and counting requests!</p>
       <form id="offers">
+        <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
         <div class="form-group">
           <label for="title">Item</label>
           <input type="text" class="form-control" id="title" placeholder="Enter Item Name" maxlength="30" required>
         </div>
         <div class="form-group">
-          <label for="location">Dropoff Location</label>
-          <input type="text" class="form-control" id="location" placeholder="Enter Dropoff Location" maxlength="40" required>
+          <label for="location">Dropoff Address</label>
+          <input type="text" class="form-control" id="location" placeholder="Enter Dropoff Address" maxlength="40" required>
         </div>
         <div class="form-group">
           <label for="tags">Quantity</label>

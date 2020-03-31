@@ -4,12 +4,14 @@ const renderFile = require('./../middleware/renderFile.js');
 const toLogin = require('./../middleware/toLogin.js');
 const toProfile = require('./../middleware/toProfile.js');
 const Keyv = require('keyv');
+const csrf = require('csurf');
 const keyv = new Keyv(process.env.DB_URL);
 keyv.on('error', (err) => {
   console.error(err);
 });
 
 const router = Router();
+const csrfProtection = csrf({ cookie: true });
 
 router.get('/', async (req, res) => {
   renderFile(req, res, 'index');
@@ -27,16 +29,16 @@ router.get('/login', toProfile, async (req, res) => {
   renderFile(req, res, 'login');
 });
 
-router.get('/signup', toProfile, async (req, res) => {
-  renderFile(req, res, 'signup');
+router.get('/signup', toProfile, csrfProtection, async (req, res) => {
+  renderFile(req, res, 'signup', { csrfToken: req.csrfToken() });
 });
 
-router.get('/me', toLogin, async (req, res) => {
-  renderFile(req, res, 'user');
+router.get('/me', toLogin, csrfProtection, async (req, res) => {
+  renderFile(req, res, 'user', { csrfToken: req.csrfToken() });
 });
 
-router.get('/new', toLogin, async (req, res) => {
-  renderFile(req, res, 'new');
+router.get('/new', toLogin, csrfProtection, async (req, res) => {
+  renderFile(req, res, 'new', { csrfToken: req.csrfToken() });
 });
 
 router.get('/requests', async (req, res) => {
@@ -63,6 +65,7 @@ router.get('/@:username', async (req, res) => {
   const name = req.params.username.toLowerCase();
   const userList = (await keyv.get('user-list')) || [];
   const id = userList.find((block) => block[0] === name)[1];
+  if (!id) return renderFile(req, res, '404');
   const origin = url.format({
     protocol: req.protocol,
     host: req.get('host')

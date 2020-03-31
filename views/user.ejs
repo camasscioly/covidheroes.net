@@ -2,6 +2,7 @@
 <div class="container mt-2">
   <h1>Your Profile</h1>
   <form id="submit">
+    <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
     <div class="form-group">
       <label for="name">Username</label>
       <input type="text" class="form-control" id="name" maxlength="20" value="Loading...">

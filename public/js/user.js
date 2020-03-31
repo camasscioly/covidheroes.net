@@ -69,8 +69,10 @@ window.onload = async () => {
         esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
       )
     ) {
-      alert('Invalid Email');
-      return false;
+      if (document.querySelector('#email').value !== localStorage.getItem('email')) {
+        alert('Invalid Email');
+        return false;
+      }
     }
 
     if (
@@ -78,8 +80,10 @@ window.onload = async () => {
         .substring(0, 50)
         .match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)
     ) {
-      alert('Invalid Phone Number');
-      return false;
+      if (document.querySelector('#phone').value !== localStorage.getItem('phone')) {
+        alert('Invalid Phone Number');
+        return false;
+      }
     }
 
     if (
@@ -107,7 +111,8 @@ window.onload = async () => {
       ),
       password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
       id: localStorage.getItem('id'),
-      original: localStorage.getItem('name')
+      original: localStorage.getItem('name'),
+      csrf: document.querySelector('#csrf').value
     }).then((data) => {
       if (data === 'Error!') return alert('Oops! Something went wrong.');
       if (data === 'Already Registered') return alert('Username already taken');

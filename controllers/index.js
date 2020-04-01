@@ -42,11 +42,19 @@ router.get('/new', toLogin, csrfProtection, async (req, res) => {
 });
 
 router.get('/requests', async (req, res) => {
+  renderFile(req, res, 'offers'); // deprecate this later
+});
+
+router.get('/submissions', async (req, res) => {
   renderFile(req, res, 'offers');
 });
 
 router.get('/requests/open', async (req, res) => {
-  renderFile(req, res, 'request');
+  renderFile(req, res, 'request'); 
+});
+
+router.get('/submissions/open', async (req, res) => {
+  renderFile(req, res, 'request'); // deprecate this later
 });
 
 router.get('/profile', toLogin, async (req, res) => {

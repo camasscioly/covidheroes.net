@@ -1,11 +1,11 @@
 <%- include('blocks/header') %>
     <div class="container"></div>
     <div class="container mt-2">
-      <h1><i class="fas fa-list"></i> Requests</h1>
+      <h1><i class="fas fa-list"></i> Submissions</h1>
       <p style="font-size: 120%;">Join the <a id="user-count">0</a> heroes helping each other.</p>
       <hr>
       <div class="alert alert-primary" role="alert">
-        If you are in need of resources, <a href="/new">Click here to create a new request</a>.
+        If you are in need or can offer resources, <a href="/new">Click here to create a new submission</a>.
       </div>
       <form id="search" onsubmit="search(); return false;">
         <div class="input-group mb-3">
@@ -20,6 +20,7 @@
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'date'; document.querySelector('#search-input').placeholder = 'Search Date'; document.querySelector('#search-input').value = ''">Date</a>
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'quantity'; document.querySelector('#search-input').placeholder = 'Search Quantity'; document.querySelector('#search-input').value = ''">Quantity</a>
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'location'; document.querySelector('#search-input').placeholder = 'Search Location'; document.querySelector('#search-input').value = ''">Location</a>
+              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'type'; document.querySelector('#search-input').placeholder = 'Search Type'; document.querySelector('#search-input').value = ''">Type</a>
             </div>
           </div>
         </div>
@@ -30,6 +31,7 @@
         <table class="table" id="dateTable">
           <thead>
             <tr id="head">
+              <th scope="col">Type</th>
               <th scope="col">Item</th>
               <th scope="col">Author</th>
               <th scope="col">Information</th>
@@ -42,9 +44,11 @@
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
+              <td>Loading...</td>
             </tr>
             <tr id="loading2" style="color: rgba(0, 0, 0, 0.25)">
               <th scope="row" style="color: rgba(107, 99, 255, 0.25)">Loading...</a></th>
+              <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
@@ -54,15 +58,18 @@
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
+              <td>Loading...</td>
             </tr>
             <tr id="loading4" style="color: rgba(0, 0, 0, 0.15)">
               <th scope="row" style="color: rgba(107, 99, 255, 0.15)">Loading...</a></th>
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
+              <td>Loading...</td>
             </tr>
             <tr id="loading5" style="color: rgba(0, 0, 0, 0.1)">
               <th scope="row" style="color: rgba(107, 99, 255, 0.1)">Loading...</a></th>
+              <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>

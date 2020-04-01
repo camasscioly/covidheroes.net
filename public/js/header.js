@@ -9,7 +9,7 @@ if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'
   ).innerHTML = `<button class="btn btn-danger" onclick="window.location=window.location.origin + '/@' + localStorage.getItem('name')"><i class="fas fa-user"></i> Account</button>
-  <button class="btn btn-danger" onclick="window.location=window.location.origin + '/new'"><i class="fas fa-plus"></i> New Request</button>`;
+  <button class="btn btn-danger" onclick="window.location=window.location.origin + '/new'"><i class="fas fa-plus"></i> New Submission</button>`;
   window.addEventListener(
     'storage',
     () => {

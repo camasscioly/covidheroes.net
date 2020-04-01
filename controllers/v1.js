@@ -117,6 +117,7 @@ router.post('/offer', async (req, res) => {
     email: req.body.email,
     comments: 0,
     id: makeID(15),
+    type: req.body.type || 'request',
   });
   await keyv.set('offer-list', offerList);
   await keyv.set('offer-count', counter);
@@ -138,6 +139,7 @@ router.get('/offer/increment', async (req, res) => {
     email: out.email,
     comments: out.comments + 1 || 0,
     id: out.id,
+    type: out.type,
   });
   await keyv.set('offer-list', offerList);
   res.json(offerList);

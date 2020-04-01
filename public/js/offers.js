@@ -36,11 +36,12 @@ window.onload = () => {
       }
     }
 
-    async function addEntry(title, author, date, tags, description, dom, authorid, id, comments) {
+    async function addEntry(title, author, date, tags, description, dom, authorid, id, comments, type) {
       const close = `<button class="btn btn-danger hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
-      const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/requests/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
+      const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><p>${title.replace(/(.{17})..+/, '$1…')}</p></th>
+        <th scope="row"><p>${(type.charAt(0).toUpperCase() + type.slice(1)) === 'Request' ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>' : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'}</p></th>
+        <td><p>${title.replace(/(.{17})..+/, '$1…')}</p></td>
         <td><a href="${window.location.origin}/profile?id=${authorid}">${author}</a></td>
         <td>
           <div class="dropdown">
@@ -71,10 +72,10 @@ window.onload = () => {
         .then((body) => {
           document.querySelector(
             '#counter'
-          ).innerHTML = `Over <a>${body.counter}</a> and counting requests!`;
+          ).innerHTML = `Over <a>${body.counter}</a> and counting submissions!`;
         });
     }
-    if (window.location.href.includes('requests')) {
+    if (window.location.href.includes('requests') || window.location.href.includes('submissions')) {
       fetch(`${base}users`)
         .then((res) => res.json())
         .then((body) => {
@@ -90,15 +91,16 @@ window.onload = () => {
           const searchDate = urlParams.get('date');
           const searchQuantity = urlParams.get('quantity');
           const searchLocation = urlParams.get('location');
+          const searchType = urlParams.get('type');
           searchSetting = urlParams.get('setting');
 
           document.querySelector('#search-input').value =
-            searchItem || searchAuthor || searchDate || searchQuantity || searchLocation;
+            searchItem || searchAuthor || searchDate || searchQuantity || searchLocation || searchType;
 
           document.querySelector('#table').innerHTML = '';
           body.offerList.reverse().forEach((offer) => {
-            const { title, author, date, tags, id, authorid, description, comments } = offer;
-            if (searchItem || searchAuthor || searchDate || searchLocation || searchQuantity) {
+            const { title, author, date, tags, id, authorid, description, comments, type } = offer;
+            if (searchItem || searchAuthor || searchDate || searchLocation || searchQuantity || searchType) {
               if (
                 searchItem &&
                 stringSimilarity.compareTwoStrings(
@@ -139,8 +141,16 @@ window.onload = () => {
                 ) < 0.3
               )
                 return;
+              if (
+                searchType &&
+                stringSimilarity.compareTwoStrings(
+                  type || 'request',
+                  (searchType || (type || 'request')).split('+').join(' ')
+                ) < 0.3
+              )
+                return;
             }
-            if (counter >= 10) return;
+            if (counter >= 50) return;
             addEntry(
               esc(DOMPurify.sanitize(title)).substring(0, 30),
               esc(DOMPurify.sanitize(author)),
@@ -150,7 +160,8 @@ window.onload = () => {
               '#table',
               esc(DOMPurify.sanitize(authorid)),
               esc(DOMPurify.sanitize(id)),
-              esc(DOMPurify.sanitize(comments || 0))
+              esc(DOMPurify.sanitize(comments || 0)),
+              esc(DOMPurify.sanitize(type || 'request')),
             );
             addressOfOffers.push(description);
             ++counter;
@@ -246,6 +257,7 @@ window.onload = () => {
           email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
           date: new Date().toLocaleDateString('en-US'),
           comments: 0,
+          type: (document.querySelector('#request-radio').checked) ? 'request' : 'offer',
           csrf: document.querySelector('#csrf').value,
           tags: esc(
             DOMPurify.sanitize(
@@ -313,7 +325,7 @@ function enable() {
 }
 
 function search() {
-  window.location = `${window.location.origin}/requests?${searchSetting}=${document.querySelector(
+  window.location = `${window.location.origin}/requests?${searchSetting || 'item'}=${document.querySelector(
     '#search-input'
-  ).value || ''}&setting=${searchSetting}`;
+  ).value || ''}&setting=${searchSetting || 'item'}`;
 }

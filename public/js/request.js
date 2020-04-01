@@ -36,8 +36,8 @@ window.onload = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const reqId = urlParams.get('id');
         const offer = body.offerList.find((offer) => offer.id === reqId);
-        document.querySelector('#reqid').innerText = `Request: #${esc(DOMPurify.sanitize(reqId))}`;
-        const { title, author, date, tags, email, id, description } = offer;
+        const { title, author, date, tags, email, id, description, type } = offer;
+        document.querySelector('#reqid').innerText = `${(type.charAt(0).toUpperCase() + type.slice(1)) || 'Request'}: #${esc(DOMPurify.sanitize(reqId))}`;
         document.querySelector('#item').value = title;
         document.querySelector('#author').value = author;
         document.querySelector('#author').onclick = () => {

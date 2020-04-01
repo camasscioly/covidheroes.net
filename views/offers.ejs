@@ -2,8 +2,11 @@
     <div class="container"></div>
     <div class="container mt-2">
       <h1><i class="fas fa-list"></i> Requests</h1>
-      <p style="font-size: 120%;">Join the <a id="user-count">0</a> heroes helping each other. If you are in need of resources, <a href="/new">Click here to create a new request</a>. </p>
+      <p style="font-size: 120%;">Join the <a id="user-count">0</a> heroes helping each other.</p>
       <hr>
+      <div class="alert alert-primary" role="alert">
+        If you are in need of resources, <a href="/new">Click here to create a new request</a>.
+      </div>
       <form id="search" onsubmit="search(); return false;">
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">&nbsp;&nbsp;
@@ -22,7 +25,7 @@
         </div>
         <button type="submit" class="btn btn-primary" onclick="search()"><i class="fas fa-search" style="color: #fff !important"></i> Search</button>
         <button type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="window.location = `${location.origin}/requests`"><i class="fas fa-trash"></i> Reset</button><br>
-      </form>  
+      </form><br>
       <div class="table-responsive">
         <table class="table" id="dateTable">
           <thead>

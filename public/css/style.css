@@ -456,3 +456,9 @@ a:hover {
   transform: scale(1.1) perspective(0) rotateY(0deg) rotateX(0deg) rotate(0deg) !important;
   /*filter: brightness(1.5) saturate(1.25);*/
 }
+
+.alert-primary {
+  background: #6b63ff2d;
+  border: none;
+  border: 1px solid #6b63ffbb;
+}

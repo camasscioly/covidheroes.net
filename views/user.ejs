@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="text" class="form-control" id="password" maxlength="20" value="Loading...">
+      <input type="password" class="form-control" id="password" maxlength="20" value="Loading..." onfocusout="document.getElementById('password').type = 'password'" onfocus="document.getElementById('password').type = 'text'">
     </div>
     <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
     <button type="submit" class="btn btn-primary" id="save" disabled><i class="fas fa-save" style="color: #fff !important"></i> Save Profile</button>

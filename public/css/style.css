@@ -313,6 +313,10 @@ td {
   #lady {
     display: none !important;
   }
+
+  #lady2 {
+    display: none !important;
+  }
 }
 
 .hitbox {

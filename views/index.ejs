@@ -3,8 +3,8 @@
   <style>.pad { padding-left: 5%; padding-right: 5%; width: 100% !important; }</style>
   <div class="container mt-2">
     <div class="the-project pad" style="padding-top: 10%; padding-bottom: 16%;">
-      <div class="row">
-        <div class="col-md-6">
+      <div class="row justify-content-center">
+        <div class="col-md-6" id="scale">
           <div style="text-align: left;">
             <a class="announcement" href="https://team2471.org/infinite-resource/" target="_blank">
               <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">New</span>
@@ -19,8 +19,8 @@
             <button class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="if (localStorage.getItem('name')) return  alert(`You're already signed in!`); window.location=window.location.origin + '/login'"><i class="fas fa-sign-in-alt"></i> Log in</button>
           </div>
         </div>
-        <div class="col-md-6">
-          <video class="img-fluid hover" controls style="border-radius: 5px;" id="lady">
+        <div class="col-md-6" id="lady">
+          <video class="img-fluid hover" controls style="border-radius: 5px;">
             <source type="video/mp4" src="/media/teaser.mp4" />
           </video>
         </div>
@@ -37,9 +37,9 @@
 
     <div class="pad" style="padding-top: 10%; padding-bottom: 10%; font-size: 120%; color: #000; font-weight: bold; text-align: center">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div title="@jjangsuyx" style="margin-top: -3%"><img src="./img/covidheroes.png" class="hover img-fluid d-block float-md-right" width="330em"></div>
+        <div class="row justify-content-center">
+          <div class="col-md-6" id="lady2">
+            <div title="@jjangsuyx" style="margin-right: 3%; margin-top: -3%"><img src="./img/covidheroes.png" class="hover img-fluid d-block float-md-right" width="330em"></div><br>
           </div>
           <div class="col-md-3">
             <div class="hover"><i class="fas fa-users fa-2x"></i><br>Helpful Community</div><br>

@@ -90,6 +90,7 @@ window.onload = () => {
         esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
       );
       document.cookie = 'member=true';
+      alert(`You've been logged in.`);
       window.history.back();
     });
     return false;

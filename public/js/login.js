@@ -43,6 +43,7 @@ window.onload = () => {
       if (staff) localStorage.setItem('admin', true);
       localStorage.setItem('member', true);
       document.cookie = 'member=true';
+      alert(`You've been logged in.`);
       window.history.back();
     });
     return false;

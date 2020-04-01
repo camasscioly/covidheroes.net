@@ -435,3 +435,24 @@ a:hover {
   margin: 10px 0;
 }
 
+.perspective-right {
+  -webkit-transition: all .2s ease !important;
+  -o-transition: all .2s ease !important;
+  transition: all .2s ease !important;
+  -webkit-transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg) !important;
+  transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg) !important;
+  /* filter: brightness(1.25) saturate(1);*/
+  user-drag: none; 
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.perspective-right:hover {
+  -webkit-transition: all .2s ease !important;
+  -o-transition: all .2s ease !important;
+  transition: all .2s ease !important;
+  transform: scale(1.1) perspective(0) rotateY(0deg) rotateX(0deg) rotate(0deg) !important;
+  /*filter: brightness(1.5) saturate(1.25);*/
+}

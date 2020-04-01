@@ -314,6 +314,10 @@ td {
     display: none !important;
   }
 
+  .col-md-6 {
+    width: 100% !important;
+  }
+
   #lady2 {
     display: none !important;
   }

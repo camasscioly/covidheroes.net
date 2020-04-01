@@ -123,10 +123,17 @@
       }
       map = new google.maps.Map(document.getElementById('map'), options);
       const res = await fetch('https://ipapi.co/json/')
-        .then(res => res.json())
-      let geocoder = new google.maps.Geocoder();
-      await geocodeAddressMark(geocoder, map, address);
-      await geocodeAddressMark(geocoder, map, res.city || homeAddress);
+        .then(res => res.text())
+        .then(async response => {
+          let geocoder = new google.maps.Geocoder();
+          await geocodeAddressMark(geocoder, map, address);
+          await geocodeAddressMark(geocoder, map, response.city || homeAddress);
+        })
+        .catch(async (data, status) => {
+          let geocoder = new google.maps.Geocoder();
+          await geocodeAddressMark(geocoder, map, address);
+          await geocodeAddressMark(geocoder, map, homeAddress);
+        })
     }
 
     let coordCalcCount = 0;

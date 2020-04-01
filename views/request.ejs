@@ -30,18 +30,15 @@
             </form>
           </div>
           <div class="col-md-6">
-            <div class="card h-100" style="border: 0px solid #666">
+            <div class="card h-100" style="border: 0px solid #666;">
               <div class="card-body">
-                <h4 class="card-title" style="font-weight:700">Dropoff Location</h4>
-                <div id="map"></div>
-                <small id="stats">Your distance from the dropoff location is <a id="distance">0km</a>, or around a <a id="time">0min</a> drive.</small>
+                <div id="map" style="border-radius: 5px !important;"></div>
+                <small id="stats">You <b>(A)</b> are <a id="distance">0km</a> away from the Dropoff Location <b>(B)</b>, or around a <a id="time">0min</a> drive.</small>
               </div>
             </div>
           </div>
         </div>
-    </div>
-    </div>
-      </form><br>
+    </div><br>
       <h1>
         Fulfillment Process
       </h1>
@@ -67,7 +64,9 @@
         5. <b>Post</b> your comment.
       </p>
       <div id="disqus_thread"></div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=places,geometry"></script>
   <script defer>
+    let map;
     let address;
     let homeAddress;
     let coordArray = [];
@@ -104,8 +103,12 @@
       };
 
       if (!localStorage.getItem('name')) {
-        document.querySelector('#stats').innerHTML = 'Login to See Map Calculations';
-        return document.querySelector('#map').innerHTML = 'Login to See Map Data';
+        document.querySelector('#stats').innerHTML = '<a href="/login">Login to See Map Calculations</a>';
+        return document.querySelector('#map').innerHTML = '<a href="/login">Login to See Map Data</a>';
+      }
+      if (!localStorage.getItem('location').replace('Not Configured', '')) {
+        document.querySelector('#stats').innerHTML = '<a href="/me">Configure Location to See Map Calculations</a>';
+        return document.querySelector('#map').innerHTML = '<a href="/me">Configure Location to See Map Calculations</a>';
       }
       const service = new google.maps.places.AutocompleteService();
       service.getQueryPredictions({ input: document.querySelector('#location').value }, parse);
@@ -115,16 +118,15 @@
     async function initMap() { 
       let options = {
         zoom: 10, 
-        center: {
-          lat: 0, 
-          lng: 0
-        },
+        center: { lat: 0, lng: -180 },
         disableDefaultUI: true,
       }
-      let map = new google.maps.Map(document.getElementById('map'), options);
+      map = new google.maps.Map(document.getElementById('map'), options);
+      const res = await fetch('https://ipapi.co/json/')
+        .then(res => res.json())
       let geocoder = new google.maps.Geocoder();
       await geocodeAddressMark(geocoder, map, address);
-      await geocodeAddressMark(geocoder, map, homeAddress);
+      await geocodeAddressMark(geocoder, map, res.city || homeAddress);
     }
 
     let coordCalcCount = 0;
@@ -136,30 +138,41 @@
               results[0].geometry.location.lat(), results[0].geometry.location.lng()
             ]);
             ++coordCalcCount;
-            let opts = {
-              map: resultsMap,
-              position: results[0].geometry.location,
-              icon: {
-                url: `${window.location.origin}/img/target_marker.svg`,
-                scaledSize: new google.maps.Size(70, 70)
-              }
-            }
-            if (coordCalcCount === 1) {
-              opts.icon = {
-                url: `${window.location.origin}/img/home_marker.svg`,
-                scaledSize: new google.maps.Size(60, 60)
-              }
-            }
+            // let opts = {
+            //   map: resultsMap,
+            //   position: results[0].geometry.location,
+            //   icon: {
+            //     url: `${window.location.origin}/img/target_marker.svg`,
+            //     scaledSize: new google.maps.Size(60, 60)
+            //   },
+            //   anchorPoint: results[0].geometry.location
+            // }
+            // if (coordCalcCount === 1) {
+            //   opts.icon = {
+            //     url: `${window.location.origin}/img/home_marker.svg`,
+            //     scaledSize: new google.maps.Size(60, 60)
+            //   }
+            // }
             // let marker = new google.maps.Marker(opts);
+            // const circle = new google.maps.Circle({
+            //   map: map,
+            //   strokeWeight: 1,
+            //   strokeColor: '#48bb78',
+            //   radius: 200,    // 10 miles in metres
+            //   fillColor: '#abf5aa'
+            // });
+            // circle.bindTo('center', marker, 'position');
+            // map.fitBounds(circle.getBounds())
             if (coordCalcCount === 1) return res(true);
             resultsMap.setCenter(results[0].geometry.location);
             if (coordCalcCount === 2) {
               let directionsService = new google.maps.DirectionsService;
               let directionsDisplay = new google.maps.DirectionsRenderer;
-              directionsDisplay.setMap(resultsMap);
+              directionsDisplay.setMap(map);
               calculateAndDisplayRoute(directionsService, directionsDisplay);
               const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
-              document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
+              if (dist.endsWith('km')) document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
+              else document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60) / 1000}min`;
               document.querySelector('#distance').innerText = dist;
             }
             res(true);
@@ -173,10 +186,14 @@
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       directionsService.route({
-        origin: homeAddress,
-        destination: address,
-        travelMode: 'DRIVING'
-      }, function(response, status) {
+        origin: address,
+        destination: homeAddress,
+        travelMode: 'DRIVING',
+        drivingOptions: {
+          departureTime: new Date(Date.now() + 1),
+          trafficModel: 'optimistic'
+        }
+      }, (response, status) => {
         if (status === 'OK') {
           directionsDisplay.setDirections(response);
         } else {
@@ -185,28 +202,27 @@
       });
     }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=geometry,places"></script>
-    <script>
-      var disqus_config = function () {
-        this.page.url = window.location.href; 
-        this.page.identifier = (new URLSearchParams(window.location.search)).get('id');
-        this.callbacks.onNewComment = [function(comment) {
-          console.log(comment.id);
-          console.log(comment.text);
-          fetch(`${window.location.origin}/v1/offer/increment?id=${ID}`)
-        }];
-      };
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href; 
+      this.page.identifier = (new URLSearchParams(window.location.search)).get('id');
+      this.callbacks.onNewComment = [function(comment) {
+        console.log(comment.id);
+        console.log(comment.text);
+        fetch(`${window.location.origin}/v1/offer/increment?id=${ID}`)
+      }];
+    };
 
-      (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script');
-      s.src = 'https://corona-4.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-      })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                
-    </div>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://corona-4.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                              
+  </div>
   </div><br>
   <%- include('blocks/footer') %>
   <script id="dsq-count-scr" src="//corona-4.disqus.com/count.js" async></script>

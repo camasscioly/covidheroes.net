@@ -26,11 +26,11 @@ window.onload = () => {
     }
 
     async function addEntry(title, author, date, tags, id, dom, authorid, comments, description, type) {
-      const close = `<button style="color: #E81224 !important" class="btn btn-danger hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times" style="color: #E81224 !important"></i> Close</button>`;
+      const close = `<button class="btn btn-danger hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
       const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${(type.charAt(0).toUpperCase() + type.slice(1)) === 'Request' ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>' : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'}</p></th>
-        <td><p>${title.replace(/(.{17})..+/, '$1…')}</p></td>
+        <td><p style="font-weight: bold; color: #000 !important">${title.replace(/(.{17})..+/, '$1…')}</p></td>
         <td><a href="${window.location.origin}/@${author || undefined}">${author}</a></td>
         <td>
           <div class="dropdown">

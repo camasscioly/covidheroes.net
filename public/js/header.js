@@ -21,7 +21,7 @@ if (!localStorage.getItem('name')) {
             !body.users.find(
               (user) =>
                 user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id')
-            )
+            ) || document.cookie.indexOf('member=true') === -1
           ) {
             localStorage.clear();
             document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -31,8 +31,7 @@ if (!localStorage.getItem('name')) {
     },
     false
   );
-  if (!localStorage.getItem('name'))
-    document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
   fetch(`${base}users`)
     .then((res) => res.json())
     .then((body) => {
@@ -41,7 +40,7 @@ if (!localStorage.getItem('name')) {
         !body.users.find(
           (user) =>
             user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id')
-        )
+        ) || document.cookie.indexOf('member=true') === -1
       ) {
         localStorage.clear();
         document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';

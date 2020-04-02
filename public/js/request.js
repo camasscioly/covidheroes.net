@@ -36,6 +36,10 @@ window.onload = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const reqId = urlParams.get('id');
         const offer = body.offerList.find((offer) => offer.id === reqId);
+        if (!offer) {
+          alert('Not able to find submission.');
+          location = `${window.location.origin}/submissions`;
+        }
         let { title, author, date, tags, email, id, description, type } = offer;
         if (!type) type = 'request';
         document.querySelector('#reqid').innerText = `${(type.charAt(0).toUpperCase() + type.slice(1)) || 'Request'}: #${esc(DOMPurify.sanitize(reqId))}`;

@@ -117,7 +117,7 @@ window.onload = () => {
             esc(DOMPurify.sanitize(author)),
             esc(DOMPurify.sanitize(date)),
             esc(DOMPurify.sanitize(tags)),
-            esc(DOMPurify.sanitize(id)),
+            esc(DOMPurify.sanitize(offer.id)),
             '#table',
             esc(DOMPurify.sanitize(authorid)),
             esc(DOMPurify.sanitize(comments || 0)),

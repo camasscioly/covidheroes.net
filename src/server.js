@@ -30,7 +30,7 @@ app.use(
   '/v1',
   require('express-rate-limit')({
     windowMs: 1000,
-    max: 50,
+    max: 1000,
     headers: true,
     handler: (_req, res) => {
       res.boom.tooManyRequests();

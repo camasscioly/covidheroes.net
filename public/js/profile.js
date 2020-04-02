@@ -26,7 +26,7 @@ window.onload = () => {
     }
 
     async function addEntry(title, author, date, tags, id, dom, authorid, comments, description, type) {
-      const close = `<button class="btn btn-danger hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
+      const close = `<button style="color: #E81224 !important" class="btn btn-danger hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times" style="color: #E81224 !important"></i> Close</button>`;
       const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${(type.charAt(0).toUpperCase() + type.slice(1)) === 'Request' ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>' : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'}</p></th>
@@ -69,7 +69,7 @@ window.onload = () => {
     fetch(`${base}userdata?id=${id}`)
       .then((res) => res.json())
       .then((body) => {
-        let { email, name, location, rep, phone, staff } = body;
+        let { email, name, location, rep, phone, staff, verified } = body;
         let temp = name;
         if (phone.toLowerCase() === 'not configured') phone = '';
         if (location.toLowerCase() === 'not configured') location = '';
@@ -80,6 +80,7 @@ window.onload = () => {
         document.querySelector('#location').value = location;
         name = esc(DOMPurify.sanitize(name));
         if (staff) name = `${name} <span class="badge badge-outline-primary">STAFF</span>`;
+        if (verified) name = `${name} <i class="fas fa-badge-check" title="Official organization"></i>`;
         document.querySelector('#prof-head').innerHTML = `@${name}`;
         name = temp;
         document.querySelector(

@@ -28,11 +28,12 @@ window.onload = () => {
       }
     }
 
-    async function addEntry(user, id, rep, dom, staff) {
+    async function addEntry(user, id, rep, dom, staff, verified) {
       let origUser = user;
       if (localStorage.getItem('id') === id)
         user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
       if (staff) user = `${user} <span class="badge badge-outline-primary">STAFF</span>`;
+      if (verified) user = `${user} <i class="fas fa-badge-check" title="Official organization"></i>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
         <td>${id}</td>
@@ -48,10 +49,10 @@ window.onload = () => {
         let totals = [];
         users.forEach(async (user) => {
           try {
-            const { rep, staff } = await fetch(`${base}userdata?id=${user[1]}`).then((res) =>
+            const { rep, staff, verified } = await fetch(`${base}userdata?id=${user[1]}`).then((res) =>
               res.json()
             );
-            totals.push([user[0], user[1], String(rep.length), staff || false]);
+            totals.push([ user[0], user[1], String(rep.length), staff || false, verified || false ]);
             if (users.length === totals.length) {
               document.getElementById('table').innerHTML = '';
               totals
@@ -69,7 +70,8 @@ window.onload = () => {
                     esc(DOMPurify.sanitize(user[1])),
                     esc(DOMPurify.sanitize(user[2])),
                     '#table',
-                    user[3]
+                    user[3],
+                    user[4]
                   );
                 });
             }

@@ -3,7 +3,7 @@
     <div class="container mt-2">
       <h1><i class="fas fa-box-open"></i> Create a Submission</h1>
       <p style="font-size: 120%;" id="counter"><a>Loading...</a> and counting submissions!</p>
-      <form id="offers">
+      <form id="offers" onsubmit="return false;">
         <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
         <div class="form-group">
           <label for="title">Item</label>
@@ -30,7 +30,7 @@
           </label>
         </div><br>
         <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
-        <button type="submit" class="btn btn-primary" id="submit" disabled><i class="fas fa-paper-plane" style="color: #fff !important"></i> Submit</button>
+        <button type="submit" class="btn btn-primary" id="submission-button" disabled><i class="fas fa-paper-plane" style="color: #fff !important"></i> Submit</button>
       </form>
     </div>
   </div><br>
@@ -57,7 +57,7 @@
     function fillInAddress() {
       let place = autocomplete.getPlace();
     
-      for (let component in componentForm) {
+      /*for (let component in componentForm) {
         document.getElementById(component).value = '';
         document.getElementById(component).disabled = false;
       }
@@ -68,7 +68,7 @@
           let val = place.address_components[i][componentForm[addressType]];
           document.getElementById(addressType).value = val;
         }
-      }
+      }*/
     }
     
     function geolocate() {

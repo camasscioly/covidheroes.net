@@ -170,57 +170,6 @@ window.onload = () => {
         });
     }
     if (window.location.href.includes('new')) {
-      let placeSearch, autocomplete;
-
-      let componentForm = {
-        street_number: 'short_name',
-        route: 'long_name',
-        locality: 'long_name',
-        administrative_area_level_1: 'short_name',
-        country: 'long_name',
-        postal_code: 'short_name',
-      };
-
-      function initAutocomplete() {
-        autocomplete = new google.maps.places.Autocomplete(document.getElementById('location'), {
-          types: ['geocode'],
-        });
-        autocomplete.setFields(['address_component']);
-        autocomplete.addListener('place_changed', fillInAddress);
-      }
-
-      function fillInAddress() {
-        let place = autocomplete.getPlace();
-
-        for (let component in componentForm) {
-          document.getElementById(component).value = '';
-          document.getElementById(component).disabled = false;
-        }
-
-        for (let i = 0; i < place.address_components.length; i++) {
-          let addressType = place.address_components[i].types[0];
-          if (componentForm[addressType]) {
-            let val = place.address_components[i][componentForm[addressType]];
-            document.getElementById(addressType).value = val;
-          }
-        }
-      }
-
-      function geolocate() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((position) => {
-            let geolocation = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-            let circle = new google.maps.Circle({
-              center: geolocation,
-              radius: position.coords.accuracy,
-            });
-          });
-        }
-      }
-
       fetch(`${window.location.origin}/v1/offer`)
         .then((res) => res.json())
         .then((body) => {
@@ -232,23 +181,8 @@ window.onload = () => {
           });
         });
 
-      document.querySelector('#offers').onsubmit = () => {
+      document.querySelector('#submission-button').onclick = () => {
         if (!localStorage.getItem('admin')) if (reqs > 5) return alert('You cannot have more than 5 concurrent requests.');
-        fetch(`${base}users`)
-          .then((res) => res.json())
-          .then((body) => {
-            if (!localStorage.getItem('name')) return;
-            if (
-              !body.users.find(
-                (user) =>
-                  user[0] === localStorage.getItem('name') && user[1] === localStorage.getItem('id')
-              )
-            ) {
-              localStorage.clear();
-              location.reload();
-              return;
-            }
-          });
         postData(`${base}offer`, {
           title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
           author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
@@ -268,6 +202,7 @@ window.onload = () => {
           ),
         }).then((data) => {
           window.location = `${window.location.origin}/requests`;
+          return false;
         });
         return false;
       };
@@ -321,7 +256,7 @@ function esc(string) {
 }
 
 function enable() {
-  document.querySelector('#submit').disabled = false;
+  document.querySelector('#submission-button').disabled = false;
 }
 
 function search() {

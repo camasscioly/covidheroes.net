@@ -91,7 +91,7 @@ window.onload = () => {
       );
       document.cookie = 'member=true';
       alert(`You've been logged in.`);
-      window.history.back();
+      window.location = `${window.location.origin}/submissions`;
     });
     return false;
   };

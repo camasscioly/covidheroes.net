@@ -83,6 +83,7 @@ router.get('/@:username', appPage, async (req, res) => {
     });
     res.redirect(`${origin}/profile?id=${id}`);
   } catch(err) {
+    console.error(err);
     renderFile(req, res, '404');
   }
 });

@@ -112,18 +112,18 @@ window.onload = () => {
           const { title, author, date, tags, authorid, comments, description, type } = offer;
           if (authorid !== id) return;
           // (title, author, date, tags, id, dom, authorid, comments, description
-          addEntry(
-            esc(DOMPurify.sanitize(title)).substring(0, 30),
-            esc(DOMPurify.sanitize(author)),
-            esc(DOMPurify.sanitize(date)),
-            esc(DOMPurify.sanitize(tags)),
-            esc(DOMPurify.sanitize(offer.id)),
-            '#table',
-            esc(DOMPurify.sanitize(authorid)),
-            esc(DOMPurify.sanitize(comments || 0)),
-            esc(DOMPurify.sanitize(description)),
-            esc(DOMPurify.sanitize(type || 'request')),
-          );
+          // addEntry(
+          //   esc(DOMPurify.sanitize(title)).substring(0, 30),
+          //   esc(DOMPurify.sanitize(author)),
+          //   esc(DOMPurify.sanitize(date)),
+          //   esc(DOMPurify.sanitize(tags)),
+          //   esc(DOMPurify.sanitize(offer.id)),
+          //   '#table',
+          //   esc(DOMPurify.sanitize(authorid)),
+          //   esc(DOMPurify.sanitize(comments || 0)),
+          //   esc(DOMPurify.sanitize(description)),
+          //   esc(DOMPurify.sanitize(type || 'request')),
+          // );
         });
         offerList = body.offerList.reverse();
       });

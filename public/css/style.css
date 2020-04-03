@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600;700&display=swap');
 ::-webkit-scrollbar {
   background-color: #fff;
   width: 16px;
@@ -20,12 +21,23 @@ a:hover {
 }
 
 table {
-  border: 1px solid #dee2e6 !important;
-  border-radius: 15px !important;
+  /* border-bottom: 1px solid #000 !important; */
+  /* border-radius: 15px !important; */
+  text-align: center;
 }
 
 thead {
-  background: rgba(222, 226, 230, 0);
+  /* background: rgba(222, 226, 230, 0); */
+  font-family: 'Plex';
+  text-transform: uppercase;
+  font-size: 85%;
+  color: rgba(0, 0, 0, 0.521);
+}
+
+.actions {
+  font-family: 'Plex';
+  font-size: 85%;
+  text-transform: uppercase;
 }
 
 .table-responsive {
@@ -63,10 +75,6 @@ code {
 
 .maps {
   float: left;
-}
-
-table {
-  text-align: center;
 }
 
 input:focus,
@@ -242,9 +250,8 @@ input[type='number']:focus,
   vertical-align: middle;
 }
 
-tr,
-#pins {
-  background: rgba(206, 212, 218, 0.05) !important;
+tr {
+  border-bottom: 1px solid #EEEEEE;
 }
 
 #head {
@@ -333,34 +340,28 @@ td {
 
 input {
   transition: all 0.2s ease;
-  background: rgba(3, 3, 3, 0.03) !important;
+  background: #F5F4F9 !important;
   border: none !important;
   outline: none !important;
   border-radius: 0.3em !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-  border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
 }
 
 input:focus {
-  background: rgba(3, 3, 3, 0.1) !important;
-  border-bottom: 2px solid #6c63ff !important;
+  background: rgb(241, 239, 252) !important;
+}
+
+.card-signin {
+  box-shadow: 0 0 1.2rem rgba(0, 0, 0, 0.06) !important;
+  padding: 25px;
+  margin-top: 0 !important;
 }
 
 input:read-only {
   transition: all 0.2s ease;
-  background: rgba(3, 3, 3, 0.1) !important;
+  background: #F2F2F2 !important;
   border: none !important;
   outline: none !important;
-  border-radius: 3px !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.09) !important;
-  border-bottom-left-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
-}
-
-input:read-only:focus {
-  background: rgba(3, 3, 3, 0.15) !important;
-  border-bottom: 2px solid #6c63ff !important;
+  border-radius: 0.3em !important;
 }
 
 .underline {
@@ -396,7 +397,7 @@ a:hover {
   color: #fff;
   text-decoration: none;
 }
-
+/* 
 .dropdown-menu .sub-menu {
   left: 100%;
   position: absolute;
@@ -436,7 +437,7 @@ a:hover {
   left: 10px;
   top: 11px;
   left: -6px;
-}
+} */
 
 #map {
   height: 91%;

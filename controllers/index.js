@@ -3,6 +3,9 @@ const url = require('url');
 const renderFile = require('./../middleware/renderFile.js');
 const toLogin = require('./../middleware/toLogin.js');
 const toProfile = require('./../middleware/toProfile.js');
+const toSubmissions = require('./../middleware/toSubmissions.js');
+const appPage = require('./../middleware/appPage.js');
+const normalPage = require('./../middleware/normalPage.js');
 const Keyv = require('keyv');
 const csrf = require('csurf');
 const keyv = new Keyv(process.env.DB_URL);
@@ -13,63 +16,63 @@ keyv.on('error', (err) => {
 const router = Router();
 const csrfProtection = csrf({ cookie: true });
 
-router.get('/', async (req, res) => {
+router.get('/', toSubmissions, normalPage, async (req, res) => {
   renderFile(req, res, 'index');
 });
 
-router.get('/discuss', async (req, res) => {
+router.get('/discuss', normalPage, async (req, res) => {
   renderFile(req, res, 'discussion');
 });
 
-router.get('/heroes', toLogin, async (req, res) => {
+router.get('/heroes', toLogin, appPage, async (req, res) => {
   renderFile(req, res, 'users');
 });
 
-router.get('/login', toProfile, async (req, res) => {
+router.get('/login', toProfile, appPage, async (req, res) => {
   renderFile(req, res, 'login');
 });
 
-router.get('/signup', toProfile, csrfProtection, async (req, res) => {
+router.get('/signup', toProfile, appPage, csrfProtection, async (req, res) => {
   renderFile(req, res, 'signup', { csrfToken: req.csrfToken() });
 });
 
-router.get('/me', toLogin, csrfProtection, async (req, res) => {
+router.get('/me', toLogin, appPage, csrfProtection, async (req, res) => {
   renderFile(req, res, 'user', { csrfToken: req.csrfToken() });
 });
 
-router.get('/new', toLogin, csrfProtection, async (req, res) => {
+router.get('/new', toLogin, appPage, csrfProtection, async (req, res) => {
   renderFile(req, res, 'new', { csrfToken: req.csrfToken() });
 });
 
-router.get('/requests', async (req, res) => {
+router.get('/requests', appPage, async (req, res) => {
   renderFile(req, res, 'offers'); // deprecate this later
 });
 
-router.get('/submissions', async (req, res) => {
+router.get('/submissions', appPage, async (req, res) => {
   renderFile(req, res, 'offers');
 });
 
-router.get('/requests/open', async (req, res) => {
+router.get('/requests/open', appPage, async (req, res) => {
   renderFile(req, res, 'request'); 
 });
 
-router.get('/submissions/open', async (req, res) => {
+router.get('/submissions/open', appPage, async (req, res) => {
   renderFile(req, res, 'request'); // deprecate this later
 });
 
-router.get('/profile', toLogin, async (req, res) => {
+router.get('/profile', toLogin, appPage, async (req, res) => {
   renderFile(req, res, 'profile');
 });
 
-router.get('/terms', async (req, res) => {
+router.get('/terms', normalPage, async (req, res) => {
   renderFile(req, res, 'terms');
 });
 
-router.get('/team', async (req, res) => {
+router.get('/team', normalPage, async (req, res) => {
   renderFile(req, res, 'team');
 });
 
-router.get('/@:username', async (req, res) => {
+router.get('/@:username', appPage, async (req, res) => {
   try {
     const name = req.params.username.toLowerCase();
     const userList = (await keyv.get('user-list')) || [];
@@ -84,7 +87,7 @@ router.get('/@:username', async (req, res) => {
   }
 });
 
-router.use((req, res) => {
+router.use(normalPage, (req, res) => {
   renderFile(req, res, '404');
 });
 

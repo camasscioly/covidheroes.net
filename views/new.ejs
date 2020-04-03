@@ -1,39 +1,51 @@
 <%- include('blocks/header') %>
-    <div class="container"></div>
-    <div class="container mt-2">
-      <h1><i class="fas fa-box-open"></i> Create a Submission</h1>
-      <p style="font-size: 120%;" id="counter"><a>Loading...</a> and counting submissions!</p>
-      <form id="offers" onsubmit="return false;">
-        <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
-        <div class="form-group">
-          <label for="title">Item</label>
-          <input type="text" class="form-control" id="title" placeholder="Enter Item Name" maxlength="30" required>
-        </div>
-        <div class="form-group">
-          <label for="location">Dropoff Address</label>
-          <input onFocus="geolocate()" type="text" class="form-control" id="location" placeholder="Enter Dropoff Address" maxlength="40" required>
-        </div>
-        <div class="form-group">
-          <label for="tags">Quantity</label>
-          <input maxlength="7" min="1" max="1000000" type="number" class="form-control" id="tags" placeholder="Enter Quantity of Item" maxlength="10" required>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="request-radio" value="option1" checked>
-          <label class="form-check-label" for="request-radio">
-            I am requesting resources
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="offer-radio" value="option2">
-          <label class="form-check-label" for="offer-radio">
-            I am offering resources
-          </label>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h1 class="card-title" style="font-size: 170%">Create new submission</h1>
+            <p style="font-size: 120%;" id="counter"><a>Loading...</a> and counting submissions!</p>
+            <form id="offers" onsubmit="return false;">
+              <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
+              <div class="form-group">
+                <label for="title">Item</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter Item Name" maxlength="30" required>
+              </div>
+              <div class="form-group">
+                <label for="location">Dropoff Address</label>
+                <input onFocus="geolocate()" type="text" class="form-control" id="location" placeholder="Enter Dropoff Address" maxlength="40" required>
+              </div>
+              <div class="form-group">
+                <label for="tags">Quantity</label>
+                <input maxlength="7" min="1" max="1000000" type="number" class="form-control" id="tags" placeholder="Enter Quantity of Item" maxlength="10" required>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="request-radio" value="option1" checked>
+                <label class="form-check-label" for="request-radio">
+                  I am requesting resources
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="offer-radio" value="option2">
+                <label class="form-check-label" for="offer-radio">
+                  I am offering resources
+                </label>
+              </div><br>
+              <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
+              <button type="submit" class="btn btn-primary" id="submission-button" disabled>Submit</button>           
+              <button type="button" class="btn btn-secondary" id="cancel-button" onclick="window.history.back()">Cancel</button> 
+            </form>
+          </div>
         </div><br>
-        <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
-        <button type="submit" class="btn btn-primary" id="submission-button" disabled><i class="fas fa-paper-plane" style="color: #fff !important"></i> Submit</button>
-      </form>
+      </div>
     </div>
-  </div><br>
+  </div>
+  <style>
+    body {
+      background: #F7FAFC !important;
+    }
+  </style>
   <%- include('blocks/footer') %>
   <script>
     let placeSearch, autocomplete;

@@ -1,86 +1,90 @@
-<%- include('blocks/header') %>
-    <div class="container"></div>
-    <div class="container mt-2">
-      <h1 id="prof-head">Profile</h1>
-      <p id="prof-link"></p>
-      <p id="logoff"> 
-        
-      </p>
-      <form onsubmit="return false;">
-        <div class="form-group">
-          <label for="name">Username</label>
-          <input type="text" class="form-control" id="name" readonly>
+<%- include('blocks/app-header') %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h1 id="prof-head" class="card-title" style="font-size: 170%">Profile</h1>
+          <p id="prof-link"></p>
+          <p id="logoff"> 
+            
+          </p>
+          <form onsubmit="return false;">
+            <div class="form-group">
+              <label for="name">Username</label>
+              <input type="text" class="form-control" id="name" readonly>
+            </div>
+            <div class="form-group">
+              <label for="rep">Repuation</label>
+              <input type="text" class="form-control" value="Loading..." id="rep" readonly>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" value="Loading..." id="email" readonly>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" value="Loading..." id="phone" readonly>
+            </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" class="form-control" value="Loading..." id="location" readonly>
+            </div>
+            <p id="change">
+              <button class="btn btn-primary" id="give-rep"><i style="color: #fff !important" class="fas fa-plus"></i> Give Rep</button>
+            </p>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="rep">Repuation</label>
-          <input type="text" class="form-control" value="Loading..." id="rep" readonly>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" value="Loading..." id="email" readonly>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="text" class="form-control" value="Loading..." id="phone" readonly>
-        </div>
-        <div class="form-group">
-          <label for="location">Location</label>
-          <input type="text" class="form-control" value="Loading..." id="location" readonly>
-        </div>
-        <p id="change">
-          <button class="btn btn-primary" id="give-rep"><i style="color: #fff !important" class="fas fa-plus"></i> Give Rep</button>
-        </p>
-      </form><br><hr><br>
-      <h1>Open Submissions by User</h1>
-      <div class="table-responsive">
-        <table class="table" id="dateTable">
-          <thead>
-            <tr id="head">
-              <th scope="col">Type</th>
-              <th scope="col">Item</th>
-              <th scope="col">Author</th>
-              <th scope="col">Information</th>
-              <th scope="col">Controls</th>
-            </tr>
-          </thead>
-          <tbody id="table">
-            <tr id="loading1" style="color: rgba(0, 0, 0, 0.3)">
-              <th scope="row" style="color: rgba(107, 99, 255, 0.3)">Loading...</a></th>
-              <td>Loading...</td>
-              <td>Loading...</td>
-              <td>Loading...</td>
-            </tr>
-            <tr id="loading2" style="color: rgba(0, 0, 0, 0.25)">
-              <th scope="row" style="color: rgba(107, 99, 255, 0.25)">Loading...</a></th>
-              <td>Loading...</td>
-              <td>Loading...</td>
-              <td>Loading...</td>
-            </tr>
-            <tr id="loading3" style="color: rgba(0, 0, 0, 0.2)">
-              <th scope="row" style="color: rgba(107, 99, 255, 0.2)">Loading...</a></th>
-              <td>Loading...</td>
-              <td>Loading...</td>
-              <td>Loading...</td>
-            </tr>
-            <tr id="loading4" style="color: rgba(0, 0, 0, 0.15)">
-              <th scope="row" style="color: rgba(107, 99, 255, 0.15)">Loading...</a></th>
-              <td>Loading...</td>
-              <td>Loading...</td>
-              <td>Loading...</td>
-            </tr>
-            <tr id="loading5" style="color: rgba(0, 0, 0, 0.1)">
-              <th scope="row" style="color: rgba(107, 99, 255, 0.1)">Loading...</a></th>
-              <td>Loading...</td>
-              <td>Loading...</td>
-              <td>Loading...</td>
-            </tr>
-          </tbody>
-          <br />
-        </table>
       </div>
-      
     </div>
-  </div><br>
+  </div>
+  <!-- <div class="table-responsive">
+    <table class="table" id="dateTable">
+      <thead>
+        <tr id="head">
+          <th scope="col">Type</th>
+          <th scope="col">Item</th>
+          <th scope="col">Author</th>
+          <th scope="col">Information</th>
+          <th scope="col">Controls</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+        <tr id="loading1" style="color: rgba(0, 0, 0, 0.3)">
+          <th scope="row" style="color: rgba(107, 99, 255, 0.3)">Loading...</a></th>
+          <td>Loading...</td>
+          <td>Loading...</td>
+          <td>Loading...</td>
+        </tr>
+        <tr id="loading2" style="color: rgba(0, 0, 0, 0.25)">
+          <th scope="row" style="color: rgba(107, 99, 255, 0.25)">Loading...</a></th>
+          <td>Loading...</td>
+          <td>Loading...</td>
+          <td>Loading...</td>
+        </tr>
+        <tr id="loading3" style="color: rgba(0, 0, 0, 0.2)">
+          <th scope="row" style="color: rgba(107, 99, 255, 0.2)">Loading...</a></th>
+          <td>Loading...</td>
+          <td>Loading...</td>
+          <td>Loading...</td>
+        </tr>
+        <tr id="loading4" style="color: rgba(0, 0, 0, 0.15)">
+          <th scope="row" style="color: rgba(107, 99, 255, 0.15)">Loading...</a></th>
+          <td>Loading...</td>
+          <td>Loading...</td>
+          <td>Loading...</td>
+        </tr>
+        <tr id="loading5" style="color: rgba(0, 0, 0, 0.1)">
+          <th scope="row" style="color: rgba(107, 99, 255, 0.1)">Loading...</a></th>
+          <td>Loading...</td>
+          <td>Loading...</td>
+          <td>Loading...</td>
+        </tr>
+      </tbody>
+      <br />
+    </table>
+  </div> -->
+</div>
   <%- include('blocks/footer') %>
   <script src="./js/profile.js" defer></script>
 </body>

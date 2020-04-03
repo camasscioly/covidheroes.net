@@ -63,7 +63,7 @@ window.onload = () => {
                   return a[2] - b[2];
                 })
                 .reverse()
-                .slice(range, range + 10)
+                //.slice(range, range + 10)
                 .forEach((user) => {
                   addEntry(
                     esc(DOMPurify.sanitize(user[0])),

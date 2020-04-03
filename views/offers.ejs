@@ -1,8 +1,11 @@
-<%- include('blocks/header') %>
+<%- include('blocks/app-header') %>
     <div class="container"></div>
     <div class="container mt-2">
-      <h1><i class="fas fa-list"></i> Submissions</h1>
-      <p style="font-size: 120%;">Join the <a id="user-count">0</a> heroes helping each other.</p>
+      <center>
+        <h1><i class="fas fa-list"></i> Submissions</h1>
+        <p style="font-size: 120%;">Join the <a id="user-count">0</a> heroes helping each other.</p>
+      </center>
+      
       <hr>
       <div class="alert alert-primary" role="alert">
         If you are in need or can offer resources, <a href="/new">Click here to create a new submission</a>.
@@ -11,7 +14,7 @@
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">&nbsp;&nbsp;
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
+            <button style="background: #F5F4F9 !important; color: #636E7D !important" class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
               Setting
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdown">
@@ -31,17 +34,15 @@
         <table class="table" id="dateTable">
           <thead>
             <tr id="head">
-              <th scope="col">Type</th>
               <th scope="col">Item</th>
               <th scope="col">Author</th>
               <th scope="col">Information</th>
-              <th scope="col">Controls</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody id="table">
             <tr id="loading1" style="color: rgba(0, 0, 0, 0.3)">
               <th scope="row" style="color: rgba(107, 99, 255, 0.3)">Loading...</a></th>
-              <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
@@ -51,11 +52,9 @@
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
-              <td>Loading...</td>
             </tr>
             <tr id="loading3" style="color: rgba(0, 0, 0, 0.2)">
               <th scope="row" style="color: rgba(107, 99, 255, 0.2)">Loading...</a></th>
-              <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
@@ -65,11 +64,9 @@
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
-              <td>Loading...</td>
             </tr>
             <tr id="loading5" style="color: rgba(0, 0, 0, 0.1)">
               <th scope="row" style="color: rgba(107, 99, 255, 0.1)">Loading...</a></th>
-              <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
               <td>Loading...</td>
@@ -80,6 +77,7 @@
       </div>
     </div>
   </div><br>
+  
   <%- include('blocks/footer') %>
   <script src="//unpkg.com/string-similarity/umd/string-similarity.min.js"></script>
   <script src="./js/offers.js" defer></script>

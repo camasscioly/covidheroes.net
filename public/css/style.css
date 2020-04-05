@@ -318,7 +318,7 @@ td {
 
 @media screen and (max-width: 960px) {
   #lady {
-    display: none !important;
+    width: 100% !important;
   }
 
   .col-md-6 {

@@ -2,7 +2,7 @@
   <script src="https://cdn.jsdelivr.net/npm/afterglowplayer@1/dist/afterglow.min.js"></script>
   <style>.pad { padding-left: 5%; padding-right: 5%; width: 100% !important; }</style>
   <div class="container-fluid mt-2">
-    <div class="container" style="padding-top: 5%; padding-bottom: 10%;">
+    <div class="container" style="padding-top: 5%; padding-bottom: 7%">
       <div class="row row-grid align-items-center">
         <div class="col-md-6">
           <div style="text-align: left;">
@@ -25,14 +25,29 @@
         </div>
       </div>
     </div>
-    
-    <div style="padding-top: 8%; padding-bottom: 8%; background: #F5F4F9;">
-      <div class="container pad">
-        <h2 style="font-weight: bold; font-size: 250%;"> Our Mission</h2>
-        <p style="font-size: 120%;">
-          We aim to help people in need during the COVID-19 epidemic locate, receive, and exchange needed necessities from within their community.
-        </p>
-        <button class="btn hover" style="outline: none; border: none;background: #fff; padding: 12px; padding-right: 20px; padding-left: 20px; border-radius: 7px; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important;"><a href="/team" class="hitbox">Our Team <i class="fas fa-arrow-right"></i></a></button>
+    <div style="text-align: center">
+      <small style="color: #666">Supported By</small><br>
+      <div class="the-project" style="padding-bottom: 2%;">
+        <div>
+          <a href="http://vca-usa.org/" target="_blank"><img style="filter: grayscale(1); opacity: 0.4" target="_blank" src="/img/vca-logo.png" width="80px;" title="Vancouver Chinese Association"></a>&nbsp;&nbsp;&nbsp;
+          <a href="http://team2471.org/" target="_blank"><img style="filter: grayscale(1); opacity: 0.4" target="_blank" src="/img/2471-logo.png" width="60px;" title="Team Mean Machine"></a>&nbsp;&nbsp;&nbsp;
+          <a href="http://camasscioly.weebly.com/" target="_blank"><img style="filter: grayscale(1); opacity: 0.4" target="_blank" src="/img/camas-scioly-logo.png" width="70px;" title="Camas Science Olympiad Club"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-grid row justify-content-center align-self-center" style="padding: 12%; background: #F5F4F9; vertical-align: middle">
+      <div class="col-md-6 my-auto" id="lady" style="text-align: center">
+        <img src="/img/surgeonhero.png" width="48%">
+      </div>
+      <div class="col-md-6 my-auto">
+        <div class="container pad">
+          <h2 style="font-weight: bold; font-size: 250%;"> Our Mission</h2>
+          <p style="font-size: 120%;">
+            We aim to help people in need during the COVID-19 epidemic locate, receive, and exchange needed necessities from within their community.
+          </p>
+          <button class="btn hover" style="outline: none; border: none ;background: #fff; padding: 12px; padding-right: 20px; padding-left: 20px; border-radius: 7px; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important;"><a href="/team" class="hitbox">Our Team <i class="fas fa-arrow-right"></i></a></button>
+        </div>
       </div>
     </div>
 
@@ -45,17 +60,22 @@
       <div class="hover"><i class="fas fa-lock fa-2x"></i><br>Secure</div>
     </div>
 
-    <div style="padding-top: 10%; padding-bottom: 10%; background: #F5F4F9;">
-      <div class="container pad">
-        <h2 style="font-weight: bold; font-size: 250%;">How it Works</h2>
-        <p style="font-size: 120%;">
-          We provide a platform for individuals and communities to request resources, or to fulfill requests of those in need during the COVID-19 epidemic. 
-        </p>
-        <button class="btn hover" style="outline: none; border: none;background: #fff; padding: 12px; padding-right: 20px; padding-left: 20px; border-radius: 7px; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important;"><a href="/requests" class="hitbox">Requests <i class="fas fa-arrow-right"></i></a></button> 
+    <div class="row-grid row justify-content-center align-self-center" style="padding: 12%; background: #F5F4F9; vertical-align: middle">
+      <div class="col-md-6 my-auto" id="lady" style="text-align: center">
+        <img src="/img/covidheroes.png" width="48%">
+      </div>
+      <div class="col-md-6 my-auto">
+        <div class="container pad">
+          <h2 style="font-weight: bold; font-size: 250%;"> How it Works</h2>
+          <p style="font-size: 120%;">
+            We provide a platform for individuals and communities to request resources, or to fulfill requests of those in need during the COVID-19 epidemic. 
+          </p>
+          <button class="btn hover" style="outline: none; border: none;background: #fff; padding: 12px; padding-right: 20px; padding-left: 20px; border-radius: 7px; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important;"><a href="/requests" class="hitbox">Requests <i class="fas fa-arrow-right"></i></a></button> 
+        </div>
       </div>
     </div>
 
-    <div class="container" style="padding-top: 10%; padding-bottom: 10%; text-align: center">
+    <div class="container" style="padding-top: 5%; padding-bottom: 5%; text-align: center">
       <h1 style="font-weight: 1000; font-size: 250%; ">Join the Fight Today!</h1>
       <p style="font-size: 120%;">We are the ones who will stop COVID-19, one step at a time.</p>
       <button class="btn btn-primary" onclick="if (localStorage.getItem('name')) return alert(`You're already signed in!`); window.location=window.location.origin + '/signup'"><i class="fas fa-hand-spock" style="color: #fff !important;"></i> Join Us Today!</button>

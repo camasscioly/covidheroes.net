@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon --watch controllers --watch middleware --watch src src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/index.js"
   },
   "repository": {
     "type": "git",
@@ -54,6 +54,7 @@
   "devDependencies": {
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
+    "tape": "^4.13.2",
     "yarn": "^1.22.4"
   }
 }

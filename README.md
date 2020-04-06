@@ -1,8 +1,8 @@
 COVID Heroes
 ====
-[![Build Status](https://travis-ci.org/madhums/node-express-mongoose-demo.svg?branch=master)](https://travis-ci.org/madhums/node-express-mongoose-demo)
+[![Build Status](https://travis-ci.org/10hstartup/web?branch=master)](https://travis-ci.org/10hstartup/web)
 [![Dependencies](https://img.shields.io/david/10hstartup/web.svg?style=flat)](https://img.shields.io/david/10hstartup/web.svg?style=flat)
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/madhums/node-express-mongoose-demo)
+[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/10hstartup/web)
 
 A platform that bridges requesters and fullfillers for medical supplies.
 

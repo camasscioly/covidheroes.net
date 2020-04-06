@@ -25,7 +25,7 @@ Useful Links
 
 [The website](https://covidheroes.net) hosts the production version of the website.
 
-[The website](https://covidheroes.net) hosts the production version of the website.
+[Our Github Repository](https://github.com/10hstartup/web) contains the most updated code.
 
 License
 -------

@@ -471,3 +471,7 @@ a:hover {
   border: none;
   border: 1px solid #6b63ffbb;
 }
+
+.eac-sugg {
+  color: #ccc !important;
+}

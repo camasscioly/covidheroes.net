@@ -1,4 +1,4 @@
-if (window.location.origin.includes('herokuapp')) window.location = `https://covidheroes.net`;
+if (window.location.origin.includes('covid19-tracker-10h')) window.location = `https://covidheroes.net`;
 if (!localStorage.getItem('name')) {
   document.querySelector(
     '#account'

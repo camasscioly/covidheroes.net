@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const Keyv = require('keyv');
- 
+
 const { join } = require('path');
 
 const v1Routes = require('./../controllers/v1.js');
@@ -13,7 +13,7 @@ const app = express();
 app.enable('trust proxy', true);
 
 app.disable('view cache');
-app.set('view engine', 'ejs'); 
+app.set('view engine', 'ejs');
 app.set('views', join(__dirname, './../views'));
 
 app.use(require('express-boom')());
@@ -25,6 +25,13 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
 app.use(require('morgan')('dev'));
 app.use(express.static('public'));
+
+app.use(
+  require('express-session')({
+    secret: 'covidheroes',
+    cookie: { maxAge: 60000 },
+  })
+);
 
 app.use(
   '/v1',

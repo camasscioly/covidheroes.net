@@ -79,13 +79,16 @@ window.onload = () => {
         document.querySelector('#phone').value = phone;
         document.querySelector('#location').value = location;
         name = esc(DOMPurify.sanitize(name));
-        if (staff) name = `${name} <span class="badge badge-outline-primary">STAFF</span>`;
-        if (verified) name = `${name} <i class="fas fa-badge-check" title="Official organization"></i>`;
+        if (staff) name = `${name} <span class="badge badge-outline-primary" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team">STAFF</span>`;
+        if (verified) name = `${name} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
         document.querySelector('#prof-head').innerHTML = `@${name}`;
         name = temp;
         document.querySelector(
           '#prof-link'
         ).innerHTML = `<b>Profile: <a href="${window.location.origin}/@${name}">${window.location.origin}/@${name}</a></b>`;
+        $(function() {
+          $('[data-toggle="tooltip"]').tooltip();
+        });
       })
       .catch((err) => {
         alert('Oops! Something went wrong...');

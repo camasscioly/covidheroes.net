@@ -32,13 +32,16 @@ window.onload = () => {
       let origUser = user;
       if (localStorage.getItem('id') === id)
         user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
-      if (staff) user = `${user} <span class="badge badge-outline-primary">STAFF</span>`;
-      if (verified) user = `${user} <i class="fas fa-badge-check" title="Official organization"></i>`;
+      if (staff) user = `${user} <span class="badge badge-outline-primary" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team">STAFF</span>`;
+      if (verified) user = `${user} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top"title="Official organization"></i>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
         <td>${id}</td>
         <td><b><i class="fas fa-sort-up"></i>${rep}</b></td>
       </tr>`;
+      $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
     }
 
     fetch(`${base}users`)

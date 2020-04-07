@@ -1,8 +1,4 @@
 # These are supported funding model platforms
 
-github: # aidenybai
-patreon: ayb
-open_collective: # Replace with a single Open Collective username
-ko_fi: # Replace with a single Ko-fi username
-tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
-custom: # Replace with a single custom sponsorship URL
+github: aidenybai
+custom: https://www.gofundme.com/f/help-create-covid-heroes?utm_source=customer&utm_medium=copy_link&utm_campaign=p_cf+share-flow-1

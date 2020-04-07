@@ -10,15 +10,30 @@
               <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
               <div class="form-group">
                 <label for="title">Item</label>
-                <input type="text" class="form-control" id="title" placeholder="Enter Item Name" maxlength="30" required>
+                <input list="itemlist" type="text" class="form-control autoCompleteItem" autocomplete="off" id="title" placeholder="Enter Item Name" maxlength="30" required>
               </div>
+              <datalist id="itemlist">
+                <option value="Ventilators">
+                <option value="N95 Respirators">
+                <option value="Surgical Masks">
+                <option value="Coveralls">
+                <option value="Surgical or Exam Gowns">
+                <option value="Face Shields">
+                <option value="Goggles">
+                <option value="Examination Gloves">
+                <option value="Hand Sanitizers">
+                <option value="Wipes">
+                <option value="Test Kits">
+                <option value="Swabs">
+                <option value="Viral Testing Media">
+              </datalist>
               <div class="form-group">
                 <label for="location">Dropoff Address</label>
                 <input onFocus="geolocate()" type="text" class="form-control" id="location" placeholder="Enter Dropoff Address" maxlength="40" required>
               </div>
               <div class="form-group">
                 <label for="tags">Quantity</label>
-                <input maxlength="7" min="1" max="1000000" type="number" class="form-control" id="tags" placeholder="Enter Quantity of Item" maxlength="10" required>
+                <input maxlength="7" min="1" max="1000000" type="number" autocomplete="off" class="form-control" id="tags" placeholder="Enter Quantity of Item" maxlength="10" required>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="exampleRadios" id="request-radio" value="option1" checked>

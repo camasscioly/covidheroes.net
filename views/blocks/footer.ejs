@@ -8,20 +8,23 @@
 
           <div class="col-md-4 col-sm-6 col-xs-12">
             <ul class="social-icons">
-              <li><a class="hover" href="https://www.gofundme.com/f/help-create-covid-heroes?utm_source=customer&utm_medium=copy_link&utm_campaign=p_cf+share-flow-1" target="_blank"><i class="fas fa-money-bill-wave-alt"></i></a></li>
-              <li><a class="hover" href="https://www.producthunt.com/posts/covid-heroes?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-covid-heroes" target="_blank"><i class="fab fa-product-hunt"></i></a></li>
-              <li><a class="hover" href="https://instagram.com/covid_heroes_official" target="_blank"><i class="fab fa-instagram"></i></a></li>
+              <li data-toggle="tooltip" data-placement="top" title="GoFundMe"><a class="hover" href="https://www.gofundme.com/f/help-create-covid-heroes?utm_source=customer&utm_medium=copy_link&utm_campaign=p_cf+share-flow-1" target="_blank"><i class="fas fa-money-bill-wave-alt"></i></a></li>
+              <li data-toggle="tooltip" data-placement="top" title="ProductHunt"><a class="hover" href="https://www.producthunt.com/posts/covid-heroes?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-covid-heroes" target="_blank"><i class="fab fa-product-hunt"></i></a></li>
+              <li data-toggle="tooltip" data-placement="top" title="Instagram"><a class="hover" href="https://instagram.com/covid_heroes_official" target="_blank"><i class="fab fa-instagram"></i></a></li>
             </ul>
           </div>
         </div>
       </div>
     </footer>
-    <script>
+    <script defer>
       var APP_ID = "mnsa7ogc";
 
       window.intercomSettings = {
         app_id: APP_ID
       };
       (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/' + APP_ID;var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+      $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
     </script>
     

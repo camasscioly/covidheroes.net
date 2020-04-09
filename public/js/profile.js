@@ -110,7 +110,7 @@ window.onload = () => {
     fetch(`${window.location.origin}/v1/offer`)
       .then((res) => res.json())
       .then((body) => {
-        document.querySelector('#table').innerHTML = '';
+        // document.querySelector('#table').innerHTML = '';
         body.offerList.reverse().forEach((offer) => {
           const { title, author, date, tags, authorid, comments, description, type } = offer;
           if (authorid !== id) return;

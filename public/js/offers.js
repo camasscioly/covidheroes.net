@@ -37,24 +37,19 @@ window.onload = () => {
     }
 
     async function addEntry(title, author, date, tags, description, dom, authorid, id, comments, type) {
-      const close = `<button style="padding: 0 !important" class="btn btn-danger hover actions" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Close</button>`;
+      const close = `<button style="padding: 0 !important; color: #7A7A7A !important" class="btn btn-danger hover actions" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Close</button>`;
       const fulfill = ` <button style="padding: 0 !important" class="btn btn-danger hover actions" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'">Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><p>${(type.charAt(0).toUpperCase() + type.slice(1)) === 'Request' ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>' : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'} ${title.replace(/(.{17})..+/, '$1…')}</p></th>
         <td><a href="${window.location.origin}/profile?id=${authorid}">${author}</a></td>
         <td>
-          <div class="dropdown" style="margin: 0 !important">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
-              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments ||
-                0}</span> Details
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdown">
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Date</b>: ${date}</a>
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Quantity</b>: ${tags}</a>
-              <a style="background: #fff !important;" class="hover dropdown-item" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description
-                .split(' ')
-                .join('+')}"><b>Location</b>: ${description.replace(/(.{17})..+/, '$1…')}</a>
-            </div>
+          <div style="margin: 0 !important">
+            <span data-toggle="tooltip" data-placement="top" title="${date} - ${tags}x - ${description}">
+              <i style="color: #000 !important" class="fas fa-info-circle"></i>
+            </span>
+            <span style="color: #6c63ff; font-weight: bold">
+              <i class="fas fa-comment-alt"></i> ${comments || 0}
+            </span>
           </div>
         </td>
         <td>${
@@ -166,6 +161,9 @@ window.onload = () => {
             ++counter;
           });
           offerList = body.offerList.reverse();
+          $(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+          });
         });
     }
     if (window.location.href.includes('new')) {
@@ -180,7 +178,7 @@ window.onload = () => {
           });
         });
 
-      document.querySelector('#submission-button').onclick = () => {
+      document.querySelector('#offers').onsubmit = () => {
         if (!localStorage.getItem('admin')) if (reqs > 5) return alert('You cannot have more than 5 concurrent requests.');
         postData(`${base}offer`, {
           title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),

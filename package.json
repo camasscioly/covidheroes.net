@@ -1,7 +1,7 @@
 {
   "name": "covid-heroes",
   "version": "1.0.0",
-  "description": "A platform that bridges requesters and fullfillers for medical supplies.",
+  "description": "COVID-19 communication platform to support medical workers.",
   "main": "src/server.js",
   "private": false,
   "engines": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/10hstartup/web.git"
+    "url": "git+https://github.com/camasscioly/covidheroes.net.git"
   },
   "keywords": [
     "covid",
@@ -28,7 +28,7 @@
   "author": "Aiden Bai <aidenybai@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/10hstartup/web/issues"
+    "url": "https://github.com/camasscioly/covidheroes.net/issues"
   },
   "homepage": "https://covidheroes.net",
   "dependencies": {

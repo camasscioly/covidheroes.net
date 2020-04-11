@@ -6,3 +6,4 @@
 *.jpg binary
 public/* linguist-vendored=true
 .github/* linguist-vendored=true
+views/* linguist-vendored=true

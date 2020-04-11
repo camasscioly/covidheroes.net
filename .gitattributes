@@ -4,3 +4,5 @@
 # Denote all files that are truly binary and should not be modified.
 *.mp4 binary
 *.jpg binary
+public/* linguist-vendored=true
+.github/* linguist-vendored=true

@@ -6,7 +6,7 @@ const rootRoutes = require('./../controllers/index.js');
 
 const app = express();
 
-class Server {
+class App {
   constructor(port = (process.env.PORT = 3000)) {
     this._port = port;
   }
@@ -54,4 +54,4 @@ class Server {
   }
 }
 
-module.exports = Server;
+module.exports = App;

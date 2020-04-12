@@ -49,6 +49,7 @@
     "helmet": "^3.21.3",
     "html-minifier": "^4.0.0",
     "keyv": "^4.0.0",
+    "mailgun-js": "false0.22.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {

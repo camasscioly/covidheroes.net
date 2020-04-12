@@ -53,8 +53,9 @@ window.onload = () => {
         <td>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
-              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${comments ||
-                0}</span> Info
+              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${
+                comments || 0
+              }</span> Info
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdown">
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Date</b>: ${date}</a>
@@ -91,6 +92,9 @@ window.onload = () => {
         let temp = name;
         if (phone.toLowerCase() === 'not configured') phone = '';
         if (location.toLowerCase() === 'not configured') location = '';
+        document.querySelector(
+          '#prof-img'
+        ).src = `https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${name}`;
         document.querySelector('#name').value = name;
         document.querySelector('#rep').value = rep.length;
         document.querySelector('#email').value = email;
@@ -106,7 +110,7 @@ window.onload = () => {
         document.querySelector(
           '#prof-link'
         ).innerHTML = `<b>Profile: <a href="${window.location.origin}/@${name}">${window.location.origin}/@${name}</a></b>`;
-        $(function() {
+        $(function () {
           $('[data-toggle="tooltip"]').tooltip();
         });
       })

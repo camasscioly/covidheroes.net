@@ -100,7 +100,9 @@ window.onload = () => {
           ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>'
           : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
       } ${title.replace(/(.{17})..+/, '$1…')}</p></th>
-        <td><a href="${window.location.origin}/profile?id=${authorid}">${
+        <td><a data-toggle="tooltip" data-placement="top" data-original-title="<img src='https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${author}'><p>${author}</p>" href="${
+        window.location.origin
+      }/profile?id=${authorid}">${
         localStorage.getItem('name') === author
           ? '<span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>'
           : author
@@ -252,8 +254,10 @@ window.onload = () => {
             ++counter;
           });
           offerList = body.offerList.reverse();
-          $(function() {
-            $('[data-toggle="tooltip"]').tooltip();
+          $('[data-toggle="tooltip"]').tooltip({
+            animated: 'fade',
+            placement: 'bottom',
+            html: true,
           });
         });
     }
@@ -349,7 +353,7 @@ function enable() {
 }
 
 function search() {
-  window.location = `${window.location.origin}/requests?${searchSetting ||
-    'item'}=${document.querySelector('#search-input').value || ''}&setting=${searchSetting ||
-    'item'}`;
+  window.location = `${window.location.origin}/requests?${searchSetting || 'item'}=${
+    document.querySelector('#search-input').value || ''
+  }&setting=${searchSetting || 'item'}`;
 }

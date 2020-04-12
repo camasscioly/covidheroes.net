@@ -8,7 +8,7 @@ const app = express();
 
 class Server {
   constructor(port = (process.env.PORT = 3000)) {
-    this.port = port;
+    this._port = port;
   }
 
   start() {
@@ -50,7 +50,7 @@ class Server {
     app.use('/v1', v1Routes);
     app.use(rootRoutes);
 
-    app.listen(this.port, () => console.log(`Listening on port ${this.port}`));
+    app.listen(this._port, () => console.log(`Listening on port ${this._port}`));
   }
 }
 

@@ -102,7 +102,7 @@ window.onload = () => {
         document.querySelector('#location').value = location;
         name = esc(DOMPurify.sanitize(name));
         if (staff)
-          name = `${name} <span class="badge badge-outline-primary" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team">STAFF</span>`;
+          name = `${name} <i class="far fa-star" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team"></i>`;
         if (verified)
           name = `${name} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
         document.querySelector('#prof-head').innerHTML = `@${name}`;
@@ -210,3 +210,5 @@ function esc(string) {
 function enable() {
   document.querySelector('#submit').disabled = false;
 }
+
+document.getElementById('prof-img').ondragstart = () => false;

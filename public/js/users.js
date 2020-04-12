@@ -33,7 +33,7 @@ window.onload = () => {
       if (localStorage.getItem('id') === id)
         user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
       if (staff)
-        user = `${user} <span class="badge badge-outline-primary" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team">STAFF</span>`;
+        user = `${user} <i class="far fa-star" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team"></i>`;
       if (verified)
         user = `${user} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
@@ -41,7 +41,7 @@ window.onload = () => {
         <td>${id}</td>
         <td><b><i class="fas fa-sort-up"></i>${rep}</b></td>
       </tr>`;
-      $(function() {
+      $(function () {
         $('[data-toggle="tooltip"]').tooltip();
       });
     }

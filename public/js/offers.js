@@ -357,3 +357,10 @@ function search() {
     document.querySelector('#search-input').value || ''
   }&setting=${searchSetting || 'item'}`;
 }
+
+function update(type) {
+  if (type === 'range')
+    document.querySelector('#tags').value = document.querySelector('#slider').value;
+  if (type === 'input')
+    document.querySelector('#slider').value = document.querySelector('#tags').value;
+}

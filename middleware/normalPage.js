@@ -3,10 +3,11 @@ module.exports = (req, res, next) => {
   const sub = parts[0] || null;
   const domain = parts[1];
   const type = `.${parts[2]}` || '';
-  const fixed = `${req.protocol}://${`${req.get('host').replace(/^[^.]+\./g, '')}`}${req.originalUrl}`;
+  const fixed = `${req.protocol}://${`${req.get('host').replace(/^[^.]+\./g, '')}`}${
+    req.originalUrl
+  }`;
   if (sub !== 'app') {
     res.cookie('member', '', { expires: new Date(0) });
     next();
-  }
-  else res.redirect(fixed);
+  } else res.redirect(fixed);
 };

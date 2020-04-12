@@ -32,8 +32,10 @@ window.onload = () => {
       let origUser = user;
       if (localStorage.getItem('id') === id)
         user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
-      if (staff) user = `${user} <span class="badge badge-outline-primary" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team">STAFF</span>`;
-      if (verified) user = `${user} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top"title="Official organization"></i>`;
+      if (staff)
+        user = `${user} <span class="badge badge-outline-primary" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team">STAFF</span>`;
+      if (verified)
+        user = `${user} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
         <td>${id}</td>
@@ -52,10 +54,10 @@ window.onload = () => {
         let totals = [];
         users.forEach(async (user) => {
           try {
-            const { rep, staff, verified } = await fetch(`${base}userdata?id=${user[1]}`).then((res) =>
-              res.json()
-            );
-            totals.push([ user[0], user[1], String(rep.length), staff || false, verified || false ]);
+            const { rep, staff, verified } = await fetch(
+              `${base}userdata?id=${user[1]}`
+            ).then((res) => res.json());
+            totals.push([user[0], user[1], String(rep.length), staff || false, verified || false]);
             if (users.length === totals.length) {
               document.getElementById('table').innerHTML = '';
               totals

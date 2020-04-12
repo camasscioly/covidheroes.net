@@ -15,5 +15,6 @@
   "prettier.tabWidth": 2,
   "prettier.trailingComma": "es5",
   "useTabs": false,
-  "prettier.endOfLine": "lf"
+  "prettier.endOfLine": "lf",
+  "files.eol": "\n"
 }

@@ -122,7 +122,7 @@ window.onload = async () => {
           .substring(0, 50)
           .toLowerCase()
           .replace(/[^a-z0-9]/gi, '')
-          .replace(/\s/g, '') 
+          .replace(/\s/g, '')
       );
       localStorage.setItem(
         'email',

@@ -9,6 +9,7 @@ const normalPage = require('./../middleware/normalPage.js');
 const Keyv = require('keyv');
 const csrf = require('csurf');
 const keyv = new Keyv(process.env.DB_URL);
+
 keyv.on('error', (err) => {
   console.error(err);
 });
@@ -53,7 +54,7 @@ router.get('/submissions', appPage, async (req, res) => {
 });
 
 router.get('/requests/open', appPage, async (req, res) => {
-  renderFile(req, res, 'request'); 
+  renderFile(req, res, 'request');
 });
 
 router.get('/submissions/open', appPage, async (req, res) => {
@@ -79,10 +80,10 @@ router.get('/@:username', appPage, async (req, res) => {
     const id = userList.find((block) => block[0] === name)[1];
     const origin = url.format({
       protocol: req.protocol,
-      host: req.get('host')
+      host: req.get('host'),
     });
     res.redirect(`${origin}/profile?id=${id}`);
-  } catch(err) {
+  } catch (err) {
     console.error(err);
     renderFile(req, res, '404');
   }

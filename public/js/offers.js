@@ -36,12 +36,75 @@ window.onload = () => {
       }
     }
 
-    async function addEntry(title, author, date, tags, description, dom, authorid, id, comments, type) {
+    async function insertEntry(
+      title,
+      author,
+      date,
+      tags,
+      description,
+      dom,
+      authorid,
+      id,
+      comments,
+      type
+    ) {
+      const close = `<button style="padding: 0 !important; color: #7A7A7A !important" class="btn btn-danger hover actions" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Close</button>`;
+      const fulfill = ` <button style="padding: 0 !important" class="btn btn-danger hover actions" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'">Open</button>`;
+      document.querySelector(dom).innerHTML = `<tr id="${id}">
+        <th scope="row"><p data-toggle="tooltip" data-placement="top" data-original-title="${title}">${
+        type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
+          ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>'
+          : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
+      } ${title.replace(/(.{17})..+/, '$1…')}</p></th>
+        <td><a href="${window.location.origin}/profile?id=${authorid}">${
+        localStorage.getItem('name') === author
+          ? '<span class="badge badge-outline-primary" data-toggle="tooltip" data-placement="top" data-original-title="This is you">YOU</span>'
+          : author
+      }</a></td>
+        <td>
+          <div style="margin: 0 !important">
+            <span data-toggle="tooltip" data-placement="top" title="${date} - ${tags}x - ${description}">
+              <i style="color: #000 !important" class="fas fa-info-circle"></i>
+            </span>
+            <span style="color: #6c63ff; font-weight: bold">
+              <i class="fas fa-comment-alt"></i> ${comments || 0}
+            </span>
+          </div>
+        </td>
+        <td>${
+          localStorage.getItem('name') === author || localStorage.getItem('admin')
+            ? fulfill + close
+            : fulfill
+        }</td>
+      </tr>
+      ${document.querySelector(dom).innerHTML}`;
+    }
+
+    async function addEntry(
+      title,
+      author,
+      date,
+      tags,
+      description,
+      dom,
+      authorid,
+      id,
+      comments,
+      type
+    ) {
       const close = `<button style="padding: 0 !important; color: #7A7A7A !important" class="btn btn-danger hover actions" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Close</button>`;
       const fulfill = ` <button style="padding: 0 !important" class="btn btn-danger hover actions" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'">Open</button>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><p>${(type.charAt(0).toUpperCase() + type.slice(1)) === 'Request' ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>' : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'} ${title.replace(/(.{17})..+/, '$1…')}</p></th>
-        <td><a href="${window.location.origin}/profile?id=${authorid}">${author}</a></td>
+        <th scope="row"><p data-toggle="tooltip" data-placement="top" data-original-title="${title}">${
+        type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
+          ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>'
+          : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
+      } ${title.replace(/(.{17})..+/, '$1…')}</p></th>
+        <td><a href="${window.location.origin}/profile?id=${authorid}">${
+        localStorage.getItem('name') === author
+          ? '<span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>'
+          : author
+      }</a></td>
         <td>
           <div style="margin: 0 !important">
             <span data-toggle="tooltip" data-placement="top" title="${date} - ${tags}x - ${description}">
@@ -89,12 +152,24 @@ window.onload = () => {
           searchSetting = urlParams.get('setting');
 
           document.querySelector('#search-input').value =
-            searchItem || searchAuthor || searchDate || searchQuantity || searchLocation || searchType;
+            searchItem ||
+            searchAuthor ||
+            searchDate ||
+            searchQuantity ||
+            searchLocation ||
+            searchType;
 
           document.querySelector('#table').innerHTML = '';
           body.offerList.reverse().forEach((offer) => {
             const { title, author, date, tags, id, authorid, description, comments, type } = offer;
-            if (searchItem || searchAuthor || searchDate || searchLocation || searchQuantity || searchType) {
+            if (
+              searchItem ||
+              searchAuthor ||
+              searchDate ||
+              searchLocation ||
+              searchQuantity ||
+              searchType
+            ) {
               if (
                 searchItem &&
                 stringSimilarity.compareTwoStrings(
@@ -139,24 +214,40 @@ window.onload = () => {
                 searchType &&
                 stringSimilarity.compareTwoStrings(
                   type || 'request',
-                  (searchType || (type || 'request')).split('+').join(' ')
+                  (searchType || type || 'request').split('+').join(' ')
                 ) < 0.3
               )
                 return;
             }
             if (counter >= 50) return;
-            addEntry(
-              esc(DOMPurify.sanitize(title)).substring(0, 30),
-              esc(DOMPurify.sanitize(author)),
-              esc(DOMPurify.sanitize(date)),
-              esc(DOMPurify.sanitize(tags)),
-              esc(DOMPurify.sanitize(description)),
-              '#table',
-              esc(DOMPurify.sanitize(authorid)),
-              esc(DOMPurify.sanitize(id)),
-              esc(DOMPurify.sanitize(comments || 0)),
-              esc(DOMPurify.sanitize(type || 'request')),
-            );
+            if (author === localStorage.getItem('name')) {
+              insertEntry(
+                esc(DOMPurify.sanitize(title)).substring(0, 30),
+                esc(DOMPurify.sanitize(author)),
+                esc(DOMPurify.sanitize(date)),
+                esc(DOMPurify.sanitize(tags)),
+                esc(DOMPurify.sanitize(description)),
+                '#table',
+                esc(DOMPurify.sanitize(authorid)),
+                esc(DOMPurify.sanitize(id)),
+                esc(DOMPurify.sanitize(comments || 0)),
+                esc(DOMPurify.sanitize(type || 'request'))
+              );
+            } else {
+              addEntry(
+                esc(DOMPurify.sanitize(title)).substring(0, 30),
+                esc(DOMPurify.sanitize(author)),
+                esc(DOMPurify.sanitize(date)),
+                esc(DOMPurify.sanitize(tags)),
+                esc(DOMPurify.sanitize(description)),
+                '#table',
+                esc(DOMPurify.sanitize(authorid)),
+                esc(DOMPurify.sanitize(id)),
+                esc(DOMPurify.sanitize(comments || 0)),
+                esc(DOMPurify.sanitize(type || 'request'))
+              );
+            }
+
             addressOfOffers.push(description);
             ++counter;
           });
@@ -179,7 +270,8 @@ window.onload = () => {
         });
 
       document.querySelector('#offers').onsubmit = () => {
-        if (!localStorage.getItem('admin')) if (reqs > 5) return alert('You cannot have more than 5 concurrent requests.');
+        if (!localStorage.getItem('admin'))
+          if (reqs > 5) return alert('You cannot have more than 5 concurrent requests.');
         postData(`${base}offer`, {
           title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
           author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),
@@ -188,7 +280,7 @@ window.onload = () => {
           email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
           date: new Date().toLocaleDateString('en-US'),
           comments: 0,
-          type: (document.querySelector('#request-radio').checked) ? 'request' : 'offer',
+          type: document.querySelector('#request-radio').checked ? 'request' : 'offer',
           csrf: document.querySelector('#csrf').value,
           tags: esc(
             DOMPurify.sanitize(
@@ -257,7 +349,7 @@ function enable() {
 }
 
 function search() {
-  window.location = `${window.location.origin}/requests?${searchSetting || 'item'}=${document.querySelector(
-    '#search-input'
-  ).value || ''}&setting=${searchSetting || 'item'}`;
+  window.location = `${window.location.origin}/requests?${searchSetting ||
+    'item'}=${document.querySelector('#search-input').value || ''}&setting=${searchSetting ||
+    'item'}`;
 }

@@ -1,4 +1,8 @@
-# <img src="https://covidheroes.net/img/text_logo.svg" width="300px">
+<a href="https://covidheroes.net/">
+  <img src="public/img/logo.svg" width="100px" align="right" />
+</a>
+
+# COVID Heroes
 
 [![Build Status](https://travis-ci.org/10hstartup/web.svg?branch=master)](https://travis-ci.org/10hstartup/web)
 [![Dependencies](https://img.shields.io/david/10hstartup/web.svg?style=flat)](https://img.shields.io/david/10hstartup/web.svg?style=flat)

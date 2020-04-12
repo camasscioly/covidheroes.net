@@ -2,7 +2,7 @@
   "name": "covid-heroes",
   "version": "1.0.0",
   "description": "COVID-19 communication platform to support medical workers.",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "private": false,
   "engines": {
     "node": ">=10.11.0",
@@ -10,8 +10,8 @@
     "yarn": ">=1.5.1"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon --watch controllers --watch middleware --watch src src/server.js",
+    "start": "node src/index.js",
+    "dev": "nodemon --watch controllers --watch middleware --watch src src/index.js",
     "test": "node tests/index.js"
   },
   "repository": {

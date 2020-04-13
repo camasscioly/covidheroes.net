@@ -4,7 +4,7 @@
   <h1><i class="fas fa-users"></i> Heroes</h1>
   <p style="font-size: 120%;">Who's currently contributing the most?</p>
   <div class="table-responsive">
-    <table class="table" id="dateTable">
+    <table class="table" id="dateTable" style="border-radius: 10px !important">
       <thead>
         <tr id="head">
           <th scope="col">Name</th>
@@ -12,7 +12,7 @@
           <th scope="col">Reputation</th>
         </tr>
       </thead>
-      <tbody id="table">
+      <tbody id="table" style="background: #fff">
         <tr id="loading1" style="color: rgba(0, 0, 0, 0.3)">
           <th scope="row" style="color: rgba(107, 99, 255, 0.3)">Loading...</a></th>
           <td>Loading...</td>
@@ -45,6 +45,11 @@
 
 </div>
 </div><br>
+<style>
+  body {
+    background: #F6F6F6;
+  }
+</style>
 <%- include('blocks/footer') %>
 <script src="./js/users.js" defer></script>
 </body>

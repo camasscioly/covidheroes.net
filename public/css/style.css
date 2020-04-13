@@ -355,7 +355,7 @@ input:focus {
 .card-signin {
   border: none;
   border-top: 3px solid #6b63ffbb;
-  /* box-shadow: 0 0 1.2rem rgba(0, 0, 0, 0.06) !important; */
+  box-shadow: 0 0 1.2rem rgba(0, 0, 0, 0.06) !important;
   padding: 25px;
   margin-top: 0 !important;
 }
@@ -446,6 +446,7 @@ a:hover {
 #map {
   height: 91%;
   margin: 10px 0;
+  box-shadow: 0 0 0.12rem rgba(0, 0, 0, 0.21) !important;
 }
 
 .perspective-right {
@@ -620,4 +621,8 @@ a:hover {
 
 .custom-range::-ms-thumb {
   background: #6b63ff;
+}
+
+#search-input {
+  background: #fff !important;
 }

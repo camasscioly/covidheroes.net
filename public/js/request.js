@@ -40,22 +40,26 @@ window.onload = () => {
           alert('Not able to find submission.');
           location = `${window.location.origin}/submissions`;
         }
-        let { title, author, date, tags, email, id, description, type } = offer;
+        let { title, author, date, tags, email, id, description, type, authorid } = offer;
         if (!type) type = 'request';
-        document.querySelector('#reqid').innerText = `${type.charAt(0).toUpperCase() +
-          type.slice(1) || 'Request'}: #${esc(DOMPurify.sanitize(reqId))}`;
+        document.querySelector('#reqid').innerText = `${
+          type.charAt(0).toUpperCase() + type.slice(1) || 'Request'
+        }: #${esc(DOMPurify.sanitize(reqId))}`;
         document.querySelector('#item').value = title;
         document.querySelector('#author').value = author;
         document.querySelector('#date').value = date;
         document.querySelector('#quantity').value = tags;
         document.querySelector('#location').value = description;
-        if (localStorage.getItem('name'))
+        if (localStorage.getItem('name')) {
+          let close = `<button class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>`;
+          if (localStorage.id === authorid)
+            document.querySelector('#prof-delete').innerHTML = close;
           document.querySelector('#prof-link').value = `<a href="${
             window.location.origin
           }/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem(
             'name'
           )}</a>`;
-        else document.querySelector('#prof-link').value = 'Login to get a profile link.';
+        } else document.querySelector('#prof-link').value = 'Login to get a profile link.';
         document.querySelector(
           '#prof-link-author'
         ).innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">${window.location.origin}/@${author}</a></b>`;

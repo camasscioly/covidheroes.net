@@ -1,35 +1,46 @@
 <%- include('blocks/app-header') %>
-    <div class="container"></div>
-    <div class="container mt-2">
-      <center>
-        <h1><i class="fas fa-hand-holding-heart"></i> Submissions</h1>
-        <p style="font-size: 120%;">Join the <a id="user-count">0</a> heroes with <a id="req-count">0</a> concurrent requests helping each other.</p>
-      </center>
-       
-      <hr>
-      <div class="alert alert-primary" role="alert">
-        If you are in need or can offer resources, <a href="/new">Click here to create a new submission</a>.
-      </div>
-      <form id="search" onsubmit="search(); return false;">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">
-          <!--&nbsp;&nbsp;<div class="dropdown">
-            <button style="background: #F5F4F9 !important; color: #636E7D !important" class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
-              Setting
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdown">
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'item'; document.querySelector('#search-input').placeholder = 'Search Item'; document.querySelector('#search-input').value = ''">Item</a>
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'author'; document.querySelector('#search-input').placeholder = 'Search Author'; document.querySelector('#search-input').value = ''">Author</a>
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'date'; document.querySelector('#search-input').placeholder = 'Search Date'; document.querySelector('#search-input').value = ''">Date</a>
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'quantity'; document.querySelector('#search-input').placeholder = 'Search Quantity'; document.querySelector('#search-input').value = ''">Quantity</a>
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'location'; document.querySelector('#search-input').placeholder = 'Search Location'; document.querySelector('#search-input').value = ''">Location</a>
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'type'; document.querySelector('#search-input').placeholder = 'Search Type'; document.querySelector('#search-input').value = ''">Type</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="card-text">
+            <h1><i class="fas fa-hand-holding-heart"></i> Submissions</h1>
+            <p style="font-size: 120%;">Join the <a id="user-count">0</a> heroes with <a id="req-count">0</a> concurrent requests helping each other.</p>
+             
+            <hr>
+            <div class="alert alert-primary" role="alert">
+              If you are in need or can offer resources, <a href="/new">Click here to create a new submission</a>.
             </div>
-          </div> -->
+            <form id="search" onsubmit="search(); return false;">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">
+                <!--&nbsp;&nbsp;<div class="dropdown">
+                  <button style="background: #F5F4F9 !important; color: #636E7D !important" class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
+                    Setting
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdown">
+                    <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'item'; document.querySelector('#search-input').placeholder = 'Search Item'; document.querySelector('#search-input').value = ''">Item</a>
+                    <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'author'; document.querySelector('#search-input').placeholder = 'Search Author'; document.querySelector('#search-input').value = ''">Author</a>
+                    <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'date'; document.querySelector('#search-input').placeholder = 'Search Date'; document.querySelector('#search-input').value = ''">Date</a>
+                    <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'quantity'; document.querySelector('#search-input').placeholder = 'Search Quantity'; document.querySelector('#search-input').value = ''">Quantity</a>
+                    <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'location'; document.querySelector('#search-input').placeholder = 'Search Location'; document.querySelector('#search-input').value = ''">Location</a>
+                    <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'type'; document.querySelector('#search-input').placeholder = 'Search Type'; document.querySelector('#search-input').value = ''">Type</a>
+                  </div>
+                </div> -->
+              </div>
+              <!-- <button type="submit" class="btn btn-primary" onclick="search()"><i class="fas fa-search" style="color: #fff !important"></i> Search</button>
+              <button type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="window.location = `${location.origin}/requests`"><i class="fas fa-trash"></i> Reset</button><br> -->
+            </form>
+          </p>
         </div>
-        <!-- <button type="submit" class="btn btn-primary" onclick="search()"><i class="fas fa-search" style="color: #fff !important"></i> Search</button>
-        <button type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="window.location = `${location.origin}/requests`"><i class="fas fa-trash"></i> Reset</button><br> -->
-      </form><br>
+        <div class="col-md-6">
+          <div class="hover" id="map" style="border-radius: 5px !important; height: 91% !important"></div>
+          <small id="stats"></small>
+        </div>
+      </div>
+    </div>
+    <hr style="margin-bottom: 25px;">
+    <div class="container mt-2">
+
       <div class="row" id="cardView">
         
       </div>
@@ -80,8 +91,60 @@
       </div> -->
     </div>
   </div><br>
-  
+  <style>
+    body {
+      background: #F6F6F6;
+    }
+  </style>
   <%- include('blocks/footer') %>
+  <script defer>
+    let map;
+
+    function initService() {
+      if (!localStorage.getItem('name')) {
+        document.querySelector('#stats').innerHTML = '<a href="/login">Login to See Map Calculations</a>';
+        return document.querySelector('#map').innerHTML = '<a href="/login">Login to See Map Data</a>';
+      }
+      if (!localStorage.getItem('location').replace('Not Configured', '')) {
+        document.querySelector('#stats').innerHTML = '<a href="/me">Configure Location to See Map Calculations</a>';
+        return document.querySelector('#map').innerHTML = '<a href="/me">Configure Location to See Map Calculations</a>';
+      }
+      initMap();
+    }
+
+    async function initMap() { 
+      let options = {
+        zoom: 15, 
+        center: { lat: 0, lng: -180 },
+        disableDefaultUI: true,
+      }
+      map = new google.maps.Map(document.querySelector('#map'), options);
+      let geocoder = new google.maps.Geocoder();
+      await geocodeAddressMark(geocoder, map, localStorage.location);
+    }
+
+    async function geocodeAddressMark(geocoder, resultsMap, address) {
+      return new Promise((res, rej) => {
+        geocoder.geocode({ address }, (results, status) => {
+          if (status === 'OK') {
+            console.log(results);
+            let opts = {
+              map: resultsMap,
+              position: results[0].geometry.location,
+              anchorPoint: results[0].geometry.location
+            }
+            let marker = new google.maps.Marker(opts);
+            res(true);
+            resultsMap.setCenter(results[0].geometry.location);
+          } else {
+            alert(status);
+            rej(false);
+          }
+        });
+      }); 
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=places,geometry&callback=initService"></script>
   <script src="//unpkg.com/string-similarity/umd/string-similarity.min.js"></script>
   <script src="./js/offers.js" defer></script>
   </body>

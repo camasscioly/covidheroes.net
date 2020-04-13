@@ -4,39 +4,40 @@
       <center>
         <h1 id="reqid"></h1>
         <p style="font-size: 120%" id="prof-link-author"></p>
-        <p id="prof-delete"></p>
       </center>
       
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <form id="req">
-              <div class="form-group">
-                <label for="item">Item</label>
-                <input type="text" class="form-control" id="item" value="Loading..." readonly>
+            <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
+              <div class="card-body" id="infocard">
+                <h5 class="card-title" id="title">
+                  
+                </h5>
+                  <p class="card-text">
+                    <form id="req">
+                      <div class="form-group">
+                        <label for="item">Item</label>
+                        <input type="text" class="form-control" id="item" value="Loading..." readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="text" class="form-control" id="date" value="Loading..." readonly>
+                      </div>
+                      <div class="form-group">
+                        <label for="location">Dropoff Address</label>
+                        <input type="text" class="form-control" id="location" value="Loading..." readonly>
+                      </div>
+                    </form>
+                  </p>
+                  <p id="prof-delete" class="text-right"></p>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" class="form-control" id="author" value="Loading..." readonly>
-              </div>
-              <div class="form-group">
-                <label for="date">Date</label>
-                <input type="text" class="form-control" id="date" value="Loading..." readonly>
-              </div>
-              <div class="form-group">
-                <label for="location">Dropoff Address</label>
-                <input type="text" class="form-control" id="location" value="Loading..." readonly>
-              </div>
-              <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="number" class="form-control" id="quantity" value="Loading..." readonly>
-              </div>
-            </form>
           </div>
           <div class="col-md-6">
-            <div class="card h-100 hover" style="border: 0px solid #666;">
+            <div class="card h-100 hover" style="border: 0px solid #666; border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
               <div class="card-body">
-                <div id="map" style="border-radius: 5px !important;"></div>
+                <div id="map" style="border-radius: 5px !important; height: 80.5% !important"></div><hr>
                 <small id="stats">You <b>(A)</b> are <a id="distance">0km</a> away from the Dropoff Location <b>(B)</b>, or around a <a id="time">0min</a> drive.</small>
               </div>
             </div>
@@ -88,6 +89,11 @@
         </div><br>
       <div id="disqus_thread"></div>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=places,geometry"></script>
+  <style>
+    body {
+      background: #F6F6F6 !important;
+    }
+  </style>
   <script defer>
     let map;
     let address;

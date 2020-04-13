@@ -27,7 +27,7 @@ Give it a spin: https://covidheroes.net/
 
 ## Getting Started
 
-## Installation
+### Installation
 
 ```bash
 git clone https://github.com/camasscioly/covidheroes.net.git
@@ -36,7 +36,7 @@ cd covidheroes.net
 
 Note: You will need at least NodeJS 10.18.1+, VSCode 1.44+, and MongoDB 3+. You will also need to configure .env variables before launching.
 
-## Environment Variables
+### Configuring Environment Variables
 
 ```bash
 # Environment Config
@@ -52,7 +52,7 @@ MAILGUN_API_KEY=example-mailgun-token
 
 Rename `.env.example` to `.env` to be able to interact with `process.env` in NodeJS.
 
-## Usage
+### Usage
 
 COVID Heroes follows the latest maintenance LTS version of Node.
 
@@ -62,7 +62,7 @@ yarn dev
 # production: yarn start
 ```
 
-# FAQ
+## FAQ
 
 #### Q: Who maintains COVID Heroes?
 

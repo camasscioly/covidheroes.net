@@ -41,17 +41,62 @@ window.onload = () => {
           location = `${window.location.origin}/submissions`;
         }
         let { title, author, date, tags, email, id, description, type, authorid } = offer;
+        console.log(offer);
+        let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        let months = [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December',
+        ];
+        let now = new Date(date);
+        date = `${days[now.getDay()]}, ${
+          months[now.getMonth()]
+        } ${now.getDate()}, ${now.getFullYear()}`;
         if (!type) type = 'request';
         document.querySelector('#reqid').innerText = `${
           type.charAt(0).toUpperCase() + type.slice(1) || 'Request'
         }: #${esc(DOMPurify.sanitize(reqId))}`;
-        document.querySelector('#item').value = title;
-        document.querySelector('#author').value = author;
-        document.querySelector('#date').value = date;
-        document.querySelector('#quantity').value = tags;
-        document.querySelector('#location').value = description;
+        document.querySelector('#title').innerHTML = `
+          <div class="d-flex">
+            <div>
+              ${
+                type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
+                  ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
+                  : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
+              } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
+            </div>
+            <div class="ml-auto">
+              <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
+                <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${0}
+              </span>
+            </div>
+          </div>
+        `;
+        document.querySelector('#infocard').innerHTML += `
+          <hr>
+          <div class="d-flex" style="color: #A0AECA">
+            <div>
+              <p class="card-text">
+                ${date}
+              </p>
+            </div>
+            <div class="ml-auto">
+              ${tags}x
+            </div>
+          </div>
+        `;
         if (localStorage.getItem('name')) {
           let close = `<button class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>`;
+          let edit = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { alert('Coming soon') } }">Edit</button>`;
           if (localStorage.id === authorid)
             document.querySelector('#prof-delete').innerHTML = close;
           document.querySelector('#prof-link').value = `<a href="${
@@ -63,6 +108,9 @@ window.onload = () => {
         document.querySelector(
           '#prof-link-author'
         ).innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">${window.location.origin}/@${author}</a></b>`;
+        document.querySelector('#item').value = title;
+        document.querySelector('#date').value = date;
+        document.querySelector('#location').value = description;
         emailTo = email;
         ID = id;
         offerList = body.offerList.reverse();

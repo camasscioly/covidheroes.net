@@ -48,36 +48,60 @@ window.onload = () => {
       comments,
       type
     ) {
-      const close = `<button style="padding: 0 !important; color: #7A7A7A !important" class="btn btn-danger hover actions" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Close</button>`;
-      const fulfill = ` <button style="padding: 0 !important" class="btn btn-danger hover actions" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'">Open</button>`;
-      document.querySelector(dom).innerHTML = `<tr id="${id}">
-        <th scope="row"><p data-toggle="tooltip" data-placement="top" data-original-title="${title}">${
-        type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
-          ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>'
-          : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
-      } ${title.replace(/(.{17})..+/, '$1…')}</p></th>
-        <td><a href="${window.location.origin}/profile?id=${authorid}">${
-        localStorage.getItem('name') === author
-          ? '<span class="badge badge-outline-primary" data-toggle="tooltip" data-placement="top" data-original-title="This is you">YOU</span>'
-          : author
-      }</a></td>
-        <td>
-          <div style="margin: 0 !important">
-            <span data-toggle="tooltip" data-placement="top" title="${date} - ${tags}x - ${description}">
-              <i style="color: #000 !important" class="fas fa-info-circle"></i>
-            </span>
-            <span style="color: #6c63ff; font-weight: bold">
-              <i class="fas fa-comment-alt"></i> ${comments || 0}
-            </span>
+      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>`;
+      const fulfill = ` <button  class="btn btn-primary hover" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'">Open</button>`;
+      document.querySelector('#cardView').innerHTML = `
+        <div class="col-sm-6" style="margin-bottom: 15px;">
+          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
+            <div class="card-body">
+              <h5 class="card-title">
+                <div class="d-flex">
+                  <div>
+                    ${
+                      type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
+                        ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>'
+                        : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
+                    } <b>${author}</b>
+                  </div>
+                  <div class="ml-auto">
+                    <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
+                      <i style="color: #A0AECA !important; font-weight: bold" class="fas fa-comment-alt"></i> ${
+                        comments || 0
+                      }
+                    </span>
+                  </div>
+                </div>
+              </h5>
+              <p class="card-text">
+                ${type.charAt(0).toUpperCase() + type.slice(1)}s <b>${title}</b>
+              </p>
+              <p class="card-text">
+                Posted <b>${date}</b>
+              </p>
+              <p class="card-text">
+                ${description}
+              </p>
+              <p class="card-text">
+                ${
+                  localStorage.getItem('name') === author || localStorage.getItem('admin')
+                    ? fulfill + close
+                    : fulfill
+                }
+              </p>
+              <div class="d-flex" style="color: #A0AECA">
+                <div>
+                  <p class="card-text">
+                    ${date}
+                  </p>
+                </div>
+                <div class="ml-auto">
+                  ${tags}x
+                </div>
+              </div>
+            </div>
           </div>
-        </td>
-        <td>${
-          localStorage.getItem('name') === author || localStorage.getItem('admin')
-            ? fulfill + close
-            : fulfill
-        }</td>
-      </tr>
-      ${document.querySelector(dom).innerHTML}`;
+        </div>
+      ${document.querySelector('#cardView').innerHTML}`;
     }
 
     async function addEntry(
@@ -92,37 +116,60 @@ window.onload = () => {
       comments,
       type
     ) {
-      const close = `<button style="padding: 0 !important; color: #7A7A7A !important" class="btn btn-danger hover actions" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Close</button>`;
-      const fulfill = ` <button style="padding: 0 !important" class="btn btn-danger hover actions" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'">Open</button>`;
-      document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><p data-toggle="tooltip" data-placement="top" data-original-title="${title}">${
-        type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
-          ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>'
-          : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
-      } ${title.replace(/(.{17})..+/, '$1…')}</p></th>
-        <td><a data-toggle="tooltip" data-placement="top" data-original-title="<img src='https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${author}'><p>${author}</p>" href="${
-        window.location.origin
-      }/profile?id=${authorid}">${
-        localStorage.getItem('name') === author
-          ? '<span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>'
-          : author
-      }</a></td>
-        <td>
-          <div style="margin: 0 !important">
-            <span data-toggle="tooltip" data-placement="top" title="${date} - ${tags}x - ${description}">
-              <i style="color: #000 !important" class="fas fa-info-circle"></i>
-            </span>
-            <span style="color: #6c63ff; font-weight: bold">
-              <i class="fas fa-comment-alt"></i> ${comments || 0}
-            </span>
+      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>`;
+      const fulfill = ` <button  class="btn btn-primary hover" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'">Open</button>`;
+      document.querySelector('#cardView').innerHTML += `
+        <div class="col-sm-6" style="margin-bottom: 15px;">
+          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
+            <div class="card-body">
+              <h5 class="card-title">
+                <div class="d-flex">
+                  <div>
+                    ${
+                      type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
+                        ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>'
+                        : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
+                    } <b>${author}</b>
+                  </div>
+                  <div class="ml-auto">
+                    <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
+                      <i style="color: #A0AECA !important; font-weight: bold" class="fas fa-comment-alt"></i> ${
+                        comments || 0
+                      }
+                    </span>
+                  </div>
+                </div>
+              </h5>
+              <p class="card-text">
+                ${type.charAt(0).toUpperCase() + type.slice(1)}s <b>${title}</b>
+              </p>
+              <p class="card-text">
+                Posted <b>${date}</b>
+              </p>
+              <p class="card-text">
+                ${description}
+              </p>
+              <p class="card-text">
+                ${
+                  localStorage.getItem('name') === author || localStorage.getItem('admin')
+                    ? fulfill + close
+                    : fulfill
+                }
+              </p>
+              <div class="d-flex" style="color: #A0AECA">
+                <div>
+                  <p class="card-text">
+                    ${date}
+                  </p>
+                </div>
+                <div class="ml-auto">
+                  ${tags}x
+                </div>
+              </div>
+            </div>
           </div>
-        </td>
-        <td>${
-          localStorage.getItem('name') === author || localStorage.getItem('admin')
-            ? fulfill + close
-            : fulfill
-        }</td>
-      </tr>`;
+        </div>
+      `;
     }
 
     if (window.location.href.includes('new')) {
@@ -161,7 +208,7 @@ window.onload = () => {
             searchLocation ||
             searchType;
 
-          document.querySelector('#table').innerHTML = '';
+          // document.querySelector('#table').innerHTML = '';
           body.offerList.reverse().forEach((offer) => {
             const { title, author, date, tags, id, authorid, description, comments, type } = offer;
             if (

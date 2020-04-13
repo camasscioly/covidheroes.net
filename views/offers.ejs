@@ -12,8 +12,8 @@
       </div>
       <form id="search" onsubmit="search(); return false;">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">&nbsp;&nbsp;
-          <div class="dropdown">
+          <input type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">
+          <!--&nbsp;&nbsp;<div class="dropdown">
             <button style="background: #F5F4F9 !important; color: #636E7D !important" class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
               Setting
             </button>
@@ -25,12 +25,15 @@
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'location'; document.querySelector('#search-input').placeholder = 'Search Location'; document.querySelector('#search-input').value = ''">Location</a>
               <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item" onclick="searchSetting = 'type'; document.querySelector('#search-input').placeholder = 'Search Type'; document.querySelector('#search-input').value = ''">Type</a>
             </div>
-          </div>
+          </div> -->
         </div>
-        <button type="submit" class="btn btn-primary" onclick="search()"><i class="fas fa-search" style="color: #fff !important"></i> Search</button>
-        <button type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="window.location = `${location.origin}/requests`"><i class="fas fa-trash"></i> Reset</button><br>
+        <!-- <button type="submit" class="btn btn-primary" onclick="search()"><i class="fas fa-search" style="color: #fff !important"></i> Search</button>
+        <button type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" onclick="window.location = `${location.origin}/requests`"><i class="fas fa-trash"></i> Reset</button><br> -->
       </form><br>
-      <div class="table-responsive">
+      <div class="row" id="cardView">
+        
+      </div>
+      <!-- <div class="table-responsive">
         <table class="table" id="dateTable">
           <thead>
             <tr id="head">
@@ -74,7 +77,7 @@
           </tbody>
           <br />
         </table>
-      </div>
+      </div> -->
     </div>
   </div><br>
   

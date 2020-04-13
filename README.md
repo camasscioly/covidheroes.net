@@ -5,7 +5,7 @@
 # COVID Heroes
 
 [![Build Status](https://travis-ci.org/camasscioly/covidheroes.net.svg?branch=master)](https://travis-ci.org/camasscioly/covidheroes.net.)
-[![Dependencies](https://img.shields.io/david/camasscioly/covidheroes.net.svg?style=flat)](https://img.shields.io/david/camasscioly/covidheroes.svg?style=flat)
+[![Dependencies](https://img.shields.io/david/camasscioly/covidheroes.net.svg?style=flat)](https://img.shields.io/david/camasscioly/covidheroes.net.svg?style=flat)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/camasscioly/covidheroes.net)
 
 ###### [Website](https://covidheroes.net) | [Code of Conduct](https://github.com/camasscioly/covidheroes.net/blob/master/.github/CODE_OF_CONDUCT.md) | [Contributing](https://github.com/camasscioly/covidheroes.net/blob/master/.github/CONTRIBUTING.md) | [License](https://github.com/camasscioly/covidheroes.net/blob/master/LICENSE)
@@ -60,6 +60,64 @@ COVID Heroes follows the latest maintenance LTS version of Node.
 yarn
 yarn dev
 # production: yarn start
+```
+
+# FAQ
+
+#### Q: Who maintains COVID Heroes?
+
+The Camas Science Olympiad team maintains the webapp, but we'd love your help and expertise on the project!
+See [Contributing](https://github.com/camasscioly/covidheroes.net/blob/master/CONTRIBUTING.md).
+
+#### Q: What are COVID Heroes’ goals and principles?
+
+The goals of the project are:
+
+- Provide a slim, canonical webapp that centralizes communication between medical institutions and PPE volunteers.
+- Provide a reference implementation for similar webapps for crisis in the future.
+- Grow the adoption of web platforms for managing requests/offers.
+- Help dogfood the PPE and maker volunteer movement.
+- Learn more about the pain points of creating a CRUD webapp and learn from the experience.
+
+We adapt [Chromium principles](https://www.chromium.org/developers/core-principles) to help us drive product decisions:
+
+- **Speed**: COVID Heroes core has almost zero performance overhead and is compressed with deflate and gzip.
+- **Security**: COVID Heroes is secured with 128-bit SSL and passwords are hashed with bcrypt with 10 rounds of salt.
+- **Stability**: COVID Heroes should not be flaky and should not leak memory.
+- **Simplicity**: COVID Heroes provides a high-level interface that’s easy to use, understand, and debug.
+
+#### Q: What's the difference between `yarn start` and `yarn dev`?
+
+Our project has two environments: Production and Development. The production environment is used when it is actually hosted, an example is https://covidheroes.net. The development environment shows more "developer" metrics, helping you to debug, but is not suitible for production.
+
+```bash
+yarn start # production
+
+yarn dev # development
+```
+
+#### Q: I'm recieving `Error: Cannot find module 'example'` whenever I start the project
+
+You need to install the packages with the command below.
+
+```bash
+yarn
+```
+
+#### Q: I'm recieving `ERR_SOCKET_BAD_PORT` whenever I start the project
+
+You need to configure your environment variables. First, rename `.env.example` to `.env`.
+
+```bash
+PORT=3000
+```
+
+#### Q: Database queries arent working.
+
+You need to configure your environment variables. First, rename `.env.example` to `.env`.
+
+```bash
+DB_URL=mongodb://mongodb.example.com:27017
 ```
 
 ## Useful Links

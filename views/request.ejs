@@ -208,7 +208,7 @@
               calculateAndDisplayRoute(directionsService, directionsDisplay);
               const dist = distance(coordArray[0][0], coordArray[0][1], coordArray[1][0], coordArray[1][1]);
               if (dist.endsWith('km')) document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60)}min`;
-              else document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 60) / 1000}min`;
+              else document.querySelector('#time').innerText = `${Math.round(parseInt(dist.replace(/[^0-9a-z-A-Z ]/g, '').replace(/ +/, ' ')) / 50 * 6 / 10) / 10}min`;
               document.querySelector('#distance').innerText = dist;
             }
             res(true);

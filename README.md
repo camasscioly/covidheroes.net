@@ -4,7 +4,7 @@
 
 # COVID Heroes
 
-[![Build Status](https://travis-ci.org/camasscioly/covidheroes.net.svg?branch=master)](https://travis-ci.org/camasscioly/covidheroes.net.)
+[![Build Status](https://github.com/camasscioly/covidheroes.net/workflows/Node.js%20CI/badge.svg)](https://github.com/camasscioly/covidheroes.net/workflows/Node.js%20CI/badge.svg)
 [![Dependencies](https://img.shields.io/david/camasscioly/covidheroes.net.svg?style=flat)](https://img.shields.io/david/camasscioly/covidheroes.net.svg?style=flat)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/camasscioly/covidheroes.net)
 

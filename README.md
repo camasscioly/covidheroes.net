@@ -124,7 +124,7 @@ DB_URL=mongodb://mongodb.example.com:27017
 
 - [The website](https://covidheroes.net) hosts the production version of the website.
 - [Our Github Repository](https://github.com/camasscioly/covidheroes.net) contains the most updated code.
-- [Our GoFundMe Page](https://www.gofundme.com/f/help-create-covid-heroes?utm_source=customer&utm_medium=copy_link&utm_campaign=p_cf+share-flow-1) is where you can donate and support us.
+- [Our GoFundMe Page](https://www.gofundme.com/f/face-shields-and-glasses-for-front-lines?utm_source=customer&utm_medium=email&utm_campaign=p_cf+share-flow-1) is where you can donate and support us.
 - [Our Instagram Page](https://instagram.com/covid_heroes_official) contains the latest announcements.
 - [Our Producthunt Page](https://www.producthunt.com/posts/covid-heroes?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-covid-heroes) shows the latest feedback from indie makers.
 

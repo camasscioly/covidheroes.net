@@ -33,7 +33,7 @@ window.onload = () => {
       if (localStorage.getItem('id') === id)
         user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
       if (staff)
-        user = `${user} <i class="far fa-star" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team"></i>`;
+        user = `${user} <i class="fas fa-shield-alt" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team"></i>`;
       if (verified)
         user = `${user} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">

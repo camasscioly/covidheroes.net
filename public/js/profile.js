@@ -102,7 +102,7 @@ window.onload = () => {
         document.querySelector('#location').value = location;
         name = esc(DOMPurify.sanitize(name));
         if (staff)
-          name = `${name} <i class="far fa-star" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team"></i>`;
+          name = `${name} <i class="fas fa-shield-alt" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team"></i>`;
         if (verified)
           name = `${name} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
         document.querySelector('#prof-head').innerHTML = `@${name}`;

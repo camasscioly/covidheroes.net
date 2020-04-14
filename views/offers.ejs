@@ -106,8 +106,8 @@
         return document.querySelector('#map').innerHTML = '<a href="/login">Login to See Map Data</a>';
       }
       if (!localStorage.getItem('location').replace('Not Configured', '')) {
-        document.querySelector('#stats').innerHTML = '<a href="/me">Configure Location to See Map Calculations</a>';
-        return document.querySelector('#map').innerHTML = '<a href="/me">Configure Location to See Map Calculations</a>';
+        document.querySelector('#stats').innerHTML = '<a href="/configure">Configure Location to See Map Calculations</a>';
+        return document.querySelector('#map').innerHTML = '<a href="/configure">Configure Location to See Map Calculations</a>';
       }
       initMap();
     }

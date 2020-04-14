@@ -12,14 +12,15 @@ window.onload = async () => {
 
     document.querySelector('#name').value = DOMPurify.sanitize(name);
     document.querySelector('#email').value = DOMPurify.sanitize(email);
-    if (phone === 'Not Configured') {
-      document.querySelector('#phone').placeholder = DOMPurify.sanitize(phone);
-      document.querySelector('#phone').value = '';
-    } else document.querySelector('#phone').value = DOMPurify.sanitize(phone);
-    if (location === 'Not Configured') {
-      document.querySelector('#location').placeholder = DOMPurify.sanitize(location);
-      document.querySelector('#location').value = '';
-    } else document.querySelector('#location').value = DOMPurify.sanitize(location);
+    if (window.location.href.includes('configure')) {
+      if (location === 'Not Configured') {
+        document.querySelector('#location').placeholder = DOMPurify.sanitize(location);
+        document.querySelector('#location').value = '';
+      } else document.querySelector('#location').value = DOMPurify.sanitize(location);
+    } else {
+      document.querySelector('#location').value = DOMPurify.sanitize(location);
+    }
+    document.querySelector('#phone').value = DOMPurify.sanitize(phone);
     document.querySelector('#password').value = DOMPurify.sanitize(password);
     // document.querySelector('#id').value = DOMPurify.sanitize(id);
     // const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)

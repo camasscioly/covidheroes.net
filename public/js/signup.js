@@ -91,7 +91,9 @@ window.onload = () => {
       );
       document.cookie = 'member=true';
       alert(`You've been logged in.`);
-      window.location = `${window.location.origin}/submissions`;
+      if (localStorage.location === 'Not Configured')
+        window.location = `${window.location.origin}/configure`;
+      else window.location = `${window.location.origin}/submissions`;
     });
     return false;
   };

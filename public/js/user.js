@@ -12,8 +12,14 @@ window.onload = async () => {
 
     document.querySelector('#name').value = DOMPurify.sanitize(name);
     document.querySelector('#email').value = DOMPurify.sanitize(email);
-    document.querySelector('#phone').value = DOMPurify.sanitize(phone);
-    document.querySelector('#location').value = DOMPurify.sanitize(location);
+    if (phone === 'Not Configured') {
+      document.querySelector('#phone').placeholder = DOMPurify.sanitize(phone);
+      document.querySelector('#phone').value = '';
+    } else document.querySelector('#phone').value = DOMPurify.sanitize(phone);
+    if (location === 'Not Configured') {
+      document.querySelector('#location').placeholder = DOMPurify.sanitize(location);
+      document.querySelector('#location').value = '';
+    } else document.querySelector('#location').value = DOMPurify.sanitize(location);
     document.querySelector('#password').value = DOMPurify.sanitize(password);
     // document.querySelector('#id').value = DOMPurify.sanitize(id);
     // const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)
@@ -52,49 +58,61 @@ window.onload = async () => {
       return re.test(String(email).toLowerCase());
     }
 
+    if (!window.location.href.includes('configure')) {
+      if (
+        esc(DOMPurify.sanitize(document.querySelector('#name').value))
+          .substring(0, 50)
+          .toLowerCase()
+          .replace(/[^a-z0-9]/gi, '')
+          .replace(/\s/g, '') !==
+        esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)
+      ) {
+        alert('Username must be alphanumeric, lowercase, and contain no spaces.');
+        return false;
+      }
+
+      if (
+        !validateEmail(
+          esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
+        )
+      ) {
+        if (document.querySelector('#email').value !== localStorage.getItem('email')) {
+          alert('Invalid Email');
+          return false;
+        }
+      }
+
+      if (
+        !esc(DOMPurify.sanitize(document.querySelector('#phone').value))
+          .substring(0, 50)
+          .match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)
+      ) {
+        if (document.querySelector('#phone').value !== localStorage.getItem('phone')) {
+          alert('Invalid Phone Number');
+          return false;
+        }
+      }
+
+      if (
+        localStorage.getItem('password') !==
+        esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
+      ) {
+        let userPass = prompt('What is your current password?');
+        if (localStorage.getItem('password') !== userPass) {
+          alert('Incorrect password.');
+          return false;
+        }
+      }
+    }
+
     if (
-      esc(DOMPurify.sanitize(document.querySelector('#name').value))
-        .substring(0, 50)
-        .toLowerCase()
-        .replace(/[^a-z0-9]/gi, '')
-        .replace(/\s/g, '') !==
-      esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)
+      window.location.href.includes('configure') &&
+      (document.querySelector('#location').value === '' ||
+        document.querySelector('#location').value.toLowerCase() === 'not configured' ||
+        document.querySelector('#location').value.length < 3)
     ) {
-      alert('Username must be alphanumeric, lowercase, and contain no spaces.');
+      alert('Please set a real location.');
       return false;
-    }
-
-    if (
-      !validateEmail(
-        esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
-      )
-    ) {
-      if (document.querySelector('#email').value !== localStorage.getItem('email')) {
-        alert('Invalid Email');
-        return false;
-      }
-    }
-
-    if (
-      !esc(DOMPurify.sanitize(document.querySelector('#phone').value))
-        .substring(0, 50)
-        .match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)
-    ) {
-      if (document.querySelector('#phone').value !== localStorage.getItem('phone')) {
-        alert('Invalid Phone Number');
-        return false;
-      }
-    }
-
-    if (
-      localStorage.getItem('password') !==
-      esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
-    ) {
-      let userPass = prompt('What is your current password?');
-      if (localStorage.getItem('password') !== userPass) {
-        alert('Incorrect password.');
-        return false;
-      }
     }
     postData(`${base}update`, {
       name: esc(DOMPurify.sanitize(document.querySelector('#name').value))
@@ -140,7 +158,8 @@ window.onload = async () => {
         'password',
         esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
       );
-      location.reload();
+      if (window.location.href.includes('configure')) location = `${location.origin}/submissions`;
+      else location.reload();
       return false;
     });
   };

@@ -46,10 +46,11 @@
     "express-minify": "^1.0.0",
     "express-rate-limit": "^5.1.1",
     "express-session": "^1.17.0",
+    "grumpy": "^0.2.4",
     "helmet": "^3.21.3",
     "html-minifier": "^4.0.0",
     "keyv": "^4.0.0",
-    "mailgun-js": "false0.22.0",
+    "mailgun-js": "^0.22.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {

@@ -21,7 +21,7 @@ Most things you can do in email can be done in COVID Heroes
 - Reputation system for active contributors
 - Location mapping and distance calculation
 - Simple NodeJS backend with MongoDB adapters
-- Email and SMS integration
+- Email integration
 
 Give it a spin: https://covidheroes.net/
 
@@ -74,10 +74,10 @@ See [Contributing](https://github.com/camasscioly/covidheroes.net/blob/master/CO
 The goals of the project are:
 
 - Provide a slim, canonical webapp that centralizes communication between medical institutions and PPE volunteers.
-- Provide a reference implementation for similar webapps for crisis in the future.
+- Provide a reference implementation for similar webapps for crises in the future.
 - Grow the adoption of web platforms for managing requests/offers.
-- Help dogfood the PPE and maker volunteer movement.
-- Learn more about the pain points of creating a CRUD webapp and learn from the experience.
+- Help support the PPE and maker volunteer movement.
+- Learn more about creating a CRUD webapp and learn about creating a service.
 
 We adapt [Chromium principles](https://www.chromium.org/developers/core-principles) to help us drive product decisions:
 

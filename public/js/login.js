@@ -27,10 +27,7 @@ window.onload = () => {
 
   document.querySelector('#login').onsubmit = () => {
     postData(`${base}login`, {
-      name: document
-        .querySelector('#name')
-        .value.toLowerCase()
-        .trim(),
+      name: document.querySelector('#name').value.toLowerCase().trim(),
       password: document.querySelector('#password').value.trim(),
     }).then((data) => {
       const { name, email, phone, location, password, id, staff } = data;
@@ -47,7 +44,9 @@ window.onload = () => {
       localStorage.setItem('member', true);
       document.cookie = 'member=true';
       alert(`You've been logged in.`);
-      window.location = `${window.location.origin}/submissions`;
+      if (localStorage.location === 'Not Configured')
+        window.location = `${window.location.origin}/configure`;
+      else window.location = `${window.location.origin}/submissions`;
     });
     return false;
   };

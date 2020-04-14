@@ -1,0 +1,95 @@
+<%- include('blocks/app-header') %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h1 class="card-title" style="font-size: 170%">Configure Location</h1>
+          <form id="submit">
+            <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="name" maxlength="20" value="Loading...">
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="email" maxlength="50" value="Loading...">
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="phone" maxlength="15" value="Loading...">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="location" maxlength="30" value="Loading...">
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="password" maxlength="20" value="Loading..." onfocusout="document.getElementById('password').type = 'password'" onfocus="document.getElementById('password').type = 'text'">
+            </div>
+            <small id="userHelp" class="form-text text-muted">Note: We do not share your address with users outside of the COVID Heroes service.</small><br>
+            <button type="submit" class="btn btn-primary" id="save">Set Location</button>
+            <a href="/submissions" type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);">Skip for now</a>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('blocks/footer') %>
+<style>
+  body {
+    background: #F6F6F6 !important;
+  }
+</style>
+<script>
+  if (localStorage.location !== 'Not Configured') location = `${location.origin}/submissions`;
+
+  let placeSearch, autocomplete;
+  
+  let componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+  
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('location'), {types: ['geocode']});
+    autocomplete.setFields(['address_component']);
+    autocomplete.addListener('place_changed', fillInAddress);
+  }
+  
+  function fillInAddress() {
+    let place = autocomplete.getPlace();
+  
+    for (let component in componentForm) {
+      document.getElementById(component).value = '';
+      document.getElementById(component).disabled = false;
+    }
+  
+    for (let i = 0; i < place.address_components.length; i++) {
+      let addressType = place.address_components[i].types[0];
+      if (componentForm[addressType]) {
+        let val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+      }
+    }
+  }
+  
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        let circle = new google.maps.Circle(
+            {center: geolocation, radius: position.coords.accuracy});
+      });
+    }
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=places&callback=initAutocomplete"></script>
+<script src="./js/user.js" defer></script>
+</body>
+
+</html>

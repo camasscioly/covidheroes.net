@@ -45,7 +45,7 @@ Note: You will need at least NodeJS 10.18.1+, VSCode 1.44+, and MongoDB 3+. You 
 
 PORT=3000
 DB_URL=mongodb://mongodb.example.com:27017
-MAILGUN_API_KEY=example-mailgun-token
+SENDGRID_API_KEY=example-sendgrid-token
 
 # Note: MongoDB URI must be in the mongodb:// protocol, the mongodb+srv:// is not supported
 ```

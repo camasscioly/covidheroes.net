@@ -184,6 +184,27 @@ router.get('/offer/increment', async (req, res) => {
   res.json(offerList);
 });
 
+router.post('/offer/edit', async (req, res) => {
+  let offerList = (await keyv.get('offer-list')) || [];
+  let out = offerList.find(({ id }) => id === req.body.id);
+  offerList.splice(offerList.indexOf(out), 1);
+  offerList.push({
+    title: req.body.title,
+    description: req.body.description || null,
+    date: out.date,
+    tags: req.body.tags,
+    author: out.author,
+    authorid: out.authorid,
+    email: out.email,
+    comments: out.comments + 1 || 0,
+    id: out.id,
+    type: out.type,
+  });
+
+  await keyv.set('offer-list', offerList);
+  res.json(offerList);
+});
+
 router.post('/offer/remove', async (req, res) => {
   const offerList = (await keyv.get('offer-list')) || [];
   let toRemove = offerList.find((block) => block.id === req.body.id);

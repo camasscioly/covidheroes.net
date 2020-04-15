@@ -3,6 +3,24 @@ let emailTo;
 let ID;
 const matchHtmlRegExp = /["'&<>]/;
 
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *client
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+  return await response.text(); // parses JSON response into native JavaScript objects
+}
+
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
   if (true) {
@@ -12,24 +30,6 @@ window.onload = () => {
         id,
       }).then((data) => {});
     };
-
-    async function postData(url = '', data = {}) {
-      // Default options are marked with *
-      const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-          'Content-Type': 'application/json',
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: 'follow', // manual, *follow, error
-        referrerPolicy: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-      });
-      return await response.text(); // parses JSON response into native JavaScript objects
-    }
     fetch(`${window.location.origin}/v1/offer`)
       .then((res) => res.json())
       .then((body) => {
@@ -90,15 +90,15 @@ window.onload = () => {
               </p>
             </div>
             <div class="ml-auto">
-              ${tags}x
+              ${id}
             </div>
           </div>
         `;
         if (localStorage.getItem('name')) {
-          let close = `<button class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>`;
-          let edit = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { alert('Coming soon') } }">Edit</button>`;
-          if (localStorage.id === authorid)
-            document.querySelector('#prof-delete').innerHTML = close;
+          let close = `<button class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>&nbsp;&nbsp;`;
+          let edit = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" id="edit" onclick="editMode()">Edit</button>`;
+          if (localStorage.id === authorid || localStorage.admin)
+            document.querySelector('#prof-delete').innerHTML = edit + close;
           document.querySelector('#prof-link').value = `<a href="${
             window.location.origin
           }/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem(
@@ -109,7 +109,7 @@ window.onload = () => {
           '#prof-link-author'
         ).innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">${window.location.origin}/@${author}</a></b>`;
         document.querySelector('#item').value = title;
-        document.querySelector('#date').value = date;
+        document.querySelector('#amt').value = tags;
         document.querySelector('#location').value = description;
         emailTo = email;
         ID = id;
@@ -169,4 +169,32 @@ function esc(string) {
 
 function enable() {
   document.querySelector('#submit').disabled = false;
+}
+
+let toggler = false;
+function editMode() {
+  if (toggler) {
+    console.log({
+      ID,
+      tags: document.querySelector('#amt').value,
+      title: document.querySelector('#item').value,
+      description: document.querySelector('#location').value,
+    });
+    postData(`${location.origin}/v1/offer/edit`, {
+      id: ID,
+      tags: document.querySelector('#amt').value,
+      title: document.querySelector('#item').value,
+      description: document.querySelector('#location').value,
+    }).then((data) => {
+      location.reload();
+    });
+  } else {
+    toggler = true;
+    document.querySelector('#amt').readOnly = false;
+    document.querySelector('#item').readOnly = false;
+    document.querySelector('#location').readOnly = false;
+    document.querySelector('#edit').innerText = 'Save';
+    alert('Edit mode enabled!');
+    initAutocomplete();
+  }
 }

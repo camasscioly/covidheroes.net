@@ -185,8 +185,8 @@ window.onload = () => {
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
                 <div class="form-group">
-                  <label for="date">Posted</label> 
-                  <input type="text" class="form-control" id="date" value="${date}" readonly="readonly">
+                  <label for="amt">Quantity</label> 
+                  <input type="text" class="form-control" id="amt" value="${tags}" readonly="readonly">
                 </div>
                 <div class="form-group">
                   <label for="dropoff">Dropoff Address</label> 
@@ -207,8 +207,7 @@ window.onload = () => {
                   </p>
                 </div>
                 <div class="ml-auto">
-                  ${tags}x
-                </div>
+                  ${id}
               </div>
             </div>
           </div>

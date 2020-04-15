@@ -21,8 +21,8 @@
                         <input type="text" class="form-control" id="item" value="Loading..." readonly>
                       </div>
                       <div class="form-group">
-                        <label for="date">Date</label>
-                        <input type="text" class="form-control" id="date" value="Loading..." readonly>
+                        <label for="amt">Quantity</label>
+                        <input type="number" min="0" max="1000" class="form-control" id="amt" value="Loading..." readonly>
                       </div>
                       <div class="form-group">
                         <label for="location">Dropoff Address</label>
@@ -94,6 +94,55 @@
       background: #F6F6F6 !important;
     }
   </style>
+  <script defer>
+    let placeSearch, autocomplete;
+    
+    let componentForm = {
+      street_number: 'short_name',
+      route: 'long_name',
+      locality: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'long_name',
+      postal_code: 'short_name'
+    };
+    
+    function initAutocomplete() {
+      autocomplete = new google.maps.places.Autocomplete(
+          document.getElementById('location'), {types: ['geocode']});
+      autocomplete.setFields(['address_component']);
+      autocomplete.addListener('place_changed', fillInAddress);
+    }
+    
+    function fillInAddress() {
+      let place = autocomplete.getPlace();
+    
+      /*for (let component in componentForm) {
+        document.getElementById(component).value = '';
+        document.getElementById(component).disabled = false;
+      }
+    
+      for (let i = 0; i < place.address_components.length; i++) {
+        let addressType = place.address_components[i].types[0];
+        if (componentForm[addressType]) {
+          let val = place.address_components[i][componentForm[addressType]];
+          document.getElementById(addressType).value = val;
+        }
+      }*/
+    }
+    
+    function geolocate() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          let geolocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          let circle = new google.maps.Circle(
+              {center: geolocation, radius: position.coords.accuracy});
+        });
+      }
+    }
+  </script>
   <script defer>
     let map;
     let address;

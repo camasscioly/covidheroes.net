@@ -4,6 +4,7 @@ let total = 0;
 let killOffer;
 let searchSetting = 'item';
 const matchHtmlRegExp = /["'&<>]/;
+let post;
 
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
@@ -49,6 +50,21 @@ window.onload = () => {
       comments,
       type
     ) {
+      let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      let months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ];
       let now = new Date(date);
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
@@ -382,9 +398,20 @@ window.onload = () => {
           });
         });
 
-      document.querySelector('#offers').onsubmit = () => {
-        if (!localStorage.getItem('admin'))
-          if (reqs > 5) return alert('You cannot have more than 5 concurrent requests.');
+      post = async () => {
+        const { rep } = await fetch(
+          `${location.origin}/v1/userdata?id=${localStorage.id}`
+        ).then((res) => res.json());
+        console.log(rep);
+        if (!localStorage.getItem('admin')) {
+          if (reqs > 5) alert('You cannot have more than 5 concurrent requests.');
+          return false;
+        }
+        if (rep.length < 1000) {
+          alert('You need at least 1 rep to be able to post.');
+          return false;
+        }
+        document.querySelector('#submission-button').disabled = true;
         postData(`${base}offer`, {
           title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),
           author: esc(DOMPurify.sanitize(localStorage.getItem('name'))),

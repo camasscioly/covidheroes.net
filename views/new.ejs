@@ -6,7 +6,7 @@
           <div class="card-body">
             <h1 class="card-title" style="font-size: 170%">Create new submission</h1>
             <p style="font-size: 120%;" id="counter"><a>Loading...</a> and counting submissions!</p>
-            <form id="offers">
+            <form id="offers" onsubmit="post(); return false;">
               <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
               <div class="form-group">
                 <label for="title">Item</label>

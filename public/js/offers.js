@@ -77,60 +77,64 @@ window.onload = () => {
       }</button>`;
       document.querySelector('#cardView').innerHTML = `
       <div class="col-sm-6" style="margin-bottom: 20px;">
-      <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
-        <div class="card-body">
-          <h5 class="card-title">
-            <div class="d-flex">
-              <div>
-                ${
-                  type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
-                    ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
-                    : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
-                } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
-              </div>
-              <div class="ml-auto">
-                <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
-                  <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
-                    comments || 0
-                  }
-                </span>
-              </div>
-            </div>
-          </h5>
-          <p class="card-text">
-            <div class="form-group">
-              <label for="item">${type.charAt(0).toUpperCase() + type.slice(1)}</label> 
-              <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
-            </div>
-            <div class="form-group">
-              <label for="date">Posted</label> 
-              <input type="text" class="form-control" id="date" value="${date}" readonly="readonly">
-            </div>
-            <div class="form-group">
-              <label for="dropoff">Dropoff Address</label> 
-              <input type="text" class="form-control" id="dropoff" value="${description}" readonly="readonly">
-            </div>
-          </p>
-          <p class="card-text" style="text-align: right">
-            ${
-              localStorage.getItem('name') === author || localStorage.getItem('admin')
-                ? close + fulfill
-                : fulfill
-            }
-          </p><hr>
-          <div class="d-flex" style="color: #A0AECA">
-            <div>
+          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
+            <div class="card-body">
+              <h5 class="card-title">
+                <div class="d-flex">
+                  <div>
+                    ${
+                      type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
+                        ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
+                        : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
+                    } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
+        color || 'fff'
+      ).replace('#', '')}&color=${idealTextColor(color || '000').replace(
+        '#',
+        ''
+      )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
+                  </div>
+                  <div class="ml-auto">
+                    <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
+                      <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
+                        comments || 0
+                      }
+                    </span>
+                  </div>
+                </div>
+              </h5>
               <p class="card-text">
-                ${date}
+                <div class="form-group">
+                  <label for="item">${type.charAt(0).toUpperCase() + type.slice(1)}</label> 
+                  <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
+                </div>
+                <div class="form-group">
+                  <label for="amt">Quantity</label> 
+                  <input type="text" class="form-control" id="amt" value="${tags}" readonly="readonly">
+                </div>
+                <div class="form-group">
+                  <label for="dropoff">Dropoff Address</label> 
+                  <input type="text" class="form-control" id="dropoff" value="${description}" readonly="readonly">
+                </div>
               </p>
-            </div>
-            <div class="ml-auto">
-              ${tags}x
+              <p class="card-text" style="text-align: right">
+                ${
+                  localStorage.getItem('name') === author || localStorage.getItem('admin')
+                    ? close + fulfill
+                    : fulfill
+                }
+              </p><hr>
+              <div class="d-flex" style="color: #A0AECA">
+                <div>
+                  <p class="card-text">
+                    ${date}
+                  </p>
+                </div>
+                <div class="ml-auto">
+                  ${id}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
       ${document.querySelector('#cardView').innerHTML}`;
     }
 
@@ -174,7 +178,7 @@ window.onload = () => {
       }</button>`;
       document.querySelector('#cardView').innerHTML += `
         <div class="col-sm-6" style="margin-bottom: 20px;">
-          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
+          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">

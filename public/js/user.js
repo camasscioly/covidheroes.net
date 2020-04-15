@@ -23,7 +23,11 @@ window.onload = async () => {
     }
     document.querySelector('#phone').value = DOMPurify.sanitize(phone);
     document.querySelector('#password').value = DOMPurify.sanitize(password);
-    if (document.querySelector('#color').value) document.querySelector('#color').value = color;
+    try {
+      if (document.querySelector('#color').value) document.querySelector('#color').value = color;
+    } catch (err) {
+      console.log(err);
+    }
     // document.querySelector('#id').value = DOMPurify.sanitize(id);
     // const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)
     //   .then((res) => res.json())
@@ -117,6 +121,12 @@ window.onload = async () => {
       alert('Please set a real location.');
       return false;
     }
+    let col;
+    try {
+      col = document.querySelector('#color').value;
+    } catch (err) {
+      col = '#000000';
+    }
     postData(`${base}update`, {
       name: esc(DOMPurify.sanitize(document.querySelector('#name').value))
         .substring(0, 50)
@@ -130,7 +140,7 @@ window.onload = async () => {
         0,
         100
       ),
-      color: document.querySelector('#color').value,
+      color: col,
       password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
       id: localStorage.getItem('id'),
       original: localStorage.getItem('name'),
@@ -162,7 +172,11 @@ window.onload = async () => {
         'password',
         esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
       );
-      localStorage.setItem('color', document.querySelector('#color').value);
+      try {
+        localStorage.setItem('color', document.querySelector('#color').value);
+      } catch (err) {
+        localStorage.setItem('color', '#000000');
+      }
       if (window.location.href.includes('configure')) location = `${location.origin}/submissions`;
       else location.reload();
       return false;

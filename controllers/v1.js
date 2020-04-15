@@ -32,7 +32,7 @@ router.post('/signup', async (req, res) => {
           from: 'aiden@covidheroes.net',
           templateId: 'd-15d7bb027f4f4c739d0a4f3db911a1d0',
           dynamic_template_data: {
-            name: name
+            name: name,
           },
         };
         sendgrid.send(msg);
@@ -152,6 +152,7 @@ router.post('/offer', async (req, res) => {
         link: `https://app.covidheroes.net/submissions/open?id=${id}`,
       },
     });
+  }
   sendgrid.send(emails);
 
   await keyv.set('offer-list', offerList);

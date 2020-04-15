@@ -48,7 +48,8 @@ window.onload = () => {
       authorid,
       id,
       comments,
-      type
+      type,
+      color
     ) {
       let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       let months = [
@@ -188,8 +189,8 @@ window.onload = () => {
                         ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
                         : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
                     } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
-        color || 'fff'
-      ).replace('#', '')}&color=${idealTextColor(color || '000').replace(
+        color || '000'
+      ).replace('#', '')}&color=${idealTextColor(color || 'fff').replace(
         '#',
         ''
       )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>

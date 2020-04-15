@@ -35,10 +35,7 @@ window.onload = () => {
       localStorage.setItem('email', esc(DOMPurify.sanitize(email)));
       localStorage.setItem('phone', esc(DOMPurify.sanitize(phone)));
       localStorage.setItem('location', esc(DOMPurify.sanitize(location)));
-      localStorage.setItem(
-        'password',
-        esc(DOMPurify.sanitize(document.querySelector('#password').value))
-      );
+      localStorage.setItem('password', document.querySelector('#password').value);
       localStorage.setItem('id', esc(DOMPurify.sanitize(id)));
       if (staff) localStorage.setItem('admin', true);
       localStorage.setItem('member', true);

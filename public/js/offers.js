@@ -356,6 +356,7 @@ window.onload = () => {
             addressOfOffers.push(description);
             ++counter;
             ++total;
+            document.querySelector('#req-count').innerText = total;
           });
           document.querySelector('#req-count').innerText = total;
           offerList = body.offerList.reverse();

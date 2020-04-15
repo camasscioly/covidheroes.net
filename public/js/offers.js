@@ -49,6 +49,10 @@ window.onload = () => {
       comments,
       type
     ) {
+      let now = new Date(date);
+      date = `${days[now.getDay()]}, ${
+        months[now.getMonth()]
+      } ${now.getDate()}, ${now.getFullYear()}`;
       const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>`;
       const fulfill = ` <button class="btn btn-primary hover" onclick="window.location = '${
         window.location.origin
@@ -234,7 +238,7 @@ window.onload = () => {
       let counter = 0;
       fetch(`${window.location.origin}/v1/offer`)
         .then((res) => res.json())
-        .then((body) => {
+        .then(async (body) => {
           const urlParams = new URLSearchParams(window.location.search);
           const searchItem = urlParams.get('item');
           const searchAuthor = urlParams.get('author');
@@ -253,7 +257,7 @@ window.onload = () => {
             searchType;
 
           // document.querySelector('#table').innerHTML = '';
-          body.offerList.reverse().forEach(async (offer) => {
+          for (let offer of body.offerList.reverse()) {
             const { title, author, date, tags, id, authorid, description, comments, type } = offer;
             if (
               searchItem ||
@@ -356,7 +360,7 @@ window.onload = () => {
             ++counter;
             ++total;
             document.querySelector('#req-count').innerText = total;
-          });
+          }
           document.querySelector('#req-count').innerText = total;
           offerList = body.offerList.reverse();
           $('[data-toggle="tooltip"]').tooltip({

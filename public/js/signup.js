@@ -83,10 +83,7 @@ window.onload = () => {
       localStorage.setItem('phone', 'Not Configured');
       localStorage.setItem('location', 'Not Configured');
       localStorage.setItem('id', data);
-      localStorage.setItem(
-        'password',
-        esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
-      );
+      localStorage.setItem('password', document.querySelector('#password').value);
       document.cookie = 'member=true';
       alert(`You've been logged in.`);
       if (localStorage.location === 'Not Configured')

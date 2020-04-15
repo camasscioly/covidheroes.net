@@ -196,7 +196,7 @@ router.post('/offer/edit', async (req, res) => {
     author: out.author,
     authorid: out.authorid,
     email: out.email,
-    comments: out.comments + 1 || 0,
+    comments: out.comments || 0,
     id: out.id,
     type: out.type,
   });

@@ -40,7 +40,7 @@ window.onload = () => {
           alert('Not able to find submission.');
           location = `${window.location.origin}/submissions`;
         }
-        let { title, author, date, tags, email, id, description, type, authorid } = offer;
+        let { title, author, date, tags, email, id, description, type, authorid, comments } = offer;
         console.log(offer);
         let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         let months = [
@@ -76,7 +76,9 @@ window.onload = () => {
             </div>
             <div class="ml-auto">
               <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
-                <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${0}
+                <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
+                  comments || 0
+                }
               </span>
             </div>
           </div>

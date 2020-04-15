@@ -124,7 +124,8 @@ window.onload = () => {
       authorid,
       id,
       comments,
-      type
+      type,
+      color
     ) {
       let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       let months = [
@@ -162,7 +163,12 @@ window.onload = () => {
                       type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
                         ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
                         : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
-                    } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
+                    } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
+        color || 'fff'
+      ).replace('#', '')}&color=${idealTextColor(color || '000').replace(
+        '#',
+        ''
+      )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
                   </div>
                   <div class="ml-auto">
                     <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
@@ -248,7 +254,7 @@ window.onload = () => {
             searchType;
 
           // document.querySelector('#table').innerHTML = '';
-          body.offerList.reverse().forEach((offer) => {
+          body.offerList.reverse().forEach(async (offer) => {
             const { title, author, date, tags, id, authorid, description, comments, type } = offer;
             if (
               searchItem ||
@@ -307,6 +313,9 @@ window.onload = () => {
               )
                 return;
             }
+            const { color } = await fetch(
+              `${window.location.origin}/v1/userdata?id=${authorid}`
+            ).then((res) => res.json());
             if (counter >= 50) return;
             if (author === localStorage.getItem('name')) {
               insertEntry(
@@ -319,7 +328,8 @@ window.onload = () => {
                 esc(DOMPurify.sanitize(authorid)),
                 esc(DOMPurify.sanitize(id)),
                 esc(DOMPurify.sanitize(comments || 0)),
-                esc(DOMPurify.sanitize(type || 'request'))
+                esc(DOMPurify.sanitize(type || 'request')),
+                (color || '#000').replace('#', '')
               );
             } else {
               addEntry(
@@ -332,9 +342,16 @@ window.onload = () => {
                 esc(DOMPurify.sanitize(authorid)),
                 esc(DOMPurify.sanitize(id)),
                 esc(DOMPurify.sanitize(comments || 0)),
-                esc(DOMPurify.sanitize(type || 'request'))
+                esc(DOMPurify.sanitize(type || 'request')),
+                (color || '#000').replace('#', '')
               );
             }
+
+            $('[data-toggle="tooltip"]').tooltip({
+              animated: 'fade',
+              placement: 'bottom',
+              html: true,
+            });
 
             addressOfOffers.push(description);
             ++counter;
@@ -451,4 +468,24 @@ function update(type) {
     document.querySelector('#tags').value = document.querySelector('#slider').value;
   if (type === 'input')
     document.querySelector('#slider').value = document.querySelector('#tags').value;
+}
+
+function idealTextColor(bgColor) {
+  const nThreshold = 105;
+  const components = getRGBComponents(bgColor);
+  const bgDelta = components.R * 0.299 + components.G * 0.587 + components.B * 0.114;
+
+  return 255 - bgDelta < nThreshold ? '#000000' : '#ffffff';
+}
+
+function getRGBComponents(color) {
+  const r = color.substring(1, 3);
+  const g = color.substring(3, 5);
+  const b = color.substring(5, 7);
+
+  return {
+    R: parseInt(r, 16),
+    G: parseInt(g, 16),
+    B: parseInt(b, 16),
+  };
 }

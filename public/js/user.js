@@ -8,6 +8,7 @@ window.onload = async () => {
     const phone = localStorage.getItem('phone');
     const location = localStorage.getItem('location');
     const id = localStorage.getItem('id');
+    const color = localStorage.getItem('color');
     const password = localStorage.getItem('password');
 
     document.querySelector('#name').value = DOMPurify.sanitize(name);
@@ -22,6 +23,7 @@ window.onload = async () => {
     }
     document.querySelector('#phone').value = DOMPurify.sanitize(phone);
     document.querySelector('#password').value = DOMPurify.sanitize(password);
+    if (document.querySelector('#color').value) document.querySelector('#color').value = color;
     // document.querySelector('#id').value = DOMPurify.sanitize(id);
     // const { rep } = await fetch(`${base}userdata?id=${DOMPurify.sanitize(id)}`)
     //   .then((res) => res.json())
@@ -128,6 +130,7 @@ window.onload = async () => {
         0,
         100
       ),
+      color: document.querySelector('#color').value,
       password: esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50),
       id: localStorage.getItem('id'),
       original: localStorage.getItem('name'),
@@ -159,6 +162,7 @@ window.onload = async () => {
         'password',
         esc(DOMPurify.sanitize(document.querySelector('#password').value)).substring(0, 50)
       );
+      localStorage.setItem('color', document.querySelector('#color').value);
       if (window.location.href.includes('configure')) location = `${location.origin}/submissions`;
       else location.reload();
       return false;

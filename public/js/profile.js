@@ -92,9 +92,19 @@ window.onload = () => {
         let temp = name;
         if (phone.toLowerCase() === 'not configured') phone = '';
         if (location.toLowerCase() === 'not configured') location = '';
-        document.querySelector(
-          '#prof-img'
-        ).src = `https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${name}`;
+        try {
+          document.querySelector('#prof-img').src = `https://ui-avatars.com/api/?background=${
+            body.color.replace('#', '') || '000'
+          }&color=${idealTextColor(body.color || 'fff').replace(
+            '#',
+            ''
+          )}&bold=true&rounded=true&name=${name}`;
+        } catch (err) {
+          document.querySelector(
+            '#prof-img'
+          ).src = `https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${name}`;
+        }
+
         document.querySelector('#name').value = name;
         document.querySelector('#rep').value = rep.length;
         document.querySelector('#email').value = email;
@@ -110,7 +120,7 @@ window.onload = () => {
         document.querySelector(
           '#prof-link'
         ).innerHTML = `<b>Profile: <a href="${window.location.origin}/@${name}">${window.location.origin}/@${name}</a></b>`;
-        $(function () {
+        $(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
       })
@@ -212,3 +222,23 @@ function enable() {
 }
 
 document.getElementById('prof-img').ondragstart = () => false;
+
+function idealTextColor(bgColor) {
+  const nThreshold = 105;
+  const components = getRGBComponents(bgColor);
+  const bgDelta = components.R * 0.299 + components.G * 0.587 + components.B * 0.114;
+
+  return 255 - bgDelta < nThreshold ? '#000000' : '#ffffff';
+}
+
+function getRGBComponents(color) {
+  const r = color.substring(1, 3);
+  const g = color.substring(3, 5);
+  const b = color.substring(5, 7);
+
+  return {
+    R: parseInt(r, 16),
+    G: parseInt(g, 16),
+    B: parseInt(b, 16),
+  };
+}

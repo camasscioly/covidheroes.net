@@ -24,6 +24,10 @@
               <input type="text" class="form-control" id="location" maxlength="30" value="Loading...">
             </div>
             <div class="form-group">
+              <label for="color">Color</label>
+              <input type="color" class="form-control" id="color" value="#000000">
+            </div>
+            <div class="form-group">
               <label for="password">Password</label>
               <input type="password" class="form-control" id="password" maxlength="20" value="Loading..." onfocusout="document.getElementById('password').type = 'password'" onfocus="document.getElementById('password').type = 'text'">
             </div>
@@ -41,7 +45,7 @@
     background: #F6F6F6 !important;
   }
 </style>
-<script>
+<script defer>
   let placeSearch, autocomplete;
   
   let componentForm = {

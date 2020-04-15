@@ -48,7 +48,7 @@ router.post('/signup', async (req, res) => {
 
 router.post('/update', async (req, res) => {
   try {
-    const { name, email, phone, location, password, id, original } = req.body;
+    const { name, email, phone, location, password, id, original, color } = req.body;
     const userList = (await keyv.get('user-list')) || [];
     const out = userList.find((block) => block[1] === id);
     const checkIllegal = userList.find((block) => block[0] === name) || 0;
@@ -61,6 +61,7 @@ router.post('/update', async (req, res) => {
         let user = await keyv.get(id);
         user.name = name;
         user.email = email;
+        user.color = color;
         user.phone = phone || 'Not Configured';
         user.location = location || 'Not Configured';
         user.password = hash;

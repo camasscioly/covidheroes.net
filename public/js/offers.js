@@ -70,14 +70,14 @@ window.onload = () => {
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
       } ${now.getDate()}, ${now.getFullYear()}`;
-      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>`;
+      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { location = '${location.origin}/submissions/open?id=${id}' }">Edit</button>`;
       const fulfill = ` <button class="btn btn-primary hover" onclick="window.location = '${
         window.location.origin
       }/submissions/open?id=${id}'">${
         type !== 'request' ? 'Ask for help' : 'Offer to help'
       }</button>`;
       document.querySelector('#cardView').innerHTML = `
-      <div class="col-sm-6" style="margin-bottom: 30px;">
+      <div class="col-md-4" style="margin-bottom: 30px;">
           <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
             <div class="card-body">
               <h5 class="card-title">
@@ -131,7 +131,8 @@ window.onload = () => {
                   </p>
                 </div>
                 <div class="ml-auto">
-                  ${id}
+                
+                </div>
               </div>
             </div>
           </div>
@@ -171,15 +172,15 @@ window.onload = () => {
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
       } ${now.getDate()}, ${now.getFullYear()}`;
-      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>`;
+      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { location = '${location.origin}/submissions/open?id=${id}' }">Edit</button>`;
       const fulfill = ` <button class="btn btn-primary hover" onclick="window.location = '${
         window.location.origin
       }/submissions/open?id=${id}'">${
         type !== 'request' ? 'Ask for help' : 'Offer to help'
       }</button>`;
       document.querySelector('#cardView').innerHTML += `
-        <div class="col-sm-6" style="margin-bottom: 30px;">
-          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
+        <div class="col-md-4" style="margin-bottom: 30px;">
+          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
@@ -232,8 +233,8 @@ window.onload = () => {
                   </p>
                 </div>
                 <div class="ml-auto">
-                  ${id}
-              </div>
+
+                </div>
             </div>
           </div>
         </div>

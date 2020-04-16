@@ -607,6 +607,10 @@ a:hover {
   }
 }
 
+.alert {
+  border: none;
+}
+
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
   border-color: #6c63ff;
@@ -629,4 +633,5 @@ a:hover {
 
 #search-input {
   background: #fff !important;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }

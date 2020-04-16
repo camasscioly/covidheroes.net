@@ -77,7 +77,7 @@ window.onload = () => {
         type !== 'request' ? 'Ask for help' : 'Offer to help'
       }</button>`;
       document.querySelector('#cardView').innerHTML = `
-      <div class="col-sm-6" style="margin-bottom: 20px;">
+      <div class="col-sm-6" style="margin-bottom: 30px;">
           <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
             <div class="card-body">
               <h5 class="card-title">
@@ -178,7 +178,7 @@ window.onload = () => {
         type !== 'request' ? 'Ask for help' : 'Offer to help'
       }</button>`;
       document.querySelector('#cardView').innerHTML += `
-        <div class="col-sm-6" style="margin-bottom: 20px;">
+        <div class="col-sm-6" style="margin-bottom: 30px;">
           <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
             <div class="card-body">
               <h5 class="card-title">

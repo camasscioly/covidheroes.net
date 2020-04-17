@@ -97,7 +97,7 @@ window.onload = () => {
           </div>
         `;
         if (localStorage.getItem('name')) {
-          let close = `<button class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>&nbsp;&nbsp;`;
+          let close = `<button id="del" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }">Delete</button>&nbsp;&nbsp;`;
           let edit = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" id="edit" onclick="editMode()">Edit</button>`;
           if (localStorage.id === authorid || localStorage.admin)
             document.querySelector('#prof-delete').innerHTML = edit + close;
@@ -196,6 +196,10 @@ function editMode() {
     document.querySelector('#item').readOnly = false;
     document.querySelector('#location').readOnly = false;
     document.querySelector('#edit').innerText = 'Save';
+    document.querySelector('#del').innerText = 'Cancel';
+    document.querySelector('#del').onclick = () => {
+      location.reload();
+    };
     alert('Edit mode enabled!');
     initAutocomplete();
   }

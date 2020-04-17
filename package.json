@@ -46,7 +46,7 @@
     "express-boom": "^3.0.0",
     "express-minify": "^1.0.0",
     "express-rate-limit": "^5.1.1",
-    "express-session": "^1.17.0",
+    "express-session": "^1.17.1",
     "grumpy": "^0.2.4",
     "helmet": "^3.21.3",
     "html-minifier": "^4.0.0",

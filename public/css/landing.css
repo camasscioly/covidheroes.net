@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,800;&display=swap');
 ::selection {
   background: #6c63ff;
   color: #fff !important;
@@ -377,7 +378,7 @@ button,
 input,
 select,
 textarea {
-  font-family: 'MetropolisRegular', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 400;
 }
 .a,
@@ -392,7 +393,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Metropolis', serif;
+  font-family: 'Poppins', serif;
   font-weight: 700;
   clear: both;
   color: #000;
@@ -2471,11 +2472,11 @@ ul.rh li {
   transform: translate(-50%, -50%);
 }
 .tbuttonn {
-  font-family: 'MetropolisRegular', serif;
+  font-family: 'Poppins', serif;
   box-shadow: 0 8px 20px rgba(17, 19, 37, 0.32);
 }
 .nh a:not(.tbuttonn) {
-  font-family: 'MetropolisRegular', serif;
+  font-family: 'Poppins', serif;
 }
 .rq {
   display: inline-flex;

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,800;&display=swap');
 
 :root {
   --main-color: #6c63ff;
@@ -46,7 +46,7 @@ thead {
 }
 
 body {
-  font-family: 'MetropolisRegular', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 h1,
@@ -54,7 +54,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'Metropolis', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btn-primary:hover {

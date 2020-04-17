@@ -80,10 +80,10 @@ window.onload = () => {
     if (id === localStorage.getItem('id')) {
       document.querySelector(
         '#logoff'
-      ).innerHTML = `<button class="btn btn-primary" onclick="localStorage.clear(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location = window.location.origin" id="logout"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Log out</button>`;
+      ).innerHTML = `<button style="color: #6C63FF; background: transparent !important" class="btn btn-primary" onclick="localStorage.clear(); document.cookie = 'member=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'; window.location = window.location.origin" id="logout"><i class="fas fa-sign-out-alt"></i> Log out</button>`;
       document.querySelector(
         '#change'
-      ).innerHTML = `<button class="btn btn-primary" id="config" onclick="window.location = (window.location.origin + '/me')"><i class="fas fa-sign-out-alt" style="color: #fff !important"></i> Change Settings</button>`;
+      ).innerHTML = `<button class="btn btn-primary" id="config" onclick="window.location = (window.location.origin + '/me')"><i class="fas fa-cog" style="color: #fff !important"></i> Settings</button>`;
     }
     fetch(`${base}userdata?id=${id}`)
       .then((res) => res.json())

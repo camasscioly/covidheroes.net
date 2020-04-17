@@ -1,3 +1,5 @@
+if (window.location.origin.includes('herokuapp')) window.location = `https://covidheroes.net`;
+
 setTimeout(() => {
   console.log(
     '%cHold up!',

@@ -64,7 +64,7 @@ yarn dev
 # production: yarn start
 ```
 
-Visit `http://localhost:PORT` or `http://127.0.0.1:PORT` to view the application (Ex. `localhost:3000`)
+Visit `http://localhost:PORT` to view the application (Ex. `localhost:3000`)
 
 ## FAQ
 

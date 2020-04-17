@@ -31,6 +31,10 @@
               <label for="password">Password</label>
               <input type="password" class="form-control" id="password" maxlength="20" value="Loading..." onfocusout="document.getElementById('password').type = 'password'" onfocus="document.getElementById('password').type = 'text'">
             </div>
+            <div class="custom-control custom-switch">
+              <input type="radio" class="custom-control-input" name="exampleRadios" id="notif-radio" checked>
+              <label class="custom-control-label" for="notif-radio">Get notified when someone posts.</label>
+            </div><br>
             <div class="g-recaptcha" data-sitekey="6LepN-MUAAAAAIaZKV-BSSEm-krAwdDo3jzZP53t" data-callback="enable"></div><br>
             <button type="submit" class="btn btn-primary" id="save" disabled><i class="fas fa-save" style="color: #fff !important"></i> Save Profile</button>
           </form>

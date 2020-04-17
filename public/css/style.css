@@ -366,7 +366,7 @@ input:focus {
 
 input:read-only {
   transition: all 0.2s ease;
-  background: #f2f2f2 !important;
+  background: #ebeaf1d5 !important;
   border: none !important;
   outline: none !important;
   border-radius: 0.3em !important;
@@ -634,4 +634,25 @@ a:hover {
 #search-input {
   background: #fff !important;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  width: 95%;
+  margin-left: 5%;
+}
+
+#cardView {
+  width: 70%;
+  text-align: left;
+}
+
+@media (max-width: 400px) {
+  #cardView {
+    width: 100% !important;
+    text-align: left;
+  }
+  .card {
+    width: 100% !important;
+    margin-left: 0% !important;
+  }
 }

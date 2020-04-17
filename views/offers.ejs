@@ -1,9 +1,9 @@
 <%- include('blocks/app-header') %>
     <div class="container text-center">
-          <p class="card-text">
+          <p class="card-text"><br>
             <h1><i class="fas fa-hand-holding-heart"></i> Submissions</h1>
             <p style="font-size: 120%;">Join the <a id="user-count">0</a> heroes with <a id="req-count">0</a> current unresolved submissions.</p>
-            <center>
+            <center><br>
               <div class="alert alert-primary w-75" role="alert">
                 If you are in need or can offer resources, <a href="/new">Click here to create a new submission</a>.
               </div>
@@ -33,11 +33,13 @@
           </p>
     </div>
     <br style="margin-bottom: 25px;">
-    <div class="container mt-2">
-
-      <div class="row" id="cardView">
+    <div class="container-fluid mt-2 text-center" style="text-align: center">
+      <center>
+        <div class="row card-columns hidden-md-down" id="cardView">
         
-      </div>
+        </div>
+      </center>
+      
       <!-- <div class="table-responsive">
         <table class="table" id="dateTable">
           <thead>

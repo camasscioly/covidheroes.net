@@ -77,7 +77,7 @@ window.onload = () => {
         type !== 'request' ? 'Ask for help' : 'Offer to help'
       }</button>`;
       document.querySelector('#cardView').innerHTML = `
-      <div class="col-md-4" style="margin-bottom: 30px;">
+      <div class="col-sm-4" style="margin-bottom: 30px;">
           <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
             <div class="card-body">
               <h5 class="card-title">
@@ -117,23 +117,16 @@ window.onload = () => {
                   <input type="text" class="form-control" id="dropoff" value="${description}" readonly="readonly">
                 </div>
               </p>
-              <p class="card-text" style="text-align: right">
+              <p class="card-text" style="text-align: center; padding-bottom: 15px; padding-top: 15px;">
                 ${
                   localStorage.getItem('name') === author || localStorage.getItem('admin')
                     ? close + fulfill
                     : fulfill
                 }
               </p><hr>
-              <div class="d-flex" style="color: #A0AECA">
-                <div>
-                  <p class="card-text">
-                    ${date}
-                  </p>
-                </div>
-                <div class="ml-auto">
-                
-                </div>
-              </div>
+              <p class="card-text text-center" style="color: #A0AECA">
+                ${date}
+              </p>
             </div>
           </div>
         </div>
@@ -179,7 +172,7 @@ window.onload = () => {
         type !== 'request' ? 'Ask for help' : 'Offer to help'
       }</button>`;
       document.querySelector('#cardView').innerHTML += `
-        <div class="col-md-4" style="margin-bottom: 30px;">
+        <div class="col-sm-4" style="margin-bottom: 30px;">
           <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
             <div class="card-body">
               <h5 class="card-title">
@@ -219,23 +212,16 @@ window.onload = () => {
                   <input type="text" class="form-control" id="dropoff" value="${description}" readonly="readonly">
                 </div>
               </p>
-              <p class="card-text" style="text-align: right">
+              <p class="card-text" style="text-align: center; padding-bottom: 15px; padding-top: 15px;">
                 ${
                   localStorage.getItem('name') === author || localStorage.getItem('admin')
                     ? close + fulfill
                     : fulfill
                 }
               </p><hr>
-              <div class="d-flex" style="color: #A0AECA">
-                <div>
-                  <p class="card-text">
+                  <p class="card-text text-center" style="color: #A0AECA">
                     ${date}
                   </p>
-                </div>
-                <div class="ml-auto">
-
-                </div>
-            </div>
           </div>
         </div>
       `;

@@ -13,7 +13,9 @@ window.onload = () => {
     killOffer = (id) => {
       postData(`${base}offer/remove`, {
         id,
-      }).then((data) => {});
+      }).then((data) => {
+        location = `${window.location.origin}/submissions/`;
+      });
     };
 
     async function postData(url = '', data = {}) {
@@ -49,7 +51,8 @@ window.onload = () => {
       id,
       comments,
       type,
-      color
+      color,
+      skills
     ) {
       let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       let months = [
@@ -66,6 +69,10 @@ window.onload = () => {
         'November',
         'December',
       ];
+      let skillHTML = '';
+      for (let skill of skills) {
+        skillHTML += `<span class="badge badge-outline-primary">${skill}</span>`;
+      }
       let now = new Date(date);
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
@@ -106,6 +113,7 @@ window.onload = () => {
               <p class="card-text">
                 <div class="form-group">
                   <label for="item">${type.charAt(0).toUpperCase() + type.slice(1)}</label> 
+                  <br><label>${skillHTML}</label>
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
                 <div class="form-group">
@@ -144,7 +152,8 @@ window.onload = () => {
       id,
       comments,
       type,
-      color
+      color,
+      skills
     ) {
       let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       let months = [
@@ -161,6 +170,10 @@ window.onload = () => {
         'November',
         'December',
       ];
+      let skillHTML = '';
+      for (let skill of skills) {
+        skillHTML += `<span class="badge badge-outline-primary">${skill}</span> `;
+      }
       let now = new Date(date);
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
@@ -201,6 +214,7 @@ window.onload = () => {
               <p class="card-text">
                 <div class="form-group">
                   <label for="item">${type.charAt(0).toUpperCase() + type.slice(1)}</label> 
+                  <br><label>${skillHTML}</label>
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
                 <div class="form-group">
@@ -230,17 +244,17 @@ window.onload = () => {
     if (window.location.href.includes('new')) {
       fetch(`${window.location.origin}/v1/counter`)
         .then((res) => res.json())
-        .then((body) => {
+        .then(({ counter }) => {
           document.querySelector(
             '#counter'
-          ).innerHTML = `Over <a>${body.counter}</a> and counting submissions!`;
+          ).innerHTML = `Over <a>${counter}</a> and counting submissions!`;
         });
     }
     if (window.location.href.includes('requests') || window.location.href.includes('submissions')) {
       fetch(`${base}users`)
         .then((res) => res.json())
-        .then((body) => {
-          document.querySelector('#user-count').innerText = body.users.length;
+        .then(({ users }) => {
+          document.querySelector('#user-count').innerText = users.length;
           document.querySelector('#req-count').innerText = total;
         });
       let counter = 0;
@@ -266,7 +280,18 @@ window.onload = () => {
 
           // document.querySelector('#table').innerHTML = '';
           for (let offer of body.offerList.reverse()) {
-            const { title, author, date, tags, id, authorid, description, comments, type } = offer;
+            let {
+              title,
+              author,
+              date,
+              tags,
+              id,
+              authorid,
+              description,
+              comments,
+              type,
+              skills,
+            } = offer;
             if (
               searchItem ||
               searchAuthor ||
@@ -324,6 +349,7 @@ window.onload = () => {
               )
                 return;
             }
+            skills = skills || [];
             const { color } = await fetch(
               `${window.location.origin}/v1/userdata?id=${authorid}`
             ).then((res) => res.json());
@@ -340,7 +366,8 @@ window.onload = () => {
                 esc(DOMPurify.sanitize(id)),
                 esc(DOMPurify.sanitize(comments || 0)),
                 esc(DOMPurify.sanitize(type || 'request')),
-                (color || '#000').replace('#', '')
+                (color || '#000').replace('#', ''),
+                skills
               );
             } else {
               addEntry(
@@ -354,7 +381,8 @@ window.onload = () => {
                 esc(DOMPurify.sanitize(id)),
                 esc(DOMPurify.sanitize(comments || 0)),
                 esc(DOMPurify.sanitize(type || 'request')),
-                (color || '#000').replace('#', '')
+                (color || '#000').replace('#', ''),
+                skills
               );
             }
 
@@ -399,7 +427,7 @@ window.onload = () => {
           if (reqs > 5) alert('You cannot have more than 5 concurrent requests.');
           return false;
         }
-        if (rep.length < 1000) {
+        if (rep.length < 1) {
           alert('You need at least 1 rep to be able to post.');
           return false;
         }
@@ -412,6 +440,7 @@ window.onload = () => {
           email: esc(DOMPurify.sanitize(localStorage.getItem('email'))),
           date: new Date().toLocaleDateString('en-US'),
           comments: 0,
+          skills: $('#skills').tagsinput('items') || [],
           type: document.querySelector('#request-radio').checked ? 'request' : 'offer',
           csrf: document.querySelector('#csrf').value,
           tags: esc(

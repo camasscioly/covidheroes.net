@@ -1,4 +1,5 @@
 <%- include('blocks/app-header') %>
+  <link rel="stylesheet" href="/css/tags.min.css">
   <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -8,6 +9,11 @@
             <p style="font-size: 120%;" id="counter"><a>Loading...</a> and counting submissions!</p>
             <form id="offers" onsubmit="post(); return false;">
               <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
+              <div class="form-group">
+                <label for="skills">Skills</label>
+                <input id="skills" type="text" value="" placeholder="Enter skills" data-role="tagsinput" required><br>
+                <small class="form-text text-muted">Type your skill, then press enter to save the skill. If you have multiple skills, remember to press enter between them.</small>
+              </div>
               <div class="form-group">
                 <label for="title">Item</label>
                 <input list="itemlist" type="text" class="form-control autoCompleteItem" autocomplete="off" id="title" placeholder="Enter Item Name" maxlength="30" required>
@@ -26,6 +32,14 @@
                 <option value="Test Kits">
                 <option value="Swabs">
                 <option value="Viral Testing Media">
+              </datalist>
+              <datalist id="skillslist">
+                <option value="Getting supplies">
+                <option value="Volunteering">
+                <option value="PPE Printing">
+                <option value="Online chat">
+                <option value="Software">  
+                <option value="Other">
               </datalist>
               <div class="form-group">
                 <label for="location">Dropoff Address</label>
@@ -108,6 +122,8 @@
       }
     }
   </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="./js/tags.min.js" defer></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=places&callback=initAutocomplete"></script>
   <script src="./js/offers.js" defer></script>
   </body>

@@ -133,9 +133,8 @@ router.post('/offer', async (req, res) => {
     comments: 0,
     id,
     type: req.body.type || 'request',
+    skills: req.body.skills || [],
   });
-
-  sgMail.send(msg);
 
   let emails = [];
   for (let u of userList) {
@@ -153,7 +152,7 @@ router.post('/offer', async (req, res) => {
       },
     });
   }
-  sendgrid.send(emails);
+  // sendgrid.send(emails);
 
   await keyv.set('offer-list', offerList);
   await keyv.set('offer-count', counter);

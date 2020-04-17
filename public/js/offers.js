@@ -113,19 +113,11 @@ window.onload = () => {
               <p class="card-text">
                 <div class="form-group">
                   <label for="item">${type.charAt(0).toUpperCase() + type.slice(1)}</label> 
-                  <br><label>${skillHTML}</label>
+                  <label>${skillHTML}</label>
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
-                <div class="form-group">
-                  <label for="amt">Quantity</label> 
-                  <input type="text" class="form-control" id="amt" value="${tags}" readonly="readonly">
-                </div>
-                <div class="form-group">
-                  <label for="dropoff">Dropoff Address</label> 
-                  <input type="text" class="form-control" id="dropoff" value="${description}" readonly="readonly">
-                </div>
               </p>
-              <p class="card-text" style="text-align: center; padding-bottom: 15px; padding-top: 15px;">
+              <p class="card-text" style="text-align: center; padding-bottom: 10px; padding-top: 10px;">
                 ${
                   localStorage.getItem('name') === author || localStorage.getItem('admin')
                     ? close + fulfill
@@ -214,19 +206,11 @@ window.onload = () => {
               <p class="card-text">
                 <div class="form-group">
                   <label for="item">${type.charAt(0).toUpperCase() + type.slice(1)}</label> 
-                  <br><label>${skillHTML}</label>
+                  <label>${skillHTML}</label>
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
-                <div class="form-group">
-                  <label for="amt">Quantity</label> 
-                  <input type="text" class="form-control" id="amt" value="${tags}" readonly="readonly">
-                </div>
-                <div class="form-group">
-                  <label for="dropoff">Dropoff Address</label> 
-                  <input type="text" class="form-control" id="dropoff" value="${description}" readonly="readonly">
-                </div>
               </p>
-              <p class="card-text" style="text-align: center; padding-bottom: 15px; padding-top: 15px;">
+              <p class="card-text" style="text-align: center; padding-bottom: 10px; padding-top: 10px;">
                 ${
                   localStorage.getItem('name') === author || localStorage.getItem('admin')
                     ? close + fulfill

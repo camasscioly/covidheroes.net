@@ -42,7 +42,19 @@ window.onload = () => {
           alert('Not able to find submission.');
           location = `${window.location.origin}/submissions`;
         }
-        let { title, author, date, tags, email, id, description, type, authorid, comments } = offer;
+        let {
+          title,
+          author,
+          date,
+          tags,
+          email,
+          id,
+          description,
+          type,
+          authorid,
+          comments,
+          skills,
+        } = offer;
         console.log(offer);
         let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         let months = [
@@ -67,6 +79,15 @@ window.onload = () => {
         document.querySelector('#reqid').innerText = `${
           type.charAt(0).toUpperCase() + type.slice(1) || 'Request'
         }: #${esc(DOMPurify.sanitize(reqId))}`;
+        if (skills) {
+          let skillHTML = '';
+          for (let skill of skills) {
+            skillHTML += `<span class="badge badge-outline-primary">${skill}</span> `;
+          }
+          document.querySelector('#skills').innerHTML = skillHTML;
+        }
+        document.querySelector('#type').innerText =
+          type.charAt(0).toUpperCase() + type.slice(1) || 'Request';
         document.querySelector('#title').innerHTML = `
           <div class="d-flex">
             <div>

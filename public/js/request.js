@@ -75,7 +75,7 @@ window.onload = () => {
               } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
             </div>
             <div class="ml-auto">
-              <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
+              <span style="color: #A0AECA; font-family: 'Poppins' !important; font-family: bold;">
                 <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
                   comments || 0
                 }

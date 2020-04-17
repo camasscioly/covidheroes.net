@@ -95,7 +95,7 @@ window.onload = () => {
       )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
                   </div>
                   <div class="ml-auto">
-                    <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
+                    <span style="color: #A0AECA; font-family: 'Poppins' !important; font-family: bold;">
                       <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
                         comments || 0
                       }
@@ -190,7 +190,7 @@ window.onload = () => {
       )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
                   </div>
                   <div class="ml-auto">
-                    <span style="color: #A0AECA; font-family: 'MetropolisRegular' !important; font-family: bold;">
+                    <span style="color: #A0AECA; font-family: 'Poppins' !important; font-family: bold;">
                       <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
                         comments || 0
                       }

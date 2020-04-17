@@ -11,7 +11,22 @@
             
             <form id="search" onsubmit="search(); return false;">
               <div class="input-group mb-3 w-75">
-                <input type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">
+                <input list="itemlist" type="text" class="form-control" id="search-input" placeholder="Search Item" maxlength="70">
+                <datalist id="itemlist">
+                  <option value="Ventilators">
+                  <option value="N95 Respirators">
+                  <option value="Surgical Masks">
+                  <option value="Coveralls">
+                  <option value="Surgical or Exam Gowns">
+                  <option value="Face Shields">
+                  <option value="Goggles">
+                  <option value="Examination Gloves">
+                  <option value="Hand Sanitizers">
+                  <option value="Wipes">
+                  <option value="Test Kits">
+                  <option value="Swabs">
+                  <option value="Viral Testing Media">
+                </datalist>
                 <!--&nbsp;&nbsp;<div class="dropdown">
                   <button style="background: #F5F4F9 !important; color: #636E7D !important" class="btn btn-secondary dropdown-toggle form-control" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
                     Setting

@@ -152,7 +152,7 @@ router.post('/offer', async (req, res) => {
       },
     });
   }
-  // sendgrid.send(emails);
+  sendgrid.send(emails);
 
   await keyv.set('offer-list', offerList);
   await keyv.set('offer-count', counter);

@@ -112,7 +112,9 @@ window.onload = () => {
               </h5>
               <p class="card-text">
                 <div class="form-group">
-                  <label for="item">${type.charAt(0).toUpperCase() + type.slice(1)}</label> 
+                  <label for="item">${
+                    type === 'request' ? 'Needs help with' : 'Can help with'
+                  }</label> 
                   <label>${skillHTML}</label>
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
@@ -124,9 +126,16 @@ window.onload = () => {
                     : fulfill
                 }
               </p><hr>
-              <p class="card-text text-center" style="color: #A0AECA">
-                ${date}
-              </p>
+              <div class="d-flex" style="color: #A0AECA">
+              <div>
+                <p class="card-text">
+                  ${date}
+                </p>
+              </div>
+              <div class="ml-auto">
+                ${type.charAt(0).toUpperCase() + type.slice(1)}
+              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -205,7 +214,9 @@ window.onload = () => {
               </h5>
               <p class="card-text">
                 <div class="form-group">
-                  <label for="item">${type.charAt(0).toUpperCase() + type.slice(1)}</label> 
+                  <label for="item">${
+                    type === 'request' ? 'Needs help with' : 'Can help with'
+                  }</label> 
                   <label>${skillHTML}</label>
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
@@ -217,9 +228,16 @@ window.onload = () => {
                     : fulfill
                 }
               </p><hr>
-                  <p class="card-text text-center" style="color: #A0AECA">
-                    ${date}
-                  </p>
+              <div class="d-flex" style="color: #A0AECA">
+              <div>
+                <p class="card-text">
+                  ${date}
+                </p>
+              </div>
+              <div class="ml-auto">
+              ${type.charAt(0).toUpperCase() + type.slice(1)}
+              </div>
+            </div>
           </div>
         </div>
       `;

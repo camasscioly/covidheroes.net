@@ -87,7 +87,7 @@ window.onload = () => {
           document.querySelector('#skills').innerHTML = skillHTML;
         }
         document.querySelector('#type').innerText =
-          type.charAt(0).toUpperCase() + type.slice(1) || 'Request';
+          type === 'request' ? 'Needs help with' : 'Can help with';
         document.querySelector('#title').innerHTML = `
           <div class="d-flex">
             <div>
@@ -115,7 +115,7 @@ window.onload = () => {
               </p>
             </div>
             <div class="ml-auto">
-              ${id}
+              ${type.charAt(0).toUpperCase() + type.slice(1)}
             </div>
           </div>
         `;

@@ -196,6 +196,7 @@ router.post('/offer/edit', async (req, res) => {
     comments: out.comments || 0,
     id: out.id,
     type: out.type,
+    skills: out.skills,
   });
 
   await keyv.set('offer-list', offerList);

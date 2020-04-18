@@ -669,3 +669,12 @@ a:hover {
   cursor: text;
   width: 100%;
 }
+
+.badge-outline-primary {
+  background: #e5edff !important;
+  border: none !important;
+}
+
+.alert {
+  background: #dedcf8 !important;
+}

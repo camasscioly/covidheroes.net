@@ -139,6 +139,7 @@ window.onload = () => {
           </div>
         </div>
       ${document.querySelector('#cardView').innerHTML}`;
+      console.log(skillHTML);
     }
 
     async function addEntry(

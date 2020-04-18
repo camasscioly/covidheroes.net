@@ -451,6 +451,7 @@ a:hover {
   height: 91%;
   margin: 10px 0;
   box-shadow: 0 0 0.12rem rgba(0, 0, 0, 0.21) !important;
+  min-height: 100px;
 }
 
 .perspective-right {
@@ -642,7 +643,7 @@ a:hover {
 }
 
 #cardView {
-  width: 90%;
+  /* width: 90%; */
   text-align: left;
 }
 
@@ -655,4 +656,16 @@ a:hover {
     width: 100% !important;
     margin-left: 0% !important;
   }
+}
+
+.description-area {
+  background-color: #f3f2fa !important;
+  display: inline-block;
+  padding: 9px;
+  color: #555;
+  vertical-align: middle;
+  border-radius: 5px;
+  line-height: 22px;
+  cursor: text;
+  width: 100%;
 }

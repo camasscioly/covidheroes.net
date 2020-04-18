@@ -114,9 +114,8 @@ window.onload = () => {
                 <div class="form-group">
                   <label for="item">${
                     type === 'request' ? 'Needs help with' : 'Can help with'
-                  }</label> 
-                  <label>${skillHTML}</label>
-                  <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
+                  }</label> ${skillHTML}
+                  <br><div class="description-area">${title}</div>
                 </div>
               </p>
               <p class="card-text" style="text-align: right; padding-bottom: 10px; padding-top: 10px;">
@@ -216,9 +215,9 @@ window.onload = () => {
                 <div class="form-group">
                   <label for="item">${
                     type === 'request' ? 'Needs help with' : 'Can help with'
-                  }</label> 
-                  <label>${skillHTML}</label>
-                  <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
+                  }</label> ${skillHTML}
+
+                  <br><div class="description-area">${title}</div>
                 </div>
               </p>
               <p class="card-text" style="text-align: right; padding-bottom: 10px; padding-top: 10px;">
@@ -358,7 +357,7 @@ window.onload = () => {
             if (counter >= 50) return;
             if (author === localStorage.getItem('name')) {
               insertEntry(
-                esc(DOMPurify.sanitize(title)).substring(0, 30),
+                esc(DOMPurify.sanitize(title)),
                 esc(DOMPurify.sanitize(author)),
                 esc(DOMPurify.sanitize(date)),
                 esc(DOMPurify.sanitize(tags)),
@@ -373,7 +372,7 @@ window.onload = () => {
               );
             } else {
               addEntry(
-                esc(DOMPurify.sanitize(title)).substring(0, 30),
+                esc(DOMPurify.sanitize(title)),
                 esc(DOMPurify.sanitize(author)),
                 esc(DOMPurify.sanitize(date)),
                 esc(DOMPurify.sanitize(tags)),

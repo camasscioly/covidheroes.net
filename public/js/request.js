@@ -133,7 +133,7 @@ window.onload = () => {
         document.querySelector(
           '#prof-link-author'
         ).innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">${window.location.origin}/@${author}</a></b>`;
-        document.querySelector('#item').value = title;
+        document.querySelector('#item').innerText = title;
         document.querySelector('#amt').value = tags;
         document.querySelector('#location').value = description;
         emailTo = email;
@@ -202,7 +202,7 @@ function editMode() {
     console.log({
       ID,
       tags: document.querySelector('#amt').value,
-      title: document.querySelector('#item').value,
+      title: document.querySelector('#item').innerText,
       description: document.querySelector('#location').value,
     });
     postData(`${location.origin}/v1/offer/edit`, {

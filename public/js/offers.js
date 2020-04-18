@@ -119,7 +119,7 @@ window.onload = () => {
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
               </p>
-              <p class="card-text" style="text-align: center; padding-bottom: 10px; padding-top: 10px;">
+              <p class="card-text" style="text-align: right; padding-bottom: 10px; padding-top: 10px;">
                 ${
                   localStorage.getItem('name') === author || localStorage.getItem('admin')
                     ? close + fulfill
@@ -221,7 +221,7 @@ window.onload = () => {
                   <input type="text" class="form-control" id="item" value="${title}" readonly="readonly">
                 </div>
               </p>
-              <p class="card-text" style="text-align: center; padding-bottom: 10px; padding-top: 10px;">
+              <p class="card-text" style="text-align: right; padding-bottom: 10px; padding-top: 10px;">
                 ${
                   localStorage.getItem('name') === author || localStorage.getItem('admin')
                     ? close + fulfill

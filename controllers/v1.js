@@ -137,10 +137,10 @@ router.post('/offer', async (req, res) => {
   });
 
   let emails = [];
-  /*for (let u of userList) {
-    const user = await keyv.get(u[1]);
+  for (let u of userList) {
+    const { email } = await keyv.get(u[1]);
     emails.push({
-      to: user,
+      to: email,
       from: 'aiden@covidheroes.net',
       templateId: 'd-a02e2d6bf89c4fcaab28762d98442a1f',
       dynamic_template_data: {
@@ -151,19 +151,7 @@ router.post('/offer', async (req, res) => {
         link: `https://app.covidheroes.net/submissions/open?id=${id}`,
       },
     });
-  }*/
-  emails.push({
-    to: 'aiden.bai05@gmail.com',
-    from: 'aiden@covidheroes.net',
-    templateId: 'd-a02e2d6bf89c4fcaab28762d98442a1f',
-    dynamic_template_data: {
-      item: req.body.title,
-      type: req.body.type || 'request',
-      author: req.body.author,
-      address: req.body.description || null,
-      link: `https://app.covidheroes.net/submissions/open?id=${id}`,
-    },
-  });
+  }
   sendgrid.send(emails);
 
   await keyv.set('offer-list', offerList);

@@ -358,7 +358,7 @@ input:focus {
 
 .card-signin {
   border: none;
-  border-top: 3px solid #6b63ffbb;
+  border-top: 0px solid #6b63ffbb;
   box-shadow: 0 0 1.2rem rgba(0, 0, 0, 0.06) !important;
   padding: 25px;
   margin-top: 0 !important;
@@ -675,6 +675,7 @@ a:hover {
   border: none !important;
 }
 
-.alert {
-  background: #dedcf8 !important;
+.alert-primary {
+  background: rgb(108, 99, 255) !important;
+  color: #fff !important;
 }

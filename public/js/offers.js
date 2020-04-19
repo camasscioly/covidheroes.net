@@ -85,7 +85,7 @@ window.onload = () => {
       }</button>`;
       document.querySelector('#cardView').innerHTML = `
       <div class="col-sm-4" style="margin-bottom: 30px;">
-          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
+          <div class="card hover" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
@@ -102,8 +102,8 @@ window.onload = () => {
       )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
                   </div>
                   <div class="ml-auto">
-                    <span style="color: #A0AECA; font-family: 'Poppins' !important; font-family: bold;">
-                      <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
+                    <span style="color: #A0AECA; font-family: 'Poppins' !important;">
+                      <i style="color: #A0AECA !important; font-size: 80% !important" class="fas fa-comment-alt"></i> ${
                         comments || 0
                       }
                     </span>
@@ -121,20 +121,20 @@ window.onload = () => {
               <p class="card-text" style="text-align: right; padding-bottom: 10px; padding-top: 10px;">
                 ${
                   localStorage.getItem('name') === author || localStorage.getItem('admin')
-                    ? close + fulfill
+                    ? fulfill
                     : fulfill
                 }
               </p><hr>
               <div class="d-flex" style="color: #A0AECA">
-              <div>
-                <p class="card-text">
-                  ${date}
-                </p>
+                <div>
+                  <p class="card-text">
+                    ${date}
+                  </p>
+                </div>
+                <div class="ml-auto">
+                  ${type.charAt(0).toUpperCase() + type.slice(1)}
+                </div>
               </div>
-              <div class="ml-auto">
-                ${type.charAt(0).toUpperCase() + type.slice(1)}
-              </div>
-            </div>
             </div>
           </div>
         </div>
@@ -187,7 +187,7 @@ window.onload = () => {
       }</button>`;
       document.querySelector('#cardView').innerHTML += `
         <div class="col-sm-4" style="margin-bottom: 30px;">
-          <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
+          <div class="card hover" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
@@ -204,8 +204,8 @@ window.onload = () => {
       )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
                   </div>
                   <div class="ml-auto">
-                    <span style="color: #A0AECA; font-family: 'Poppins' !important; font-family: bold;">
-                      <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
+                    <span style="color: #A0AECA; font-family: 'Poppins' !important;">
+                      <i style="color: #A0AECA !important; font-size: 80% !important" class="fas fa-comment-alt"></i> ${
                         comments || 0
                       }
                     </span>
@@ -224,7 +224,7 @@ window.onload = () => {
               <p class="card-text" style="text-align: right; padding-bottom: 10px; padding-top: 10px;">
                 ${
                   localStorage.getItem('name') === author || localStorage.getItem('admin')
-                    ? close + fulfill
+                    ? fulfill
                     : fulfill
                 }
               </p><hr>

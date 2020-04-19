@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <div class="card hover" style="border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
+            <div class="card hover" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
               <div class="card-body" id="infocard">
                 <h5 class="card-title" id="title">
                   
@@ -36,7 +36,7 @@
               </div>
           </div>
           <div class="col-md-6">
-            <div class="card h-100 hover" style="border: 0px solid #666; border: none; border-top: 3px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
+            <div class="card h-100 hover" style="border: 0px solid #666; border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;">
               <div class="card-body">
                 <div id="map" style="border-radius: 5px !important; height: 80.5% !important"></div><hr>
                 <small id="stats">You <b>(A)</b> are <a id="distance">0km</a> away from the Dropoff Location <b>(B)</b>, or around a <a id="time">0min</a> drive.</small>
@@ -88,6 +88,7 @@
             </div>
           </div>
         </div><br>
+        <%- include('blocks/alert') %><br>
       <div id="disqus_thread"></div>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=places,geometry"></script>
   <style>

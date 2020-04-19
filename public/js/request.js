@@ -76,9 +76,7 @@ window.onload = () => {
           months[now.getMonth()]
         } ${now.getDate()}, ${now.getFullYear()}`;
         if (!type) type = 'request';
-        document.querySelector('#reqid').innerText = `${
-          type.charAt(0).toUpperCase() + type.slice(1) || 'Request'
-        }: #${esc(DOMPurify.sanitize(reqId))}`;
+        document.querySelector('#reqid').innerText = title;
         if (skills) {
           let skillHTML = '';
           for (let skill of skills) {

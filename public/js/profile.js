@@ -117,9 +117,6 @@ window.onload = () => {
           name = `${name} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
         document.querySelector('#prof-head').innerHTML = `@${name}`;
         name = temp;
-        document.querySelector(
-          '#prof-link'
-        ).innerHTML = `<b>Profile: <a href="${window.location.origin}/@${name}">${window.location.origin}/@${name}</a></b>`;
         $(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });

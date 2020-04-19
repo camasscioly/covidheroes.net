@@ -21,7 +21,7 @@ window.onload = () => {
       try {
         return await response.text(); // parses JSON response into native JavaScript objects
       } catch (err) {
-        alert(`You've already repped this user!`);
+        swal(`You've already repped this user!`);
       }
     }
 
@@ -122,7 +122,7 @@ window.onload = () => {
         });
       })
       .catch((err) => {
-        alert('Oops! Something went wrong...');
+        swal('Oops! Something went wrong...');
         location = window.location.origin;
       });
     if (document.querySelector('#give-rep')) {

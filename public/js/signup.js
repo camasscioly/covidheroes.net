@@ -35,7 +35,7 @@ window.onload = () => {
         .replace(/\s/g, '') !==
       esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)
     ) {
-      alert('Username must be alphanumeric, lowercase, and contain no spaces.');
+      swal('Username must be alphanumeric, lowercase, and contain no spaces.');
       return false;
     }
     if (
@@ -43,14 +43,14 @@ window.onload = () => {
         esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
       )
     ) {
-      alert('Invalid Email');
+      swal('Invalid Email');
       return false;
     }
     if (
       document.querySelector('#password').value !==
       document.querySelector('#password-confirm').value
     ) {
-      alert('Password does not match confirmation');
+      swal('Password does not match confirmation');
       return false;
     }
     postData(`${base}signup`, {
@@ -66,7 +66,7 @@ window.onload = () => {
       password: document.querySelector('#password').value.substring(0, 50).trim(),
       csrf: document.querySelector('#csrf').value,
     }).then((data) => {
-      if (data === 'Already Registered') return alert('This username is already taken.');
+      if (data === 'Already Registered') return swal('This username is already taken.');
       localStorage.setItem(
         'name',
         esc(DOMPurify.sanitize(document.querySelector('#name').value))
@@ -85,7 +85,7 @@ window.onload = () => {
       localStorage.setItem('id', data);
       localStorage.setItem('password', document.querySelector('#password').value);
       document.cookie = 'member=true';
-      alert(`You've been logged in.`);
+      swal(`You've been logged in.`);
       if (localStorage.location === 'Not Configured')
         window.location = `${window.location.origin}/configure`;
       else window.location = `${window.location.origin}/submissions`;

@@ -36,7 +36,7 @@ window.onload = () => {
       try {
         return await response.json(); // parses JSON response into native JavaScript objects
       } catch (err) {
-        alert('Invalid Offer');
+        swal('Invalid Offer');
       }
     }
 
@@ -426,11 +426,11 @@ window.onload = () => {
         ).then((res) => res.json());
         console.log(rep);
         if (!localStorage.getItem('admin')) {
-          if (reqs > 5) alert('You cannot have more than 5 concurrent requests.');
+          if (reqs > 5) swal('You cannot have more than 5 concurrent requests.');
           return false;
         }
         if (rep.length < 1) {
-          alert('You need at least 1 rep to be able to post.');
+          swal('You need at least 1 rep to be able to post.');
           return false;
         }
         document.querySelector('#submission-button').disabled = true;

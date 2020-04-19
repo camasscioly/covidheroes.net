@@ -24,7 +24,7 @@ window.onload = () => {
       try {
         return await response.json(); // parses JSON response into native JavaScript objects
       } catch (err) {
-        alert('Invalid Offer');
+        swal('Invalid Offer');
       }
     }
 
@@ -81,7 +81,7 @@ window.onload = () => {
                 });
             }
           } catch (err) {
-            // return alert('Oops! Something went wrong.');
+            // return swal('Oops! Something went wrong.');
             return;
           }
         });

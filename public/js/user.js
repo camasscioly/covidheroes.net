@@ -55,7 +55,7 @@ window.onload = async () => {
       try {
         return await response.text(); // parses JSON response into native JavaScript objects
       } catch (err) {
-        alert('Oops, something went wrong.');
+        swal('Oops, something went wrong.');
       }
     }
     const base = `${window.location.origin}/v1/`;
@@ -74,7 +74,7 @@ window.onload = async () => {
           .replace(/\s/g, '') !==
         esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)
       ) {
-        alert('Username must be alphanumeric, lowercase, and contain no spaces.');
+        swal('Username must be alphanumeric, lowercase, and contain no spaces.');
         return false;
       }
 
@@ -84,7 +84,7 @@ window.onload = async () => {
         )
       ) {
         if (document.querySelector('#email').value !== localStorage.getItem('email')) {
-          alert('Invalid Email');
+          swal('Invalid Email');
           return false;
         }
       }
@@ -95,7 +95,7 @@ window.onload = async () => {
           .match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)
       ) {
         if (document.querySelector('#phone').value !== localStorage.getItem('phone')) {
-          alert('Invalid Phone Number');
+          swal('Invalid Phone Number');
           return false;
         }
       }
@@ -106,7 +106,7 @@ window.onload = async () => {
       ) {
         let userPass = prompt('What is your current password?');
         if (localStorage.getItem('password') !== userPass) {
-          alert('Incorrect password.');
+          swal('Incorrect password.');
           return false;
         }
       }
@@ -118,7 +118,7 @@ window.onload = async () => {
         document.querySelector('#location').value.toLowerCase() === 'not configured' ||
         document.querySelector('#location').value.length < 3)
     ) {
-      alert('Please set a real location.');
+      swal('Please set a real location.');
       return false;
     }
     let col;
@@ -146,8 +146,8 @@ window.onload = async () => {
       original: localStorage.getItem('name'),
       csrf: document.querySelector('#csrf').value,
     }).then((data) => {
-      if (data === 'Error!') return alert('Oops! Something went wrong.');
-      if (data === 'Already Registered') return alert('Username already taken');
+      if (data === 'Error!') return swal('Oops! Something went wrong.');
+      if (data === 'Already Registered') return swal('Username already taken');
       localStorage.setItem(
         'name',
         esc(DOMPurify.sanitize(document.querySelector('#name').value))

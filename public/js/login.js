@@ -21,7 +21,7 @@ window.onload = () => {
     try {
       return await response.json(); // parses JSON response into native JavaScript objects
     } catch (err) {
-      alert('Invalid Login');
+      swal('Invalid Login');
     }
   }
 
@@ -40,7 +40,6 @@ window.onload = () => {
       if (staff) localStorage.setItem('admin', true);
       localStorage.setItem('member', true);
       document.cookie = 'member=true';
-      alert(`You've been logged in.`);
       if (localStorage.location === 'Not Configured')
         window.location = `${window.location.origin}/configure`;
       else window.location = `${window.location.origin}/submissions`;

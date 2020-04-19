@@ -39,7 +39,7 @@ window.onload = () => {
         const reqId = urlParams.get('id');
         const offer = body.offerList.find((offer) => offer.id === reqId);
         if (!offer) {
-          alert('Not able to find submission.');
+          swal('Not able to find submission.');
           location = `${window.location.origin}/submissions`;
         }
         let {
@@ -221,7 +221,7 @@ function editMode() {
     document.querySelector('#del').onclick = () => {
       location.reload();
     };
-    alert('Edit mode enabled!');
+    swal('Edit mode enabled!');
     initAutocomplete();
   }
 }

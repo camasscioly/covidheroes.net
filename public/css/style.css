@@ -619,6 +619,13 @@ a:hover {
   box-shadow: none !important;
 }
 
+.custom-control-input:active ~ .custom-control-label:active::before {
+  color: #fff;
+  border-color: #4a44b3;
+  background-color: #4a44b3;
+  box-shadow: none !important;
+}
+
 .custom-range::-webkit-slider-thumb {
   box-shadow: none !important;
   background: #6c63ff;
@@ -632,6 +639,18 @@ a:hover {
   background: #6b63ff;
 }
 
+.custom-range::-webkit-slider-thumb:active {
+  box-shadow: none !important;
+  background: #4a44b3;
+}
+
+.custom-range::-moz-range-thumb:active {
+  background: #4a44b3;
+}
+
+.custom-range::-ms-thumb:active {
+  background: #4a44b3;
+}
 #search-input {
   background: #fff !important;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);

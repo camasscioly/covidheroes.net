@@ -55,7 +55,7 @@ window.onload = async () => {
       try {
         return await response.text(); // parses JSON response into native JavaScript objects
       } catch (err) {
-        swal('Oops, something went wrong.');
+        swal('Oops, something went wrong.', '', 'warning');
       }
     }
     const base = `${window.location.origin}/v1/`;
@@ -74,7 +74,11 @@ window.onload = async () => {
           .replace(/\s/g, '') !==
         esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)
       ) {
-        swal('Username must be alphanumeric, lowercase, and contain no spaces.');
+        swal(
+          'Username must be alphanumeric, lowercase, and contain no spaces.',
+          'Characters can only be a-z',
+          'warning'
+        );
         return false;
       }
 
@@ -84,7 +88,7 @@ window.onload = async () => {
         )
       ) {
         if (document.querySelector('#email').value !== localStorage.getItem('email')) {
-          swal('Invalid Email');
+          swal('Invalid Email', 'Example: hello@example.com', 'warning');
           return false;
         }
       }
@@ -95,7 +99,7 @@ window.onload = async () => {
           .match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)
       ) {
         if (document.querySelector('#phone').value !== localStorage.getItem('phone')) {
-          swal('Invalid Phone Number');
+          swal('Invalid Phone Number', '', 'warning');
           return false;
         }
       }
@@ -106,7 +110,7 @@ window.onload = async () => {
       ) {
         let userPass = prompt('What is your current password?');
         if (localStorage.getItem('password') !== userPass) {
-          swal('Incorrect password.');
+          swal('Incorrect password.', '', 'warning');
           return false;
         }
       }
@@ -118,7 +122,7 @@ window.onload = async () => {
         document.querySelector('#location').value.toLowerCase() === 'not configured' ||
         document.querySelector('#location').value.length < 3)
     ) {
-      swal('Please set a real location.');
+      swal('Please set a real location.', '', 'warning');
       return false;
     }
     let col;
@@ -146,8 +150,8 @@ window.onload = async () => {
       original: localStorage.getItem('name'),
       csrf: document.querySelector('#csrf').value,
     }).then((data) => {
-      if (data === 'Error!') return swal('Oops! Something went wrong.');
-      if (data === 'Already Registered') return swal('Username already taken');
+      if (data === 'Error!') return swal('Oops! Something went wrong.', '', 'warning');
+      if (data === 'Already Registered') return swal('Username already taken', '', 'warning');
       localStorage.setItem(
         'name',
         esc(DOMPurify.sanitize(document.querySelector('#name').value))

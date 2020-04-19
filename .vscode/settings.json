@@ -1,4 +1,5 @@
 {
+  "editor.formatOnSave": true,
   "prettier.arrowParens": "always",
   "prettier.bracketSpacing": true,
   "prettier.htmlWhitespaceSensitivity": "css",

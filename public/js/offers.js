@@ -36,7 +36,11 @@ window.onload = () => {
       try {
         return await response.json(); // parses JSON response into native JavaScript objects
       } catch (err) {
-        swal('Invalid Offer');
+        swal(
+          'Invalid Post',
+          'Something went wrong when trying to post. Try reloading and contact support if this error keeps happening.',
+          'warning'
+        );
       }
     }
 
@@ -426,11 +430,20 @@ window.onload = () => {
         ).then((res) => res.json());
         console.log(rep);
         if (!localStorage.getItem('admin')) {
-          if (reqs > 5) swal('You cannot have more than 5 concurrent requests.');
+          if (reqs > 5)
+            swal(
+              'You cannot have more than 5 concurrent submissions.',
+              'If you want to have more than the limit, contact support. ',
+              'warning'
+            );
           return false;
         }
         if (rep.length < 1) {
-          swal('You need at least 1 rep to be able to post.');
+          swal(
+            'You need at least 1 rep to be able to post.',
+            'This is to prevent malicious hackers to try to break our service. You can gain rep by asking other users or helping them.',
+            'warning'
+          );
           return false;
         }
         document.querySelector('#submission-button').disabled = true;
@@ -453,7 +466,19 @@ window.onload = () => {
             )
           ),
         }).then((data) => {
-          window.location = `${window.location.origin}/requests`;
+          swal(
+            {
+              title: `Created your post!`,
+              type: 'info',
+              confirmButtonClass: 'btn-primary',
+              confirmButtonText: 'Ok',
+              closeOnConfirm: false,
+              closeOnCancel: false,
+            },
+            (isConfirm) => {
+              window.location = `${window.location.origin}/requests`;
+            }
+          );
           return false;
         });
         return false;

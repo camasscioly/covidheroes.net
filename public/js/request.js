@@ -39,8 +39,21 @@ window.onload = () => {
         const reqId = urlParams.get('id');
         const offer = body.offerList.find((offer) => offer.id === reqId);
         if (!offer) {
-          swal('Not able to find submission.');
-          location = `${window.location.origin}/submissions`;
+          swal(
+            {
+              title: `Not able to find submission.`,
+              type: 'warning',
+              confirmButtonClass: 'btn-primary',
+              confirmButtonText: 'Ok',
+              closeOnConfirm: false,
+              closeOnCancel: false,
+            },
+            (isConfirm) => {
+              if (isConfirm) {
+                location = `${window.location.origin}/submissions`;
+              }
+            }
+          );
         }
         let {
           title,

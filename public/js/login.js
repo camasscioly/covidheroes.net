@@ -21,7 +21,11 @@ window.onload = () => {
     try {
       return await response.json(); // parses JSON response into native JavaScript objects
     } catch (err) {
-      swal('Invalid Login');
+      swal(
+        'Invalid Login',
+        'Something went wrong when trying to log you in. Check the USERNAME and PASSWORD fields.',
+        'warning'
+      );
     }
   }
 
@@ -40,9 +44,23 @@ window.onload = () => {
       if (staff) localStorage.setItem('admin', true);
       localStorage.setItem('member', true);
       document.cookie = 'member=true';
-      if (localStorage.location === 'Not Configured')
-        window.location = `${window.location.origin}/configure`;
-      else window.location = `${window.location.origin}/submissions`;
+      swal(
+        {
+          title: `You've been logged in!`,
+          type: 'info',
+          confirmButtonClass: 'btn-primary',
+          confirmButtonText: 'Ok',
+          closeOnConfirm: false,
+          closeOnCancel: false,
+        },
+        (isConfirm) => {
+          if (isConfirm) {
+            if (localStorage.location === 'Not Configured')
+              window.location = `${window.location.origin}/configure`;
+            else window.location = `${window.location.origin}/submissions`;
+          }
+        }
+      );
     });
     return false;
   };

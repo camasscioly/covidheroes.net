@@ -21,57 +21,12 @@ window.onload = () => {
       try {
         return await response.text(); // parses JSON response into native JavaScript objects
       } catch (err) {
-        swal(`You've already repped this user!`);
+        swal(
+          `You've already repped this user!`,
+          "You cannot rep someone more than once! Once you've repped someone, it is permanent",
+          'warning'
+        );
       }
-    }
-
-    async function addEntry(
-      title,
-      author,
-      date,
-      tags,
-      id,
-      dom,
-      authorid,
-      comments,
-      description,
-      type
-    ) {
-      const close = `<button class="btn btn-danger hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { if (confirm('Do you want to close request ${id}?')) { document.getElementById('${id}').remove(); killOffer('${id}') } }"><i class="fas fa-times"></i> Close</button>`;
-      const fulfill = ` <button class="btn btn-danger hover" onclick="window.location = '${window.location.origin}/submissions/open?id=${id}'"><i class="fas fa-book-open"></i> Open</button>`;
-      document.querySelector(dom).innerHTML += `<tr id="${id}">
-        <th scope="row"><p>${
-          type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
-            ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #48BB78 !important"></i><span>'
-            : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
-        }</p></th>
-        <td><p style="font-weight: bold; color: #000 !important">${title.replace(
-          /(.{17})..+/,
-          '$1…'
-        )}</p></td>
-        <td><a href="${window.location.origin}/@${author || undefined}">${author}</a></td>
-        <td>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #000 !important; font-weight: bold !important">
-              <span class="badge badge-outline-primary"><i class="fas fa-comment-alt"></i> ${
-                comments || 0
-              }</span> Info
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdown">
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Date</b>: ${date}</a>
-              <a style="color: #000 !important; font-weight: 100; background: #fff !important;" class="hover dropdown-item"><b>Quantity</b>: ${tags}</a>
-              <a style="background: #fff !important;" class="hover dropdown-item" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${description
-                .split(' ')
-                .join('+')}"><b>Location</b>: ${description.replace(/(.{17})..+/, '$1…')}</a>
-            </div>
-          </div>
-        </td>
-        <td>${
-          localStorage.getItem('name') === author || localStorage.getItem('admin')
-            ? fulfill + close
-            : fulfill
-        }</td>
-      </tr>`;
     }
 
     const base = `${window.location.origin}/v1/`;
@@ -127,14 +82,30 @@ window.onload = () => {
       });
     if (document.querySelector('#give-rep')) {
       document.querySelector('#give-rep').onclick = () => {
-        if (!confirm('Are you sure you want to rep this user? This is permanent.')) return;
-        postData(`${base}userdata/rep`, {
-          rep: localStorage.getItem('id'),
-          id,
-        }).then((data) => {
-          location.reload();
-          return false;
-        });
+        swal(
+          {
+            title: 'Are you sure you want to rep this user?',
+            text: 'Repping users is permanent and cannot be removed.',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: 'btn-danger',
+            confirmButtonText: 'Yes, I want to rep!',
+            cancelButtonText: 'Cancel',
+            closeOnConfirm: false,
+            closeOnCancel: false,
+          },
+          (isConfirm) => {
+            if (isConfirm) {
+              postData(`${base}userdata/rep`, {
+                rep: localStorage.getItem('id'),
+                id,
+              }).then((data) => {
+                location.reload();
+                return false;
+              });
+            }
+          }
+        );
       };
     }
 

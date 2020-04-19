@@ -35,7 +35,11 @@ window.onload = () => {
         .replace(/\s/g, '') !==
       esc(DOMPurify.sanitize(document.querySelector('#name').value)).substring(0, 50)
     ) {
-      swal('Username must be alphanumeric, lowercase, and contain no spaces.');
+      swal(
+        'Username must be alphanumeric, lowercase, and contain no spaces.',
+        'Only a-z is allowed',
+        'warning'
+      );
       return false;
     }
     if (
@@ -43,14 +47,18 @@ window.onload = () => {
         esc(DOMPurify.sanitize(document.querySelector('#email').value)).substring(0, 50)
       )
     ) {
-      swal('Invalid Email');
+      swal('Invalid Email', 'Example: hello@example.com', 'warning');
       return false;
     }
     if (
       document.querySelector('#password').value !==
       document.querySelector('#password-confirm').value
     ) {
-      swal('Password does not match confirmation');
+      swal(
+        'Password does not match confirmation',
+        'Make sure the password confirmation is the same as your original password.',
+        'warning'
+      );
       return false;
     }
     postData(`${base}signup`, {
@@ -66,7 +74,8 @@ window.onload = () => {
       password: document.querySelector('#password').value.substring(0, 50).trim(),
       csrf: document.querySelector('#csrf').value,
     }).then((data) => {
-      if (data === 'Already Registered') return swal('This username is already taken.');
+      if (data === 'Already Registered')
+        return swal('This username is already taken.', '', 'warning');
       localStorage.setItem(
         'name',
         esc(DOMPurify.sanitize(document.querySelector('#name').value))
@@ -85,10 +94,23 @@ window.onload = () => {
       localStorage.setItem('id', data);
       localStorage.setItem('password', document.querySelector('#password').value);
       document.cookie = 'member=true';
-      swal(`You've been logged in.`);
-      if (localStorage.location === 'Not Configured')
-        window.location = `${window.location.origin}/configure`;
-      else window.location = `${window.location.origin}/submissions`;
+      swal(
+        {
+          title: `You've been logged in!`,
+          type: 'info',
+          confirmButtonClass: 'btn-primary',
+          confirmButtonText: 'Ok',
+          closeOnConfirm: false,
+          closeOnCancel: false,
+        },
+        (isConfirm) => {
+          if (isConfirm) {
+            if (localStorage.location === 'Not Configured')
+              window.location = `${window.location.origin}/configure`;
+            else window.location = `${window.location.origin}/submissions`;
+          }
+        }
+      );
     });
     return false;
   };

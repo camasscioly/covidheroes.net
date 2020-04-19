@@ -24,7 +24,7 @@ window.onload = () => {
       try {
         return await response.json(); // parses JSON response into native JavaScript objects
       } catch (err) {
-        swal('Invalid Offer');
+        swal('Oops! Something went wrong!', '', 'warning');
       }
     }
 

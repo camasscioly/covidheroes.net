@@ -143,7 +143,7 @@ window.onload = () => {
         } else document.querySelector('#prof-link').value = 'Login to get a profile link.';
         document.querySelector(
           '#prof-link-author'
-        ).innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">${window.location.origin}/@${author}</a></b>`;
+        ).innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">@${author}</a></b>`;
         document.querySelector('#item').innerText = title;
         document.querySelector('#amt').value = tags;
         document.querySelector('#location').value = description;

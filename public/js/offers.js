@@ -543,15 +543,15 @@ window.onload = () => {
         const { rep } = await fetch(
           `${location.origin}/v1/userdata?id=${localStorage.id}`
         ).then((res) => res.json());
-        console.log(rep);
         if (!localStorage.getItem('admin')) {
-          if (reqs > 5)
+          if (reqs > 5) {
             swal(
               'You cannot have more than 5 concurrent posts.',
               'If you want to have more than the limit, contact support. ',
               'warning'
             );
-          return false;
+            return false;
+          }
         }
         if (rep.length < 1) {
           swal(

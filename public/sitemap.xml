@@ -4,33 +4,32 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
 <url>
   <loc>https://covidheroes.net/</loc>
-  <lastmod>2020-03-30T19:20:46+00:00</lastmod>
+  <lastmod>2020-04-20T16:56:50+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://covidheroes.net/requests</loc>
-  <lastmod>2020-03-30T19:20:46+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://covidheroes.net/discuss</loc>
-  <lastmod>2020-03-30T19:20:46+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://covidheroes.net/team</loc>
-  <lastmod>2020-03-30T19:20:46+00:00</lastmod>
+  <lastmod>2020-04-20T16:56:50+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://covidheroes.net/index.html</loc>
+  <lastmod>2020-04-20T16:56:50+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://covidheroes.net/terms</loc>
-  <lastmod>2020-03-30T19:20:46+00:00</lastmod>
-  <priority>0.80</priority>
+  <lastmod>2020-04-20T16:56:50+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://covidheroes.net/discuss</loc>
+  <lastmod>2020-04-20T16:56:50+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 
 

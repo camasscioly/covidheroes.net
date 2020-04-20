@@ -144,8 +144,10 @@ router.post('/offer', async (req, res) => {
       from: 'aiden@covidheroes.net',
       templateId: 'd-a02e2d6bf89c4fcaab28762d98442a1f',
       dynamic_template_data: {
+        icon: req.body.type || 'request' !== 'request' ? '❤️' : '✋',
         item: req.body.title,
-        type: req.body.type || 'request',
+        skills: req.body.skills.join(', '),
+        type: req.body.type || 'request' === 'request' ? 'needs help with' : 'can help with',
         author: req.body.author,
         address: req.body.description || null,
         link: `https://app.covidheroes.net/posts/open?id=${id}`,

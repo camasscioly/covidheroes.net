@@ -690,7 +690,7 @@ a:hover {
 }
 
 .badge-outline-primary {
-  background: #e5edff !important;
+  background: rgba(108, 99, 255, 0.15) !important;
   border: none !important;
 }
 

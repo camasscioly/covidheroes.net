@@ -24,7 +24,7 @@
             </div>
             <small id="userHelp" class="form-text text-muted">Note: We do not share your address with users outside of the COVID Heroes service.</small><br>
             <button type="submit" class="btn btn-primary" id="save">Set Location</button>
-            <a href="/submissions" type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);">Skip for now</a>
+            <a href="/posts" type="button" class="btn btn-primary" style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);">Skip for now</a>
           </form>
         </div>
         </div>
@@ -38,7 +38,7 @@
   }
 </style>
 <script>
-  if (localStorage.location !== 'Not Configured') location = `${location.origin}/submissions`;
+  if (localStorage.location !== 'Not Configured') location = `${location.origin}/posts`;
 
   let placeSearch, autocomplete;
   

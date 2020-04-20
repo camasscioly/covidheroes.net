@@ -14,7 +14,7 @@ window.onload = () => {
       postData(`${base}offer/remove`, {
         id,
       }).then((data) => {
-        location = `${window.location.origin}/submissions/`;
+        location = `${window.location.origin}/posts/`;
       });
     };
 
@@ -81,12 +81,10 @@ window.onload = () => {
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
       } ${now.getDate()}, ${now.getFullYear()}`;
-      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { location = '${location.origin}/submissions/open?id=${id}' }">Edit</button>`;
+      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { location = '${location.origin}/posts/open?id=${id}' }">Edit</button>`;
       const fulfill = ` <button class="btn btn-primary hover" onclick="window.location = '${
         window.location.origin
-      }/submissions/open?id=${id}'">${
-        type !== 'request' ? 'Ask for help' : 'Offer to help'
-      }</button>`;
+      }/posts/open?id=${id}'">${type !== 'request' ? 'Ask for help' : 'Offer to help'}</button>`;
       document.querySelector('#cardView').innerHTML = `
       <div class="col-sm-4" style="margin-bottom: 30px;">
           <div class="card hover" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
@@ -183,12 +181,10 @@ window.onload = () => {
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
       } ${now.getDate()}, ${now.getFullYear()}`;
-      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { location = '${location.origin}/submissions/open?id=${id}' }">Edit</button>`;
+      const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { location = '${location.origin}/posts/open?id=${id}' }">Edit</button>`;
       const fulfill = ` <button class="btn btn-primary hover" onclick="window.location = '${
         window.location.origin
-      }/submissions/open?id=${id}'">${
-        type !== 'request' ? 'Ask for help' : 'Offer to help'
-      }</button>`;
+      }/posts/open?id=${id}'">${type !== 'request' ? 'Ask for help' : 'Offer to help'}</button>`;
       document.querySelector('#cardView').innerHTML += `
         <div class="col-sm-4" style="margin-bottom: 30px;">
           <div class="card hover" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
@@ -247,16 +243,20 @@ window.onload = () => {
       `;
     }
 
-    if (window.location.href.includes('new')) {
+    if (window.location.href.toLowerCase().includes('new')) {
       fetch(`${window.location.origin}/v1/counter`)
         .then((res) => res.json())
         .then(({ counter }) => {
           document.querySelector(
             '#counter'
-          ).innerHTML = `Over <a>${counter}</a> and counting submissions!`;
+          ).innerHTML = `Over <a>${counter}</a> and counting posts!`;
         });
     }
-    if (window.location.href.includes('requests') || window.location.href.includes('submissions')) {
+    if (
+      window.location.href.toLowerCase().includes('requests') ||
+      window.location.href.toLowerCase().includes('posts') ||
+      window.location.href.toLowerCase().includes('submissions')
+    ) {
       fetch(`${base}users`)
         .then((res) => res.json())
         .then(({ users }) => {
@@ -565,7 +565,7 @@ window.onload = () => {
           });
       }, 350000);
     }
-    if (window.location.href.includes('new')) {
+    if (window.location.href.toLowerCase().includes('new')) {
       fetch(`${window.location.origin}/v1/offer`)
         .then((res) => res.json())
         .then((body) => {
@@ -585,7 +585,7 @@ window.onload = () => {
         if (!localStorage.getItem('admin')) {
           if (reqs > 5)
             swal(
-              'You cannot have more than 5 concurrent submissions.',
+              'You cannot have more than 5 concurrent posts.',
               'If you want to have more than the limit, contact support. ',
               'warning'
             );

@@ -148,7 +148,7 @@ router.post('/offer', async (req, res) => {
         type: req.body.type || 'request',
         author: req.body.author,
         address: req.body.description || null,
-        link: `https://app.covidheroes.net/submissions/open?id=${id}`,
+        link: `https://app.covidheroes.net/posts/open?id=${id}`,
       },
     });
   }

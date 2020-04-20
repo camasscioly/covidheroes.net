@@ -6,6 +6,6 @@ module.exports = (req, res, next) => {
       protocol: req.protocol,
       host: req.get('host'),
     });
-    return res.redirect(`${origin}/submissions`);
+    return res.redirect(`${origin}/posts`);
   } else next();
 };

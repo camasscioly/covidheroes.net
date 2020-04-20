@@ -57,7 +57,7 @@ window.onload = () => {
           if (isConfirm) {
             if (localStorage.location === 'Not Configured')
               window.location = `${window.location.origin}/configure`;
-            else window.location = `${window.location.origin}/submissions`;
+            else window.location = `${window.location.origin}/posts`;
           }
         }
       );

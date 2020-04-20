@@ -57,11 +57,19 @@ router.get('/submissions', appPage, async (req, res) => {
   renderFile(req, res, 'offers');
 });
 
+router.get('/posts', appPage, async (req, res) => {
+  renderFile(req, res, 'offers');
+});
+
 router.get('/requests/open', appPage, async (req, res) => {
   renderFile(req, res, 'request');
 });
 
 router.get('/submissions/open', appPage, async (req, res) => {
+  renderFile(req, res, 'request'); // deprecate this later
+});
+
+router.get('/posts/open', appPage, async (req, res) => {
   renderFile(req, res, 'request'); // deprecate this later
 });
 

@@ -181,7 +181,7 @@ window.onload = async () => {
       } catch (err) {
         localStorage.setItem('color', '#000000');
       }
-      if (window.location.href.includes('configure')) location = `${location.origin}/submissions`;
+      if (window.location.href.includes('configure')) location = `${location.origin}/posts`;
       else location.reload();
       return false;
     });

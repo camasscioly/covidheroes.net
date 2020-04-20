@@ -29,7 +29,7 @@ window.onload = () => {
       postData(`${base}offer/remove`, {
         id,
       }).then((data) => {
-        location = `${window.location.origin}/submissions/`;
+        location = `${window.location.origin}/posts/`;
       });
     };
     fetch(`${window.location.origin}/v1/offer`)
@@ -41,7 +41,7 @@ window.onload = () => {
         if (!offer) {
           swal(
             {
-              title: `Not able to find submission.`,
+              title: `Not able to find post.`,
               type: 'warning',
               confirmButtonClass: 'btn-primary',
               confirmButtonText: 'Ok',
@@ -50,7 +50,7 @@ window.onload = () => {
             },
             (isConfirm) => {
               if (isConfirm) {
-                location = `${window.location.origin}/submissions`;
+                location = `${window.location.origin}/posts`;
               }
             }
           );

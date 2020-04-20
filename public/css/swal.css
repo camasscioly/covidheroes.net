@@ -55,25 +55,25 @@
 .showSweetAlert {
   animation: showSweetAlert 0.3s;
 }
-.showSweetAlert[data-animation=none] {
+.showSweetAlert[data-animation='none'] {
   animation: none;
 }
-.showSweetAlert[data-animation=slide-from-top] {
+.showSweetAlert[data-animation='slide-from-top'] {
   animation: slideFromTop 0.3s;
 }
-.showSweetAlert[data-animation=slide-from-bottom] {
+.showSweetAlert[data-animation='slide-from-bottom'] {
   animation: slideFromBottom 0.3s;
 }
 .hideSweetAlert {
   animation: hideSweetAlert 0.3s;
 }
-.hideSweetAlert[data-animation=none] {
+.hideSweetAlert[data-animation='none'] {
   animation: none;
 }
-.hideSweetAlert[data-animation=slide-from-top] {
+.hideSweetAlert[data-animation='slide-from-top'] {
   animation: slideToTop 0.3s;
 }
-.hideSweetAlert[data-animation=slide-from-bottom] {
+.hideSweetAlert[data-animation='slide-from-bottom'] {
   animation: slideToBottom 0.3s;
 }
 @keyframes animateSuccessTip {
@@ -187,10 +187,10 @@
 }
 @keyframes pulseWarning {
   0% {
-    border-color: #F8D486;
+    border-color: #f8d486;
   }
   100% {
-    border-color: #F8BB86;
+    border-color: #f8bb86;
   }
 }
 .pulseWarning {
@@ -198,10 +198,10 @@
 }
 @keyframes pulseWarningIns {
   0% {
-    background-color: #F8D486;
+    background-color: #f8d486;
   }
   100% {
-    background-color: #F8BB86;
+    background-color: #f8bb86;
   }
 }
 .pulseWarningIns {
@@ -276,7 +276,7 @@ body.stop-scrolling {
   visibility: hidden;
 }
 .sweet-alert button[disabled] {
-  opacity: .6;
+  opacity: 0.6;
   cursor: default;
 }
 .sweet-alert button.confirm[disabled] {
@@ -321,7 +321,7 @@ body.stop-scrolling {
   right: 16px;
 }
 .sweet-alert .sa-icon.sa-warning {
-  border-color: #eea236;
+  border-color: #6c63ff;
 }
 .sweet-alert .sa-icon.sa-warning .sa-body {
   position: absolute;
@@ -331,7 +331,7 @@ body.stop-scrolling {
   top: 10px;
   border-radius: 2px;
   margin-left: -2px;
-  background-color: #f0ad4e;
+  background-color: #6c63ff;
 }
 .sweet-alert .sa-icon.sa-warning .sa-dot {
   position: absolute;
@@ -341,13 +341,13 @@ body.stop-scrolling {
   margin-left: -3px;
   left: 50%;
   bottom: 10px;
-  background-color: #f0ad4e;
+  background-color: #6c63ff;
 }
 .sweet-alert .sa-icon.sa-info {
-  border-color: #46b8da;
+  border-color: #6c63ff;
 }
 .sweet-alert .sa-icon.sa-info::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 5px;
   height: 29px;
@@ -355,17 +355,17 @@ body.stop-scrolling {
   bottom: 17px;
   border-radius: 2px;
   margin-left: -2px;
-  background-color: #5bc0de;
+  background-color: #6c63ff;
 }
 .sweet-alert .sa-icon.sa-info::after {
-  content: "";
+  content: '';
   position: absolute;
   width: 7px;
   height: 7px;
   border-radius: 50%;
   margin-left: -3px;
   top: 19px;
-  background-color: #5bc0de;
+  background-color: #6c63ff;
 }
 .sweet-alert .sa-icon.sa-success {
   border-color: #4cae4c;
@@ -445,32 +445,32 @@ body.stop-scrolling {
 .sweet-alert .btn-default:focus {
   border-color: #cccccc;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(204, 204, 204, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(204, 204, 204, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(204, 204, 204, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(204, 204, 204, 0.6);
 }
 .sweet-alert .btn-success:focus {
   border-color: #4cae4c;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(76, 174, 76, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(76, 174, 76, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(76, 174, 76, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(76, 174, 76, 0.6);
 }
 .sweet-alert .btn-info:focus {
-  border-color: #46b8da;
+  border-color: #6c63ff;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(70, 184, 218, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(70, 184, 218, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(70, 184, 218, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(70, 184, 218, 0.6);
 }
 .sweet-alert .btn-danger:focus {
   border-color: #d43f3a;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(212, 63, 58, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(212, 63, 58, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(212, 63, 58, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(212, 63, 58, 0.6);
 }
 .sweet-alert .btn-warning:focus {
-  border-color: #eea236;
+  border-color: #6c63ff;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(238, 162, 54, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(238, 162, 54, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(238, 162, 54, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(238, 162, 54, 0.6);
 }
 .sweet-alert button::-moz-focus-inner {
   border: 0;
@@ -571,7 +571,7 @@ body.stop-scrolling {
     transform: translateY(-145%);
   }
   10% {
-    opacity: .5;
+    opacity: 0.5;
   }
   20% {
     opacity: 1;
@@ -584,7 +584,7 @@ body.stop-scrolling {
     transform: translateY(0);
   }
   90% {
-    opacity: .5;
+    opacity: 0.5;
   }
   100% {
     opacity: 0;
@@ -599,7 +599,7 @@ body.stop-scrolling {
     transform: translateY(-145%);
   }
   10% {
-    opacity: .5;
+    opacity: 0.5;
   }
   20% {
     opacity: 1;
@@ -612,7 +612,7 @@ body.stop-scrolling {
     transform: translateY(0);
   }
   90% {
-    opacity: .5;
+    opacity: 0.5;
   }
   100% {
     opacity: 0;
@@ -627,7 +627,7 @@ body.stop-scrolling {
     transform: translateY(-145%);
   }
   10% {
-    opacity: .5;
+    opacity: 0.5;
   }
   20% {
     opacity: 1;
@@ -640,7 +640,7 @@ body.stop-scrolling {
     transform: translateY(0);
   }
   90% {
-    opacity: .5;
+    opacity: 0.5;
   }
   100% {
     opacity: 0;
@@ -657,7 +657,7 @@ body.stop-scrolling {
     transform: translateY(-145%);
   }
   10% {
-    opacity: .5;
+    opacity: 0.5;
   }
   20% {
     opacity: 1;
@@ -674,7 +674,7 @@ body.stop-scrolling {
     transform: translateY(0);
   }
   90% {
-    opacity: .5;
+    opacity: 0.5;
   }
   100% {
     opacity: 0;

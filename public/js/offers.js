@@ -101,7 +101,7 @@ window.onload = () => {
       ).replace('#', '')}&color=${idealTextColor(color || '000').replace(
         '#',
         ''
-      )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author}</a></b>
+      )}&bold=true&rounded=true&name=${author}'><br>Click to view" href="/profile?id=${authorid}">${author} <span class="badge badge-outline-primary">YOU</span></a></b>
                   </div>
                   <div class="ml-auto">
                     <span style="color: #A0AECA; font-family: 'Poppins' !important;">
@@ -306,54 +306,16 @@ window.onload = () => {
               searchQuantity ||
               searchType
             ) {
-              if (
-                searchItem &&
-                stringSimilarity.compareTwoStrings(
-                  title,
-                  (searchItem || title).split('+').join(' ')
-                ) < 0.3
-              )
-                return;
-              if (
-                searchAuthor &&
-                stringSimilarity.compareTwoStrings(
-                  author,
-                  (searchAuthor || author).split('+').join(' ')
-                ) < 0.3
-              )
-                return;
-              if (
-                searchDate &&
-                stringSimilarity.compareTwoStrings(
-                  date,
-                  (searchDate || date).split('+').join(' ')
-                ) < 0.3
-              )
-                return;
-              if (
-                searchQuantity &&
-                stringSimilarity.compareTwoStrings(
-                  tags,
-                  (searchQuantity || tags).split('+').join(' ')
-                ) < 0.3
-              )
-                return;
-              if (
-                searchLocation &&
-                stringSimilarity.compareTwoStrings(
-                  description,
-                  (searchLocation || description).split('+').join(' ')
-                ) < 0.3
-              )
-                return;
-              if (
-                searchType &&
-                stringSimilarity.compareTwoStrings(
-                  type || 'request',
-                  (searchType || type || 'request').split('+').join(' ')
-                ) < 0.3
-              )
-                return;
+              for (let skill of skills) {
+                if (
+                  searchItem &&
+                  stringSimilarity.compareTwoStrings(
+                    skill,
+                    (searchItem || skill).split('+').join(' ')
+                  ) < 0.3
+                )
+                  return;
+              }
             }
             skills = skills || [];
             const { color } = await fetch(

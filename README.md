@@ -132,10 +132,20 @@ DB_URL=mongodb://mongodb.example.com:27017
 - [Our Instagram Page](https://instagram.com/covid_heroes_official) contains the latest announcements.
 - [Our Producthunt Page](https://www.producthunt.com/posts/covid-heroes?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-covid-heroes) shows the latest feedback from indie makers.
 
+## Contribution
+
+Please make sure to read the [Contributing Guide](https://github.com/camasscioly/covidheroes.net/blob/master/.github/CONTRIBUTING.md) before making a pull request.
+
+Thank you to all the people who already contributed to COVID Heroes!
+
+## Sponsors
+
+<a href="http://vca-usa.org/"><img src="https://covidheroes.net/img/vca-logo.png" width="90" /></a>
+
 ## Made by Camas Science Olympiad
 
 Camas High School SciOly is like an academic track meet, consisting of 23 events for both middle and high school divisions. While exploring disciplines such as chemistry, biology, earth science, physics, and engineering, students are able to develop valuable teamwork and study skills in a fun and challenging environment.
 
-Find out more [about Camas Scioly](https://camasscioly.weebly.com).
+Find out more [about Camas Scioly](https://camasscioly.covidheroes.net).
 
 ( ᵔ ᴥ ᵔ )

@@ -1,4 +1,5 @@
 let killOffer;
+let reppers = [];
 const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
@@ -44,6 +45,7 @@ window.onload = () => {
       .then((res) => res.json())
       .then((body) => {
         let { email, name, location, rep, phone, staff, verified } = body;
+        reppers = rep;
         let temp = name;
         if (phone.toLowerCase() === 'not configured') phone = '';
         if (location.toLowerCase() === 'not configured') location = '';
@@ -82,6 +84,12 @@ window.onload = () => {
       });
     if (document.querySelector('#give-rep')) {
       document.querySelector('#give-rep').onclick = () => {
+        if (reppers.includes(localStorage.id))
+          return swal(
+            `You've already repped this user!`,
+            `Once you've repped someone, it is permanent.`,
+            'warning'
+          );
         swal(
           {
             title: 'Are you sure you want to rep this user?',

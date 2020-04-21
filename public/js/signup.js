@@ -22,7 +22,7 @@ window.onload = () => {
     return await response.text(); // parses JSON response into native JavaScript objects
   }
 
-  document.querySelector('#signup').onsubmit = () => {
+  document.querySelector('#signup').onsubmit = async () => {
     function validateEmail(email) {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
@@ -57,6 +57,19 @@ window.onload = () => {
       swal(
         'Password does not match confirmation',
         'Make sure the password confirmation is the same as your original password.',
+        'warning'
+      );
+      return false;
+    }
+    const body = await fetch(
+      `https://verifier.meetchopra.com/verify/${email}?token=${atob(
+        'OTI5MjhiNzU2ZTYyMzM1N2IzYmQ4MGU4ZGM5MGRlYWUwMzFmMmFlNmI1NGE4NmFmZDNlOTgzZWY1MDhmYzVjZjdhM2IwNjI1MWM2YmU4NDY3NjhjMmM3ZTJiZTljZjFi'
+      )}`
+    ).then((res) => res.json());
+    if (!body.email) {
+      swal(
+        'Your email is invalid.',
+        'Make sure you entered a legitimate email. Disposable or fake email is strictly phohibited.',
         'warning'
       );
       return false;

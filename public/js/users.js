@@ -38,7 +38,6 @@ window.onload = () => {
         user = `${user} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
       document.querySelector(dom).innerHTML += `<tr id="${id}">
         <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
-        <td>${id}</td>
         <td><b><i class="fas fa-sort-up"></i>${rep}</b></td>
       </tr>`;
       $(function () {

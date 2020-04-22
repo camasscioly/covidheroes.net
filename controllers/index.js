@@ -29,11 +29,11 @@ router.get('/heroes', toLogin, appPage, async (req, res) => {
   renderFile(req, res, 'users');
 });
 
-router.get('/login', toProfile, appPage, async (req, res) => {
+router.get('/login', toSubmissions, appPage, async (req, res) => {
   renderFile(req, res, 'login');
 });
 
-router.get('/signup', toProfile, appPage, csrfProtection, async (req, res) => {
+router.get('/signup', toSubmissions, appPage, csrfProtection, async (req, res) => {
   renderFile(req, res, 'signup', { csrfToken: req.csrfToken() });
 });
 

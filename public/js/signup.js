@@ -2,7 +2,7 @@ const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
   const base = `${window.location.origin}/v1/`;
-  if (localStorage.getItem('name')) window.location = `${window.location.origin}/me`;
+  if (localStorage.getItem('name')) window.location = `${window.location.origin}/posts`;
 
   async function postData(url = '', data = {}) {
     // Default options are marked with *

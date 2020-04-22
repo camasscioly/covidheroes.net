@@ -130,7 +130,7 @@ window.onload = () => {
                 class="twitter-share-button"
                 href="https://twitter.com/intent/tweet?text=COVID+Heroes+-+${title}+-+https://app.covidheroes.net/posts/open?id=${id}"
               >
-                Tweet</a
+                <i class="fab fa-twitter"></i> Share</a
               >
             </div>
           </div>

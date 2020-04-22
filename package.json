@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2",
-    "prettier": "^2.0.4",
+    "prettier": "^2.0.5",
     "tape": "^4.13.2",
     "yarn": "^1.22.4"
   }

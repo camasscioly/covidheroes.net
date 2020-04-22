@@ -187,10 +187,10 @@
 }
 @keyframes pulseWarning {
   0% {
-    border-color: #f8d486;
+    border-color: rgb(108, 99, 255);
   }
   100% {
-    border-color: #f8bb86;
+    border-color: rgb(108, 99, 255);
   }
 }
 .pulseWarning {
@@ -198,10 +198,10 @@
 }
 @keyframes pulseWarningIns {
   0% {
-    background-color: #f8d486;
+    background-color: rgb(108, 99, 255);
   }
   100% {
-    background-color: #f8bb86;
+    background-color: rgb(108, 99, 255);
   }
 }
 .pulseWarningIns {

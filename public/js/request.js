@@ -234,7 +234,11 @@ function editMode() {
     document.querySelector('#del').onclick = () => {
       location.reload();
     };
-    swal('Edit mode enabled!');
+    swal(
+      'Edit mode enabled!',
+      `Click on any of the inputs and type or delete text. Remember to press SAVE when you're done.`,
+      'info'
+    );
     initAutocomplete();
   }
 }

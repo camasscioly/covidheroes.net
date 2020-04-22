@@ -47,6 +47,7 @@ window.onload = () => {
       swal(
         {
           title: `You've been logged in!`,
+          text: 'Welcome back to COVID Heroes! Clicking OK will redirect you to the posts page.',
           type: 'info',
           confirmButtonClass: 'btn-primary',
           confirmButtonText: 'Ok',

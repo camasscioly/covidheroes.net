@@ -96,11 +96,11 @@ window.onload = () => {
             text: 'Repping users is permanent and cannot be removed.',
             type: 'warning',
             showCancelButton: true,
-            confirmButtonClass: 'btn-danger',
-            confirmButtonText: 'Yes, I want to rep!',
+            confirmButtonClass: 'btn-primary',
+            confirmButtonText: 'Yes!',
             cancelButtonText: 'Cancel',
             closeOnConfirm: false,
-            closeOnCancel: false,
+            closeOnCancel: true,
           },
           (isConfirm) => {
             if (isConfirm) {

@@ -584,6 +584,8 @@ window.onload = () => {
           swal(
             {
               title: `Created your post!`,
+              text:
+                'Your post is now live! If you made a mistake, either edit or delete the post by clicking opening and selecting the cooresponding buttons.',
               type: 'info',
               confirmButtonClass: 'btn-primary',
               confirmButtonText: 'Ok',

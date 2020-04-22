@@ -36,7 +36,7 @@ git clone https://github.com/camasscioly/covidheroes.net.git
 cd covidheroes.net
 ```
 
-Note: You will need at least NodeJS 10.18.1+, VSCode 1.44+, and MongoDB 3+. You will also need to configure .env variables before launching.
+Note: You will need at least NodeJS 10.18.1+, VSCode 1.44+, Yarn 1.17.3+ and MongoDB 3+. You will also need to configure .env variables before launching.
 
 ### Configuring Environment Variables
 
@@ -89,6 +89,14 @@ We adapt [Chromium principles](https://www.chromium.org/developers/core-principl
 - **Security**: COVID Heroes is secured with 128-bit SSL and passwords are hashed with bcrypt with 10 rounds of salt.
 - **Stability**: COVID Heroes should not be flaky and should not leak memory.
 - **Simplicity**: COVID Heroes provides a high-level interface that’s easy to use, understand, and debug.
+
+#### Q: I'm recieving `ReferenceError: yarn is not defined` whenever I try to use Yarn
+
+You need to install yarn first. You can either install it from [their website](https://yarnpkg.com/lang/en/docs/install/), or you can install from CLI.
+
+```bash
+npm i -g yarn
+```
 
 #### Q: What's the difference between `yarn start` and `yarn dev`?
 

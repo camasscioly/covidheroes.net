@@ -2,6 +2,7 @@ const express = require('express');
 const { join } = require('path');
 
 const v1Routes = require('./../controllers/v1.js');
+const externalRoutes = require('./../controllers/external.js');
 const rootRoutes = require('./../controllers/index.js');
 
 const app = express();
@@ -48,6 +49,7 @@ class App {
     );
 
     app.use('/v1', v1Routes);
+    app.use('/r', externalRoutes);
     app.use(rootRoutes);
 
     app.listen(this._port, () => console.log(`Listening on port ${this._port}`));

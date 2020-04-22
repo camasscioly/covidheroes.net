@@ -21,7 +21,7 @@ router.get('/', toSubmissions, normalPage, async (req, res) => {
   renderFile(req, res, 'index');
 });
 
-router.get('/discuss', normalPage, async (req, res) => {
+router.get('/community', normalPage, async (req, res) => {
   renderFile(req, res, 'discussion');
 });
 

@@ -696,3 +696,7 @@ a:hover {
   background: rgb(108, 99, 255) !important;
   color: #fff !important;
 }
+
+#twitter-widget-0 {
+  vertical-align: middle;
+}

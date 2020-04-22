@@ -126,7 +126,12 @@ window.onload = () => {
               </p>
             </div>
             <div class="ml-auto">
-              ${type.charAt(0).toUpperCase() + type.slice(1)}
+              <a
+                class="twitter-share-button"
+                href="https://twitter.com/intent/tweet?text=COVID+Heroes+-+${title}+-+https://app.covidheroes.net/posts/open?id=${id}"
+              >
+                Tweet</a
+              >
             </div>
           </div>
         `;

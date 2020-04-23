@@ -58,6 +58,10 @@ window.onload = () => {
       color,
       skills
     ) {
+      const emoji =
+        type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
+          ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #fff !important"></i><span>'
+          : '<span title="Offer"><i class="fas fa-heart" style="color: #fff !important"></i></span>';
       let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       let months = [
         'January',
@@ -84,7 +88,7 @@ window.onload = () => {
       const close = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" onclick="if (localStorage.getItem('id') === '${authorid}' || localStorage.getItem('admin')) { location = '${location.origin}/posts/open?id=${id}' }">Edit</button>`;
       const fulfill = ` <button class="btn btn-primary hover" onclick="window.location = '${
         window.location.origin
-      }/posts/open?id=${id}'">${type !== 'request' ? 'Ask for help' : 'Offer to help'}</button>`;
+      }/posts/open?id=${id}'"> ${type !== 'request' ? 'Ask for help' : 'Offer to help'}</button>`;
       document.querySelector('#cardView').innerHTML = `
       <div class="col-sm-4" style="margin-bottom: 30px;">
           <div class="card hover" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
@@ -92,11 +96,7 @@ window.onload = () => {
               <h5 class="card-title">
                 <div class="d-flex">
                   <div>
-                    ${
-                      type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
-                        ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
-                        : '<span title="Offer"><i class="fas fa-heart" style="color: #EC4561 !important"></i></span>'
-                    } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
+                    ${emoji} <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
         color || 'fff'
       ).replace('#', '')}&color=${idealTextColor(color || '000').replace(
         '#',

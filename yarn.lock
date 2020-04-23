@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@keyv/mongo@^1.1.0":
+"@keyv/mongo@false1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@keyv/mongo/-/mongo-1.1.0.tgz#e9beed3760dadb266b7444902a54d1e51fd79f14"
   integrity sha512-SoILHI5E4TEZOE52UatgkpYBLxkSInvfVD0VMtgdsGFiotDckgV3d+QEHc+0arLhZV8gvUWrXxXQsKhZbEBnSg==
@@ -26,7 +26,7 @@
     chalk "^2.0.1"
     deepmerge "^4.2.2"
 
-"@sendgrid/mail@^7.0.1":
+"@sendgrid/mail@false7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@sendgrid/mail/-/mail-7.0.1.tgz#058295972e45ad4d960d77a043cedc0ebe5f856d"
   integrity sha512-yFkhjrYQvwpdy8eUiDxLLgPp9o5jHQzjJ5qUkgMr2fuPuYSKKqbpPir1PXIHx0ek2VKkTsvj/7Z5UQk6hPZcrQ==

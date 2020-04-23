@@ -95,7 +95,7 @@ window.onload = () => {
                     ${
                       type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
                         ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
-                        : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
+                        : '<span title="Offer"><i class="fas fa-heart" style="color: #EC4561 !important"></i></span>'
                     } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
         color || 'fff'
       ).replace('#', '')}&color=${idealTextColor(color || '000').replace(
@@ -200,7 +200,7 @@ window.onload = () => {
                     ${
                       type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
                         ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
-                        : '<span title="Offer"><i class="fas fa-heart" style="color: #E81224 !important"></i></span>'
+                        : '<span title="Offer"><i class="fas fa-heart" style="color: #EC4561 !important"></i></span>'
                     } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
         color || '000'
       ).replace('#', '')}&color=${idealTextColor(color || 'fff').replace(

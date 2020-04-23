@@ -31,7 +31,9 @@
                       </div>
                     </form>
                   </p>
-                  <p id="prof-delete" class="text-right"></p>
+                  <p id="prof-delete" class="text-right">
+                    <button type="button" onclick="window.scrollTo(0, document.body.scrollHeight);" class="btn btn-primary" style="color: #fff !important"><i class="fas fa-comment-alt" style="color: #fff !important"></i> Comment</button>
+                  </p>
                 </div>
               </div>
           </div>
@@ -315,5 +317,24 @@
   <%- include('blocks/footer') %>
   <script id="dsq-count-scr" src="//corona-4.disqus.com/count.js" async></script>
   <script src="/js/request.js" defer></script>
+  <script>
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://platform.twitter.com/widgets.js';
+      fjs.parentNode.insertBefore(js, fjs);
+  
+      t._e = [];
+      t.ready = function (f) {
+        t._e.push(f);
+      };
+  
+      return t;
+    })(document, 'script', 'twitter-wjs');
+  </script>
 </body>
 </html>

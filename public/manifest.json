@@ -1,0 +1,15 @@
+{
+  "name": "COVID Heroes",
+  "short_name": "COVID Heroes",
+  "lang": "en",
+  "display": "standalone",
+  "theme_color": "#6C63FF",
+  "background_color": "#ffffff",
+  "start_url": "/",
+  "icons": [
+    {
+      "sizes": "16x16",
+      "src": "favicon.ico"
+    }
+  ]
+}

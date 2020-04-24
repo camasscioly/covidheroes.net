@@ -48,6 +48,7 @@ Note: You will need at least NodeJS 10.18.1+, VSCode 1.44+, Yarn 1.17.3+ and Mon
 PORT=3000
 DB_URL=mongodb://mongodb.example.com:27017
 SENDGRID_API_KEY=example-sendgrid-token
+DISCORD_WEBHOOK_URL=https://discordapp.com/api/webhooks/ID/TOKEN
 
 # Note: MongoDB URI must be in the mongodb:// protocol, the mongodb+srv:// is not supported
 ```
@@ -122,6 +123,14 @@ You need to configure your environment variables. First, rename `.env.example` t
 
 ```bash
 PORT=3000
+```
+
+#### Q: I'm recieving `Error: Only absolute URLs are supported` whenever I start the project
+
+You need to configure your environment variables. First, rename `.env.example` to `.env`.
+
+```bash
+DISCORD_WEBHOOK_URL=https://discordapp.com/api/webhooks/ID/TOKEN
 ```
 
 #### Q: Database queries arent working.

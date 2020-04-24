@@ -4,6 +4,7 @@ const makeID = require('./../middleware/makeID.js');
 const Keyv = require('keyv');
 const csrf = require('csurf');
 const sendgrid = require('@sendgrid/mail');
+const { Webhook } = require('discord-webhook-node');
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
 const keyv = new Keyv(process.env.DB_URL);
@@ -39,6 +40,9 @@ router.post('/signup', async (req, res) => {
           },
         };
         sendgrid.send(msg);
+        const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+
+        hook.send(`Signup: ${name}`);
         res.status(200).send(id);
       });
     });
@@ -65,6 +69,9 @@ router.post('/update', async (req, res) => {
         user.location = location || 'Not Configured';
         user.password = hash;
         await keyv.set(id, user);
+        const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+
+        hook.send(`Profile Update: ${name}`);
         res.status(200).send('Updated!');
       });
     });
@@ -102,6 +109,9 @@ router.post('/userdata/rep', async (req, res) => {
   if (!user.rep) user.rep = [];
   if (!user.rep.includes(rep)) user.rep.push(rep);
   await keyv.set(out[1], user);
+  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+
+  hook.send(`Rep: ${out[0]}`);
   res.send(`Action completed`);
 });
 
@@ -115,6 +125,9 @@ router.post('/login', async (req, res) => {
   bcrypt.compare(password, user.password, (err, result) => {
     if (!result) return res.status(500).send('Invalid Login');
     user.id = out[1];
+    const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+
+    hook.send(`Login: ${name}`);
     res.json(user);
   });
 });
@@ -162,6 +175,10 @@ router.post('/offer', async (req, res) => {
   }
   sendgrid.send(emails);
 
+  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+
+  hook.send(`New Post: ${title}`);
+
   await keyv.set('offer-list', offerList);
   await keyv.set('offer-count', counter);
   res.json(offerList);
@@ -186,6 +203,9 @@ router.get('/offer/increment', async (req, res) => {
   });
 
   await keyv.set('offer-list', offerList);
+  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+
+  hook.send(`New Comment: ${out.title}`);
   res.json(offerList);
 });
 
@@ -207,6 +227,10 @@ router.post('/offer/edit', async (req, res) => {
     skills: out.skills,
   });
 
+  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+
+  hook.send(`Post changed: ${req.body.title}`);
+
   await keyv.set('offer-list', offerList);
   res.json(offerList);
 });
@@ -216,6 +240,9 @@ router.post('/offer/remove', async (req, res) => {
   let toRemove = offerList.find((block) => block.id === req.body.id);
   offerList.splice(offerList.indexOf(toRemove), 1);
   await keyv.set('offer-list', offerList);
+  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+
+  hook.send(`Post removed: ${block.id}`);
   res.json(offerList);
 });
 

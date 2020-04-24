@@ -560,23 +560,23 @@ window.onload = () => {
           `${location.origin}/v1/userdata?id=${localStorage.id}`
         ).then((res) => res.json());
         if (!localStorage.getItem('admin')) {
-          if (reqs > 5) {
+          if (reqs > 10) {
             swal(
-              'You cannot have more than 5 concurrent posts.',
+              'You cannot have more than 10 concurrent posts.',
               'If you want to have more than the limit, contact support. ',
               'warning'
             );
             return false;
           }
         }
-        if (rep.length < 1) {
-          swal(
-            'You need at least 1 rep to be able to post.',
-            'This is to prevent malicious hackers to try to break our service. You can gain rep by asking other users or helping them.',
-            'warning'
-          );
-          return false;
-        }
+        // if (rep.length < 1) {
+        //   swal(
+        //     'You need at least 1 rep to be able to post.',
+        //     'This is to prevent malicious hackers to try to break our service. You can gain rep by asking other users or helping them.',
+        //     'warning'
+        //   );
+        //   return false;
+        // }
         document.querySelector('#submission-button').disabled = true;
         postData(`${base}offer`, {
           title: esc(DOMPurify.sanitize(document.querySelector('#title').value)),

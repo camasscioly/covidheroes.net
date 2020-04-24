@@ -99,6 +99,11 @@ window.onload = () => {
         }
         document.querySelector('#type').innerText =
           type === 'request' ? 'Needs help with' : 'Can help with';
+        document.querySelector(
+          '#scroll-down'
+        ).innerHTML = `<i class="fas fa-comment-alt" style="color: #fff !important"></i> ${
+          type || 'request' ? 'Offer to help' : 'Ask for help'
+        }`;
         document.querySelector('#title').innerHTML = `
           <div class="d-flex">
             <div>

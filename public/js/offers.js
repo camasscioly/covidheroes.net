@@ -58,10 +58,6 @@ window.onload = () => {
       color,
       skills
     ) {
-      const emoji =
-        type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
-          ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #fff !important"></i><span>'
-          : '<span title="Offer"><i class="fas fa-heart" style="color: #fff !important"></i></span>';
       let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       let months = [
         'January',
@@ -96,7 +92,11 @@ window.onload = () => {
               <h5 class="card-title">
                 <div class="d-flex">
                   <div>
-                    ${emoji} <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
+                    ${
+                      type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
+                        ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #fff !important"></i><span>'
+                        : '<span title="Offer"><i class="fas fa-heart" style="color: #fff !important"></i></span>'
+                    } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
         color || 'fff'
       ).replace('#', '')}&color=${idealTextColor(color || '000').replace(
         '#',

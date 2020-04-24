@@ -21,7 +21,10 @@ router.post('/signup', async (req, res) => {
     if (out) res.status(500).send('Already Registered');
     else throw new Error('Throw back to default');
   } catch (err) {
-    const id = makeID(10);
+    let id = makeID(10);
+    while ((await keyv.get(id)) || undefined) {
+      id = makeID(10);
+    }
     userList.push([name, id]);
     keyv.set('user-list', userList);
     bcrypt.genSalt(10, (err, salt) => {
@@ -121,6 +124,9 @@ router.post('/offer', async (req, res) => {
   let userList = (await keyv.get('user-list')) || [];
   let counter = (await keyv.get('offer-count')) || 0;
   let id = makeID(15);
+  while ((await keyv.get(id)) || undefined) {
+    id = makeID(15);
+  }
   counter++;
   offerList.push({
     title: req.body.title,

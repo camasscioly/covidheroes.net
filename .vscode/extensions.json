@@ -1,9 +1,7 @@
 {
   "recommendations": [
     "esbenp.prettier-vscode",
-    "eamodio.gitlens",
     "mrmlnc.vscode-lebab",
-    "christian-kohler.npm-intellisense",
-    "naumovs.color-highlight"
+    "christian-kohler.npm-intellisense"
   ]
 }

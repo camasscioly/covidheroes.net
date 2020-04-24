@@ -6,7 +6,7 @@
         <div class="card-body">
           <h1 class="card-title" style="font-size: 170%">Join the Fight</h1>
           <p>Create your account here. </p>
-          <form id="signup">
+          <form id="signup" onsubmit="return false;">
             <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
             <div class="form-group">
               <label for="name">Username</label>

@@ -1,3 +1,7 @@
+function enable() {
+  document.querySelector('#submit').disabled = false;
+}
+
 const matchHtmlRegExp = /["'&<>]/;
 
 window.onload = () => {
@@ -22,7 +26,7 @@ window.onload = () => {
     return await response.text(); // parses JSON response into native JavaScript objects
   }
 
-  document.querySelector('#signup').onsubmit = async () => {
+  document.querySelector('#submit').onclick = async () => {
     function validateEmail(email) {
       let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
@@ -61,19 +65,25 @@ window.onload = () => {
       );
       return false;
     }
-    const body = await fetch(
-      `https://verifier.meetchopra.com/verify/${email}?token=${atob(
-        'OTI5MjhiNzU2ZTYyMzM1N2IzYmQ4MGU4ZGM5MGRlYWUwMzFmMmFlNmI1NGE4NmFmZDNlOTgzZWY1MDhmYzVjZjdhM2IwNjI1MWM2YmU4NDY3NjhjMmM3ZTJiZTljZjFi'
-      )}`
-    ).then((res) => res.json());
-    if (!body.email) {
-      swal(
-        'Your email is invalid.',
-        'Make sure you entered a legitimate email. Disposable or fake email is strictly phohibited.',
-        'warning'
-      );
-      return false;
-    }
+    // let body;
+    // try {
+    //   body = await fetch(
+    //     `https://verifier.meetchopra.com/verify/${email}?token=${atob(
+    //       'OTI5MjhiNzU2ZTYyMzM1N2IzYmQ4MGU4ZGM5MGRlYWUwMzFmMmFlNmI1NGE4NmFmZDNlOTgzZWY1MDhmYzVjZjdhM2IwNjI1MWM2YmU4NDY3NjhjMmM3ZTJiZTljZjFi'
+    //     )}`
+    //   ).then((res) => res.json());
+    // } catch (err) {
+    //   console.log(err);
+    // }
+
+    // if (!body.email) {
+    //   swal(
+    //     'Your email is invalid.',
+    //     'Make sure you entered a legitimate email. Disposable or fake email is strictly phohibited.',
+    //     'warning'
+    //   );
+    //   return false;
+    // }
     postData(`${base}signup`, {
       name: esc(DOMPurify.sanitize(document.querySelector('#name').value))
         .substring(0, 50)
@@ -118,15 +128,12 @@ window.onload = () => {
           closeOnCancel: false,
         },
         (isConfirm) => {
-          if (isConfirm) {
-            if (localStorage.location === 'Not Configured')
-              window.location = `${window.location.origin}/configure`;
-            else window.location = `${window.location.origin}/posts`;
-          }
+          if (localStorage.location === 'Not Configured')
+            window.location = `${window.location.origin}/configure`;
+          else window.location = `${window.location.origin}/posts`;
         }
       );
     });
-    return false;
   };
 };
 
@@ -177,8 +184,4 @@ function esc(string) {
   }
 
   return lastIndex !== index ? html + str.substring(lastIndex, index) : html;
-}
-
-function enable() {
-  document.querySelector('#submit').disabled = false;
 }

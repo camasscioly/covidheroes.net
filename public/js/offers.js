@@ -86,8 +86,8 @@ window.onload = () => {
         window.location.origin
       }/posts/open?id=${id}'"> ${type !== 'request' ? 'Ask for help' : 'Offer to help'}</button>`;
       document.querySelector('#cardView').innerHTML = `
-      <div class="col-sm-4" style="margin-bottom: 30px;">
-          <div class="card hover" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
+      <div class="col-sm-4 ${id}" style="margin-bottom: 30px;">
+          <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
@@ -192,7 +192,7 @@ window.onload = () => {
       }/posts/open?id=${id}'">${type !== 'request' ? 'Ask for help' : 'Offer to help'}</button>`;
       document.querySelector('#cardView').innerHTML += `
         <div class="col-sm-4" style="margin-bottom: 30px;">
-          <div class="card hover" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
+          <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
@@ -382,160 +382,166 @@ window.onload = () => {
             placement: 'bottom',
             html: true,
           });
+          VanillaTilt.init(document.querySelectorAll('.tilt'), {
+            scale: 1.03,
+            max: 3,
+            speed: 500,
+          });
         });
 
-      setInterval(async () => {
-        fetch(`${window.location.origin}/v1/offer`)
-          .then((res) => res.json())
-          .then(async (body) => {
-            total = 0;
-            counter = 0;
-            document.querySelector('#cardView').innerHTML = ``;
-            const urlParams = new URLSearchParams(window.location.search);
-            const searchItem = urlParams.get('item');
-            const searchAuthor = urlParams.get('author');
-            const searchDate = urlParams.get('date');
-            const searchQuantity = urlParams.get('quantity');
-            const searchLocation = urlParams.get('location');
-            const searchType = urlParams.get('type');
-            searchSetting = urlParams.get('setting');
+      // setInterval(async () => {
+      //   fetch(`${window.location.origin}/v1/offer`)
+      //     .then((res) => res.json())
+      //     .then(async (body) => {
+      //       total = 0;
+      //       counter = 0;
+      //       document.querySelector('#cardView').innerHTML = ``;
+      //       const urlParams = new URLSearchParams(window.location.search);
+      //       const searchItem = urlParams.get('item');
+      //       const searchAuthor = urlParams.get('author');
+      //       const searchDate = urlParams.get('date');
+      //       const searchQuantity = urlParams.get('quantity');
+      //       const searchLocation = urlParams.get('location');
+      //       const searchType = urlParams.get('type');
+      //       searchSetting = urlParams.get('setting');
 
-            document.querySelector('#search-input').value =
-              searchItem ||
-              searchAuthor ||
-              searchDate ||
-              searchQuantity ||
-              searchLocation ||
-              searchType;
+      //       document.querySelector('#search-input').value =
+      //         searchItem ||
+      //         searchAuthor ||
+      //         searchDate ||
+      //         searchQuantity ||
+      //         searchLocation ||
+      //         searchType;
 
-            // document.querySelector('#table').innerHTML = '';
-            for (let offer of body.offerList.reverse()) {
-              let {
-                title,
-                author,
-                date,
-                tags,
-                id,
-                authorid,
-                description,
-                comments,
-                type,
-                skills,
-              } = offer;
-              if (
-                searchItem ||
-                searchAuthor ||
-                searchDate ||
-                searchLocation ||
-                searchQuantity ||
-                searchType
-              ) {
-                if (
-                  searchItem &&
-                  stringSimilarity.compareTwoStrings(
-                    title,
-                    (searchItem || title).split('+').join(' ')
-                  ) < 0.3
-                )
-                  return;
-                if (
-                  searchAuthor &&
-                  stringSimilarity.compareTwoStrings(
-                    author,
-                    (searchAuthor || author).split('+').join(' ')
-                  ) < 0.3
-                )
-                  return;
-                if (
-                  searchDate &&
-                  stringSimilarity.compareTwoStrings(
-                    date,
-                    (searchDate || date).split('+').join(' ')
-                  ) < 0.3
-                )
-                  return;
-                if (
-                  searchQuantity &&
-                  stringSimilarity.compareTwoStrings(
-                    tags,
-                    (searchQuantity || tags).split('+').join(' ')
-                  ) < 0.3
-                )
-                  return;
-                if (
-                  searchLocation &&
-                  stringSimilarity.compareTwoStrings(
-                    description,
-                    (searchLocation || description).split('+').join(' ')
-                  ) < 0.3
-                )
-                  return;
-                if (
-                  searchType &&
-                  stringSimilarity.compareTwoStrings(
-                    type || 'request',
-                    (searchType || type || 'request').split('+').join(' ')
-                  ) < 0.3
-                )
-                  return;
-              }
-              skills = skills || [];
-              const { color } = await fetch(
-                `${window.location.origin}/v1/userdata?id=${authorid}`
-              ).then((res) => res.json());
-              if (counter >= 50) return;
-              if (author === localStorage.getItem('name')) {
-                insertEntry(
-                  esc(DOMPurify.sanitize(title)),
-                  esc(DOMPurify.sanitize(author)),
-                  esc(DOMPurify.sanitize(date)),
-                  esc(DOMPurify.sanitize(tags)),
-                  esc(DOMPurify.sanitize(description)),
-                  '#table',
-                  esc(DOMPurify.sanitize(authorid)),
-                  esc(DOMPurify.sanitize(id)),
-                  esc(DOMPurify.sanitize(comments || 0)),
-                  esc(DOMPurify.sanitize(type || 'request')),
-                  (color || '#000').replace('#', ''),
-                  skills
-                );
-              } else {
-                addEntry(
-                  esc(DOMPurify.sanitize(title)),
-                  esc(DOMPurify.sanitize(author)),
-                  esc(DOMPurify.sanitize(date)),
-                  esc(DOMPurify.sanitize(tags)),
-                  esc(DOMPurify.sanitize(description)),
-                  '#table',
-                  esc(DOMPurify.sanitize(authorid)),
-                  esc(DOMPurify.sanitize(id)),
-                  esc(DOMPurify.sanitize(comments || 0)),
-                  esc(DOMPurify.sanitize(type || 'request')),
-                  (color || '#000').replace('#', ''),
-                  skills
-                );
-              }
+      //       // document.querySelector('#table').innerHTML = '';
+      //       for (let offer of body.offerList.reverse()) {
+      //         let {
+      //           title,
+      //           author,
+      //           date,
+      //           tags,
+      //           id,
+      //           authorid,
+      //           description,
+      //           comments,
+      //           type,
+      //           skills,
+      //         } = offer;
+      //         if (
+      //           searchItem ||
+      //           searchAuthor ||
+      //           searchDate ||
+      //           searchLocation ||
+      //           searchQuantity ||
+      //           searchType
+      //         ) {
+      //           if (
+      //             searchItem &&
+      //             stringSimilarity.compareTwoStrings(
+      //               title,
+      //               (searchItem || title).split('+').join(' ')
+      //             ) < 0.3
+      //           )
+      //             return;
+      //           if (
+      //             searchAuthor &&
+      //             stringSimilarity.compareTwoStrings(
+      //               author,
+      //               (searchAuthor || author).split('+').join(' ')
+      //             ) < 0.3
+      //           )
+      //             return;
+      //           if (
+      //             searchDate &&
+      //             stringSimilarity.compareTwoStrings(
+      //               date,
+      //               (searchDate || date).split('+').join(' ')
+      //             ) < 0.3
+      //           )
+      //             return;
+      //           if (
+      //             searchQuantity &&
+      //             stringSimilarity.compareTwoStrings(
+      //               tags,
+      //               (searchQuantity || tags).split('+').join(' ')
+      //             ) < 0.3
+      //           )
+      //             return;
+      //           if (
+      //             searchLocation &&
+      //             stringSimilarity.compareTwoStrings(
+      //               description,
+      //               (searchLocation || description).split('+').join(' ')
+      //             ) < 0.3
+      //           )
+      //             return;
+      //           if (
+      //             searchType &&
+      //             stringSimilarity.compareTwoStrings(
+      //               type || 'request',
+      //               (searchType || type || 'request').split('+').join(' ')
+      //             ) < 0.3
+      //           )
+      //             return;
+      //         }
+      //         skills = skills || [];
+      //         const { color } = await fetch(
+      //           `${window.location.origin}/v1/userdata?id=${authorid}`
+      //         ).then((res) => res.json());
+      //         if (counter >= 50) return;
+      //         if (author === localStorage.getItem('name')) {
+      //           insertEntry(
+      //             esc(DOMPurify.sanitize(title)),
+      //             esc(DOMPurify.sanitize(author)),
+      //             esc(DOMPurify.sanitize(date)),
+      //             esc(DOMPurify.sanitize(tags)),
+      //             esc(DOMPurify.sanitize(description)),
+      //             '#table',
+      //             esc(DOMPurify.sanitize(authorid)),
+      //             esc(DOMPurify.sanitize(id)),
+      //             esc(DOMPurify.sanitize(comments || 0)),
+      //             esc(DOMPurify.sanitize(type || 'request')),
+      //             (color || '#000').replace('#', ''),
+      //             skills
+      //           );
+      //         } else {
+      //           addEntry(
+      //             esc(DOMPurify.sanitize(title)),
+      //             esc(DOMPurify.sanitize(author)),
+      //             esc(DOMPurify.sanitize(date)),
+      //             esc(DOMPurify.sanitize(tags)),
+      //             esc(DOMPurify.sanitize(description)),
+      //             '#table',
+      //             esc(DOMPurify.sanitize(authorid)),
+      //             esc(DOMPurify.sanitize(id)),
+      //             esc(DOMPurify.sanitize(comments || 0)),
+      //             esc(DOMPurify.sanitize(type || 'request')),
+      //             (color || '#000').replace('#', ''),
+      //             skills
+      //           );
+      //         }
 
-              $('[data-toggle="tooltip"]').tooltip({
-                animated: 'fade',
-                placement: 'bottom',
-                html: true,
-              });
+      //         $('[data-toggle="tooltip"]').tooltip({
+      //           animated: 'fade',
+      //           placement: 'bottom',
+      //           html: true,
+      //         });
 
-              addressOfOffers.push(description);
-              ++counter;
-              ++total;
-              document.querySelector('#req-count').innerText = total;
-            }
-            document.querySelector('#req-count').innerText = total;
-            offerList = body.offerList.reverse();
-            $('[data-toggle="tooltip"]').tooltip({
-              animated: 'fade',
-              placement: 'bottom',
-              html: true,
-            });
-          });
-      }, 350000);
+      //         addressOfOffers.push(description);
+      //         ++counter;
+      //         ++total;
+      //         document.querySelector('#req-count').innerText = total;
+      //       }
+      //       document.querySelector('#req-count').innerText = total;
+      //       offerList = body.offerList.reverse();
+      //       $('[data-toggle="tooltip"]').tooltip({
+      //         animated: 'fade',
+      //         placement: 'bottom',
+      //         html: true,
+      //       });
+      //       VanillaTilt.init(document.querySelectorAll('.tilt'));
+      //     });
+      // }, 350000);
     }
     if (window.location.href.toLowerCase().includes('new')) {
       fetch(`${window.location.origin}/v1/offer`)

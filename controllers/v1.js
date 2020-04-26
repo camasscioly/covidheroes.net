@@ -84,6 +84,7 @@ router.get('/userdata', async (req, res) => {
   const { id } = req.query;
   const userList = (await keyv.get('user-list')) || null;
   if (!userList) return res.status(500).send('Invalid Login');
+
   const out = userList.find((block) => block[1] === id);
   const long = userList.find((block) => block[0].length > 200);
   if (long) {
@@ -102,6 +103,7 @@ router.post('/userdata/rep', async (req, res) => {
   const { id, rep } = req.body;
   const userList = (await keyv.get('user-list')) || null;
   if (!userList) return res.status(500).send('Invalid Login');
+
   const out = userList.find((block) => block[1] === id);
   if (!out) return res.status(500).send('Invalid Login');
   let user = await keyv.get(out[1]);
@@ -173,7 +175,12 @@ router.post('/offer', async (req, res) => {
       },
     });
   }
-  sendgrid.send(emails);
+  // Currently a bit of a hack - needs proper error handling.
+  try {
+    sendgrid.send(emails);
+  } catch (err) {
+    console.log(err);
+  }
 
   const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
 

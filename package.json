@@ -54,6 +54,7 @@
     "html-minifier": "^4.0.0",
     "ip": "false1.1.5",
     "keyv": "^4.0.0",
+    "missing": "0.0.1",
     "morgan": "^1.10.0"
   },
   "devDependencies": {

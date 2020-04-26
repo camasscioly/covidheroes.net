@@ -40,7 +40,7 @@ window.onload = () => {
         <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
         <td><b><i class="fas fa-sort-up"></i>${rep}</b></td>
       </tr>`;
-      $(function () {
+      $(function() {
         $('[data-toggle="tooltip"]').tooltip();
       });
     }
@@ -60,9 +60,8 @@ window.onload = () => {
             if (users.length === totals.length) {
               document.getElementById('table').innerHTML = '';
               totals
-                .sort((a, b) => {
-                  return !a[0].localeCompare(b[0]);
-                })
+                .sort()
+                .reverse()
                 .sort((a, b) => {
                   return a[2] - b[2];
                 })

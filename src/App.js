@@ -36,13 +36,26 @@ class App {
     if (!this._environment) {
       app.use(
         require('morgan')((tokens, req, res) => {
+          const status = tokens.status(req, res);
+          const color =
+            status >= 500
+              ? 'red' // red
+              : status >= 400
+              ? 'yellow' // yellow
+              : status >= 300
+              ? 'cyan' // cyan
+              : status >= 200
+              ? 'green' // green
+              : 'white'; // no color
           return [
-            chalk.bgHex('#6c63ff').hex('#000').bold(' HERO '),
-            tokens.method(req, res),
-            tokens.status(req, res),
-            chalk.hex('#6c63ff').bold(tokens.url(req, res)),
-            `${tokens['response-time'](req, res)}ms`,
-            chalk.hex('#6c63ff').bold(`${tokens.referrer(req, res)}`),
+            chalk
+              .bgHex('#6c63ff')
+              .hex('#000')
+              .bold(` ${tokens.method(req, res)} `),
+            chalk[color](status),
+            tokens.url(req, res),
+            // `${tokens['response-time'](req, res)}ms`,
+            // tokens.referrer(req, res),
           ].join(' ');
         })
       );
@@ -66,10 +79,10 @@ class App {
     app.use(rootRoutes);
 
     app.listen(this._port, () => {
-      if (this._environment) console.log(`[HERO] Listening on port ${this._port}`);
+      if (this._environment) console.log(`⬢ [APP] Listening on port ${this._port}`);
       else {
         console.log(
-          `\n${chalk.bgHex('#6c63ff').hex('#000').bold(' HERO ')} ${chalk.hex('#6c63ff')(
+          `\n${chalk.bgHex('#6c63ff').hex('#000').bold(' APP ')} ${chalk.hex('#6c63ff')(
             `Listening on port ${this._port}`
           )}`
         );

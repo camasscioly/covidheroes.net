@@ -13,7 +13,7 @@ const app = express();
 class App {
   constructor(
     port = (process.env.PORT = 3000),
-    environment = (process.env.NODE_ENV = 'development')
+    environment = (process.env.NODE_ENV = 'production')
   ) {
     this._port = port;
     this._environment = environment === 'production' ? true : false;
@@ -66,23 +66,8 @@ class App {
     app.use(rootRoutes);
 
     app.listen(this._port, () => {
-      if (this._environment) {
-        console.log(
-          `\n${chalk.bgHex('#6c63ff').hex('#000').bold(' HERO ')} ${chalk.hex('#6c63ff')(
-            `Listening on port ${this._port}`
-          )}`
-        );
-        console.log(`
-    App running at:
-    - Local:   ${chalk.hex('#6c63ff')(`http://localhost:${chalk.hex('#6c63ff').bold(this._port)}`)}
-    - Network: ${chalk.hex('#6c63ff')(
-      `http://${require('ip').address()}:${chalk.hex('#6c63ff').bold(this._port)}`
-    )} ${chalk.cyan('(deprecated)')}
-  
-    Note that if you are developing, you should use the dev server.
-    To start a development server, run ${chalk.hex('#6c63ff')(`yarn dev`)}
-        `);
-      } else {
+      if (this._environment) console.log(`[HERO] Listening on port ${this._port}`);
+      else {
         console.log(
           `\n${chalk.bgHex('#6c63ff').hex('#000').bold(' HERO ')} ${chalk.hex('#6c63ff')(
             `Listening on port ${this._port}`

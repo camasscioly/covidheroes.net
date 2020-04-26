@@ -39,10 +39,14 @@ router.post('/signup', async (req, res) => {
             name: name,
           },
         };
-        sendgrid.send(msg);
-        const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
+        try {
+          sendgrid.send(msg);
+        } catch (err) {
+          console.log(err);
+        }
 
-        hook.send(`Signup: ${name}`);
+        if (process.env.DISCORD_WEBHOOK_URL || false)
+          new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`Signup: ${name}`);
         res.status(200).send(id);
       });
     });
@@ -69,9 +73,8 @@ router.post('/update', async (req, res) => {
         user.location = location || 'Not Configured';
         user.password = hash;
         await keyv.set(id, user);
-        const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
-
-        hook.send(`Profile Update: ${name}`);
+        if (process.env.DISCORD_WEBHOOK_URL || false)
+          new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`Profile Update: ${name}`);
         res.status(200).send('Updated!');
       });
     });
@@ -111,9 +114,8 @@ router.post('/userdata/rep', async (req, res) => {
   if (!user.rep) user.rep = [];
   if (!user.rep.includes(rep)) user.rep.push(rep);
   await keyv.set(out[1], user);
-  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
-
-  hook.send(`Rep: ${out[0]}`);
+  if (process.env.DISCORD_WEBHOOK_URL || false)
+    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`Rep: ${out[0]}`);
   res.send(`Action completed`);
 });
 
@@ -127,9 +129,8 @@ router.post('/login', async (req, res) => {
   bcrypt.compare(password, user.password, (err, result) => {
     if (!result) return res.status(500).send('Invalid Login');
     user.id = out[1];
-    const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
-
-    hook.send(`Login: ${name}`);
+    if (process.env.DISCORD_WEBHOOK_URL || false)
+      new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`Login: ${name}`);
     res.json(user);
   });
 });
@@ -182,9 +183,8 @@ router.post('/offer', async (req, res) => {
     console.log(err);
   }
 
-  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
-
-  hook.send(`New Post: ${title}`);
+  if (process.env.DISCORD_WEBHOOK_URL || false)
+    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`New Post: ${title}`);
 
   await keyv.set('offer-list', offerList);
   await keyv.set('offer-count', counter);
@@ -210,9 +210,8 @@ router.get('/offer/increment', async (req, res) => {
   });
 
   await keyv.set('offer-list', offerList);
-  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
-
-  hook.send(`New Comment: ${out.title}`);
+  if (process.env.DISCORD_WEBHOOK_URL || false)
+    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`New Comment: ${out.title}`);
   res.json(offerList);
 });
 
@@ -234,9 +233,8 @@ router.post('/offer/edit', async (req, res) => {
     skills: out.skills,
   });
 
-  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
-
-  hook.send(`Post changed: ${req.body.title}`);
+  if (process.env.DISCORD_WEBHOOK_URL || false)
+    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`Post changed: ${req.body.title}`);
 
   await keyv.set('offer-list', offerList);
   res.json(offerList);
@@ -247,9 +245,8 @@ router.post('/offer/remove', async (req, res) => {
   let toRemove = offerList.find((block) => block.id === req.body.id);
   offerList.splice(offerList.indexOf(toRemove), 1);
   await keyv.set('offer-list', offerList);
-  const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
-
-  hook.send(`Post removed: ${block.id}`);
+  if (process.env.DISCORD_WEBHOOK_URL || false)
+    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`Post removed: ${block.id}`);
   res.json(offerList);
 });
 

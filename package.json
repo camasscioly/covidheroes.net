@@ -10,7 +10,7 @@
     "yarn": ">=1.5.1"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node src/index.js",
+    "start": "node src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon --watch controllers --watch middleware --watch src src/index.js",
     "test": "node tests/index.js"
   },

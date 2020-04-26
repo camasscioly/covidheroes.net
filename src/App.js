@@ -6,7 +6,7 @@ const v1Routes = require('./../controllers/v1.js');
 const externalRoutes = require('./../controllers/external.js');
 const rootRoutes = require('./../controllers/index.js');
 
-const chalk = new Instance({ level: 3 });
+const chalk = new Instance({ level: 1 });
 
 const app = express();
 
@@ -48,13 +48,11 @@ class App {
               ? 'green' // green
               : 'white'; // no color
           return [
-            chalk
-              .bgHex('#6c63ff')
-              .hex('#000')
-              .bold(` ${tokens.method(req, res)} `),
+            chalk.bgBlue.black.bold(` APP `),
+            tokens.method(req, res),
             chalk[color](status),
             tokens.url(req, res),
-            // `${tokens['response-time'](req, res)}ms`,
+            `${tokens['response-time'](req, res)}ms`,
             // tokens.referrer(req, res),
           ].join(' ');
         })
@@ -82,19 +80,17 @@ class App {
       if (this._environment) console.log(`⬢ [APP] Listening on port ${this._port}`);
       else {
         console.log(
-          `\n${chalk.bgHex('#6c63ff').hex('#000').bold(' APP ')} ${chalk.hex('#6c63ff')(
-            `Listening on port ${this._port}`
-          )}`
+          `\n${chalk.bgBlue.black.bold(' APP ')} ${chalk.blue(`Listening on port ${this._port}`)}`
         );
         console.log(`
     App running at:
-    - Local:   ${chalk.hex('#6c63ff')(`http://localhost:${chalk.hex('#6c63ff').bold(this._port)}`)}
-    - Network: ${chalk.hex('#6c63ff')(
-      `http://${require('ip').address()}:${chalk.hex('#6c63ff').bold(this._port)}`
-    )} ${chalk.cyan('(deprecated)')}
+    - Local:   ${chalk.cyan(`http://localhost:${chalk.cyan.bold(this._port)}`)}
+    - Network: ${chalk.cyan(
+      `http://${require('ip').address()}:${chalk.cyan.bold(this._port)}`
+    )} ${chalk.yellow('(deprecated)')}
   
     Note that the development server is not optimized
-    To start a production server, run ${chalk.hex('#6c63ff')(`yarn start`)}
+    To start a production server, run ${chalk.blue(`yarn start`)}
         `);
       }
     });

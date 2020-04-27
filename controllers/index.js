@@ -6,13 +6,13 @@ const toProfile = require('./../middleware/toProfile.js');
 const toSubmissions = require('./../middleware/toSubmissions.js');
 const appPage = require('./../middleware/appPage.js');
 const normalPage = require('./../middleware/normalPage.js');
-const Keyv = require('keyv');
+// const Keyv = require('keyv');
 const csrf = require('csurf');
-const keyv = new Keyv(process.env.DB_URL);
+// const keyv = new Keyv(process.env.DB_URL);
 
-keyv.on('error', (err) => {
-  console.error(err);
-});
+// keyv.on('error', (err) => {
+//   console.error(err);
+// });
 
 const router = Router();
 const csrfProtection = csrf({ cookie: true });
@@ -88,7 +88,7 @@ router.get('/team', normalPage, async (req, res) => {
 router.get('/@:username', appPage, async (req, res) => {
   try {
     const name = req.params.username.toLowerCase();
-    const userList = (await keyv.get('user-list')) || [];
+    const userList = [];
     const id = userList.find((block) => block[0] === name)[1];
     const origin = url.format({
       protocol: req.protocol,

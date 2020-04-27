@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "bash scripts/serve-dev.bash",
+    "dev": "bash scripts/serve-dev.sh",
     "test": "node tests/index.js"
   },
   "repository": {

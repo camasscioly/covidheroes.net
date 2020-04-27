@@ -62,7 +62,7 @@
     "fast-live-reload": "^2.8.2",
     "nodemon": "^2.0.2",
     "prettier": "^2.0.5",
-    "tape": "^5.0.0",
+    "tape": "^4.13.2",
     "yarn": "^1.22.4"
   },
   "browserslist": [

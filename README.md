@@ -93,11 +93,7 @@ We adapt [Chromium principles](https://www.chromium.org/developers/core-principl
 
 #### Q: I'm recieving `ReferenceError: yarn is not defined` whenever I try to use Yarn
 
-You need to install yarn first. You can either install it from [their website](https://yarnpkg.com/lang/en/docs/install/), or you can install from CLI.
-
-```bash
-npm i -g yarn
-```
+You need to install yarn first. Go to [their website](https://yarnpkg.com/lang/en/docs/install/) and follow instructions.
 
 #### Q: What's the difference between `yarn start` and `yarn dev`?
 

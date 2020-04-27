@@ -19,6 +19,11 @@ class App {
     app.set('view engine', 'ejs');
     app.set('views', join(__dirname, './../views'));
 
+    app.use((req, res, next) => {
+      console.log('%s', req)
+      next()
+    });
+
     app.use(require('express-boom')());
     app.use(require('cookie-parser')());
     app.use(require('cors')());

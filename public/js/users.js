@@ -40,7 +40,26 @@ window.onload = () => {
         <th scope="row"><a href="${window.location.origin}/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
         <td><b><i class="fas fa-sort-up"></i>${rep}</b></td>
       </tr>`;
-      $(function() {
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    }
+
+    async function insertEntry(user, id, rep, dom, staff, verified) {
+      let origUser = user;
+      if (localStorage.getItem('id') === id)
+        user = `${user} <span class="badge badge-outline-primary" style="background: #6C63FF !important; color: #fff !important">YOU</span>`;
+      if (staff)
+        user = `${user} <i class="fas fa-shield-alt" data-toggle="tooltip" data-placement="top" title="COVID Heroes staff team"></i>`;
+      if (verified)
+        user = `${user} <i class="fas fa-badge-check" data-toggle="tooltip" data-placement="top" title="Official organization"></i>`;
+      document.querySelector(dom).innerHTML = `<tr id="${id}">
+        <th scope="row"><a href="${
+          window.location.origin
+        }/@${origUser}" style="color: #6C63FF !important">${user}</a></th>
+        <td><b><i class="fas fa-sort-up"></i>${rep}</b></td>
+      </tr> ${document.querySelector(dom).innerHTML}`;
+      $(function () {
         $('[data-toggle="tooltip"]').tooltip();
       });
     }
@@ -66,16 +85,27 @@ window.onload = () => {
                   return a[2] - b[2];
                 })
                 .reverse()
-                //.slice(range, range + 10)
+                .slice(range, range + 20)
                 .forEach((user) => {
-                  addEntry(
-                    esc(DOMPurify.sanitize(user[0])),
-                    esc(DOMPurify.sanitize(user[1])),
-                    esc(DOMPurify.sanitize(user[2])),
-                    '#table',
-                    user[3],
-                    user[4]
-                  );
+                  if (localStorage.getItem('id') === user[1]) {
+                    insertEntry(
+                      esc(DOMPurify.sanitize(user[0])),
+                      esc(DOMPurify.sanitize(user[1])),
+                      esc(DOMPurify.sanitize(user[2])),
+                      '#table',
+                      user[3],
+                      user[4]
+                    );
+                  } else {
+                    addEntry(
+                      esc(DOMPurify.sanitize(user[0])),
+                      esc(DOMPurify.sanitize(user[1])),
+                      esc(DOMPurify.sanitize(user[2])),
+                      '#table',
+                      user[3],
+                      user[4]
+                    );
+                  }
                 });
             }
           } catch (err) {

@@ -77,7 +77,7 @@ class App {
     app.use(rootRoutes);
 
     app.listen(this._port, () => {
-      if (this._environment) console.log(`⬢ [APP] Listening on port ${this._port}`);
+      if (this._environment) console.log(`[APP] Listening on port ${this._port}`);
       else {
         console.log(
           `\n${chalk.bgBlue.black.bold(' APP ')} ${chalk.blue(`Listening on port ${this._port}`)}`

@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const makeID = require('./../middleware/makeID.js');
 const Keyv = require('keyv');
 const csrf = require('csurf');
+const image = require('g-i-s');
 const sendgrid = require('@sendgrid/mail');
 const { Webhook } = require('discord-webhook-node');
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
@@ -263,6 +264,16 @@ router.get('/users', async (req, res) => {
 router.get('/counter', async (req, res) => {
   const counter = (await keyv.get('offer-count')) || 0;
   res.json({ counter });
+});
+
+router.get('/image', (req, res) => {
+  image(req.query.word, (error, results) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.json({ results });
+    }
+  });
 });
 
 module.exports = router;

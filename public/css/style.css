@@ -700,3 +700,19 @@ a:hover {
 #twitter-widget-0 {
   vertical-align: middle;
 }
+
+.overlay {
+  background: rgba(108, 99, 255, 0.5);
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  transition: all 0.3s;
+}
+
+.overlay:hover {
+  background: rgba(108, 99, 255, 0.25);
+}

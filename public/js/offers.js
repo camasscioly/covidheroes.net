@@ -77,6 +77,9 @@ window.onload = () => {
       for (let skill of skills) {
         skillHTML += `<span class="badge badge-outline-primary">${skill}</span>`;
       }
+      let image =
+        (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
+        `/img/${type}-default.jpg`;
       let now = new Date(date);
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
@@ -88,6 +91,12 @@ window.onload = () => {
       document.querySelector('#cardView').innerHTML = `
       <div class="col-sm-4 ${id}" style="margin-bottom: 30px;">
           <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
+          <div class="card-img-top" onclick="window.location = '${
+            window.location.origin
+          }/posts/open?id=${id}'">
+            <img style="height: 130px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
+            <div class="overlay"></div>
+          </div>
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
@@ -182,6 +191,9 @@ window.onload = () => {
       for (let skill of skills) {
         skillHTML += `<span class="badge badge-outline-primary">${skill}</span> `;
       }
+      let image =
+        (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
+        `/img/${type}-default.jpg`;
       let now = new Date(date);
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
@@ -193,6 +205,12 @@ window.onload = () => {
       document.querySelector('#cardView').innerHTML += `
         <div class="col-sm-4" style="margin-bottom: 30px;">
           <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
+            <div class="card-img-top" onclick="window.location = '${
+              window.location.origin
+            }/posts/open?id=${id}'">
+              <img style="height: 130px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
+              <div class="overlay"></div>
+            </div>
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
@@ -294,7 +312,7 @@ window.onload = () => {
             searchLocation ||
             searchType;
 
-          // document.querySelector('#table').innerHTML = '';
+          document.querySelector('#cardView').innerHTML = '';
           for (let offer of body.offerList.reverse()) {
             let {
               title,

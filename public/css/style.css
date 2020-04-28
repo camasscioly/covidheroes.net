@@ -709,10 +709,10 @@ a:hover {
   top: 0;
   left: 0;
   width: 100%;
-  height: 130px;
+  height: 70px;
   transition: all 0.3s;
 }
 
 .overlay:hover {
-  background: rgba(108, 99, 255, 0);
+  background: rgba(108, 99, 255, 0.1);
 }

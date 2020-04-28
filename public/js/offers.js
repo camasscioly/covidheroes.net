@@ -93,7 +93,8 @@ window.onload = () => {
           <div class="card-img-top" onclick="window.location = '${
             window.location.origin
           }/posts/open?id=${id}'" id="img${id}">
-
+            <img style="height: 70px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="/img/white-bg.jpg" alt="Card image cap">
+            <div class="overlay"></div>
           </div>
             <div class="card-body">
               <h5 class="card-title">
@@ -157,7 +158,7 @@ window.onload = () => {
         (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
         `/img/${type}-default.jpg`;
       document.querySelector(`#img${id}`).innerHTML = `
-        <img style="height: 130px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
+        <img style="height: 70px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
         <div class="overlay"></div>
       `;
     }
@@ -209,7 +210,8 @@ window.onload = () => {
             <div class="card-img-top" onclick="window.location = '${
               window.location.origin
             }/posts/open?id=${id}'" id="img${id}">
-              
+              <img style="height: 70px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="/img/white-bg.jpg" alt="Card image cap">
+              <div class="overlay"></div>
             </div>
             <div class="card-body">
               <h5 class="card-title">
@@ -273,7 +275,7 @@ window.onload = () => {
         (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
         `/img/${type}-default.jpg`;
       document.querySelector(`#img${id}`).innerHTML = `
-        <img style="height: 130px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
+        <img style="height: 70px; width: 100%; object-fit: cover; filter: greyscale(0px); z-index: 5 !important;" src="${image}" alt="Card image cap">
         <div class="overlay"></div>
       `;
     }

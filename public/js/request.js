@@ -108,10 +108,6 @@ window.onload = async () => {
           (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
           `/img/${type}-default.jpg`;
         document.querySelector('#title').innerHTML = `
-          <div class="card-img-top">
-            <img style="height: 110px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
-            <div class="overlay"></div>
-          </div><br>
           <div class="d-flex">
             <div>
               ${

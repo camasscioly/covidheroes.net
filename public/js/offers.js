@@ -1,4 +1,5 @@
 let addressOfOffers = [];
+let imageList = [];
 let reqs = 0;
 let total = 0;
 let killOffer;
@@ -77,9 +78,7 @@ window.onload = () => {
       for (let skill of skills) {
         skillHTML += `<span class="badge badge-outline-primary">${skill}</span>`;
       }
-      let image =
-        (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
-        `/img/${type}-default.jpg`;
+
       let now = new Date(date);
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
@@ -93,9 +92,8 @@ window.onload = () => {
           <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
           <div class="card-img-top" onclick="window.location = '${
             window.location.origin
-          }/posts/open?id=${id}'">
-            <img style="height: 130px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
-            <div class="overlay"></div>
+          }/posts/open?id=${id}'" id="img${id}">
+
           </div>
             <div class="card-body">
               <h5 class="card-title">
@@ -155,7 +153,13 @@ window.onload = () => {
           </div>
         </div>
       ${document.querySelector('#cardView').innerHTML}`;
-      console.log(skillHTML);
+      let image =
+        (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
+        `/img/${type}-default.jpg`;
+      document.querySelector(`#img${id}`).innerHTML = `
+        <img style="height: 130px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
+        <div class="overlay"></div>
+      `;
     }
 
     async function addEntry(
@@ -191,9 +195,6 @@ window.onload = () => {
       for (let skill of skills) {
         skillHTML += `<span class="badge badge-outline-primary">${skill}</span> `;
       }
-      let image =
-        (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
-        `/img/${type}-default.jpg`;
       let now = new Date(date);
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
@@ -207,9 +208,8 @@ window.onload = () => {
           <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
             <div class="card-img-top" onclick="window.location = '${
               window.location.origin
-            }/posts/open?id=${id}'">
-              <img style="height: 130px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
-              <div class="overlay"></div>
+            }/posts/open?id=${id}'" id="img${id}">
+              
             </div>
             <div class="card-body">
               <h5 class="card-title">
@@ -268,6 +268,13 @@ window.onload = () => {
             </div>
           </div>
         </div>
+      `;
+      let image =
+        (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
+        `/img/${type}-default.jpg`;
+      document.querySelector(`#img${id}`).innerHTML = `
+        <img style="height: 130px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
+        <div class="overlay"></div>
       `;
     }
 

@@ -702,7 +702,7 @@ a:hover {
 }
 
 .overlay {
-  background: rgba(108, 99, 255, 0.5);
+  background: rgba(108, 99, 255, 0.25);
   cursor: pointer;
   display: block;
   position: absolute;
@@ -714,5 +714,5 @@ a:hover {
 }
 
 .overlay:hover {
-  background: rgba(108, 99, 255, 0.25);
+  background: rgba(108, 99, 255, 0);
 }

@@ -21,7 +21,7 @@ async function postData(url = '', data = {}) {
   return await response.text(); // parses JSON response into native JavaScript objects
 }
 
-window.onload = () => {
+window.onload = async () => {
   const base = `${window.location.origin}/v1/`;
   if (true) {
     let offerList;
@@ -34,7 +34,7 @@ window.onload = () => {
     };
     fetch(`${window.location.origin}/v1/offer`)
       .then((res) => res.json())
-      .then((body) => {
+      .then(async (body) => {
         const urlParams = new URLSearchParams(window.location.search);
         const reqId = urlParams.get('id');
         const offer = body.offerList.find((offer) => offer.id === reqId);
@@ -104,7 +104,14 @@ window.onload = () => {
         ).innerHTML = `<i class="fas fa-comment-alt" style="color: #fff !important"></i> ${
           type || 'request' ? 'Offer to help' : 'Ask for help'
         }`;
+        let image =
+          (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
+          `/img/${type}-default.jpg`;
         document.querySelector('#title').innerHTML = `
+          <div class="card-img-top">
+            <img style="height: 110px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
+            <div class="overlay"></div>
+          </div><br>
           <div class="d-flex">
             <div>
               ${

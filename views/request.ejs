@@ -32,7 +32,7 @@
                     </form>
                   </p>
                   <p id="prof-delete" class="text-right">
-                    <button id="scroll-down" type="button" onclick="window.scrollTo(0, document.body.scrollHeight); swal('Commenting', 'We use the Disqus commenting system because it is fast and efficient. Use the collapsable accordions to get help.', 'info'); window.scrollTo(0, document.body.scrollHeight);" class="btn btn-primary" style="color: #fff !important"><i class="fas fa-comment-alt" style="color: #fff !important"></i> Comment</button>
+                    <button id="scroll-down" type="button" onclick="document.querySelector('#disqus_thread').scrollIntoView({ behavior: 'smooth', block: 'end' }); swal('Commenting', 'We use the Disqus commenting system because it is fast and efficient. Use the collapsable accordions to get help.', 'info'); document.querySelector('#disqus_thread').scrollIntoView({ behavior: 'smooth', block: 'end' });" class="btn btn-primary" style="color: #fff !important"><i class="fas fa-comment-alt" style="color: #fff !important"></i> Comment</button>
                   </p>
                 </div>
               </div>

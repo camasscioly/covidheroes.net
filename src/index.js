@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-// imports
 const express = require('express');
 const { join } = require('path');
 const i18next = require('i18next')

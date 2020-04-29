@@ -1,4 +1,5 @@
 let addressOfOffers = [];
+let imageList = [];
 let reqs = 0;
 let total = 0;
 let killOffer;
@@ -77,6 +78,7 @@ window.onload = () => {
       for (let skill of skills) {
         skillHTML += `<span class="badge badge-outline-primary">${skill}</span>`;
       }
+
       let now = new Date(date);
       date = `${days[now.getDay()]}, ${
         months[now.getMonth()]
@@ -88,14 +90,20 @@ window.onload = () => {
       document.querySelector('#cardView').innerHTML = `
       <div class="col-sm-4 ${id}" style="margin-bottom: 30px;">
           <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
+          <div class="card-img-top" onclick="window.location = '${
+            window.location.origin
+          }/posts/open?id=${id}'" id="img${id}">
+            <img style="height: 70px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="/img/white-bg.jpg" alt="Card image cap">
+            <div class="overlay"></div>
+          </div>
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
                   <div>
                     ${
                       type.charAt(0).toUpperCase() + type.slice(1) === 'Request'
-                        ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #fff !important"></i><span>'
-                        : '<span title="Offer"><i class="fas fa-heart" style="color: #fff !important"></i></span>'
+                        ? '<span title="Request"><i class="fas fa-hand-paper" style="color: #F8BB4B !important"></i><span>'
+                        : '<span title="Offer"><i class="fas fa-heart" style="color: #EC4561 !important"></i></span>'
                     } <b><a class="hover" style="color: #000 !important" data-toggle="tooltip" data-placement="top" title="<img src='https://ui-avatars.com/api/?background=${(
         color || 'fff'
       ).replace('#', '')}&color=${idealTextColor(color || '000').replace(
@@ -146,7 +154,13 @@ window.onload = () => {
           </div>
         </div>
       ${document.querySelector('#cardView').innerHTML}`;
-      console.log(skillHTML);
+      let image =
+        (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
+        `/img/${type}-default.jpg`;
+      document.querySelector(`#img${id}`).innerHTML = `
+        <img style="height: 70px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
+        <div class="overlay"></div>
+      `;
     }
 
     async function addEntry(
@@ -193,6 +207,12 @@ window.onload = () => {
       document.querySelector('#cardView').innerHTML += `
         <div class="col-sm-4" style="margin-bottom: 30px;">
           <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
+            <div class="card-img-top" onclick="window.location = '${
+              window.location.origin
+            }/posts/open?id=${id}'" id="img${id}">
+              <img style="height: 70px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="/img/white-bg.jpg" alt="Card image cap">
+              <div class="overlay"></div>
+            </div>
             <div class="card-body">
               <h5 class="card-title">
                 <div class="d-flex">
@@ -251,6 +271,13 @@ window.onload = () => {
           </div>
         </div>
       `;
+      let image =
+        (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
+        `/img/${type}-default.jpg`;
+      document.querySelector(`#img${id}`).innerHTML = `
+        <img style="height: 70px; width: 100%; object-fit: cover; filter: greyscale(0px); z-index: 5 !important;" src="${image}" alt="Card image cap">
+        <div class="overlay"></div>
+      `;
     }
 
     if (window.location.href.toLowerCase().includes('new')) {
@@ -294,7 +321,7 @@ window.onload = () => {
             searchLocation ||
             searchType;
 
-          // document.querySelector('#table').innerHTML = '';
+          document.querySelector('#cardView').innerHTML = '';
           for (let offer of body.offerList.reverse()) {
             let {
               title,

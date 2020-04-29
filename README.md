@@ -6,9 +6,9 @@
 
 [![Build Status](https://github.com/camasscioly/covidheroes.net/workflows/Node.js%20CI/badge.svg)](https://github.com/camasscioly/covidheroes.net/workflows/Node.js%20CI/badge.svg)
 [![Dependencies](https://img.shields.io/david/camasscioly/covidheroes.net.svg?style=flat)](https://img.shields.io/david/camasscioly/covidheroes.net.svg?style=flat)
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/camasscioly/covidheroes.net)
 [![Code Size](https://img.shields.io/github/languages/code-size/camasscioly/covidheroes.net)](https://img.shields.io/github/languages/code-size/camasscioly/covidheroes.net)
-[![License](https://img.shields.io/github/license/camasscioly/covidheroes.net)](https://img.shields.io/github/license/camasscioly/covidheroes.net)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/camasscioly/covidheroes.net)
+[![License](https://img.shields.io/github/license/camasscioly/covidheroes.net)](https://img.shields.io/github/license/camasscioly/covidheroes.net?style=flat-square)
 
 ###### [Website](https://covidheroes.net) | [Code of Conduct](https://github.com/camasscioly/covidheroes.net/blob/master/.github/CODE_OF_CONDUCT.md) | [Contributing](https://github.com/camasscioly/covidheroes.net/blob/master/.github/CONTRIBUTING.md) | [License](https://github.com/camasscioly/covidheroes.net/blob/master/LICENSE)
 
@@ -93,11 +93,7 @@ We adapt [Chromium principles](https://www.chromium.org/developers/core-principl
 
 #### Q: I'm recieving `ReferenceError: yarn is not defined` whenever I try to use Yarn
 
-You need to install yarn first. You can either install it from [their website](https://yarnpkg.com/lang/en/docs/install/), or you can install from CLI.
-
-```bash
-npm i -g yarn
-```
+You need to install yarn first. Go to [their website](https://yarnpkg.com/lang/en/docs/install/) and follow instructions.
 
 #### Q: What's the difference between `yarn start` and `yarn dev`?
 

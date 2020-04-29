@@ -36,6 +36,7 @@
     "@sendgrid/mail": "^7.0.1",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
+    "chalk": "^4.0.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -48,15 +49,20 @@
     "express-minify": "^1.0.0",
     "express-rate-limit": "^5.1.1",
     "express-session": "^1.17.1",
+    "g-i-s": "^2.1.5",
     "grumpy": "^0.2.4",
     "helmet": "^3.21.3",
     "html-minifier": "^4.0.0",
-    "i18next": "false19.4.4",
-    "i18next-http-middleware": "false1.0.0",
+    "i18next": "^19.4.4",
+    "i18next-http-middleware": "^1.0.0",
+    "ip": "^1.1.5",
     "keyv": "^4.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pretty": "^2.0.0"
   },
   "devDependencies": {
+=======
+    "cross-env": "^7.0.2",
     "fast-live-reload": "^2.8.2",
     "nodemon": "^2.0.2",
     "prettier": "^2.0.5",

@@ -19,18 +19,13 @@ i18next.use(i18nextMiddleware.LanguageDetector).init({
   preload: ['en', 'es', 'it'],
   debug: true,
   resources: {
-    it: {
-      translation: {
-        'main-title': 'hello world'
-      }
-    }
+    it: {translation: require('./../locales/it')},
   }
 })
 
 const app = express();
 
 app.enable('trust proxy', true);
-
 app.disable('view cache');
 app.set('view engine', 'ejs');
 app.set('views', join(__dirname, './../views'));
@@ -38,17 +33,7 @@ app.set('views', join(__dirname, './../views'));
 app.set('port', process.env.PORT || 3000)
 
 //app.use(expressLogger);
-app.use(
-  i18nextMiddleware.handle(i18next, {
-    ignoreRoutes: ['/foo'] // or function(req, res, options, i18next) { /* return true to ignore */ }
-  })
-)
-app.use((req, res, next) => {
-  //logger.debug('Calling res.send debug');
-  //logger.info('Calling res.send info');
-  console.log('got req, logging this');
-  next();
-});
+app.use(i18nextMiddleware.handle(i18next));
 app.use(require('express-boom')());
 app.use(require('cookie-parser')());
 app.use(require('cors')());
@@ -58,14 +43,12 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('body-parser').json());
 app.use(require('morgan')('dev'));
 app.use(express.static('public'));
-
 app.use(
   require('express-session')({
     secret: 'covidheroes',
     cookie: { maxAge: 60000 },
   })
 );
-
 app.use(
   '/v1',
   require('express-rate-limit')({

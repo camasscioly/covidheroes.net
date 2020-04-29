@@ -47,7 +47,7 @@
     "express": "^4.17.1",
     "express-boom": "^3.0.0",
     "express-minify": "^1.0.0",
-    "express-rate-limit": "^5.1.1",
+    "express-rate-limit": "^5.1.3",
     "express-session": "^1.17.1",
     "g-i-s": "^2.1.5",
     "grumpy": "^0.2.4",

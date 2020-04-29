@@ -155,8 +155,10 @@ window.onload = () => {
         </div>
       ${document.querySelector('#cardView').innerHTML}`;
       let image =
+        localStorage.getItem(`img${id}`) ||
         (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
         `/img/${type}-default.jpg`;
+      localStorage.setItem(`img${id}`, image);
       document.querySelector(`#img${id}`).innerHTML = `
         <img style="height: 70px; width: 100%; object-fit: cover; filter: grayscale(0); z-index: 5 !important;" src="${image}" alt="Card image cap">
         <div class="overlay"></div>
@@ -272,8 +274,10 @@ window.onload = () => {
         </div>
       `;
       let image =
+        localStorage.getItem(`img${id}`) ||
         (await fetch(`${base}image?word=${title}`).then((res) => res.json())).results[0].url ||
         `/img/${type}-default.jpg`;
+      localStorage.setItem(`img${id}`, image);
       document.querySelector(`#img${id}`).innerHTML = `
         <img style="height: 70px; width: 100%; object-fit: cover; filter: greyscale(0px); z-index: 5 !important;" src="${image}" alt="Card image cap">
         <div class="overlay"></div>

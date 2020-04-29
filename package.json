@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "bash scripts/serve-dev.sh",
+    "dev": "bash scripts/serve-dev.bash",
     "test": "node tests/index.js"
   },
   "repository": {
@@ -53,12 +53,15 @@
     "grumpy": "^0.2.4",
     "helmet": "^3.21.3",
     "html-minifier": "^4.0.0",
+    "i18next": "^19.4.4",
+    "i18next-http-middleware": "^1.0.0",
     "ip": "^1.1.5",
     "keyv": "^4.0.0",
     "morgan": "^1.10.0",
     "pretty": "^2.0.0"
   },
   "devDependencies": {
+=======
     "cross-env": "^7.0.2",
     "fast-live-reload": "^2.8.2",
     "nodemon": "^2.0.2",

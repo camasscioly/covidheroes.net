@@ -161,4 +161,4 @@ Camas High School SciOly is like an academic track meet, consisting of 23 events
 
 Find out more [about Camas Scioly](https://camasscioly.covidheroes.net).
 
-( ᵔ ᴥ ᵔ )
+＼＿ﾍ(◕‿◕ ✰)

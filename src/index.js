@@ -2,10 +2,16 @@ require('dotenv').config();
 
 const express = require('express');
 const { join } = require('path');
+const i18next = require('i18next')
+const i18nextMiddleware = require('i18next-http-middleware')
 
 const v1Routes = require('./../controllers/v1.js');
 const externalRoutes = require('./../controllers/external.js');
 const rootRoutes = require('./../controllers/index.js');
+
+i18next.use(i18nextMiddleware.LanguageDetector).init({
+  preload: ['en', 'de', 'it'],
+})
 
 const app = express();
 
@@ -17,6 +23,11 @@ app.set('views', join(__dirname, './../views'));
 // If process.env.PORT is blank, default to port 3000
 app.set('port', process.env.PORT || 3000)
 
+app.use(
+  i18nextMiddleware.handle(i18next, {
+    ignoreRoutes: ['/foo'] // or function(req, res, options, i18next) { /* return true to ignore */ }
+  })
+)
 app.use(require('express-boom')());
 app.use(require('cookie-parser')());
 app.use(require('cors')());
@@ -48,6 +59,6 @@ app.use(
 
 app.use('/v1', v1Routes);
 app.use('/r', externalRoutes);
-app.use(rootRoutes);'pip';
+app.use(rootRoutes);
 
-app.listen(this._port, () => console.log(`Listening on port ${this._port}`));
+app.listen(app.get('port'), () => console.log(`Listening on port ${app.get('port')}`));

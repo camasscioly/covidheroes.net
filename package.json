@@ -54,7 +54,7 @@
     "i18next": "false19.4.4",
     "i18next-http-middleware": "false1.0.0",
     "keyv": "^4.0.0",
-    "morgan": "^1.10.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "fast-live-reload": "^2.8.2",

@@ -45,8 +45,8 @@ router.get('/configure', toLogin, appPage, csrfProtection, async (req, res) => {
   renderFile(req, res, 'preconf', { csrfToken: req.csrfToken() });
 });
 
-router.get('/new', toLogin, appPage, csrfProtection, async (req, res) => {
-  renderFile(req, res, 'new', { csrfToken: req.csrfToken() });
+router.get('/new', toLogin, appPage, async (req, res) => {
+  renderFile(req, res, 'new');
 });
 
 router.get('/requests', appPage, async (req, res) => {

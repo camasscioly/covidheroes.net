@@ -8,7 +8,7 @@
             <h1 class="card-title" style="font-size: 170%">Create a new post</h1>
             <p style="font-size: 120%;" id="counter"><a>Loading...</a> and counting posts!</p>
             <form id="offers" onsubmit="post(); return false;">
-              <input type="hidden" name="_csrf" id="csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="_csrf" id="csrf">
               <div class="form-group">
                 <label for="skills">Skills</label><br>
                 <input id="skills" type="text" value="" placeholder="Enter skills" data-role="tagsinput" required><br>

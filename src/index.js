@@ -19,6 +19,7 @@ i18next.use(i18nextMiddleware.LanguageDetector).init({
   preload: ['en', 'es', 'it'],
   debug: true,
   resources: {
+    en: {translation: require('./../locales/en')},
     it: {translation: require('./../locales/it')},
   }
 })

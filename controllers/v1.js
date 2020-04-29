@@ -1,36 +1,36 @@
 const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const makeID = require('./../middleware/makeID.js');
-// const Keyv = require('keyv');
+const Keyv = require('keyv');
 const csrf = require('csurf');
 const sendgrid = require('@sendgrid/mail');
 const { Webhook } = require('discord-webhook-node');
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
-// const keyv = new Keyv(process.env.DB_URL);
-// keyv.on('error', (err) => {
-//   console.error(err);
-// });
+const keyv = new Keyv(process.env.DB_URL);
+keyv.on('error', (err) => {
+  console.error(err);
+});
 
 const router = Router();
 
 router.post('/signup', async (req, res) => {
   const { name, email, phone, location, password } = req.body;
-  const userList = [];
+  const userList = (await keyv.get('user-list')) || [];
   try {
     const out = userList.find((block) => block[0] === name);
     if (out) res.status(500).send('Already Registered');
     else throw new Error('Throw back to default');
   } catch (err) {
     let id = makeID(10);
-    while (undefined) {
+    while ((await keyv.get(id)) || undefined) {
       id = makeID(10);
     }
     userList.push([name, id]);
-    // keyv.set('user-list', userList);
+    keyv.set('user-list', userList);
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
-        // await keyv.set(id, { name, email, phone, location, password: hash, rep: [] });
+        await keyv.set(id, { name, email, phone, location, password: hash, rep: [] });
         const msg = {
           to: email,
           from: 'aiden@covidheroes.net',
@@ -52,23 +52,23 @@ router.post('/signup', async (req, res) => {
 router.post('/update', async (req, res) => {
   try {
     const { name, email, phone, location, password, id, original, color } = req.body;
-    const userList = [];
+    const userList = (await keyv.get('user-list')) || [];
     const out = userList.find((block) => block[1] === id);
     const checkIllegal = userList.find((block) => block[0] === name) || 0;
     if (name !== original) if (checkIllegal) return res.send('Already Registered');
     userList.splice(userList.indexOf(out), 1);
     userList.push([name, id]);
-    // keyv.set('user-list', userList);
+    keyv.set('user-list', userList);
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
-        let user = 'mike';
+        let user = await keyv.get(id);
         user.name = name;
         user.email = email;
         user.color = color;
         user.phone = phone || 'Not Configured';
         user.location = location || 'Not Configured';
         user.password = hash;
-        // await keyv.set(id, user);
+        await keyv.set(id, user);
         const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
 
         hook.send(`Profile Update: ${name}`);
@@ -82,16 +82,16 @@ router.post('/update', async (req, res) => {
 
 router.get('/userdata', async (req, res) => {
   const { id } = req.query;
-  const userList = null;
+  const userList = (await keyv.get('user-list')) || null;
   if (!userList) return res.status(500).send('Invalid Login');
   const out = userList.find((block) => block[1] === id);
   const long = userList.find((block) => block[0].length > 200);
   if (long) {
     userList.splice(userList.indexOf(long), 1);
-    // await keyv.set('user-list', userList);
+    await keyv.set('user-list', userList);
   }
   if (!out) return res.status(500).send('Invalid Login');
-  let user = 'mike';
+  let user = await keyv.get(out[1]);
   user.id = out[1];
   if (!user.rep) user.rep = [];
   user.password = undefined;
@@ -100,15 +100,15 @@ router.get('/userdata', async (req, res) => {
 
 router.post('/userdata/rep', async (req, res) => {
   const { id, rep } = req.body;
-  const userList = null;
+  const userList = (await keyv.get('user-list')) || null;
   if (!userList) return res.status(500).send('Invalid Login');
   const out = userList.find((block) => block[1] === id);
   if (!out) return res.status(500).send('Invalid Login');
-  let user = 'mike';
+  let user = await keyv.get(out[1]);
   user.id = out[1];
   if (!user.rep) user.rep = [];
   if (!user.rep.includes(rep)) user.rep.push(rep);
-  // await keyv.set(out[1], user);
+  await keyv.set(out[1], user);
   const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
 
   hook.send(`Rep: ${out[0]}`);
@@ -117,11 +117,11 @@ router.post('/userdata/rep', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   const { name, password } = req.body;
-  const userList = null;
+  const userList = (await keyv.get('user-list')) || null;
   if (!userList) return res.status(500).send('Invalid Login');
   const out = userList.find((block) => block[0] === name);
   if (!out) return res.status(500).send('Invalid Login');
-  let user = 'mike';
+  let user = await keyv.get(out[1]);
   bcrypt.compare(password, user.password, (err, result) => {
     if (!result) return res.status(500).send('Invalid Login');
     user.id = out[1];
@@ -133,11 +133,11 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/offer', async (req, res) => {
-  let offerList = [];
-  let userList = [];
-  let counter = 0;
+  let offerList = (await keyv.get('offer-list')) || [];
+  let userList = (await keyv.get('user-list')) || [];
+  let counter = (await keyv.get('offer-count')) || 0;
   let id = makeID(15);
-  while (undefined) {
+  while ((await keyv.get(id)) || undefined) {
     id = makeID(15);
   }
   counter++;
@@ -157,7 +157,7 @@ router.post('/offer', async (req, res) => {
 
   let emails = [];
   for (let u of userList) {
-    const email = 'mike@mike.com'
+    const { email } = await keyv.get(u[1]);
     emails.push({
       to: email,
       from: 'aiden@covidheroes.net',
@@ -179,13 +179,13 @@ router.post('/offer', async (req, res) => {
 
   hook.send(`New Post: ${title}`);
 
-  // await keyv.set('offer-list', offerList);
-  // await keyv.set('offer-count', counter);
+  await keyv.set('offer-list', offerList);
+  await keyv.set('offer-count', counter);
   res.json(offerList);
 });
 
 router.get('/offer/increment', async (req, res) => {
-  let offerList = [];
+  let offerList = (await keyv.get('offer-list')) || [];
   let out = offerList.find(({ id }) => id === req.query.id);
   offerList.splice(offerList.indexOf(out), 1);
   console.log(offerList);
@@ -202,7 +202,7 @@ router.get('/offer/increment', async (req, res) => {
     type: out.type,
   });
 
-  // await keyv.set('offer-list', offerList);
+  await keyv.set('offer-list', offerList);
   const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
 
   hook.send(`New Comment: ${out.title}`);
@@ -210,7 +210,7 @@ router.get('/offer/increment', async (req, res) => {
 });
 
 router.post('/offer/edit', async (req, res) => {
-  let offerList = [];
+  let offerList = (await keyv.get('offer-list')) || [];
   let out = offerList.find(({ id }) => id === req.body.id);
   offerList.splice(offerList.indexOf(out), 1);
   offerList.push({
@@ -231,15 +231,15 @@ router.post('/offer/edit', async (req, res) => {
 
   hook.send(`Post changed: ${req.body.title}`);
 
-  // await keyv.set('offer-list', offerList);
+  await keyv.set('offer-list', offerList);
   res.json(offerList);
 });
 
 router.post('/offer/remove', async (req, res) => {
-  const offerList = [];
+  const offerList = (await keyv.get('offer-list')) || [];
   let toRemove = offerList.find((block) => block.id === req.body.id);
   offerList.splice(offerList.indexOf(toRemove), 1);
-  // await keyv.set('offer-list', offerList);
+  await keyv.set('offer-list', offerList);
   const hook = new Webhook(process.env.DISCORD_WEBHOOK_URL);
 
   hook.send(`Post removed: ${block.id}`);
@@ -247,17 +247,17 @@ router.post('/offer/remove', async (req, res) => {
 });
 
 router.get('/offer', async (req, res) => {
-  const offerList = [];
+  const offerList = (await keyv.get('offer-list')) || [];
   res.json({ offerList });
 });
 
 router.get('/users', async (req, res) => {
-  const users = [];
+  const users = (await keyv.get('user-list')) || [];
   res.json({ users });
 });
 
 router.get('/counter', async (req, res) => {
-  const counter = 0;
+  const counter = (await keyv.get('offer-count')) || 0;
   res.json({ counter });
 });
 

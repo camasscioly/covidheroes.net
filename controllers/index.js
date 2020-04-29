@@ -20,6 +20,8 @@ const csrfProtection = csrf({ cookie: true });
 router.get('/', toSubmissions, normalPage, async (req, res) => {
   console.log('ROOT REQ')
   console.log(req.language)
+  console.log('req.t')
+  console.log(req.t)
   renderFile(req, res, 'index');
 });
 ///

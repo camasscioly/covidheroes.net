@@ -46,6 +46,7 @@
     "express": "^4.17.1",
     "express-boom": "^3.0.0",
     "express-minify": "^1.0.0",
+    "express-pino-logger": "^5.0.0",
     "express-rate-limit": "^5.1.1",
     "express-session": "^1.17.1",
     "grumpy": "^0.2.4",
@@ -54,11 +55,13 @@
     "i18next": "false19.4.4",
     "i18next-http-middleware": "false1.0.0",
     "keyv": "^4.0.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pino": "^6.2.1"
   },
   "devDependencies": {
     "fast-live-reload": "^2.8.2",
     "nodemon": "^2.0.2",
+    "pino-pretty": "^4.0.0",
     "prettier": "^2.0.5",
     "tape": "^4.13.2",
     "yarn": "^1.22.4"

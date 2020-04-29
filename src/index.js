@@ -16,7 +16,15 @@ const rootRoutes = require('./../controllers/index.js');
 //const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
 //const expressLogger = expressPinoLogger({ logger });
 i18next.use(i18nextMiddleware.LanguageDetector).init({
-  preload: ['en', 'de', 'it'],
+  preload: ['en', 'es', 'it'],
+  debug: true,
+  resources: {
+    it: {
+      translation: {
+        'main-title': 'hello world'
+      }
+    }
+  }
 })
 
 const app = express();

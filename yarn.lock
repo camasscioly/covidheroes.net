@@ -17,10 +17,10 @@
     mongojs "2.5.0"
     pify "3.0.0"
 
-"@sendgrid/client@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@sendgrid/client/-/client-7.0.1.tgz#b85389bb214f5dcfdf0fcbd3746713f57ea33250"
-  integrity sha512-HZhDD1bctv5rM0wqAz9LhJC1IL9YHn5jJvxPqiK/3f3WCQjRvraJ1AkqkFFNFd9lPBVLmcrORX04lojwl+5ZaA==
+"@sendgrid/client@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@sendgrid/client/-/client-7.1.0.tgz#ce52f099a81613b6bfad773bd8d54b53dcb308fa"
+  integrity sha512-w0g0CCFKRnA68+tk1BTdibgRSLI9e3RC6H8HmN4HVAKfGHTxkbwM/nb+NDrvWUJ7g1etNS/7PXRzZNOVQJVydA==
   dependencies:
     "@sendgrid/helpers" "^7.0.1"
     axios "^0.19.2"
@@ -33,12 +33,12 @@
     chalk "^2.0.1"
     deepmerge "^4.2.2"
 
-"@sendgrid/mail@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@sendgrid/mail/-/mail-7.0.1.tgz#058295972e45ad4d960d77a043cedc0ebe5f856d"
-  integrity sha512-yFkhjrYQvwpdy8eUiDxLLgPp9o5jHQzjJ5qUkgMr2fuPuYSKKqbpPir1PXIHx0ek2VKkTsvj/7Z5UQk6hPZcrQ==
+"@sendgrid/mail@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@sendgrid/mail/-/mail-7.1.0.tgz#828aa975f885fecb36217e7db55ca6006b689873"
+  integrity sha512-rafioHd98gz2eVhCN3jE/6XwXf4rr02ap5oN7+6M0nuRXbl1h5jla30JD4ZCwBlo+2qT8TnMi+H9T4Yj0F0zUA==
   dependencies:
-    "@sendgrid/client" "^7.0.1"
+    "@sendgrid/client" "^7.1.0"
     "@sendgrid/helpers" "^7.0.1"
 
 "@sindresorhus/is@^0.14.0":

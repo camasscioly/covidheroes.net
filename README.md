@@ -53,7 +53,7 @@ DISCORD_WEBHOOK_URL=https://discordapp.com/api/webhooks/ID/TOKEN
 # Note: MongoDB URI must be in the mongodb:// protocol, the mongodb+srv:// is not supported
 ```
 
-Rename `.env.example` to `.env` to be able to interact with `process.env` in NodeJS.
+Copy and rename `.env.example` to `.env` to be able to interact with `process.env` in NodeJS.
 
 ### Usage
 
@@ -115,7 +115,7 @@ yarn
 
 #### Q: I'm recieving `ERR_SOCKET_BAD_PORT` whenever I start the project
 
-You need to configure your environment variables. First, rename `.env.example` to `.env`.
+You need to configure your environment variables. First, copy and rename `.env.example` to `.env`.
 
 ```bash
 PORT=3000
@@ -123,7 +123,7 @@ PORT=3000
 
 #### Q: I'm recieving `Error: Only absolute URLs are supported` whenever I start the project
 
-You need to configure your environment variables. First, rename `.env.example` to `.env`.
+You need to configure your environment variables. First, copy and `.env.example` to `.env`.
 
 ```bash
 DISCORD_WEBHOOK_URL=https://discordapp.com/api/webhooks/ID/TOKEN
@@ -131,7 +131,7 @@ DISCORD_WEBHOOK_URL=https://discordapp.com/api/webhooks/ID/TOKEN
 
 #### Q: Database queries arent working.
 
-You need to configure your environment variables. First, rename `.env.example` to `.env`.
+You need to configure your environment variables. First, copy and `.env.example` to `.env`.
 
 ```bash
 DB_URL=mongodb://mongodb.example.com:27017

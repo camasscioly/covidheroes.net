@@ -65,25 +65,6 @@ window.onload = () => {
       );
       return false;
     }
-    // let body;
-    // try {
-    //   body = await fetch(
-    //     `https://verifier.meetchopra.com/verify/${email}?token=${atob(
-    //       'OTI5MjhiNzU2ZTYyMzM1N2IzYmQ4MGU4ZGM5MGRlYWUwMzFmMmFlNmI1NGE4NmFmZDNlOTgzZWY1MDhmYzVjZjdhM2IwNjI1MWM2YmU4NDY3NjhjMmM3ZTJiZTljZjFi'
-    //     )}`
-    //   ).then((res) => res.json());
-    // } catch (err) {
-    //   console.log(err);
-    // }
-
-    // if (!body.email) {
-    //   swal(
-    //     'Your email is invalid.',
-    //     'Make sure you entered a legitimate email. Disposable or fake email is strictly phohibited.',
-    //     'warning'
-    //   );
-    //   return false;
-    // }
     postData(`${base}signup`, {
       name: esc(DOMPurify.sanitize(document.querySelector('#name').value))
         .substring(0, 50)

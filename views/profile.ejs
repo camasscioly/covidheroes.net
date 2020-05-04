@@ -38,9 +38,7 @@
               
               </span><br>
             </center>
-            
           </form><br>
-          <div id="disqus_thread"></div>
         </div>
       </div>
     </div>
@@ -54,16 +52,6 @@
   </style>
   <script src="./js/profile.js" defer></script>
   <script>
-    var disqus_config = function () {
-      this.page.url = window.location.href; 
-      this.page.identifier = (new URLSearchParams(window.location.search)).get('id');
-      this.callbacks.onNewComment = [function(comment) {
-        console.log(comment.id);
-        console.log(comment.text);
-        fetch(`${window.location.origin}/v1/offer/increment?id=${ID}`)
-      }];
-    };
-
     (function() { // DON'T EDIT BELOW THIS LINE
     var d = document, s = d.createElement('script');
     s.src = 'https://corona-4.disqus.com/embed.js';

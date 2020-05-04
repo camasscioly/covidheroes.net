@@ -46,9 +46,9 @@
             </div>
           </div>
         </div>
-    </div><br>
+    </div>
       <p>
-        <div class="accordion" id="accordionExample">
+        <!-- <div class="accordion" id="accordionExample">
           <div class="card" style="border: none; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);">
             <div class="card-header" style="background: #fff !important" id="headingOne">
               <h2 class="mb-0">
@@ -89,9 +89,21 @@
               </div>
             </div>
           </div>
-        </div><br>
-        <%- include('blocks/alert') %><br>
-      <div id="disqus_thread"></div>
+        </div><br> -->
+        <!-- <%- include('blocks/alert') %><br> -->
+        <div id="hyvor-talk-view"></div>
+          <script type="text/javascript">
+              const urlParams = new URLSearchParams(window.location.search);
+              const id = urlParams.get('id');
+              var HYVOR_TALK_WEBSITE = 563; // DO NOT CHANGE THIS
+              var HYVOR_TALK_CONFIG = {
+                  url: window.location.href,
+                  id: id
+              };
+          </script>
+          <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+
+</script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh2J9GP72NGMhCWCUwHH3togISxVR8DG4&libraries=places,geometry"></script>
   <style>
     body {
@@ -291,31 +303,10 @@
         }
       });
     }
-  </script>
-  <script>
-    var disqus_config = function () {
-      this.page.url = window.location.href; 
-      this.page.identifier = (new URLSearchParams(window.location.search)).get('id');
-      this.callbacks.onNewComment = [function(comment) {
-        console.log(comment.id);
-        console.log(comment.text);
-        fetch(`${window.location.origin}/v1/offer/increment?id=${ID}`)
-      }];
-    };
-
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://corona-4.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                              
+  </script>                   
   </div>
   </div><br>
   <%- include('blocks/footer') %>
-  <script id="dsq-count-scr" src="//corona-4.disqus.com/count.js" async></script>
   <script src="/js/request.js" defer></script>
   <script>
     window.twttr = (function (d, s, id) {

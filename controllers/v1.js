@@ -212,7 +212,7 @@ router.get('/offer/increment', async (req, res) => {
 
   await keyv.set('offer-list', offerList);
   if (process.env.DISCORD_WEBHOOK_URL || false)
-    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`New Comment: ${out.title}`);
+    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`View: ${out.title}`);
   res.json(offerList);
 });
 

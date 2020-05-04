@@ -113,7 +113,7 @@ window.onload = () => {
                   </div>
                   <div class="ml-auto">
                     <span style="color: #A0AECA; font-family: 'Poppins' !important;">
-                      <i style="color: #A0AECA !important; font-size: 80% !important" class="fas fa-comment-alt"></i> ${
+                      <i style="color: #A0AECA !important; font-size: 80% !important" class="fas fa-eye"></i> ${
                         comments || 0
                       }
                     </span>
@@ -232,7 +232,7 @@ window.onload = () => {
                   </div>
                   <div class="ml-auto">
                     <span style="color: #A0AECA; font-family: 'Poppins' !important;">
-                      <i style="color: #A0AECA !important; font-size: 80% !important" class="fas fa-comment-alt"></i> ${
+                      <i style="color: #A0AECA !important; font-size: 80% !important" class="fas fa-eye"></i> ${
                         comments || 0
                       }
                     </span>

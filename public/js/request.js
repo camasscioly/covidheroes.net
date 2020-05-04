@@ -101,7 +101,7 @@ window.onload = async () => {
           type === 'request' ? 'Needs help with' : 'Can help with';
         document.querySelector(
           '#scroll-down'
-        ).innerHTML = `<i class="fas fa-comment-alt" style="color: #fff !important"></i> ${
+        ).innerHTML = `<i class="fas fa-eye" style="color: #fff !important"></i> ${
           type || 'request' ? 'Offer to help' : 'Ask for help'
         }`;
         let image =
@@ -118,9 +118,7 @@ window.onload = async () => {
             </div>
             <div class="ml-auto">
               <span style="color: #A0AECA; font-family: 'Poppins' !important; font-family: bold;">
-                <i style="color: #A0AECA !important;" class="fas fa-comment-alt"></i> ${
-                  comments || 0
-                }
+                <i style="color: #A0AECA !important;" class="fas fa-eye"></i> ${comments + 1 || 1}
               </span>
             </div>
           </div>
@@ -166,6 +164,7 @@ window.onload = async () => {
         ID = id;
         offerList = body.offerList.reverse();
         initService();
+        fetch(`${window.location.origin}/v1/offer/increment?id=${ID}`);
       });
     if (localStorage.getItem(ID)) document.querySelector('#fulfill').disabled = true;
   } else {

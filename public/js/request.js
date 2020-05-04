@@ -153,7 +153,8 @@ window.onload = async () => {
           }/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem(
             'name'
           )}</a>`;
-        } else document.querySelector('#prof-link').value = 'Login to get a profile link.';
+          // } else document.querySelector('#prof-link').value = 'Login to get a profile link.';
+        }
         document.querySelector(
           '#prof-link-author'
         ).innerHTML = `<b>Author: <a href="${window.location.origin}/@${author}">@${author}</a></b>`;

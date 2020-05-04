@@ -195,20 +195,21 @@ router.post('/offer', async (req, res) => {
 router.get('/offer/increment', async (req, res) => {
   let offerList = (await keyv.get('offer-list')) || [];
   let out = offerList.find(({ id }) => id === req.query.id);
-  offerList.splice(offerList.indexOf(out), 1);
-  console.log(offerList);
-  offerList.push({
-    title: out.title,
-    description: out.description || null,
-    date: out.date,
-    tags: out.tags,
-    author: out.author,
-    authorid: out.authorid,
-    email: out.email,
-    comments: out.comments + 1 || 0,
-    id: out.id,
-    type: out.type,
-  });
+  let i = offerList.indexOf(out);
+  offerList[i].comments = out.comments + 1 || 0;
+  // console.log(offerList);
+  // offerList.push({
+  //   title: out.title,
+  //   description: out.description || null,
+  //   date: out.date,
+  //   tags: out.tags,
+  //   author: out.author,
+  //   authorid: out.authorid,
+  //   email: out.email,
+  //   comments: out.comments + 1 || 0,
+  //   id: out.id,
+  //   type: out.type,
+  // });
 
   await keyv.set('offer-list', offerList);
   if (process.env.DISCORD_WEBHOOK_URL || false)

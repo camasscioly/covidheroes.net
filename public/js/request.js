@@ -148,11 +148,12 @@ window.onload = async () => {
           let edit = `<button style="background: #fff !important; color: #6C63FF !important; box-shadow: 0 0 3.2rem rgba(0,0,0,0) !important; text-shadow: 0 0 3.2rem rgba(0,0,0,.12);" class="btn btn-primary hover" id="edit" onclick="editMode()">Edit</button>`;
           if (localStorage.id === authorid || localStorage.admin)
             document.querySelector('#prof-delete').innerHTML = edit + close;
-          document.querySelector('#prof-link').value = `<a href="${
-            window.location.origin
-          }/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem(
-            'name'
-          )}</a>`;
+          // document.querySelector('#prof-link').value = `<a href="${
+          //   window.location.origin
+          // }/@${localStorage.getItem('name')}">${window.location.origin}/@${localStorage.getItem(
+          //   'name'
+          // )}</a>`;
+
           // } else document.querySelector('#prof-link').value = 'Login to get a profile link.';
         }
         document.querySelector(

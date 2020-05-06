@@ -94,13 +94,43 @@
         
         <div id="hyvor-talk-view"></div>
           <script type="text/javascript">
-              const urlParams = new URLSearchParams(window.location.search);
-              const id = urlParams.get('id');
-              var HYVOR_TALK_WEBSITE = 563; // DO NOT CHANGE THIS
-              var HYVOR_TALK_CONFIG = {
-                  url: window.location.href,
-                  id: id
-              };
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            const data = btoa(JSON.stringify({
+              id: localStorage.id,
+              name: localStorage.name,
+              email: localStorage.email,
+              url: `https://covidheroes.net/profile?id=${localStorage.id}`,
+              picture: `https://ui-avatars.com/api/?background=000&color=fff&bold=true&rounded=true&name=${localStorage.name}`
+            }));
+            var HYVOR_TALK_WEBSITE = 563; // DO NOT CHANGE THIS
+            var HYVOR_TALK_CONFIG = {
+              url: window.location.href,
+              id: id,
+              sso: {
+                id: 9,
+                userData: data,
+                loginURL: "https://covidheroes.net/login",
+                signupURL: "https://covidheroes.net/signup"
+              }
+            };
+
+          async function init() {
+            HYVOR_TALK_CONFIG = {
+              url: window.location.href,
+              id: id,
+              sso: {
+                id: 9,
+                hash: ((await fetch(`${window.location.origin}/v1/hash?userdata=${data}`).then(res => res.json())).hmac),
+                userData: data,
+                loginURL: "https://covidheroes.net/login",
+                signupURL: "https://covidheroes.net/signup"
+              }
+            };
+            hyvor_talk.reload(HYVOR_TALK_CONFIG);
+          }
+           
+          init();
           </script>
           <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
 

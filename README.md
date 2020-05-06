@@ -49,6 +49,7 @@ PORT=3000
 DB_URL=mongodb://mongodb.example.com:27017
 SENDGRID_API_KEY=example-sendgrid-token
 DISCORD_WEBHOOK_URL=https://discordapp.com/api/webhooks/ID/TOKEN
+HYVOR_PRIVATE_KEY=example-hyvor-private-key
 
 # Note: MongoDB URI must be in the mongodb:// protocol, the mongodb+srv:// is not supported
 ```

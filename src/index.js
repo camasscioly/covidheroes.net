@@ -2,8 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 const { join } = require('path');
-const i18next = require('i18next')
-const i18nextMiddleware = require('i18next-http-middleware')
+const i18next = require('i18next');
+const i18nextMiddleware = require('i18next-http-middleware');
 
 const v1Routes = require('./../controllers/v1.js');
 const externalRoutes = require('./../controllers/external.js');
@@ -12,12 +12,12 @@ const rootRoutes = require('./../controllers/index.js');
 // setup
 i18next.use(i18nextMiddleware.LanguageDetector).init({
   preload: ['en', 'es', 'it'],
-  debug: true,
+  debug: false,
   resources: {
-    en: {translation: require('./../locales/en')},
-    it: {translation: require('./../locales/it')},
-  }
-})
+    en: { translation: require('./../locales/en') },
+    it: { translation: require('./../locales/it') },
+  },
+});
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.disable('view cache');
 app.set('view engine', 'ejs');
 app.set('views', join(__dirname, './../views'));
 // If process.env.PORT is blank, default to port 3000
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 3000);
 
 app.use(i18nextMiddleware.handle(i18next));
 app.use(require('express-boom')());

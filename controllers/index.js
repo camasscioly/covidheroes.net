@@ -9,6 +9,7 @@ const normalPage = require('./../middleware/normalPage.js');
 const Keyv = require('keyv');
 const csrf = require('csurf');
 const keyv = new Keyv(process.env.DB_URL);
+const makeID = require('./../middleware/makeID.js');
 
 keyv.on('error', (err) => {
   console.error(err);
@@ -62,7 +63,7 @@ router.get('/posts', appPage, async (req, res) => {
 });
 
 router.get('/requests/open', appPage, async (req, res) => {
-  renderFile(req, res, 'request');
+  renderFile(req, res, 'request'); // deprecate this later
 });
 
 router.get('/submissions/open', appPage, async (req, res) => {
@@ -70,7 +71,7 @@ router.get('/submissions/open', appPage, async (req, res) => {
 });
 
 router.get('/posts/open', appPage, async (req, res) => {
-  renderFile(req, res, 'request'); // deprecate this later
+  renderFile(req, res, 'request');
 });
 
 router.get('/profile', toLogin, appPage, async (req, res) => {

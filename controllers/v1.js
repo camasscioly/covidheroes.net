@@ -2,6 +2,7 @@ const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const makeID = require('./../middleware/makeID.js');
 const Keyv = require('keyv');
+const crypto = require('crypto-js');
 const csrf = require('csurf');
 const image = require('g-i-s');
 const sendgrid = require('@sendgrid/mail');
@@ -275,6 +276,11 @@ router.get('/image', (req, res) => {
       res.json({ results });
     }
   });
+});
+
+router.get('/hash', (req, res) => {
+  const hash = crypto.HmacSHA1(req.query.userdata, process.env.HYVOR_PRIVATE_KEY);
+  res.json({ hmac: hash.toString() });
 });
 
 module.exports = router;

@@ -99,9 +99,7 @@ window.onload = async () => {
         }
         document.querySelector('#type').innerText =
           type === 'request' ? 'Needs help with' : 'Can help with';
-        document.querySelector(
-          '#scroll-down'
-        ).innerHTML = `<i class="fas fa-eye" style="color: #fff !important"></i> ${
+        document.querySelector('#scroll-down').innerHTML = `${
           type || 'request' ? 'Offer to help' : 'Ask for help'
         }`;
         let image =
@@ -131,13 +129,11 @@ window.onload = async () => {
                 ${date}
               </p>
             </div>
-            <div class="ml-auto">
-              <a
-                class="twitter-share-button"
+            <div class="ml-auto row">
+            <div class="fb-share-button col-1" data-href="https://app.covidheroes.net/posts/open?id=${id}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcovidheroes.net%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fab fa-facebook"></i></a></div><a
+                class="twitter-share-button col-1"
                 href="https://twitter.com/intent/tweet?text=COVID+Heroes+-+${title}+-+https://app.covidheroes.net/posts/open?id=${id}"
-              >
-                <i class="fab fa-twitter"></i> Share</a
-              >
+              ><i class="fab fa-twitter"></i></a>
             </div>
           </div>
         `;

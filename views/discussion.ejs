@@ -9,11 +9,54 @@
     
     <div id="hyvor-talk-view"></div>
 <script type="text/javascript">
+    const makeid = length => {
+        let text = "";
+        const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (let i = 0; i < length; i++) {
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+
+        return text;
+    }
+
+    if (!localStorage.comID) localStorage.comID = makeid(20);
+
     var HYVOR_TALK_WEBSITE = 563; // DO NOT CHANGE THIS
+    const data = btoa(JSON.stringify({
+      id: localStorage.comID || makeid(20),
+      name: 'Guest-' + localStorage.comID,
+      email: 'guest@guest.guest',
+      url: `https://app.covidheroes.net/profile?id=${localStorage.id}`,
+      picture: `${window.location.origin}/img/default-icon.jpg`
+    }));
     var HYVOR_TALK_CONFIG = {
-        url: window.location.href,
-        id: 'discuss'
+      url: window.location.href,
+      id: 'discuss',
+      sso: {
+        id: 9,
+        userData: data,
+        loginURL: "https://covidheroes.net/login",
+        signupURL: "https://covidheroes.net/signup"
+      }
     };
+
+    async function init() {
+      HYVOR_TALK_CONFIG = {
+        url: window.location.href,
+        id: 'discuss',
+        sso: {
+          id: 9,
+          hash: ((await fetch(`${window.location.origin}/v1/hash?userdata=${data}`).then(res => res.json())).hmac),
+          userData: data,
+          loginURL: "https://covidheroes.net/login",
+          signupURL: "https://covidheroes.net/signup"
+        }
+      };
+      hyvor_talk.reload(HYVOR_TALK_CONFIG);
+    }
+      
+    init();
 </script>
 <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
 </div><br>

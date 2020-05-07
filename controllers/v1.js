@@ -179,11 +179,11 @@ router.post('/offer', async (req, res) => {
     });
   }
   // Currently a bit of a hack - needs proper error handling.
-  try {
-    sendgrid.send(emails);
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   sendgrid.send(emails);
+  // } catch (err) {
+  //   console.log(err);
+  // }
 
   if (process.env.DISCORD_WEBHOOK_URL || false)
     new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`New Post: ${title}`);

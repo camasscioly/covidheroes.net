@@ -5,7 +5,7 @@ let total = 0;
 let killOffer;
 let searchSetting = 'item';
 const matchHtmlRegExp = /["'&<>]/;
-const pinList = JSON.parse(localStorage.pins || {}).pins;
+// const pinList = JSON.parse(localStorage.pins || {}).pins;
 let post;
 
 window.onload = () => {
@@ -360,7 +360,7 @@ window.onload = () => {
               `${window.location.origin}/v1/userdata?id=${authorid}`
             ).then((res) => res.json());
             if (counter >= 50) return;
-            if (author === localStorage.getItem('name') || pinList.includes(id)) {
+            if (author === localStorage.getItem('name')) {
               insertEntry(
                 esc(DOMPurify.sanitize(title)),
                 esc(DOMPurify.sanitize(author)),

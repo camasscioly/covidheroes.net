@@ -186,7 +186,7 @@ router.post('/offer', async (req, res) => {
   // }
 
   if (process.env.DISCORD_WEBHOOK_URL || false)
-    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`New Post: ${title}`);
+    new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`New Post: ${req.body.title}`);
 
   await keyv.set('offer-list', offerList);
   await keyv.set('offer-count', counter);

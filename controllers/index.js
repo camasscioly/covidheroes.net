@@ -50,6 +50,10 @@ router.get('/new', toLogin, appPage, async (req, res) => {
   renderFile(req, res, 'new');
 });
 
+router.get('/stories', normalPage, async (req, res) => {
+  renderFile(req, res, 'stories');
+});
+
 router.get('/requests', appPage, async (req, res) => {
   renderFile(req, res, 'offers'); // deprecate this later
 });

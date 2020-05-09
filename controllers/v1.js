@@ -179,11 +179,11 @@ router.post('/offer', async (req, res) => {
     });
   }
   // Currently a bit of a hack - needs proper error handling.
-  try {
-    sendgrid.send(emails);
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   sendgrid.send(emails);
+  // } catch (err) {
+  //   console.log(err);
+  // }
 
   if (process.env.DISCORD_WEBHOOK_URL || false)
     new Webhook(process.env.DISCORD_WEBHOOK_URL).send(`New Post: ${req.body.title}`);
@@ -192,6 +192,28 @@ router.post('/offer', async (req, res) => {
   await keyv.set('offer-count', counter);
   res.json(offerList);
 });
+
+// router.get('/weekly', async (req, res) => {
+//   let userList = (await keyv.get('user-list')) || [];
+
+//   let emails = [];
+//   for (let u of userList) {
+//     const { email } = await keyv.get(u[1]);
+//     emails.push({
+//       to: email,
+//       from: 'aiden@covidheroes.net',
+//       templateId: 'd-a5f00b17d19b44beb06dfd235e1feacd',
+//       dynamic_template_data: {},
+//     });
+//   }
+//   // Currently a bit of a hack - needs proper error handling.
+//   try {
+//     sendgrid.send(emails);
+//   } catch (err) {
+//     console.log(err);
+//   }
+//   res.json({ messsage: 'DONE' });
+// });
 
 router.get('/offer/increment', async (req, res) => {
   let offerList = (await keyv.get('offer-list')) || [];

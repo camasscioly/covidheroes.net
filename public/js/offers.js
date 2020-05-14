@@ -89,7 +89,7 @@ window.onload = () => {
         window.location.origin
       }/posts/open?id=${id}'"> ${type !== 'request' ? 'Ask for help' : 'Offer to help'}</button>`;
       document.querySelector('#cardView').innerHTML = `
-      <div class="col-sm-4 ${id}" style="margin-bottom: 30px;">
+      <div class="col-lg-4 ${id}" style="margin-bottom: 30px;">
           <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;"  id="${id}">
           <div class="card-img-top" onclick="window.location = '${
             window.location.origin
@@ -206,7 +206,7 @@ window.onload = () => {
         window.location.origin
       }/posts/open?id=${id}'">${type !== 'request' ? 'Ask for help' : 'Offer to help'}</button>`;
       document.querySelector('#cardView').innerHTML += `
-        <div class="col-sm-4" style="margin-bottom: 30px;">
+        <div class="col-lg-4" style="margin-bottom: 30px;">
           <div class="card tilt" style="border: none; border-top: 0px solid #6b63ffbb; box-shadow: 0 0 0.7rem rgba(0, 0, 0, 0.06) !important;" id="${id}">
             <div class="card-img-top" onclick="window.location = '${
               window.location.origin

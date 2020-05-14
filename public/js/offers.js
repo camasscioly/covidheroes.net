@@ -350,6 +350,14 @@ window.onload = () => {
                   stringSimilarity.compareTwoStrings(
                     skill,
                     (searchItem || skill).split('+').join(' ')
+                  ) < 0.3 &&
+                  stringSimilarity.compareTwoStrings(
+                    title,
+                    (searchItem || title).split('+').join(' ')
+                  ) < 0.3 &&
+                  stringSimilarity.compareTwoStrings(
+                    author,
+                    (searchItem || author).split('+').join(' ')
                   ) < 0.3
                 )
                   return;

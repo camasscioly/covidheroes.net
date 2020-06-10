@@ -1696,10 +1696,10 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-i18next-http-middleware@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/i18next-http-middleware/-/i18next-http-middleware-1.0.0.tgz#a42ee29c57cda03f24af9604375b2cffbb0d723c"
-  integrity sha512-4ZTx6uDOwO2WiLi7srcOkonovvOVjeaOLw3EPBmtNSIPxLU1IEbIaWs0yCZ9MPrTgm3du33qOdpbg6qM9wHtXg==
+i18next-http-middleware@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/i18next-http-middleware/-/i18next-http-middleware-2.1.1.tgz#a5d10eab8d1ad897e0ea4603b972ccbbac4c3c3b"
+  integrity sha512-yjgf7Oxe/BzUiDkVzl4pHy3vZTMezgj0lNrLxkGiKUcngepCKWFv+ErtkHRRrOLqjRLJzE4KtLIur3jfwCVpDg==
 
 i18next@^19.4.4:
   version "19.4.4"

@@ -17,29 +17,29 @@
     mongojs "2.5.0"
     pify "3.0.0"
 
-"@sendgrid/client@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@sendgrid/client/-/client-7.0.1.tgz#b85389bb214f5dcfdf0fcbd3746713f57ea33250"
-  integrity sha512-HZhDD1bctv5rM0wqAz9LhJC1IL9YHn5jJvxPqiK/3f3WCQjRvraJ1AkqkFFNFd9lPBVLmcrORX04lojwl+5ZaA==
+"@sendgrid/client@^7.2.5":
+  version "7.2.5"
+  resolved "https://registry.yarnpkg.com/@sendgrid/client/-/client-7.2.5.tgz#912575a5ecfe91c250eb6b267711dff2dea4e0f1"
+  integrity sha512-UZxk0liUeOMwbBkvlFJUezzP+w+gV6n13IAbG49KEiqwOns02HeSinFwF/CK0vQfjr3wkXRGKS34gvic53rlOg==
   dependencies:
-    "@sendgrid/helpers" "^7.0.1"
+    "@sendgrid/helpers" "^7.2.4"
     axios "^0.19.2"
 
-"@sendgrid/helpers@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@sendgrid/helpers/-/helpers-7.0.1.tgz#b97debc793ed3f9f56102e12c2a6d2bbbf0ffb78"
-  integrity sha512-i/zsissq1upgdywtuJKysaplJJZC24GdtEKiJC1IRlXvBHzIjH4eU+rqUFO8h+hGji3UMURGgMFuLUXTUYvZ9w==
+"@sendgrid/helpers@^7.2.4":
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/@sendgrid/helpers/-/helpers-7.2.4.tgz#82544a4b7d9a905ce5e0b4f96fcd9b2a73129337"
+  integrity sha512-h8bBRXpjQLM0Zl08EGJPxVOPWBaXjEZZCM3IurxWn8RaVFYDGPVZ4pv4ZW9AAmsujntZXuIxSsmB4aQczg/ivw==
   dependencies:
     chalk "^2.0.1"
     deepmerge "^4.2.2"
 
-"@sendgrid/mail@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@sendgrid/mail/-/mail-7.0.1.tgz#058295972e45ad4d960d77a043cedc0ebe5f856d"
-  integrity sha512-yFkhjrYQvwpdy8eUiDxLLgPp9o5jHQzjJ5qUkgMr2fuPuYSKKqbpPir1PXIHx0ek2VKkTsvj/7Z5UQk6hPZcrQ==
+"@sendgrid/mail@^7.2.5":
+  version "7.2.5"
+  resolved "https://registry.yarnpkg.com/@sendgrid/mail/-/mail-7.2.5.tgz#cc101c13e613e9f1466308f96dfb6c9e6dc60a1f"
+  integrity sha512-kbv5Mzzx6xei26fD84S4yn/JJ3v2Pz/tRwl4WULhJlxqvfs2sTAdVZc1kjQ09ffg32iVE62eO74WhhLm+vcuJw==
   dependencies:
-    "@sendgrid/client" "^7.0.1"
-    "@sendgrid/helpers" "^7.0.1"
+    "@sendgrid/client" "^7.2.5"
+    "@sendgrid/helpers" "^7.2.4"
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"

@@ -1,3 +1,5 @@
+# Note: COVID Heroes is no longer actively maintained or used.
+
 <a href="https://covidheroes.net/">
   <img src="public/img/logo.svg" width="100px" align="right" />
 </a>
